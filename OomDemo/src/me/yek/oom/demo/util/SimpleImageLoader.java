@@ -19,7 +19,6 @@ public class SimpleImageLoader implements Loadable {
 
 	@Override
 	public void releaseImage(String path) {
-		// TODO Auto-generated method stub
 		
 	}
 
