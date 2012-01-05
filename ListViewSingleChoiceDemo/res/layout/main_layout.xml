@@ -4,38 +4,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <Button 
-        android:id="@+id/btn_default_ui"
+        android:id="@+id/btn_default_ui_check_mark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DefaultCheckedTextViewUI"
+        android:text="DefaultCheckeMarkUI"
         android:onClick="clickEventHandler"
         />
     <Button 
-        android:id="@+id/btn_custom_ui"
+        android:id="@+id/btn_custom_ui_check_mark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CustomtCheckedTextViewUI"
+        android:text="CustomCheckeMarkUI"
         android:onClick="clickEventHandler"
         />
     <Button 
-        android:id="@+id/btn_group_default_ui"
+        android:id="@+id/btn_checkable_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="DefaultCheckableLinearLayoutUI"
+        android:text="CheckableLinearLayoutUI1"
         android:onClick="clickEventHandler"
         />
     <Button 
-        android:id="@+id/btn_relative_custom_ui"
+        android:id="@+id/btn_checkable_layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CustomCheckableRelativeLayoutUI"
+        android:text="CheckableLinearLayoutUI2"
         android:onClick="clickEventHandler"
         />
     <Button 
-        android:id="@+id/btn_group_custom_ui"
+        android:id="@+id/btn_checkable_layout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CustomCheckableLinearLayoutUI"
+        android:text="CheckableRelativeLayoutUI"
         android:onClick="clickEventHandler"
         />
 </LinearLayout>

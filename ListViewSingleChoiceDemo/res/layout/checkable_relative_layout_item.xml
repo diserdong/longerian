@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<me.longerian.demo.singlechoice.widget.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<me.longerian.demo.singlechoice.widget.CheckableRelativeLayoutWithCheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:padding="5dip" >
@@ -31,4 +31,4 @@
 	        android:textAppearance="?android:attr/textAppearanceLarge"
     		android:checkMark="@drawable/check_selector"
 	    />
-</me.longerian.demo.singlechoice.widget.CheckableRelativeLayout>
+</me.longerian.demo.singlechoice.widget.CheckableRelativeLayoutWithCheckedTextView>

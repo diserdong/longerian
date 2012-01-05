@@ -8,11 +8,11 @@ import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class CheckableRelativeLayout extends RelativeLayout implements Checkable {
+public class CheckableRelativeLayoutWithCheckedTextView extends RelativeLayout implements Checkable {
 
 	private CheckedTextView checkbox;
 	
-	public CheckableRelativeLayout(Context context, AttributeSet attrs) {
+	public CheckableRelativeLayoutWithCheckedTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 

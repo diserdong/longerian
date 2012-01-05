@@ -9,10 +9,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class CustomUISingleChoiceDemo extends Activity {
+public class CustomUICheckMarkDemo extends Activity {
 
 	public static final String[] items = new String[] {
-		"Android", "iPhone", "WindowPhone", "Blackberry", "Symbian", "WebOS", "MeeGo", "Bada",
 		"Android", "iPhone", "WindowPhone", "Blackberry", "Symbian", "WebOS", "MeeGo", "Bada"
 	};
 	
@@ -35,7 +34,7 @@ public class CustomUISingleChoiceDemo extends Activity {
         final ListView customUIListView = (ListView) findViewById(R.id.listview);
         customUIListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         customUIListView.setAdapter(new ArrayAdapter<String>(
-        		getApplicationContext(),  R.layout.custom_ui_single_choice_item, items));
+        		getApplicationContext(),  R.layout.custom_ui_check_mark_item, items));
         customUIListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

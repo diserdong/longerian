@@ -17,23 +17,24 @@ public class MainActivity extends Activity {
 		int id = v.getId();
 		Intent intent = new Intent();
 		switch(id) {
-		case R.id.btn_default_ui:
-			intent.setClass(getApplicationContext(), DefaultUISingleChoiceDemo.class);
+		case R.id.btn_default_ui_check_mark:
+			intent.setClass(getApplicationContext(), DefaultUICheckMarkDemo.class);
 			startActivity(intent);
 			break;
-		case R.id.btn_custom_ui:
-			intent.setClass(getApplicationContext(), CustomUISingleChoiceDemo.class);
-			startActivity(intent);
-		case R.id.btn_group_default_ui:
-			intent.setClass(getApplicationContext(), GroupDefaultUISingleChoiceDemo.class);
+		case R.id.btn_custom_ui_check_mark:
+			intent.setClass(getApplicationContext(), CustomUICheckMarkDemo.class);
 			startActivity(intent);
 			break;
-		case R.id.btn_group_custom_ui:
-			intent.setClass(getApplicationContext(), GroupCustomUISingleChoiceDemo.class);
+		case R.id.btn_checkable_layout1:
+			intent.setClass(getApplicationContext(), CheckableLinearLayoutDemo1.class);
 			startActivity(intent);
 			break;
-		case R.id.btn_relative_custom_ui:
-			intent.setClass(getApplicationContext(), RelativeLayoutCustomUISingleChoiceDemo.class);
+		case R.id.btn_checkable_layout2:
+			intent.setClass(getApplicationContext(), CheckableLinearLayoutDemo2.class);
+			startActivity(intent);
+			break;
+		case R.id.btn_checkable_layout3:
+			intent.setClass(getApplicationContext(), CheckableRelativeLayoutDemo.class);
 			startActivity(intent);
 			break;
 		default:

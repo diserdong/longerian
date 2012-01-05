@@ -1,4 +1,4 @@
-<me.longerian.demo.singlechoice.widget.DefaultUICheckableLinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<me.longerian.demo.singlechoice.widget.CheckableLinearLayoutWithCheckedTextView  xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:padding="5dip"
@@ -24,4 +24,4 @@
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:text="default"
 	    />
-</me.longerian.demo.singlechoice.widget.DefaultUICheckableLinearLayout>
+</me.longerian.demo.singlechoice.widget.CheckableLinearLayoutWithCheckedTextView>

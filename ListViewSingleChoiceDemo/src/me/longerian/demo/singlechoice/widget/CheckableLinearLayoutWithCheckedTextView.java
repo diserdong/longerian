@@ -7,11 +7,11 @@ import android.widget.Checkable;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 
-public class DefaultUICheckableLinearLayout extends LinearLayout implements Checkable {
+public class CheckableLinearLayoutWithCheckedTextView extends LinearLayout implements Checkable {
 
 	private CheckedTextView checkbox;
 	
-	public DefaultUICheckableLinearLayout(Context context, AttributeSet attrs) {
+	public CheckableLinearLayoutWithCheckedTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 

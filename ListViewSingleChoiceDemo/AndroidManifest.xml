@@ -19,23 +19,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DefaultUISingleChoiceDemo"
+            android:name=".DefaultUICheckMarkDemo"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".CustomUISingleChoiceDemo"
+            android:name=".CustomUICheckMarkDemo"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".GroupDefaultUISingleChoiceDemo"
+            android:name=".CheckableLinearLayoutDemo1"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".GroupCustomUISingleChoiceDemo"
+            android:name=".CheckableLinearLayoutDemo2"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".RelativeLayoutCustomUISingleChoiceDemo"
+            android:name=".CheckableRelativeLayoutDemo"
             android:label="@string/app_name" >
         </activity>
     </application>

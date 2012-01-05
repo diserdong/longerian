@@ -9,10 +9,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class RelativeLayoutCustomUISingleChoiceDemo extends Activity {
+public class CheckableRelativeLayoutDemo extends Activity {
 
 	public static final String[] items = new String[] {
-		"Android", "iPhone", "WindowPhone", "Blackberry", "Symbian", "WebOS", "MeeGo", "Bada",
 		"Android", "iPhone", "WindowPhone", "Blackberry", "Symbian", "WebOS", "MeeGo", "Bada"
 	};
 	

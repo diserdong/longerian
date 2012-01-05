@@ -6,11 +6,11 @@ import android.widget.Checkable;
 import android.widget.LinearLayout;
 import me.longerian.demo.singlechoice.R;
 
-public class CustomUICheckableLinearLayout extends LinearLayout implements Checkable {
+public class CheckableLinearLayoutWithoutCheckedTextView extends LinearLayout implements Checkable {
 
 	private boolean mChecked;
     
-    public CustomUICheckableLinearLayout(Context context, AttributeSet attrs) {
+    public CheckableLinearLayoutWithoutCheckedTextView(Context context, AttributeSet attrs) {
     	super(context, attrs);
     	setChecked(false);
     }

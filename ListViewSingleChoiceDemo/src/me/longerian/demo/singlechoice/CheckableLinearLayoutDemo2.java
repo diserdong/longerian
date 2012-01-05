@@ -9,11 +9,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class GroupDefaultUISingleChoiceDemo extends Activity {
+public class CheckableLinearLayoutDemo2 extends Activity {
 
 	public static final String[] items = new String[] {
-		"Android", "iPhone", "WindowPhone", "Blackberry", "Symbian", "WebOS", "MeeGo", "Bada",
-		"Android", "iPhone", "WindowPhone", "Blackberry", "Symbian", "WebOS", "MeeGo", "Bada"
+		"S", "M", "L", "XL", "EXL"
 	};
 	
 	@Override
@@ -23,7 +22,7 @@ public class GroupDefaultUISingleChoiceDemo extends Activity {
         final ListView defaultUIListView = (ListView) findViewById(R.id.listview);
         defaultUIListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         defaultUIListView.setAdapter(new ArrayAdapter<String>(
-        		getApplicationContext(),  R.layout.default_ui_checkable_linear_layout_item, R.id.os_name, items));
+        		getApplicationContext(),  R.layout.checkable_linear_layout_item2, R.id.size, items));
         defaultUIListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -33,5 +32,6 @@ public class GroupDefaultUISingleChoiceDemo extends Activity {
 			}
 		});
     }
+	
 	
 }
