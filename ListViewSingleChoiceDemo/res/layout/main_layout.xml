@@ -25,11 +25,17 @@
         android:onClick="clickEventHandler"
         />
     <Button 
+        android:id="@+id/btn_relative_custom_ui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CustomCheckableRelativeLayoutUI"
+        android:onClick="clickEventHandler"
+        />
+    <Button 
         android:id="@+id/btn_group_custom_ui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="CustomCheckableLinearLayoutUI"
         android:onClick="clickEventHandler"
         />
-
 </LinearLayout>

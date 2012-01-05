@@ -32,6 +32,10 @@ public class MainActivity extends Activity {
 			intent.setClass(getApplicationContext(), GroupCustomUISingleChoiceDemo.class);
 			startActivity(intent);
 			break;
+		case R.id.btn_relative_custom_ui:
+			intent.setClass(getApplicationContext(), RelativeLayoutCustomUISingleChoiceDemo.class);
+			startActivity(intent);
+			break;
 		default:
 			break;
 		}
