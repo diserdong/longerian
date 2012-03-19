@@ -1,0 +1,40 @@
+{
+    "logistics_trace_search_response": {
+        "company_name": "快捷速递",
+        "out_sid": "7695202739125",
+        "status": "对方已签收",
+        "tid": 127247409755238,
+        "trace_list": {
+            "transit_step_info": [
+                {
+                    "status_desc": "桥头站  快件发往大岭山转运站",
+                    "status_time": "2011-12-17 12:12:55"
+                },
+                {
+                    "status_desc": "南沙转运站  快件已到达南沙转运站",
+                    "status_time": "2011-12-17 14:03:49"
+                },
+                {
+                    "status_desc": "南沙转运站  快件发往上海转运站",
+                    "status_time": "2011-12-17 14:14:02"
+                },
+                {
+                    "status_desc": "上海转运站  快件已到达上海转运站",
+                    "status_time": "2011-12-17 23:58:34"
+                },
+                {
+                    "status_desc": "上海转运站  快件发往浦东转运站",
+                    "status_time": "2011-12-18 04:35:32"
+                },
+                {
+                    "status_desc": "浦东转运站  快件已到达浦东转运站",
+                    "status_time": "2011-12-18 07:50:43"
+                },
+                {
+                    "status_desc": "浦东转运站  快件发往张江站",
+                    "status_time": "2011-12-18 09:11:45"
+                }
+            ]
+        }
+    }
+}

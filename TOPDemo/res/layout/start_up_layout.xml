@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="
+	    这个Demo演示了用户授权、获取个人账户信息、获取个人收藏商品列表、获取个人交易记录及按照卖家筛选交易记录，
+		为了正常获取到这些信息，首先请你配置：1.你的淘宝昵称；2.授权这个Demo访问你的淘宝账户信息。"
+        />
+    <TextView 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:textSize="18sp"
+	    android:text="淘宝昵称"
+        />
+    <EditText 
+        android:id="@+id/buyer_nick"
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:singleLine="true"
+        />
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="保存"
+        />
+    <Button 
+        android:id="@+id/go_to_authorization"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="前往授权"
+        />
+    <Button
+        android:id="@+id/go_to_demo"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="进入演示程序"
+        />
+</LinearLayout>
