@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexer {
 	
-	private final String TAG = "PeopleAdapter";
 	private SparseIntArray alphaMap;
 	private List<People> items;
 	private Context context;
@@ -58,14 +57,12 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
         	section = SideBar.ALPHABET_ARRAY.length - 1;
         }
         String targetLetter = SideBar.ALPHABET_ARRAY[section];
-        Log.d(TAG, "search for: " + targetLetter);
         int key = targetLetter.charAt(0);
         int start = 0;
         int end = items.size();
         int pos;
         //if pos already exists
         if((pos = alphaMap.get(key, Integer.MIN_VALUE)) != Integer.MIN_VALUE) {
-        	Log.d(TAG, "existed: " + key+ "/" + pos);
         	return pos;
         } else {
         	//FIXME haven't considered non-alphabet characters
@@ -74,8 +71,6 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
         	//if couldn't find the right start position, then search its prev letter's position until fint it or reach the start.
         	end = getApproximateEndPosOfLetter(items, section);
         	start = getApproximateStartPosOfLetter(items, section - 1);
-        	Log.d(TAG, "start: " + start);
-        	Log.d(TAG, "end: " + end);
         }
         while(start < end) {
     		pos = (start + end) / 2;
@@ -91,14 +86,15 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
     				if(pos >= 1) {
     					pos--;
     				} else if(pos == 0) {
-    					break;
+    					alphaMap.put(key, pos);
+    					return pos;
     				}
     			}
+    			pos++;
     			break;
     		}
     	}
         alphaMap.put(key, pos);
-        Log.d(TAG, "find new: " + key+ "/" + pos);
 		return pos;
 	}
 
