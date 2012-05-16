@@ -122,18 +122,42 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
 	
 	private int getApproximateStartPosOfLetter(List<People> source, int section) {
 		int result = -1;;
-		while(section >= 0 && result == -1) {
+		while(section >= 0) {
 			result = getFirstAppearanceOfLetter(source, SideBar.ALPHABET_ARRAY[section]);
-			section--;
+			if(result != -1) {
+				while(SideBar.ALPHABET_ARRAY[section].equals(
+						Character.toString(source.get(result).getNamePinyin().charAt(0)))) {
+					if(result < SideBar.ALPHABET_ARRAY.length - 1) {
+						result++;
+					} else {
+						return result;
+					}
+				}
+				return --result;
+			} else {
+				section--;
+			}
 		}
 		return result;
 	}
 	
 	private int getApproximateEndPosOfLetter(List<People> source, int section) {
 		int result = -1;;
-		while(section < SideBar.ALPHABET_ARRAY.length && result == -1) {
+		while(section < SideBar.ALPHABET_ARRAY.length) {
 			result = getFirstAppearanceOfLetter(source, SideBar.ALPHABET_ARRAY[section]);
-			section++;
+			if(result != -1) {
+				while(SideBar.ALPHABET_ARRAY[section].equals(
+						Character.toString(source.get(result).getNamePinyin().charAt(0)))) {
+					if(result >= 1) {
+						result--;
+					} else {
+						return result;
+					}
+				}
+				return ++result;
+			} else {
+				section++;
+			}
 		}
 		return result;
 	}
