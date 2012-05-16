@@ -154,7 +154,7 @@ public class PeopleAdapterTest extends AndroidTestCase {
 		}
 	}
 
-	public void testGetApproximateStartPosOfLetter() {
+	public void testGetApproximatePosOfLetter() {
 		
 		for(int i = 0, length = SideBar.ALPHABET_ARRAY.length; i < length; i++) {
 			long start = System.nanoTime();
