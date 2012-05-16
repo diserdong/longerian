@@ -157,25 +157,25 @@ public class PeopleAdapterTest extends AndroidTestCase {
 	public void testGetApproximateStartPosOfLetter() {
 		
 		for(int i = 0, length = SideBar.ALPHABET_ARRAY.length; i < length; i++) {
-			long start = System.currentTimeMillis();
+			long start = System.nanoTime();
 			int position = linearSearchFirstAppearanceOfLetter(people, i);
-			long end = System.currentTimeMillis();
+			long end = System.nanoTime();
 			assertEquals(linearSearchFirstAppearanceOfLetter(people, i), 
 					getApproximateEndPosOfLetter(people, i));
 			if(i > 0) {
 				assertEquals(linearSearchLastAppearanceOfLetter(people, i - 1), 
 					getApproximateStartPosOfLetter(people, i - 1));
 			}
-			Log.d(TAG, "linear search " + SideBar.ALPHABET_ARRAY[i] + "/" + position + ":" + (end - start) + "ms");
+			Log.d(TAG, "|linear search|" + SideBar.ALPHABET_ARRAY[i] + "|" + position + "|" + (end - start) / 1000 + "|ps");
 		}
 		
 		Log.d(TAG, "========================");
 		
 		for(int i = 0, length = SideBar.ALPHABET_ARRAY.length; i < length; i++) {
-			long start = System.currentTimeMillis();
+			long start = System.nanoTime();
 			int position = getApproximateEndPosOfLetter(people, i);
-			long end = System.currentTimeMillis();
-			Log.d(TAG, "binary search " + SideBar.ALPHABET_ARRAY[i] + "/" + position + ":" + (end - start) + "ms");
+			long end = System.nanoTime();
+			Log.d(TAG, "|binary search|" + SideBar.ALPHABET_ARRAY[i] + "|" + position + "|" + (end - start) / 1000 + "|ps");
 		}
 	}
 	
@@ -258,4 +258,5 @@ public class PeopleAdapterTest extends AndroidTestCase {
     	}
     	return appearance;
 	}
+	
 }
