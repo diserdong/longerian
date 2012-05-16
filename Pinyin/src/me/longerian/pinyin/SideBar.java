@@ -41,6 +41,7 @@ public class SideBar extends View {
 		sectionIndexter = (SectionIndexer) list.getAdapter();
 	}
 	
+	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		super.onTouchEvent(event);
 		int i = (int) event.getY();
