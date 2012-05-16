@@ -127,7 +127,7 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
 			if(result != -1) {
 				while(SideBar.ALPHABET_ARRAY[section].equals(
 						Character.toString(source.get(result).getNamePinyin().charAt(0)))) {
-					if(result < SideBar.ALPHABET_ARRAY.length - 1) {
+					if(result < source.size() - 1) {
 						result++;
 					} else {
 						return result;
@@ -181,5 +181,5 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
     	}
     	return appearance;
 	}
-    	
+    
 }
