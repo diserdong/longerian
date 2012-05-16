@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/knitted_netting_tiled">
+    
+	    <TextView
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+	    	android:layout_margin="40dip"
+		    android:gravity="center"
+		    android:text="Styling Android"
+		    android:textColor="#999"
+		    android:textSize="64sp"
+		    android:shadowColor="#FFF"
+		    android:shadowDx="2"
+		    android:shadowDy="2"
+		    android:shadowRadius="4"
+		    android:background="@drawable/panel"
+		    />
+
+</LinearLayout>
