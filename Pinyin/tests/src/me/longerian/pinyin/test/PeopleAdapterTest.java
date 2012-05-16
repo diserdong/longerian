@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.longerian.pinyin.People;
+import me.longerian.pinyin.PeopleAdapter;
 import me.longerian.pinyin.SideBar;
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -155,25 +156,26 @@ public class PeopleAdapterTest extends AndroidTestCase {
 	}
 
 	public void testGetApproximatePosOfLetter() {
+		for(int i = 0, length = SideBar.ALPHABET_ARRAY.length; i < length; i++) {
+			assertEquals(linearSearchFirstAppearanceOfLetter(people, i), 
+					getApproximateEndPosOfLetter(people, i));
+			if(i > 0) {
+				assertEquals(linearSearchLastAppearanceOfLetter(people, i - 1), 
+						getApproximateStartPosOfLetter(people, i - 1));
+			}
+		}
 		
 		for(int i = 0, length = SideBar.ALPHABET_ARRAY.length; i < length; i++) {
 			long start = System.nanoTime();
 			int position = linearSearchFirstAppearanceOfLetter(people, i);
 			long end = System.nanoTime();
-			assertEquals(linearSearchFirstAppearanceOfLetter(people, i), 
-					getApproximateEndPosOfLetter(people, i));
-			if(i > 0) {
-				assertEquals(linearSearchLastAppearanceOfLetter(people, i - 1), 
-					getApproximateStartPosOfLetter(people, i - 1));
-			}
 			Log.d(TAG, "|linear search|" + SideBar.ALPHABET_ARRAY[i] + "|" + position + "|" + (end - start) / 1000 + "|ps");
 		}
-		
-		Log.d(TAG, "========================");
-		
+		Log.d(TAG, "\t\n");
+		PeopleAdapter pa = new PeopleAdapter(getContext(), people);
 		for(int i = 0, length = SideBar.ALPHABET_ARRAY.length; i < length; i++) {
 			long start = System.nanoTime();
-			int position = getApproximateEndPosOfLetter(people, i);
+			int position = pa.getPositionForSection(i);
 			long end = System.nanoTime();
 			Log.d(TAG, "|binary search|" + SideBar.ALPHABET_ARRAY[i] + "|" + position + "|" + (end - start) / 1000 + "|ps");
 		}
