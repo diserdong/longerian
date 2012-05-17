@@ -90,10 +90,10 @@ public class PeopleAdapter extends ArrayAdapter<People> implements SectionIndexe
     					return pos;
     				}
     			}
-    			pos++;
     			break;
     		}
     	}
+        pos++;
         alphaMap.put(key, pos);
 		return pos;
 	}
