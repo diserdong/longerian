@@ -1,24 +1,32 @@
 package so.mp3.app;
 
 import java.io.IOException;
-import java.util.Observable;
 
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
-import android.os.Bundle;
 
-public class MusicPlayer extends Observable implements OnErrorListener, OnCompletionListener, OnBufferingUpdateListener {
+public class MusicPlayer {
 
 	private MediaPlayer mp;
 	
 	public MusicPlayer() {
 		mp = new MediaPlayer();
 	}
-	
-	
 
+	public void setOnCompletionListener(OnCompletionListener l) {
+		mp.setOnCompletionListener(l);
+	}
+	
+	public void setOnErrorListener(OnErrorListener l) {
+		mp.setOnErrorListener(l);
+	}
+	
+	public void setOnBufferingUpdateListener(OnBufferingUpdateListener l) {
+		mp.setOnBufferingUpdateListener(l);
+	}
+	
 	public void play(String url) {
 		try {
 			mp.reset();
@@ -86,43 +94,4 @@ public class MusicPlayer extends Observable implements OnErrorListener, OnComple
 		}
 	}
 	
-	@Override
-	public void onCompletion(MediaPlayer player) {
-		setChanged();
-		Bundle b = new Bundle();
-		b.putBoolean("completion", true);
-		notifyObservers(b);
-	}
-
-	@Override
-	public boolean onError(MediaPlayer player, int what, int extra) {
-		handlerError();
-		return true;
-	}
-	
-	private void  handlerError() {
-		setChanged();
-		Bundle b = new Bundle();
-		b.putBoolean("error", true);
-		notifyObservers(b);
-	}
-
-	private long lastUpdate = 0;
-	
-	@Override
-	public void onBufferingUpdate(MediaPlayer mp, int percent) {
-		if(mp.isPlaying()) {
-			long now = System.currentTimeMillis();
-			if(now - lastUpdate > 500) {
-				setChanged();
-				Bundle b = new Bundle();
-				b.putInt("buffer", percent);
-				b.putInt("current", mp.getCurrentPosition());
-				b.putInt("duration", mp.getDuration());
-				notifyObservers(b);
-				lastUpdate = now;
-			}
-		}
-	}
-
 }

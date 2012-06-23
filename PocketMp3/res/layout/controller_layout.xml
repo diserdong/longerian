@@ -39,8 +39,14 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:layout_toRightOf="@+id/download"
+		    android:paddingLeft="10dip"
+		    android:paddingRight="10dip"
 		    android:layout_below="@+id/title"
 		    android:max="100"
+		    android:progressDrawable="@drawable/seekbar_progress"
+		    android:thumb="@drawable/seekbar_thumb"
+		    android:minHeight="2dip"
+        	android:maxHeight="2dip"
 		    />
     </RelativeLayout>
 </RelativeLayout>

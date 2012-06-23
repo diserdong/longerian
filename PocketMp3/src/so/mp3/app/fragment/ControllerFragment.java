@@ -1,8 +1,6 @@
 package so.mp3.app.fragment;
 
 import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
 
 import so.mp3.app.Host;
 import so.mp3.app.MusicPlayer;
@@ -21,12 +19,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnBufferingUpdateListener;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnErrorListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,7 +39,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class ControllerFragment extends SherlockFragment implements Observer {
+public class ControllerFragment extends SherlockFragment {
 
 	private Host host;
 	
@@ -53,6 +54,8 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 	private SeekBar progress;
 	
 	private Mp3 currentMp3;
+	
+	private long lastUpdate = 0;
 	
 	private long enqueue;
     private DownloadManager dm;
@@ -76,7 +79,34 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mp = new MusicPlayer();
-	    mp.addObserver(this);
+		mp.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				complete();
+			}
+		});
+		mp.setOnErrorListener(new OnErrorListener() {
+			
+			@Override
+			public boolean onError(MediaPlayer mp, int what, int extra) {
+				Toast.makeText(getActivity(), R.string.can_not_play_the_song, Toast.LENGTH_LONG).show();
+				return true;
+			}
+		});
+		mp.setOnBufferingUpdateListener(new OnBufferingUpdateListener() {
+			
+			@Override
+			public void onBufferingUpdate(MediaPlayer mp, int percent) {
+				if(mp.isPlaying()) {
+					long now = System.currentTimeMillis();
+					if(now - lastUpdate > 500) {
+						updateMusicProgress(progress, mp.getCurrentPosition(), percent, mp.getDuration());
+						lastUpdate = now;
+					}
+				}
+			}
+		});
 	    dm = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 	    getActivity().registerReceiver(downloadCompletionReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 	}
@@ -130,7 +160,6 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 	public void onDestroy() {
 		super.onDestroy();
 		mp.release();
-		mp.deleteObserver(this);
 		getActivity().unregisterReceiver(downloadCompletionReceiver);
 	}
 	
@@ -157,7 +186,7 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 				Toast.makeText(getActivity(), R.string.network_wonky, Toast.LENGTH_LONG).show();
 			} else {
 				if(TextUtils.isEmpty(result.getLink())) {
-					Toast.makeText(getActivity(), R.string.search_result_empty, Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), R.string.can_not_find_the_song, Toast.LENGTH_LONG).show();
 				} else {
 					prepareDownloadAndPlay(result.getLink());
 				}
@@ -187,6 +216,8 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 				playOrPause.setImageResource(R.drawable.av_pause);
 				playOrPause.setEnabled(true);
 				progress.setEnabled(true);
+			} else {
+				Toast.makeText(getActivity(), R.string.can_not_play_the_song, Toast.LENGTH_LONG).show();
 			}
 			host.hideIndeterminateProgressBar();
 		}
@@ -194,8 +225,11 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 	}
 	 
 	public void handleNewMp3(Mp3 music) {
+		if(mp.isPlaying()) {
+			stop();
+		}
 		currentMp3 = music;
-		title.setText(music.getTitle() + " - " + music.getAlbum());
+		title.setText(music.getTitle() + " - " + music.getSinger());
 		if(TextUtils.isEmpty(music.getMp3Link())) {
 			downloadLinkTask = new DownloadLinkTask();
 			downloadLinkTask.execute(music.getPlayerLink());
@@ -260,20 +294,6 @@ public class ControllerFragment extends SherlockFragment implements Observer {
         progress.setProgress(currentPercent);
     }
 
-	@Override
-	public void update(Observable observable, Object data) {
-		Bundle b = (Bundle) data;
-		if(b.getBoolean("completion", false)) {
-			complete();
-			return ;
-		}
-		if(b.getBoolean("error", false)) {
-			Toast.makeText(getActivity(), R.string.song_available, Toast.LENGTH_LONG).show();
-			return ;
-		}
-		updateMusicProgress(progress, b.getInt("current"), b.getInt("bufferPercent"), b.getInt("duration"));
-	}
-	
 	private BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
