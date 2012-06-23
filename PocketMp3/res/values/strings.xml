@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, Mp3playerActivity!</string>
+    <string name="app_name">PocketMp3</string>
+    <string name="search">Search</string>
+    <string name="load_more">Load More</string>
+    <string name="search_result_empty">No songs founded...</string>
+    <string name="network_wonky">Your network is wonky...</string>
+    <string name="song_available">This song is unavailable...</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+
+</resources>

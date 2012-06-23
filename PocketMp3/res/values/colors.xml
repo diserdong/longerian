@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="super_light_gray">#fff0f0f0</color>
+    <color name="light_gray">#ffC0C0C0</color>
+    <color name="gray">#FF888888</color>
+    <color name="dark_gray">#ff444444</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#87CEFF</color>
+    <color name="title">#ff9600</color>
+    <color name="red">#FFFF0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#88ffffff</color>
+    <color name="half_gray_transparent">#88888888</color>
+    <color name="pink">#EDB4BC</color>
+	<color name="reserve_order">#4290CE</color>
+</resources>
