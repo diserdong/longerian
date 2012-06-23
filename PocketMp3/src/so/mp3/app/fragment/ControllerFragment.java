@@ -79,7 +79,6 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 	    mp.addObserver(this);
 	    dm = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 	    getActivity().registerReceiver(downloadCompletionReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-	    getActivity().registerReceiver(remoteControlReceiver, new IntentFilter(Intent.ACTION_MEDIA_BUTTON));
 	}
     
     @Override
@@ -133,7 +132,6 @@ public class ControllerFragment extends SherlockFragment implements Observer {
 		mp.release();
 		mp.deleteObserver(this);
 		getActivity().unregisterReceiver(downloadCompletionReceiver);
-		getActivity().unregisterReceiver(remoteControlReceiver);
 	}
 	
 	private class DownloadLinkTask extends AsyncTask<String, Void, DownloadLinkResponse> {
@@ -324,23 +322,5 @@ public class ControllerFragment extends SherlockFragment implements Observer {
             startActivity(i);
         }
     };
-    
-    private BroadcastReceiver remoteControlReceiver = new BroadcastReceiver() {
-		
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			if (Intent.ACTION_MEDIA_BUTTON.equals(intent.getAction())) {
-				KeyEvent event = (KeyEvent)intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
-				switch(event.getKeyCode()) {
-				case KeyEvent.KEYCODE_MEDIA_PLAY:
-					start();
-					break;
-				case KeyEvent.KEYCODE_MEDIA_PAUSE:
-					pause();
-					break;
-				}
-			}
-		}
-	};
     
 }
