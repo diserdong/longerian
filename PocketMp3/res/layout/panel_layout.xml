@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+    <fragment 
+        android:id="@+id/song_list"
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_above="@+id/controller"
+    	android:name="so.mp3.app.fragment.Mp3ListFragment"
+        />
+    <fragment 
+        android:id="@+id/controller"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentBottom="true"
+    	android:name="so.mp3.app.fragment.ControllerFragment"
+        />
+</RelativeLayout>

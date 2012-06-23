@@ -13,13 +13,13 @@ public class MusicPlayer extends Observable implements OnErrorListener, OnComple
 
 	private MediaPlayer mp;
 	
+	public MusicPlayer() {
+		mp = new MediaPlayer();
+	}
+	
+	
+
 	public void play(String url) {
-		if(mp == null) {
-			mp = new MediaPlayer();
-			mp.setOnBufferingUpdateListener(this);
-			mp.setOnCompletionListener(this);
-			mp.setOnErrorListener(this);
-		}
 		try {
 			mp.reset();
 			mp.setDataSource(url);

@@ -32,47 +32,8 @@
         android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_below="@+id/search_box"
-	    android:layout_above="@+id/control_box"
 	    android:cacheColorHint="@color/transparent" 
 	    android:dividerHeight="1.0px"
     	android:background="@color/white"
 	    />
-    <RelativeLayout 
-        android:id="@+id/control_box"
-        android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_alignParentBottom="true"
-    	android:background="@color/half_gray_transparent"
-    	android:padding="4dip"
-        >
-        <ImageButton 
-	        android:id="@+id/play_or_pause"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:src="@drawable/av_play"
-	        />
-        <ImageButton 
-	        android:id="@+id/download"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/play_or_pause"
-	        android:src="@drawable/av_download"
-	        />
-        <TextView 
-            android:id="@+id/title"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/download"
-	        android:textSize="12sp"
-	        android:textColor="@color/white"
-            />
-        <SeekBar 
-		    android:id="@+id/progress"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@+id/download"
-		    android:layout_below="@+id/title"
-		    android:max="100"
-		    />
-    </RelativeLayout>
 </RelativeLayout>
