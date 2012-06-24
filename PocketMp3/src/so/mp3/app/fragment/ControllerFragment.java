@@ -285,15 +285,14 @@ public class ControllerFragment extends SherlockFragment {
 		progress.setProgress(0);
 	}
 	
-	private void download(Mp3 mp3) {//TODO 存到自定义的文件夹
-		File f = new File(Environment.DIRECTORY_DOWNLOADS + "/" + getString(R.string.app_name) + "/");
-		if(!f.exists()) {
-			f.mkdirs();
-		}
+	private void download(Mp3 mp3) {
+		File path = Environment.getExternalStoragePublicDirectory(
+	            Environment.DIRECTORY_DOWNLOADS);
+	    path.mkdirs();
 		Request request = new Request(Uri.parse(mp3.getMp3Link()));
 		request.setTitle(mp3.getTitle())
         .setDescription(mp3.getSinger() + "/" + mp3.getAlbum())
-        .setDestinationInExternalPublicDir(f.getAbsolutePath(),
+        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,
         		mp3.getTitle() + "-" + mp3.getSinger() + ".mp3");
 	    enqueue = dm.enqueue(request);
 	}
@@ -356,7 +355,7 @@ public class ControllerFragment extends SherlockFragment {
                 msg = getString(R.string.download_running);
                 break;
               case DownloadManager.STATUS_SUCCESSFUL:
-                msg = getString(R.string.download_successful) + c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                msg = getString(R.string.download_successful) + c.getString(c.getColumnIndexOrThrow(DownloadManager.COLUMN_LOCAL_URI));
                 break;
               default:
                 msg = getString(R.string.download_default);
