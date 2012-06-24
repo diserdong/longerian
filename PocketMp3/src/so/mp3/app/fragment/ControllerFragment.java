@@ -19,6 +19,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -59,6 +61,8 @@ public class ControllerFragment extends SherlockFragment {
 	
 	private long enqueue;
     private DownloadManager dm;
+    
+    private AudioManager am; 
     
     public static ControllerFragment newInstance() {
     	ControllerFragment f = new ControllerFragment();
@@ -109,6 +113,7 @@ public class ControllerFragment extends SherlockFragment {
 		});
 	    dm = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 	    getActivity().registerReceiver(downloadCompletionReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+	    am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 	}
     
     @Override
@@ -161,6 +166,7 @@ public class ControllerFragment extends SherlockFragment {
 		super.onDestroy();
 		mp.release();
 		getActivity().unregisterReceiver(downloadCompletionReceiver);
+		am.abandonAudioFocus(afChangeListener);
 	}
 	
 	private class DownloadLinkTask extends AsyncTask<String, Void, DownloadLinkResponse> {
@@ -227,14 +233,18 @@ public class ControllerFragment extends SherlockFragment {
 	public void handleNewMp3(Mp3 music) {
 		if(mp.isPlaying()) {
 			stop();
-		}
-		currentMp3 = music;
-		title.setText(music.getTitle() + " - " + music.getSinger());
-		if(TextUtils.isEmpty(music.getMp3Link())) {
-			downloadLinkTask = new DownloadLinkTask();
-			downloadLinkTask.execute(music.getPlayerLink());
 		} else {
-			prepareDownloadAndPlay(music.getMp3Link());
+			int result = requestAudioFocus();
+			if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+				currentMp3 = music;
+				title.setText(music.getTitle() + " - " + music.getSinger());
+				if(TextUtils.isEmpty(music.getMp3Link())) {
+					downloadLinkTask = new DownloadLinkTask();
+					downloadLinkTask.execute(music.getPlayerLink());
+				} else {
+					prepareDownloadAndPlay(music.getMp3Link());
+				}
+			}
 		}
 	}
 	
@@ -294,6 +304,26 @@ public class ControllerFragment extends SherlockFragment {
         progress.setProgress(currentPercent);
     }
 
+	private int requestAudioFocus() {
+		int result = am.requestAudioFocus(afChangeListener,
+		                                 AudioManager.STREAM_MUSIC,
+		                                 AudioManager.AUDIOFOCUS_GAIN);
+		return result;
+	}
+	
+	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+	    public void onAudioFocusChange(int focusChange) {
+	        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+	        	pause();
+	        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+	        	start();
+	        } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+	            am.abandonAudioFocus(afChangeListener);
+	            stop();
+	        }
+	    }
+	};
+	
 	private BroadcastReceiver downloadCompletionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -310,31 +340,89 @@ public class ControllerFragment extends SherlockFragment {
             }
         }
         
-        private String statusMessage(Cursor c) {//TODO 给予更详细的提示
-            String msg="???";
+        private String statusMessage(Cursor c) {
+            String msg = "???";
             switch(c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS))) {
               case DownloadManager.STATUS_FAILED:
-                msg="Download failed!" + c.getColumnIndex(DownloadManager.COLUMN_REASON);
+                msg = getString(R.string.download_failed) + failedReason(c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                 break;
               case DownloadManager.STATUS_PAUSED:
-                msg="Download paused!" + c.getColumnIndex(DownloadManager.COLUMN_REASON);
+                msg = getString(R.string.download_paused) + pausedReason(c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                 break;
               case DownloadManager.STATUS_PENDING:
-                msg="Download pending!" + c.getColumnIndex(DownloadManager.COLUMN_REASON);
+                msg = getString(R.string.download_pending);
                 break;
               case DownloadManager.STATUS_RUNNING:
-                msg="Download in progress!" + c.getColumnIndex(DownloadManager.COLUMN_REASON);
+                msg = getString(R.string.download_running);
                 break;
               case DownloadManager.STATUS_SUCCESSFUL:
-                msg="Download complete!" + c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
+                msg = getString(R.string.download_successful) + c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
                 break;
               default:
-                msg="Download is nowhere in sight";
+                msg = getString(R.string.download_default);
                 break;
             }
-            
             return(msg);
           }
+        
+        private String failedReason(int reasonCode) {
+        	String reason = "";
+        	switch(reasonCode) {
+        	case DownloadManager.ERROR_CANNOT_RESUME:
+        		reason = getString(R.string.download_error_cannot_resume);
+        		break;
+        	case DownloadManager.ERROR_DEVICE_NOT_FOUND:
+        		reason = getString(R.string.download_error_device_not_found);
+        		break;
+        	case DownloadManager.ERROR_FILE_ALREADY_EXISTS:
+        		reason = getString(R.string.download_error_file_already_exists);
+        		break;
+        	case DownloadManager.ERROR_FILE_ERROR:
+        		reason = getString(R.string.download_error_file_error);
+        		break;
+        	case DownloadManager.ERROR_HTTP_DATA_ERROR:
+        		reason = getString(R.string.download_error_http_data_error);
+        		break;
+        	case DownloadManager.ERROR_INSUFFICIENT_SPACE:
+        		reason = getString(R.string.download_error_insufficient_space);
+        		break;
+        	case DownloadManager.ERROR_TOO_MANY_REDIRECTS:
+        		reason = getString(R.string.download_error_too_many_redirects);
+        		break;
+        	case DownloadManager.ERROR_UNHANDLED_HTTP_CODE:
+        		reason = getString(R.string.download_error_unhandled_http_code);
+        		break;
+        	case DownloadManager.ERROR_UNKNOWN:
+        		reason = getString(R.string.download_error_unknown);
+        		break;
+        	default:
+        		reason = getString(R.string.network_wonky);
+        		break;
+        	}
+			return reason;
+        }
+        
+        private String pausedReason(int reasonCode) {
+        	String reason = "";
+        	switch(reasonCode) {
+        	case DownloadManager.PAUSED_QUEUED_FOR_WIFI:
+        		reason = getString(R.string.download_paused_queued_for_wifi);
+        		break;
+        	case DownloadManager.PAUSED_UNKNOWN:
+        		reason = getString(R.string.download_paused_unknown);
+        		break;
+        	case DownloadManager.PAUSED_WAITING_FOR_NETWORK:
+        		reason = getString(R.string.download_paused_waiting_for_network);
+        		break;
+        	case DownloadManager.PAUSED_WAITING_TO_RETRY:
+        		reason = getString(R.string.download_paused_waiting_to_retry);
+        		break;
+        	default:
+        		reason = getString(R.string.download_paused_unknown);
+        		break;
+        	}
+			return reason;
+        }
         
         private void showDownload() {
             Intent i = new Intent();
