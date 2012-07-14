@@ -12,6 +12,7 @@ import so.mp3.http.response.SearchResponse;
 import so.mp3.type.Mp3;
 import so.mp3.util.StringUtils;
 import android.text.TextUtils;
+import android.util.Log;
 
 public class SearchParser extends SougouParser {
 
@@ -107,7 +108,7 @@ public class SearchParser extends SougouParser {
 
 	private String getSinger(String s) {
 		String singer = "";
-		Pattern pe = Pattern.compile("(<td class=\"singger\"><a showSinger=t.*?>)");
+		Pattern pe = Pattern.compile("(<td class=\"singger\"><a showSinger=t.*?\">)");
         Matcher m = pe.matcher(s);
         while(m.find()) {
 //        	Log.d("longer", m.group(0));
@@ -115,6 +116,7 @@ public class SearchParser extends SougouParser {
         	int end = m.group(0).indexOf("\" target=_blank");
         	singer = m.group(0).substring(start, end);
         }
+//        Log.d("longer", singer);
 		return singer;
 	}
 
@@ -128,6 +130,7 @@ public class SearchParser extends SougouParser {
         	int end = m.group(0).indexOf("\" action");
         	title = m.group(0).substring(start, end);
         }
+//    	Log.d("longer", title);
 		return title;
 	}
 	

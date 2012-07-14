@@ -233,17 +233,17 @@ public class ControllerFragment extends SherlockFragment {
 	public void handleNewMp3(Mp3 music) {
 		if(mp.isPlaying()) {
 			stop();
-		} else {
-			int result = requestAudioFocus();
-			if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-				currentMp3 = music;
-				title.setText(music.getTitle() + " - " + music.getSinger());
-				if(TextUtils.isEmpty(music.getMp3Link())) {
-					downloadLinkTask = new DownloadLinkTask();
-					downloadLinkTask.execute(music.getPlayerLink());
-				} else {
-					prepareDownloadAndPlay(music.getMp3Link());
-				}
+			download.setEnabled(false);
+		}
+		int result = requestAudioFocus();
+		if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+			currentMp3 = music;
+			title.setText(music.getTitle() + " - " + music.getSinger());
+			if(TextUtils.isEmpty(music.getMp3Link())) {
+				downloadLinkTask = new DownloadLinkTask();
+				downloadLinkTask.execute(music.getPlayerLink());
+			} else {
+				prepareDownloadAndPlay(music.getMp3Link());
 			}
 		}
 	}
