@@ -39,12 +39,11 @@ public class ControllerFragment extends SherlockFragment {
 	
 	private MusicPlayer mp;
 	
-	private DownloadLinkTask downloadLinkTask;
 	private PlayTask playTask;
 	
 	private TextView title;
 	private ImageButton playOrPause;
-	private ImageButton download;
+//	private ImageButton download;
 	private SeekBar progress;
 	
 	private Mp3 currentMp3;
@@ -104,7 +103,6 @@ public class ControllerFragment extends SherlockFragment {
 			}
 		});
 	    dm = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-//	    getActivity().registerReceiver(downloadCompletionReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 	    am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 	}
     
@@ -128,26 +126,23 @@ public class ControllerFragment extends SherlockFragment {
 		});
         progress = (SeekBar) view.findViewById(R.id.progress);
         progress.setEnabled(false);
-        download = (ImageButton) view.findViewById(R.id.download);
-        download.setEnabled(false);
-        download.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(currentMp3 != null && currentMp3.getMp3Link() != null) {
-					download(currentMp3);
-				}
-			}
-		});
+//        download = (ImageButton) view.findViewById(R.id.download);
+//        download.setEnabled(false);
+//        download.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				if(currentMp3 != null && currentMp3.getMp3Link() != null) {
+//					download(currentMp3);
+//				}
+//			}
+//		});
 		return view;
 	}
     
     @Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if(downloadLinkTask != null) {
-			downloadLinkTask.cancel(true);
-		}
 		if(playTask != null) {
 			playTask.cancel(true);
 		}
@@ -157,40 +152,7 @@ public class ControllerFragment extends SherlockFragment {
 	public void onDestroy() {
 		super.onDestroy();
 		mp.release();
-//		getActivity().unregisterReceiver(downloadCompletionReceiver);
 		am.abandonAudioFocus(afChangeListener);
-	}
-	
-	private class DownloadLinkTask extends AsyncTask<String, Void, DownloadLinkResponse> {
-
-		@Override
-		protected void onPreExecute() {
-			host.showIndeterminateProgressBar();
-		}
-
-		@Override
-		protected DownloadLinkResponse doInBackground(String... params) {
-			SougouClient sc = new SougouClient();
-			DownloadLinkRequest dlr = new DownloadLinkRequest();
-			dlr.setLink(params[0]);
-			DownloadLinkResponse resp = (DownloadLinkResponse) sc.excute(dlr, new DownloadLinkParser());
-			return resp;
-		}
-		
-		@Override
-		protected void onPostExecute(DownloadLinkResponse result) {
-			host.hideIndeterminateProgressBar();
-			if(result.isNetworkException()) {
-				Toast.makeText(getActivity(), R.string.network_wonky, Toast.LENGTH_LONG).show();
-			} else {
-				if(TextUtils.isEmpty(result.getLink())) {
-					Toast.makeText(getActivity(), R.string.can_not_find_the_song, Toast.LENGTH_LONG).show();
-				} else {
-					prepareDownloadAndPlay(result.getLink());
-				}
-			}
-		}
-		
 	}
 	
 	private class PlayTask extends AsyncTask<String, Void, Void> {
@@ -225,18 +187,12 @@ public class ControllerFragment extends SherlockFragment {
 	public void handleNewMp3(Mp3 music) {
 		if(mp.isPlaying()) {
 			stop();
-			download.setEnabled(false);
 		}
 		int result = requestAudioFocus();
 		if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 			currentMp3 = music;
 			title.setText(music.getTitle() + " - " + music.getSinger());
-			if(TextUtils.isEmpty(music.getMp3Link())) {
-				downloadLinkTask = new DownloadLinkTask();
-				downloadLinkTask.execute(music.getPlayerLink());
-			} else {
-				prepareDownloadAndPlay(music.getMp3Link());
-			}
+			prepareDownloadAndPlay(music.getMp3Link());
 		}
 	}
 	
@@ -245,7 +201,6 @@ public class ControllerFragment extends SherlockFragment {
 		playOrPause.setImageResource(R.drawable.av_play);
 		playOrPause.setEnabled(false);
 		progress.setEnabled(false);
-		download.setEnabled(true);
 		play(link);
 	}
 	
@@ -275,12 +230,6 @@ public class ControllerFragment extends SherlockFragment {
 	private void complete() {
 		playOrPause.setImageResource(R.drawable.av_play);
 		progress.setProgress(0);
-	}
-	
-	private void download(Mp3 mp3) {
-	    getActivity().startService(new Intent(getActivity(), DownloadService.class)
-        	.putExtra(DownloadService.TARGET_URL, mp3.getMp3Link())
-        	.putExtra(DownloadService.TARGET_NAME, mp3.getTitle() + "-" + mp3.getSinger() + ".mp3"));
 	}
 	
 	private void updateMusicProgress(SeekBar progress, int current, int bufferPercent, int duration) {

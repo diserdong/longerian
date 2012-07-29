@@ -17,18 +17,11 @@
 	        android:layout_height="wrap_content"
 	        android:src="@drawable/av_play"
 	        />
-        <ImageButton 
-	        android:id="@+id/download"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/play_or_pause"
-	        android:src="@drawable/av_download"
-	        />
         <TextView 
             android:id="@+id/title"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/download"
+	        android:layout_toRightOf="@+id/play_or_pause"
 	        android:singleLine="true"
 	        android:ellipsize="end"
 	        android:textSize="12sp"
@@ -38,7 +31,7 @@
 		    android:id="@+id/progress"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@+id/download"
+		    android:layout_toRightOf="@+id/play_or_pause"
 		    android:paddingLeft="10dip"
 		    android:paddingRight="10dip"
 		    android:layout_below="@+id/title"

@@ -4,6 +4,7 @@ import java.util.List;
 
 import so.mp3.app.Host;
 import so.mp3.app.widget.Mp3Adapter;
+import so.mp3.app.widget.Mp3Adapter.OnOpenSongOptionListener;
 import so.mp3.http.SougouClient;
 import so.mp3.http.parser.SearchParser;
 import so.mp3.http.request.SearchRequest;
@@ -11,14 +12,23 @@ import so.mp3.http.response.SearchResponse;
 import so.mp3.player.R;
 import so.mp3.type.Mp3;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -27,9 +37,15 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class Mp3ListFragment extends SherlockFragment {
+public class Mp3ListFragment extends SherlockFragment implements OnOpenSongOptionListener {
 
 	private static final String TAG = "Mp3ListFragment";
+	private static final int GROUP_SEARCH_RESULT = 2001;
+	
+
+	public interface OnSongSelectedListener {
+        public void onSongSelected(Mp3 mp3);
+    }
 	
 	private Host host;
 	private OnSongSelectedListener listener;
@@ -86,8 +102,7 @@ public class Mp3ListFragment extends SherlockFragment {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		        listener.onSongSelected(((Mp3Adapter) (parent.getAdapter())).getItems(), 
-		        		position);
+		        listener.onSongSelected((Mp3) songList.getItemAtPosition(position));
 			}
 		});
 		return view;
@@ -115,7 +130,8 @@ public class Mp3ListFragment extends SherlockFragment {
 		Mp3Adapter adapter = new Mp3Adapter(getActivity(),
 				R.layout.song_item,
 				R.id.title, 
-				songs);
+				songs,
+				this);
 		songList.setAdapter(adapter);
 	}
 	
@@ -150,9 +166,11 @@ public class Mp3ListFragment extends SherlockFragment {
 		}
 		
 	}
-
-	public interface OnSongSelectedListener {
-        public void onSongSelected(List<Mp3> songs, int position);
-    }
 	
+	@Override
+	public void onOpenOption(int position) {
+		DialogFragment optionDialog = SongOptionDialogFragment.newInstance((Mp3) songList.getItemAtPosition(position));
+		optionDialog.show(getFragmentManager(), "option");
+	}
+
 }

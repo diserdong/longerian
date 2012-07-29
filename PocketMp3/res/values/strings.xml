@@ -11,6 +11,9 @@
     <string name="can_not_play_the_song">Something wrong with playing the song</string>
     <string name="play">Play</string>
     <string name="pause">Pause</string>
+    <string name="download">Download</string>
+    <string name="share">Share</string>
+    <string name="share_via">Share via</string>
     
     <string name="download_failed">Download failed! </string>
     <string name="download_paused">Download paused! </string>

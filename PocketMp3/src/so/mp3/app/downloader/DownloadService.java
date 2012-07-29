@@ -6,7 +6,9 @@ import java.util.Queue;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -156,6 +158,7 @@ public class DownloadService extends Service implements DownloadTaskListener {
 			notifyStart.what = ServiceHandler.POLLED_FOR_START;
 			mServiceHandler.sendMessage(notifyStart);
 		}
+		sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
 		stopSelf(taskId);
 	}
 
