@@ -2,17 +2,11 @@ package so.mp3.app.fragment;
 
 import so.mp3.app.Host;
 import so.mp3.app.MusicPlayer;
-import so.mp3.app.downloader.DownloadService;
-import so.mp3.http.SougouClient;
-import so.mp3.http.parser.DownloadLinkParser;
-import so.mp3.http.request.DownloadLinkRequest;
-import so.mp3.http.response.DownloadLinkResponse;
 import so.mp3.player.R;
 import so.mp3.type.Mp3;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
@@ -21,7 +15,6 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,16 +36,12 @@ public class ControllerFragment extends SherlockFragment {
 	
 	private TextView title;
 	private ImageButton playOrPause;
-//	private ImageButton download;
 	private SeekBar progress;
 	
 	private Mp3 currentMp3;
 	
 	private long lastUpdate = 0;
 	
-	private long enqueue;
-    private DownloadManager dm;
-    
     private AudioManager am; 
     
     public static ControllerFragment newInstance() {
@@ -102,7 +91,6 @@ public class ControllerFragment extends SherlockFragment {
 				}
 			}
 		});
-	    dm = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
 	    am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 	}
     
@@ -126,17 +114,6 @@ public class ControllerFragment extends SherlockFragment {
 		});
         progress = (SeekBar) view.findViewById(R.id.progress);
         progress.setEnabled(false);
-//        download = (ImageButton) view.findViewById(R.id.download);
-//        download.setEnabled(false);
-//        download.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				if(currentMp3 != null && currentMp3.getMp3Link() != null) {
-//					download(currentMp3);
-//				}
-//			}
-//		});
 		return view;
 	}
     

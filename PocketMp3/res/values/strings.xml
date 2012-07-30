@@ -14,6 +14,9 @@
     <string name="download">Download</string>
     <string name="share">Share</string>
     <string name="share_via">Share via</string>
+
+    <string name="tab_online">Search</string>
+    <string name="tab_local">Browse</string>
     
     <string name="download_failed">Download failed! </string>
     <string name="download_paused">Download paused! </string>

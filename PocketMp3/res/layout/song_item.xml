@@ -55,18 +55,31 @@
         android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_toLeftOf="@+id/more"
+	    android:layout_alignWithParentIfMissing="true"
 	    android:paddingTop="4dip"
 	    android:gravity="center_vertical"
 	    android:textColor="#ff464646"
         />
     <TextView
         android:id="@+id/album"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_toRightOf="@+id/no"
 	    android:layout_below="@+id/title"
 	    android:padding="4dip"
 	    android:gravity="center_vertical"
 	    android:textColor="#ff464646"
+        />
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toLeftOf="@+id/more"
+	    android:layout_below="@+id/title"
+	   	android:layout_alignWithParentIfMissing="true"
+	    android:padding="4dip"
+	    android:gravity="center_vertical"
+	    android:textColor="#ff464646"
+	    android:visibility="invisible"
         />
 </RelativeLayout>

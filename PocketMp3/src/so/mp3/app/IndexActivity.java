@@ -1,7 +1,10 @@
 package so.mp3.app;
 
+import java.util.ArrayList;
+
 import so.mp3.app.downloader.DownloadService;
 import so.mp3.app.fragment.ControllerFragment;
+import so.mp3.app.fragment.LocalMp3ListFragment;
 import so.mp3.app.fragment.Mp3ListFragment;
 import so.mp3.app.fragment.Mp3ListFragment.OnSongSelectedListener;
 import so.mp3.app.fragment.SongOptionDialogFragment.OnOptionSelectedListener;
@@ -15,32 +18,51 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Window;
 
-public class IndexActivity extends SherlockFragmentActivity implements OnSongSelectedListener, OnOptionSelectedListener, Host{
+public class IndexActivity extends SherlockFragmentActivity implements OnSongSelectedListener, OnOptionSelectedListener, 
+	ActionBar.TabListener, OnPageChangeListener, Host{
 
 	private DownloadLinkTask downloadLinkTask;
-	private Mp3ListFragment songList;
 	private ControllerFragment controller;
 	private enum PostDownlaodLinkAction {
 		SHARE,
 		DOWNLOAD,
 		PLAY
 	};
+	private final static int TAB_ONLINE = 0;
+	private final static int TAB_LOCAL = 1;
+	
+	private ViewPager  mViewPager;
+	private PagerAdapter mAdapter;
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.panel_layout);
-		songList = Mp3ListFragment.newInstance();
+	    mViewPager = (ViewPager) findViewById(R.id.pager);
+	    mAdapter = new PagerAdapter(getSupportFragmentManager());
+    	mViewPager.setAdapter(mAdapter);
+    	mViewPager.setCurrentItem(TAB_ONLINE);
+    	mViewPager.setOnPageChangeListener(this);
+    	getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+    	getSupportActionBar().addTab(getOnlineTab());
+    	getSupportActionBar().addTab(getLocalTab());
 		controller = ControllerFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-        	.add(R.id.song_list, songList)
         	.add(R.id.controller, controller)
         	.commit();
         hideIndeterminateProgressBar();
@@ -164,6 +186,79 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 			}
 		}
 		
+	}
+
+	private class PagerAdapter extends FragmentPagerAdapter {
+
+		private ArrayList<Fragment> mPages = new ArrayList<Fragment>();
+		
+		public PagerAdapter(FragmentManager fm) {
+			super(fm);
+			mPages.add(Mp3ListFragment.newInstance());
+			mPages.add(LocalMp3ListFragment.newInstance());
+		}
+
+		@Override
+		public Fragment getItem(int position) {
+			return mPages.get(position);
+		}
+
+		@Override
+		public int getCount() {
+			return mPages.size();
+		}
+
+    }
+	
+	@Override
+	public void onPageScrollStateChanged(int state) {
+	}
+
+	@Override
+	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+	}
+
+	@Override
+	public void onPageSelected(int position) {
+		getSupportActionBar().setSelectedNavigationItem(position);
+	}
+
+	private ActionBar.Tab getOnlineTab() {
+		ActionBar.Tab tab = getSupportActionBar().newTab();
+        tab.setText(R.string.tab_online);
+        tab.setTag(getString(R.string.tab_online));
+        tab.setTabListener(this);
+        return tab;
+	}
+	
+	private ActionBar.Tab getLocalTab() {
+		ActionBar.Tab tab = getSupportActionBar().newTab();
+        tab.setText(R.string.tab_local);
+        tab.setTag(getString(R.string.tab_local));
+        tab.setTabListener(this);
+        return tab;
+	}
+	
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		switch(tab.getPosition()) {
+		case TAB_ONLINE:
+			mViewPager.setCurrentItem(TAB_ONLINE, true);
+			break;
+		case TAB_LOCAL:
+			mViewPager.setCurrentItem(TAB_LOCAL, true);
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	}
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	}
 	
 }

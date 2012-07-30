@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     >
-    <fragment 
-        android:id="@+id/song_list"
-        android:layout_width="match_parent"
-    	android:layout_height="match_parent"
+    <android.support.v4.view.ViewPager
+    	android:id="@+id/pager"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
     	android:layout_above="@+id/controller"
-    	android:name="so.mp3.app.fragment.Mp3ListFragment"
-        />
+	    >
+    </android.support.v4.view.ViewPager>
     <fragment 
         android:id="@+id/controller"
         android:layout_width="match_parent"
