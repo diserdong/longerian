@@ -3,14 +3,14 @@ package so.mp3.app.fragment;
 import java.util.List;
 
 import so.mp3.app.Host;
-import so.mp3.app.widget.Mp3Adapter;
-import so.mp3.app.widget.Mp3Adapter.OnOpenSongOptionListener;
+import so.mp3.app.widget.OnlineMp3Adapter;
+import so.mp3.app.widget.OnlineMp3Adapter.OnOpenSongOptionListener;
 import so.mp3.http.SougouClient;
 import so.mp3.http.parser.SearchParser;
 import so.mp3.http.request.SearchRequest;
 import so.mp3.http.response.SearchResponse;
 import so.mp3.player.R;
-import so.mp3.type.Mp3;
+import so.mp3.type.OnlineMp3;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,14 +37,14 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class Mp3ListFragment extends SherlockFragment implements OnOpenSongOptionListener {
+public class OnlineMp3ListFragment extends SherlockFragment implements OnOpenSongOptionListener {
 
 	private static final String TAG = "Mp3ListFragment";
 	private static final int GROUP_SEARCH_RESULT = 2001;
 	
 
 	public interface OnSongSelectedListener {
-        public void onSongSelected(Mp3 mp3);
+        public void onSongSelected(OnlineMp3 mp3);
     }
 	
 	private Host host;
@@ -56,8 +56,8 @@ public class Mp3ListFragment extends SherlockFragment implements OnOpenSongOptio
 	private ImageButton search;
 	private ListView songList;
 	
-	public static Mp3ListFragment newInstance() {
-		Mp3ListFragment f = new Mp3ListFragment();
+	public static OnlineMp3ListFragment newInstance() {
+		OnlineMp3ListFragment f = new OnlineMp3ListFragment();
         return f;
     }
 	
@@ -102,7 +102,7 @@ public class Mp3ListFragment extends SherlockFragment implements OnOpenSongOptio
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		        listener.onSongSelected((Mp3) songList.getItemAtPosition(position));
+		        listener.onSongSelected((OnlineMp3) songList.getItemAtPosition(position));
 			}
 		});
 		return view;
@@ -126,8 +126,8 @@ public class Mp3ListFragment extends SherlockFragment implements OnOpenSongOptio
 		super.onDestroy();
 	}
 
-	private void refreshPage(List<Mp3> songs) {
-		Mp3Adapter adapter = new Mp3Adapter(getActivity(),
+	private void refreshPage(List<OnlineMp3> songs) {
+		OnlineMp3Adapter adapter = new OnlineMp3Adapter(getActivity(),
 				R.layout.song_item,
 				R.id.title, 
 				songs,
@@ -169,7 +169,7 @@ public class Mp3ListFragment extends SherlockFragment implements OnOpenSongOptio
 	
 	@Override
 	public void onOpenOption(int position) {
-		DialogFragment optionDialog = SongOptionDialogFragment.newInstance((Mp3) songList.getItemAtPosition(position));
+		DialogFragment optionDialog = SongOptionDialogFragment.newInstance((OnlineMp3) songList.getItemAtPosition(position));
 		optionDialog.show(getFragmentManager(), "option");
 	}
 

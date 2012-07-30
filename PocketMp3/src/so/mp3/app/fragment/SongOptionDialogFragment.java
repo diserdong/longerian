@@ -1,7 +1,7 @@
 package so.mp3.app.fragment;
 
 import so.mp3.player.R;
-import so.mp3.type.Mp3;
+import so.mp3.type.OnlineMp3;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,15 +17,15 @@ public class SongOptionDialogFragment extends SherlockDialogFragment implements 
 
 	public interface OnOptionSelectedListener {
 		
-		public void onDownloadOptionSelected(Mp3 mp3);
-		public void onShareOptionSelected(Mp3 mp3);
+		public void onDownloadOptionSelected(OnlineMp3 mp3);
+		public void onShareOptionSelected(OnlineMp3 mp3);
 		
 	}
 
 	private OnOptionSelectedListener mListener;
-	private Mp3 mp3;
+	private OnlineMp3 mp3;
 	
-	public static SongOptionDialogFragment newInstance(Mp3 mp3) {
+	public static SongOptionDialogFragment newInstance(OnlineMp3 mp3) {
 		SongOptionDialogFragment f = new SongOptionDialogFragment();
         Bundle args = new Bundle();
         args.putParcelable("mp3", mp3);

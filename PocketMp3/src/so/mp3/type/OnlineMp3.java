@@ -3,7 +3,7 @@ package so.mp3.type;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Mp3 implements Parcelable {
+public class OnlineMp3 implements Parcelable {
 	
 	private String title;
 	private String singer;
@@ -11,7 +11,7 @@ public class Mp3 implements Parcelable {
 	private String playerLink;
 	private String mp3Link;
 	private String size;
-	public Mp3() {
+	public OnlineMp3() {
 		super();
 	}
 	public String getTitle() {
@@ -57,7 +57,7 @@ public class Mp3 implements Parcelable {
 				+ album + ", link=" + playerLink + ", size=" + size + "]";
 	}
 	
-	public Mp3(Parcel in) {
+	public OnlineMp3(Parcel in) {
 		readFromParcel(in);
 	}
 	
@@ -90,12 +90,12 @@ public class Mp3 implements Parcelable {
 	public static final Parcelable.Creator CREATOR = 
 		new Parcelable.Creator() {
 	
-            public Mp3 createFromParcel(Parcel in) {
-                return new Mp3(in);
+            public OnlineMp3 createFromParcel(Parcel in) {
+                return new OnlineMp3(in);
             }
  
-            public Mp3[] newArray(int size) {
-                return new Mp3[size];
+            public OnlineMp3[] newArray(int size) {
+                return new OnlineMp3[size];
             }
             
         };

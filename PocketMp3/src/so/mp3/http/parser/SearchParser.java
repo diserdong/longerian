@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import so.mp3.http.SougouParser;
 import so.mp3.http.SougouResponse;
 import so.mp3.http.response.SearchResponse;
-import so.mp3.type.Mp3;
+import so.mp3.type.OnlineMp3;
 import so.mp3.util.StringUtils;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +22,7 @@ public class SearchParser extends SougouParser {
 	public SougouResponse parse(String source) {
 		if(!TextUtils.isEmpty(source)) {
 			List<String> trs = getRawMp3InTr(StringUtils.replaceLine(source));
-			List<Mp3> mp3s = new ArrayList<Mp3>();
+			List<OnlineMp3> mp3s = new ArrayList<OnlineMp3>();
 			for(String s : trs) {
 //			Log.d("longer", s);
 				mp3s.add(buildMp3(s));
@@ -60,8 +60,8 @@ public class SearchParser extends SougouParser {
 		return raw;
 	}
 	
-	private Mp3 buildMp3(String s) {
-		Mp3 m = new Mp3();
+	private OnlineMp3 buildMp3(String s) {
+		OnlineMp3 m = new OnlineMp3();
 		m.setTitle(getTitle(s));
 		m.setSinger(getSinger(s));
 		m.setAlbum(getAlbum(s));

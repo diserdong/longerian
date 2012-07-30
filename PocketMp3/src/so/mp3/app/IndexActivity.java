@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import so.mp3.app.downloader.DownloadService;
 import so.mp3.app.fragment.ControllerFragment;
 import so.mp3.app.fragment.LocalMp3ListFragment;
-import so.mp3.app.fragment.Mp3ListFragment;
-import so.mp3.app.fragment.Mp3ListFragment.OnSongSelectedListener;
+import so.mp3.app.fragment.OnlineMp3ListFragment;
+import so.mp3.app.fragment.OnlineMp3ListFragment.OnSongSelectedListener;
 import so.mp3.app.fragment.SongOptionDialogFragment.OnOptionSelectedListener;
 import so.mp3.http.SougouClient;
 import so.mp3.http.parser.DownloadLinkParser;
 import so.mp3.http.request.DownloadLinkRequest;
 import so.mp3.http.response.DownloadLinkResponse;
 import so.mp3.player.R;
-import so.mp3.type.Mp3;
+import so.mp3.type.OnlineMp3;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
@@ -88,7 +88,7 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 	}
 
 	@Override
-	public void onSongSelected(Mp3 mp3) {
+	public void onSongSelected(OnlineMp3 mp3) {
 		if(TextUtils.isEmpty(mp3.getMp3Link())) {
 			downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.PLAY, mp3);
 			downloadLinkTask.execute(mp3.getPlayerLink());
@@ -97,12 +97,12 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 		}
 	}
 	
-	private void play(Mp3 mp3) {
+	private void play(OnlineMp3 mp3) {
 		controller.handleNewMp3(mp3);
 	}
 
 	@Override
-	public void onDownloadOptionSelected(Mp3 mp3) {
+	public void onDownloadOptionSelected(OnlineMp3 mp3) {
 		if(TextUtils.isEmpty(mp3.getMp3Link())) {
 			downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.DOWNLOAD, mp3);
 			downloadLinkTask.execute(mp3.getPlayerLink());
@@ -111,14 +111,14 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 		}
 	}
 	
-	private void download(Mp3 mp3) {
+	private void download(OnlineMp3 mp3) {
 	    startService(new Intent(getApplicationContext(), DownloadService.class)
         	.putExtra(DownloadService.TARGET_URL, mp3.getMp3Link())
         	.putExtra(DownloadService.TARGET_NAME, mp3.getTitle() + "-" + mp3.getSinger() + ".mp3"));
 	}
 
 	@Override
-	public void onShareOptionSelected(Mp3 mp3) {
+	public void onShareOptionSelected(OnlineMp3 mp3) {
 		if(TextUtils.isEmpty(mp3.getMp3Link())) {
 			downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.SHARE, mp3);
 			downloadLinkTask.execute(mp3.getPlayerLink());
@@ -127,7 +127,7 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 		}
 	}
 	
-	private void shareMp3(Mp3 mp3) {
+	private void shareMp3(OnlineMp3 mp3) {
 		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 		sharingIntent.setType("text/plain");
 		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mp3.getTitle());
@@ -138,9 +138,9 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 	private class DownloadLinkTask extends AsyncTask<String, Void, DownloadLinkResponse> {
 
 		private PostDownlaodLinkAction action;
-		private Mp3 mp3;
+		private OnlineMp3 mp3;
 		
-		public DownloadLinkTask(PostDownlaodLinkAction action, Mp3 orgMp3) {
+		public DownloadLinkTask(PostDownlaodLinkAction action, OnlineMp3 orgMp3) {
 			this.action = action;
 			this.mp3 = orgMp3;
 		}
@@ -194,7 +194,7 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 		
 		public PagerAdapter(FragmentManager fm) {
 			super(fm);
-			mPages.add(Mp3ListFragment.newInstance());
+			mPages.add(OnlineMp3ListFragment.newInstance());
 			mPages.add(LocalMp3ListFragment.newInstance());
 		}
 

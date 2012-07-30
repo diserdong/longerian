@@ -3,7 +3,7 @@ package so.mp3.app.fragment;
 import so.mp3.app.Host;
 import so.mp3.app.MusicPlayer;
 import so.mp3.player.R;
-import so.mp3.type.Mp3;
+import so.mp3.type.OnlineMp3;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -38,7 +38,7 @@ public class ControllerFragment extends SherlockFragment {
 	private ImageButton playOrPause;
 	private SeekBar progress;
 	
-	private Mp3 currentMp3;
+	private OnlineMp3 currentMp3;
 	
 	private long lastUpdate = 0;
 	
@@ -161,7 +161,7 @@ public class ControllerFragment extends SherlockFragment {
 		
 	}
 	 
-	public void handleNewMp3(Mp3 music) {
+	public void handleNewMp3(OnlineMp3 music) {
 		if(mp.isPlaying()) {
 			stop();
 		}
