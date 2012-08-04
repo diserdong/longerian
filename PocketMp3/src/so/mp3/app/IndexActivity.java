@@ -8,6 +8,7 @@ import so.mp3.app.fragment.LocalMp3ListFragment;
 import so.mp3.app.fragment.OnlineMp3ListFragment;
 import so.mp3.app.fragment.OnlineMp3ListFragment.OnSongSelectedListener;
 import so.mp3.app.fragment.SongOptionDialogFragment.OnOptionSelectedListener;
+import so.mp3.app.player.PlayerService;
 import so.mp3.http.SougouClient;
 import so.mp3.http.parser.DownloadLinkParser;
 import so.mp3.http.request.DownloadLinkRequest;
@@ -56,7 +57,6 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
 	    mAdapter = new PagerAdapter(getSupportFragmentManager());
     	mViewPager.setAdapter(mAdapter);
-    	mViewPager.setCurrentItem(TAB_ONLINE);
     	mViewPager.setOnPageChangeListener(this);
     	getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     	getSupportActionBar().addTab(getOnlineTab());
@@ -67,6 +67,11 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
         	.commit();
         hideIndeterminateProgressBar();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        if(getIntent().getAction().equals(PlayerService.ACTION_VIEW_PLAYER)) {
+        	mViewPager.setCurrentItem(TAB_LOCAL);
+        } else {
+        	mViewPager.setCurrentItem(TAB_ONLINE);
+        }
 	}
 
 	@Override

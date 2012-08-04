@@ -155,7 +155,7 @@ public class DownloadTask extends AsyncTask<String, Integer, InputStream> {
 	
 	public static final String SDCARD_ROOT = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 	public static final String DOWNLOAD_ROOT = SDCARD_ROOT + "PocketMp3/Downloads/";
-    public static final String ACTION_VIEW_DOWNLOAD = "so.mp3.app.IndexActivity.index"; 
+    public static final String ACTION_VIEW_DOWNLOAD = "so.mp3.app.IndexActivity.search";
 	
 	private boolean saveDownloadFile(InputStream result) {
 		File file = new File(DOWNLOAD_ROOT, fileName);
@@ -167,12 +167,13 @@ public class DownloadTask extends AsyncTask<String, Integer, InputStream> {
 		int icon = android.R.drawable.stat_sys_download;
 		if(notification == null) {
 			Intent notificationIntent = new Intent(ACTION_VIEW_DOWNLOAD);
-			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-			PendingIntent contentIntent1 = PendingIntent.getActivity(ctx, 0, notificationIntent, 0);
+			notificationIntent.setClass(ctx, IndexActivity.class);
+			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+			PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0, notificationIntent, 0);
 			
 			notification = new Notification(icon, tickerText, System.currentTimeMillis());
 			notification.flags|=Notification.FLAG_ONGOING_EVENT;
-			notification.contentIntent=contentIntent1;
+			notification.contentIntent=contentIntent;
 		}
 		RemoteViews contentView = new RemoteViews(ctx.getPackageName(), R.layout.downloader_progress_notification);
 		contentView.setTextViewText(R.id.notification_title, title);

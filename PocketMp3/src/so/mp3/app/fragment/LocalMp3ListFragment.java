@@ -1,16 +1,24 @@
 package so.mp3.app.fragment;
 
+import so.mp3.app.player.PlayerService;
+import so.mp3.app.player.PlayerService.PlayerBinder;
 import so.mp3.app.widget.LocalMp3Adapter;
 import so.mp3.player.R;
+import so.mp3.type.LocalMp3;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +30,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 
 public class LocalMp3ListFragment extends SherlockFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+	private static final String TAG = "LocalMp3ListFragment";
 	private ListView songList;
 	private SimpleCursorAdapter mAdapter;
 	public static final String[] MUSIC_SUMMARY_PROJECTION = new String[] {
@@ -31,6 +40,45 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
 		MediaStore.Audio.Media.ARTIST,
 		MediaStore.Audio.Media.SIZE,
 		MediaStore.Audio.Media.DURATION,
+    };
+	
+	private PlayerService playerService;
+    private ServiceConnection playerServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName arg0, IBinder service) {
+        	Log.d(TAG, "service connected: " + arg0.toShortString());
+            PlayerBinder playerBinder = (PlayerBinder)service;
+            playerService = playerBinder.getService();
+            Cursor data = mAdapter.getCursor();
+            bindCursorDataToPlayer(data);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+        	Log.d(TAG, "service disconnected: " + arg0.toShortString());
+        }
+        
+        private void bindCursorDataToPlayer(Cursor data) {
+        	if(data.getCount() > 0) {
+    			data.moveToFirst();
+    			while(!data.isAfterLast()) {
+    				playerService.addTrack(buildLocalMp3List(data));
+    				data.moveToNext();
+    			}
+    		}
+    	}
+    	
+    	private LocalMp3 buildLocalMp3List(Cursor data) {
+    		LocalMp3 mp3 = new LocalMp3();
+    		mp3.setId(data.getInt(data.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)));
+    		mp3.setTitle(data.getString(data.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)));
+    		mp3.setAlbum(data.getString(data.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)));
+    		mp3.setArtist(data.getString(data.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)));
+    		mp3.setSize(data.getInt(data.getColumnIndexOrThrow(MediaStore.Audio.Media.SIZE)));
+    		mp3.setDuration(data.getInt(data.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)));
+    		return mp3;
+    	}
     };
 	
 	public static LocalMp3ListFragment newInstance() {
@@ -57,7 +105,7 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//		        listener.onSongSelected((Mp3) songList.getItemAtPosition(position));
+				playerService.play(position);
 			}
 		});
 		return view;
@@ -70,8 +118,8 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
                 R.layout.song_item, null,
                 MUSIC_SUMMARY_PROJECTION,
                 new int[] {R.id.no, R.id.title, R.id.album, R.id.singer, R.id.size, R.id.duration}, 0);
-        songList.setAdapter(mAdapter);
-        getLoaderManager().initLoader(0, null, this);
+       songList.setAdapter(mAdapter);
+       getLoaderManager().initLoader(0, null, LocalMp3ListFragment.this);
 	}
 
     @Override
@@ -82,6 +130,7 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
     @Override
 	public void onDestroy() {
 		super.onDestroy();
+        getSherlockActivity().unbindService(playerServiceConnection);
 	}
 
 	@Override
@@ -95,6 +144,8 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		mAdapter.swapCursor(data);
+		Intent playerServiceIntent = new Intent(getSherlockActivity(), PlayerService.class);
+	    getSherlockActivity().bindService(playerServiceIntent, playerServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override

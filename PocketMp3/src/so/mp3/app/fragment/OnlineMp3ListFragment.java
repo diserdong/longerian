@@ -84,7 +84,7 @@ public class OnlineMp3ListFragment extends SherlockFragment implements OnOpenSon
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-    	View view = inflater.inflate(R.layout.songs_layout, null);
+    	View view = inflater.inflate(R.layout.online_songs_layout, null);
     	query = (EditText) view.findViewById(R.id.query);
     	search = (ImageButton) view.findViewById(R.id.search);
     	search.setOnClickListener(new OnClickListener() {
