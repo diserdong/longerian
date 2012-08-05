@@ -1,45 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content" 
     android:background="@color/white"
     >
     <RelativeLayout 
         android:id="@+id/control_box"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:background="@color/half_gray_transparent"
     	android:padding="4dip"
         >
-        <ImageButton 
-	        android:id="@+id/play_or_pause"
-	        android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/notification"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:src="@drawable/av_play"
-	        />
-        <TextView 
-            android:id="@+id/title"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_toRightOf="@+id/play_or_pause"
-	        android:singleLine="true"
-	        android:ellipsize="end"
-	        android:textSize="12sp"
-	        android:textColor="@color/white"
-            />
+	        android:orientation="horizontal"
+	        android:gravity="center_vertical"
+	        >
+	        <TextView android:id="@+id/trackname"
+	            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+	            android:focusable="true"
+	            android:ellipsize="marquee"
+	            android:singleLine="true"
+	            android:layout_gravity="left"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" />
+	        <TextView android:id="@+id/artist"
+	            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+	            android:layout_gravity="left"
+	            android:maxLines="1"
+	            android:scrollHorizontally="true"
+	            android:ellipsize="end"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" />
+	    </LinearLayout>
         <SeekBar 
 		    android:id="@+id/progress"
-		    android:layout_width="match_parent"
+		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@+id/play_or_pause"
-		    android:paddingLeft="10dip"
-		    android:paddingRight="10dip"
-		    android:layout_below="@+id/title"
+		    android:layout_marginLeft="10dip"
+		    android:layout_marginRight="10dip"
+		    android:layout_below="@+id/notification"
 		    android:max="100"
 		    android:progressDrawable="@drawable/seekbar_progress"
 		    android:thumb="@drawable/seekbar_thumb"
 		    android:minHeight="2dip"
         	android:maxHeight="2dip"
 		    />
+        <LinearLayout 
+            android:id="@+id/controller_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+            <ImageButton 
+                android:id="@+id/btn_previous"
+                android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:src="@drawable/av_previous"
+                />
+            <ImageButton 
+                android:id="@+id/btn_play_or_pause"
+                android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:src="@drawable/av_play"
+                />
+            <ImageButton 
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:src="@drawable/av_next"
+                />
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

@@ -5,22 +5,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import so.mp3.app.IndexActivity;
+import so.mp3.player.R;
 import so.mp3.type.LocalMp3;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.RemoteViews;
-import so.mp3.player.R;
 
 public class PlayerService extends Service {
 	
@@ -32,13 +32,12 @@ public class PlayerService extends Service {
     private int status, currentTrackPosition;
     private boolean taken;
     private IBinder playerBinder;
-    private NotificationManager mNotificationManager;
     private Notification notification;
     private int notificationId = 2001;
     private PlayerListener listener;
 
     public interface PlayerListener {
-    	public void onPlay(int position);
+    	public void onPlay(int position, LocalMp3 mp3);
     	public void onPause(int position);
     	public void onStop(int position);
     	public void onProgress(int max, int current);
@@ -64,7 +63,6 @@ public class PlayerService extends Service {
                 }
             }
         });
-        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     @Override
@@ -172,19 +170,19 @@ public class PlayerService extends Service {
             mediaPlayer.prepare();
         } catch (FileNotFoundException e) {
         	isSuccess = false;
-        	listener.onError();
+        	if(listener != null) listener.onError();
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
         	isSuccess = false;
-        	listener.onError();
+        	if(listener != null) listener.onError();
             e.printStackTrace();
         } catch (IllegalStateException e) {
         	isSuccess = false;
-        	listener.onError();
+        	if(listener != null) listener.onError();
             e.printStackTrace();
         } catch (IOException e) {
         	isSuccess = false;
-        	listener.onError();
+        	if(listener != null) listener.onError();
             e.printStackTrace();
         }
         if(isSuccess) {
@@ -209,7 +207,8 @@ public class PlayerService extends Service {
     		notification.tickerText = "Player for " + localMp3List.get(pos).getTitle() + " - " + localMp3List.get(pos).getArtist();
     		notification.contentView = views;
     		startForeground(notificationId, notification);
-        	listener.onPlay(pos);
+    		if(listener != null) listener.onPlay(pos, localMp3List.get(pos));
+    		mHandler.post(mRunProgress);
         }
     }
 
@@ -221,22 +220,31 @@ public class PlayerService extends Service {
             }
         break;
         case PLAYING:
-            mediaPlayer.pause();
-            setStatus(PAUSED);
+            pause();
         break;
         case PAUSED:
-            mediaPlayer.start();
-            setStatus(PLAYING);
+            start();
         break;
         }
         untake();
     }
     
+    public void start() {
+    	mediaPlayer.start();
+        setStatus(PLAYING);
+        startForeground(notificationId, notification);
+		if(listener != null) listener.onPlay(currentTrackPosition, localMp3List.get(currentTrackPosition));
+		mHandler.post(mRunProgress);
+		untake();
+    }
+    
     public void pause() {
         mediaPlayer.pause();
         setStatus(PAUSED);
-        untake();
         stopForeground(true);
+        if(listener != null) listener.onPause(currentTrackPosition);
+        mHandler.removeCallbacks(mRunProgress);
+        untake();
     }
 
     public void stop() {
@@ -244,8 +252,10 @@ public class PlayerService extends Service {
         mediaPlayer.reset();
         currentTrackPosition = -1;
         setStatus(STOPED);
-        untake();
         stopForeground(true);
+        if(listener != null) listener.onStop(currentTrackPosition);
+        mHandler.removeCallbacks(mRunProgress);
+        untake();
     }
     
     public boolean isActive() {
@@ -293,24 +303,25 @@ public class PlayerService extends Service {
             return PlayerService.this;
         }
     }
+    
+    private Runnable mRunProgress = new Runnable() {
+		
+		@Override
+		public void run() {
+			if(listener != null && mediaPlayer.isPlaying()) {
+				listener.onProgress(mediaPlayer.getDuration(), mediaPlayer.getCurrentPosition());
+			}
+			mHandler.postDelayed(mRunProgress, 1000);
+		}
+	};
+    
+    private Handler mHandler = new Handler() {
 
-//    private void showNotification(int notificationId, String title, String artist) {
-//		String tickerText = "Play for " + title + " - " + artist;
-//		int icon = android.R.drawable.ic_media_play;
-//		if(notification == null) {
-//			notification = new Notification(icon, tickerText, System.currentTimeMillis());
-//			notification.flags |= Notification.FLAG_ONGOING_EVENT;
-//		}
-//		Intent notificationIntent = new Intent(ACTION_VIEW_PLAYER);
-//		notificationIntent.setClass(getApplicationContext(), IndexActivity.class);
-//		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-//		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-//		notification.setLatestEventInfo(this, title, artist, pendingIntent);
-//		mNotificationManager.notify(notificationId, notification);
-//	}
-	
-//	private void hideNotification(int notificationId) {
-//		mNotificationManager.cancel(notificationId);
-//	}
-	
+		@Override
+		public void handleMessage(Message msg) {
+			
+		}
+    	
+    };
+
 }

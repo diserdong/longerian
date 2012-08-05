@@ -2,7 +2,6 @@ package so.mp3.app.fragment;
 
 import so.mp3.app.player.PlayerService;
 import so.mp3.app.player.PlayerService.PlayerBinder;
-import so.mp3.app.player.PlayerService.PlayerListener;
 import so.mp3.app.widget.LocalMp3Adapter;
 import so.mp3.player.R;
 import so.mp3.type.LocalMp3;
@@ -18,7 +17,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +27,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class LocalMp3ListFragment extends SherlockFragment implements LoaderManager.LoaderCallbacks<Cursor>, PlayerListener {
+public class LocalMp3ListFragment extends SherlockFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = "LocalMp3ListFragment";
 	private ListView songList;
@@ -51,7 +49,6 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
             PlayerBinder playerBinder = (PlayerBinder)service;
             playerService = playerBinder.getService();
             Log.d(TAG, "service connected: " + arg0.toShortString() + "/" + playerService);
-            playerService.setPlayerListener(LocalMp3ListFragment.this);
             Cursor data = mAdapter.getCursor();
             bindCursorDataToPlayer(data);
             if(playerService.isActive()) {
@@ -110,7 +107,9 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				playerService.playTrack(position);
+				if(playerService != null) {
+					playerService.playTrack(position);
+				}
 			}
 		});
 		return view;
@@ -158,33 +157,4 @@ public class LocalMp3ListFragment extends SherlockFragment implements LoaderMana
 		mAdapter.swapCursor(null);
 	}
 
-	@Override
-	public void onPlay(int position) {
-		mAdapter.updateIndicator(position);
-	}
-
-	@Override
-	public void onPause(int position) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStop(int position) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onProgress(int max, int current) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onError() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
