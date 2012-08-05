@@ -53,6 +53,8 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		Intent playerServiceIntent = new Intent(this, PlayerService.class);
+        startService(playerServiceIntent);
 		setContentView(R.layout.panel_layout);
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
 	    mAdapter = new PagerAdapter(getSupportFragmentManager());

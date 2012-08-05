@@ -18,9 +18,13 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.RemoteViews;
+import so.mp3.player.R;
 
 public class PlayerService extends Service {
-
+	
+	public static final String TAG = "PlayerService";
 	public static final String ACTION_VIEW_PLAYER = "so.mp3.app.IndexActivity.player";
     public static final int STOPED = -1, PAUSED = 0, PLAYING = 1;
     private MediaPlayer mediaPlayer;
@@ -30,6 +34,16 @@ public class PlayerService extends Service {
     private IBinder playerBinder;
     private NotificationManager mNotificationManager;
     private Notification notification;
+    private int notificationId = 2001;
+    private PlayerListener listener;
+
+    public interface PlayerListener {
+    	public void onPlay(int position);
+    	public void onPause(int position);
+    	public void onStop(int position);
+    	public void onProgress(int max, int current);
+    	public void onError();
+    }
     
     @Override
     public void onCreate() {
@@ -60,10 +74,21 @@ public class PlayerService extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
+    	Log.d(TAG, "service destroyed");
         return super.onUnbind(intent);
     }
+    
+    @Override
+	public void onDestroy() {
+		super.onDestroy();
+		Log.d(TAG, "service destroyed");
+	}
 
-    public void take() {
+	public void setPlayerListener(PlayerListener listener) {
+		this.listener = listener;
+	}
+
+	public void take() {
         taken = true;
     }
 
@@ -137,6 +162,7 @@ public class PlayerService extends Service {
         if (status > STOPED) {
             stop();
         }
+        boolean isSuccess = true;
         try {
             mediaPlayer.setDataSource(getApplicationContext(), 
             		Uri.withAppendedPath(
@@ -145,61 +171,85 @@ public class PlayerService extends Service {
                         ));
             mediaPlayer.prepare();
         } catch (FileNotFoundException e) {
+        	isSuccess = false;
+        	listener.onError();
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
+        	isSuccess = false;
+        	listener.onError();
             e.printStackTrace();
         } catch (IllegalStateException e) {
+        	isSuccess = false;
+        	listener.onError();
             e.printStackTrace();
         } catch (IOException e) {
+        	isSuccess = false;
+        	listener.onError();
             e.printStackTrace();
         }
-        mediaPlayer.start();
-        currentTrackPosition = pos;
-        setStatus(PLAYING);
+        if(isSuccess) {
+        	mediaPlayer.start();
+        	currentTrackPosition = pos;
+        	setStatus(PLAYING);
+        	untake();
+    		if(notification == null) {
+    			notification = new Notification();
+    			notification.flags |= Notification.FLAG_ONGOING_EVENT;
+    			notification.icon = android.R.drawable.ic_media_play;
+    			Intent notificationIntent = new Intent(ACTION_VIEW_PLAYER);
+    			notificationIntent.setClass(getApplicationContext(), IndexActivity.class);
+    			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+    			notification.contentIntent = pendingIntent;
+    		}
+    		RemoteViews views = new RemoteViews(getPackageName(), R.layout.player_status_niotification);
+            views.setImageViewResource(R.id.icon, android.R.drawable.ic_media_play);
+            views.setTextViewText(R.id.trackname, localMp3List.get(pos).getTitle());
+            views.setTextViewText(R.id.artist, localMp3List.get(pos).getArtist());
+    		notification.tickerText = "Player for " + localMp3List.get(pos).getTitle() + " - " + localMp3List.get(pos).getArtist();
+    		notification.contentView = views;
+    		startForeground(notificationId, notification);
+        	listener.onPlay(pos);
+        }
+    }
+
+    public void play() {
+        switch (status) {
+        case STOPED:
+            if (!localMp3List.isEmpty()) {
+                playTrack(0);
+            }
+        break;
+        case PLAYING:
+            mediaPlayer.pause();
+            setStatus(PAUSED);
+        break;
+        case PAUSED:
+            mediaPlayer.start();
+            setStatus(PLAYING);
+        break;
+        }
         untake();
-        showNotification(pos, localMp3List.get(pos).getTitle(), localMp3List.get(pos).getArtist());
     }
-
-    public void play(int pos) {
-        playTrack(pos);
-    }
-
-//    public void play() {
-//    	if(localMp3List.isEmpty()) {
-//    		return;
-//    	}
-//        switch (status) {
-//        case STOPED:
-//            if (!localMp3List.isEmpty()) {
-//                playTrack(0);
-//            }
-//        break;
-//        case PLAYING:
-//            mediaPlayer.pause();
-//            setStatus(PAUSED);
-//        break;
-//        case PAUSED:
-//            mediaPlayer.start();
-//            setStatus(PLAYING);
-//        break;
-//        }
-//        untake();
-//    }
-
+    
     public void pause() {
-    	hideNotification(currentTrackPosition);
         mediaPlayer.pause();
         setStatus(PAUSED);
         untake();
+        stopForeground(true);
     }
 
     public void stop() {
-    	hideNotification(currentTrackPosition);
         mediaPlayer.stop();
         mediaPlayer.reset();
         currentTrackPosition = -1;
         setStatus(STOPED);
         untake();
+        stopForeground(true);
+    }
+    
+    public boolean isActive() {
+    	return status > STOPED;
     }
 
     public void nextTrack() {
@@ -244,23 +294,23 @@ public class PlayerService extends Service {
         }
     }
 
-    private void showNotification(int notificationId, String title, String artist) {
-		String tickerText = "Play for " + title + " - " + artist;
-		int icon = android.R.drawable.ic_media_play;
-		if(notification == null) {
-			notification = new Notification(icon, tickerText, System.currentTimeMillis());
-			notification.flags |= Notification.FLAG_ONGOING_EVENT;
-		}
-		Intent notificationIntent = new Intent(ACTION_VIEW_PLAYER);
-		notificationIntent.setClass(getApplicationContext(), IndexActivity.class);
-		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-		notification.setLatestEventInfo(this, title, artist, pendingIntent);
-		mNotificationManager.notify(notificationId, notification);
-	}
+//    private void showNotification(int notificationId, String title, String artist) {
+//		String tickerText = "Play for " + title + " - " + artist;
+//		int icon = android.R.drawable.ic_media_play;
+//		if(notification == null) {
+//			notification = new Notification(icon, tickerText, System.currentTimeMillis());
+//			notification.flags |= Notification.FLAG_ONGOING_EVENT;
+//		}
+//		Intent notificationIntent = new Intent(ACTION_VIEW_PLAYER);
+//		notificationIntent.setClass(getApplicationContext(), IndexActivity.class);
+//		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+//		notification.setLatestEventInfo(this, title, artist, pendingIntent);
+//		mNotificationManager.notify(notificationId, notification);
+//	}
 	
-	private void hideNotification(int notificationId) {
-		mNotificationManager.cancel(notificationId);
-	}
+//	private void hideNotification(int notificationId) {
+//		mNotificationManager.cancel(notificationId);
+//	}
 	
 }

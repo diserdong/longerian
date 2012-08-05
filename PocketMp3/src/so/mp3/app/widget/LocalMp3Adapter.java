@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class LocalMp3Adapter extends SimpleCursorAdapter {
 
 	private DecimalFormat decimalFormater = new DecimalFormat("0.00");
+	private int currentPosition = -1;
 	
 	public LocalMp3Adapter(Context context, int layout, Cursor c,
 			String[] from, int[] to, int flags) {
@@ -50,6 +51,13 @@ public class LocalMp3Adapter extends SimpleCursorAdapter {
 		}
 		ImageView more = (ImageView) view.findViewById(R.id.more);
 		if(more != null) more.setVisibility(View.GONE);
+		ImageView indicator = (ImageView) view.findViewById(R.id.indicator);
+		indicator.setVisibility((cursor.getPosition() == currentPosition) ? View.VISIBLE : View.GONE);
+	}
+	
+	public void updateIndicator(int position) {
+		currentPosition = position;
+		notifyDataSetChanged();
 	}
 	
 }

@@ -82,4 +82,13 @@
 	    android:textColor="#ff464646"
 	    android:visibility="invisible"
         />
+    <ImageView 
+        android:id="@+id/indicator"
+        android:layout_width="24dip"
+	    android:layout_height="24dip"
+	    android:layout_toLeftOf="@+id/duration"
+	    android:layout_below="@+id/title"
+	    android:src="@android:drawable/ic_media_play"
+	    android:visibility="gone"
+        />
 </RelativeLayout>
