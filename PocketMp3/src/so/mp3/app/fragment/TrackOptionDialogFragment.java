@@ -1,7 +1,7 @@
 package so.mp3.app.fragment;
 
 import so.mp3.player.R;
-import so.mp3.type.OnlineMp3;
+import so.mp3.type.OnlineTrack;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,36 +11,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
-import com.actionbarsherlock.app.SherlockFragment;
 
-public class SongOptionDialogFragment extends SherlockDialogFragment implements OnClickListener {
+public class TrackOptionDialogFragment extends SherlockDialogFragment implements OnClickListener {
 
 	public interface OnOptionSelectedListener {
 		
-		public void onDownloadOptionSelected(OnlineMp3 mp3);
-		public void onShareOptionSelected(OnlineMp3 mp3);
+		public void onDownloadOptionSelected(OnlineTrack mp3);
+		public void onShareOptionSelected(OnlineTrack mp3);
 		
 	}
 
 	private OnOptionSelectedListener mListener;
-	private OnlineMp3 mp3;
+	private OnlineTrack mp3;
 	
-	public static SongOptionDialogFragment newInstance(OnlineMp3 mp3) {
-		SongOptionDialogFragment f = new SongOptionDialogFragment();
+	public static TrackOptionDialogFragment newInstance(OnlineTrack mp3) {
+		TrackOptionDialogFragment f = new TrackOptionDialogFragment();
         Bundle args = new Bundle();
         args.putParcelable("mp3", mp3);
         f.setArguments(args);
         return f;
 	}
 	
+	public void setOnOptionSelectedListener(OnOptionSelectedListener Listener) {
+		this.mListener = Listener;
+	}
+
 	@Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            mListener = (OnOptionSelectedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnOptionSelectedListener");
-        }
     }
 	
 	@Override
@@ -65,10 +63,10 @@ public class SongOptionDialogFragment extends SherlockDialogFragment implements 
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.action_download:
-			mListener.onDownloadOptionSelected(mp3);
+			if(mListener != null) mListener.onDownloadOptionSelected(mp3);
 			break;
 		case R.id.action_share:
-			mListener.onShareOptionSelected(mp3);
+			if(mListener != null) mListener.onShareOptionSelected(mp3);
 			break;
 		default:	
 			break;

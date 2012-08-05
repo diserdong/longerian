@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class LocalMp3Adapter extends SimpleCursorAdapter {
+public class LocalTrackAdapter extends SimpleCursorAdapter {
 
 	private DecimalFormat decimalFormater = new DecimalFormat("0.00");
 	private int currentPosition = -1;
 	
-	public LocalMp3Adapter(Context context, int layout, Cursor c,
+	public LocalTrackAdapter(Context context, int layout, Cursor c,
 			String[] from, int[] to, int flags) {
 		super(context, layout, c, from, to, flags);
 	}

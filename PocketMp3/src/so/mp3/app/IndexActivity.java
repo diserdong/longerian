@@ -2,22 +2,15 @@ package so.mp3.app;
 
 import java.util.ArrayList;
 
-import so.mp3.app.downloader.DownloadService;
-import so.mp3.app.fragment.ControllerFragment;
-import so.mp3.app.fragment.LocalMp3ListFragment;
-import so.mp3.app.fragment.OnlineMp3ListFragment;
-import so.mp3.app.fragment.OnlineMp3ListFragment.OnSongSelectedListener;
-import so.mp3.app.fragment.SongOptionDialogFragment.OnOptionSelectedListener;
-import so.mp3.app.player.PlayerService;
-import so.mp3.http.SougouClient;
-import so.mp3.http.parser.DownloadLinkParser;
-import so.mp3.http.request.DownloadLinkRequest;
-import so.mp3.http.response.DownloadLinkResponse;
+import so.mp3.app.fragment.LocalTrackControllerFragment;
+import so.mp3.app.fragment.LocalTrackListFragment;
+import so.mp3.app.fragment.OnlineTrackControllerFragment;
+import so.mp3.app.fragment.OnlineTrackListFragment;
+import so.mp3.app.player.LocalTrackPlayer;
+import so.mp3.app.player.OnlineTrackPlayer;
 import so.mp3.player.R;
-import so.mp3.type.OnlineMp3;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,37 +18,35 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 
-public class IndexActivity extends SherlockFragmentActivity implements OnSongSelectedListener, OnOptionSelectedListener, 
-	ActionBar.TabListener, OnPageChangeListener, Host{
+public class IndexActivity extends SherlockFragmentActivity implements
+	ActionBar.TabListener, OnPageChangeListener, Host {
 
-	private DownloadLinkTask downloadLinkTask;
-	private ControllerFragment controller;
-	private enum PostDownlaodLinkAction {
-		SHARE,
-		DOWNLOAD,
-		PLAY
-	};
+	private LocalTrackControllerFragment localController;
+	private OnlineTrackControllerFragment onlineController;
+
 	private final static int TAB_ONLINE = 0;
 	private final static int TAB_LOCAL = 1;
 	
-	private ViewPager  mViewPager;
+	private ViewPager mViewPager;
 	private PagerAdapter mAdapter;
 	
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		Intent playerServiceIntent = new Intent(this, PlayerService.class);
-        startService(playerServiceIntent);
+        startService(new Intent(this, LocalTrackPlayer.class));
+        startService(new Intent(this, OnlineTrackPlayer.class));
 		setContentView(R.layout.panel_layout);
+		onlineController = (OnlineTrackControllerFragment) getSupportFragmentManager().findFragmentById(R.id.online_controller);
+		localController = (LocalTrackControllerFragment) getSupportFragmentManager().findFragmentById(R.id.local_controller);
 	    mViewPager = (ViewPager) findViewById(R.id.pager);
 	    mAdapter = new PagerAdapter(getSupportFragmentManager());
     	mViewPager.setAdapter(mAdapter);
@@ -63,27 +54,43 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
     	getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     	getSupportActionBar().addTab(getOnlineTab());
     	getSupportActionBar().addTab(getLocalTab());
-		controller = ControllerFragment.newInstance();
-        getSupportFragmentManager().beginTransaction()
-        	.add(R.id.controller, controller)
-        	.commit();
         hideIndeterminateProgressBar();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        if(getIntent().getAction().equals(PlayerService.ACTION_VIEW_PLAYER)) {
+        if(getIntent().getAction().equals(LocalTrackPlayer.ACTION_VIEW_LOCAL_PLAYER)) {
         	mViewPager.setCurrentItem(TAB_LOCAL);
+        	showLocalControllerOnly();
         } else {
         	mViewPager.setCurrentItem(TAB_ONLINE);
+        	showOnlineControllerOnly();
         }
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if(downloadLinkTask != null) {
-			downloadLinkTask.cancel(true);
-		}
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, R.id.action_set, 1, R.string.setting)
+        	.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add(0, R.id.action_exit, 2, R.string.exit)
+			.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+        case R.id.action_set:
+        	//TODO
+        	break;
+        case R.id.action_exit:
+        	stopService(new Intent(this, LocalTrackPlayer.class));
+        	stopService(new Intent(this, OnlineTrackPlayer.class));
+        	finish();
+        	break;
+		default: 
+			break;
+		}
+		return true;
+	}
+	
 	@Override
 	public void showIndeterminateProgressBar() {
 		setSupportProgressBarIndeterminateVisibility(true);
@@ -94,115 +101,14 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 		setSupportProgressBarIndeterminateVisibility(false);
 	}
 
-	@Override
-	public void onSongSelected(OnlineMp3 mp3) {
-		if(TextUtils.isEmpty(mp3.getMp3Link())) {
-			downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.PLAY, mp3);
-			downloadLinkTask.execute(mp3.getPlayerLink());
-		} else {
-			play(mp3);
-		}
-	}
-	
-	private void play(OnlineMp3 mp3) {
-		controller.handleNewMp3(mp3);
-	}
-
-	@Override
-	public void onDownloadOptionSelected(OnlineMp3 mp3) {
-		if(TextUtils.isEmpty(mp3.getMp3Link())) {
-			downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.DOWNLOAD, mp3);
-			downloadLinkTask.execute(mp3.getPlayerLink());
-		} else {
-			download(mp3);
-		}
-	}
-	
-	private void download(OnlineMp3 mp3) {
-	    startService(new Intent(getApplicationContext(), DownloadService.class)
-        	.putExtra(DownloadService.TARGET_URL, mp3.getMp3Link())
-        	.putExtra(DownloadService.TARGET_NAME, mp3.getTitle() + "-" + mp3.getSinger() + ".mp3"));
-	}
-
-	@Override
-	public void onShareOptionSelected(OnlineMp3 mp3) {
-		if(TextUtils.isEmpty(mp3.getMp3Link())) {
-			downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.SHARE, mp3);
-			downloadLinkTask.execute(mp3.getPlayerLink());
-		} else {
-			shareMp3(mp3);
-		}
-	}
-	
-	private void shareMp3(OnlineMp3 mp3) {
-		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-		sharingIntent.setType("text/plain");
-		sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mp3.getTitle());
-		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, mp3.getAlbum() + "\n" + mp3.getSinger() + "\n" + mp3.getMp3Link());
-		startActivity(Intent.createChooser(sharingIntent, getString(R.string.share_via)));
-	}
-
-	private class DownloadLinkTask extends AsyncTask<String, Void, DownloadLinkResponse> {
-
-		private PostDownlaodLinkAction action;
-		private OnlineMp3 mp3;
-		
-		public DownloadLinkTask(PostDownlaodLinkAction action, OnlineMp3 orgMp3) {
-			this.action = action;
-			this.mp3 = orgMp3;
-		}
-		
-		@Override
-		protected void onPreExecute() {
-			showIndeterminateProgressBar();
-		}
-
-		@Override
-		protected DownloadLinkResponse doInBackground(String... params) {
-			SougouClient sc = new SougouClient();
-			DownloadLinkRequest dlr = new DownloadLinkRequest();
-			dlr.setLink(params[0]);
-			DownloadLinkResponse resp = (DownloadLinkResponse) sc.excute(dlr, new DownloadLinkParser());
-			return resp;
-		}
-		
-		@Override
-		protected void onPostExecute(DownloadLinkResponse result) {
-			hideIndeterminateProgressBar();
-			if(result.isNetworkException()) {
-				Toast.makeText(getApplicationContext(), R.string.network_wonky, Toast.LENGTH_LONG).show();
-			} else {
-				if(TextUtils.isEmpty(result.getLink())) {
-					Toast.makeText(getApplicationContext(), R.string.can_not_find_the_song, Toast.LENGTH_LONG).show();
-				} else {
-					mp3.setMp3Link(result.getLink());
-					switch (action) {
-					case SHARE:
-						shareMp3(mp3);
-						break;
-					case DOWNLOAD:
-						download(mp3);
-						break;
-					case PLAY:
-						play(mp3);
-						break;
-					default:
-						break;
-					}
-				}
-			}
-		}
-		
-	}
-
 	private class PagerAdapter extends FragmentPagerAdapter {
 
 		private ArrayList<Fragment> mPages = new ArrayList<Fragment>();
 		
 		public PagerAdapter(FragmentManager fm) {
 			super(fm);
-			mPages.add(OnlineMp3ListFragment.newInstance());
-			mPages.add(LocalMp3ListFragment.newInstance());
+			mPages.add(OnlineTrackListFragment.newInstance());
+			mPages.add(LocalTrackListFragment.newInstance());
 		}
 
 		@Override
@@ -251,9 +157,11 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 		switch(tab.getPosition()) {
 		case TAB_ONLINE:
 			mViewPager.setCurrentItem(TAB_ONLINE, true);
+			showOnlineControllerOnly();
 			break;
 		case TAB_LOCAL:
 			mViewPager.setCurrentItem(TAB_LOCAL, true);
+			showLocalControllerOnly();
 			break;
 		default:
 			break;
@@ -266,6 +174,14 @@ public class IndexActivity extends SherlockFragmentActivity implements OnSongSel
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	}
+	
+	private void showLocalControllerOnly() {
+		getSupportFragmentManager().beginTransaction().hide(onlineController).show(localController).commit();
+	}
+	
+	private void showOnlineControllerOnly() {
+		getSupportFragmentManager().beginTransaction().hide(localController).show(onlineController).commit();
 	}
 	
 }

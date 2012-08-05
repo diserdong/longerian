@@ -2,5 +2,7 @@
 <resources>
     <item type="id" name="action_download"/>
     <item type="id" name="action_share"/>
+    <item type="id" name="action_set"/>
+    <item type="id" name="action_exit"/>
     
 </resources>

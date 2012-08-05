@@ -1,12 +1,12 @@
 package so.mp3.app.fragment;
 
 import so.mp3.app.Host;
-import so.mp3.app.player.PlayerService;
-import so.mp3.app.player.PlayerService.PlayerBinder;
-import so.mp3.app.player.PlayerService.PlayerListener;
+import so.mp3.app.player.BasicPlayerService.PlayerListener;
+import so.mp3.app.player.OnlineTrackPlayer;
+import so.mp3.app.player.OnlineTrackPlayer.OnlinePlayerBinder;
 import so.mp3.player.R;
-import so.mp3.type.LocalMp3;
-import so.mp3.type.OnlineMp3;
+import so.mp3.type.OnlineTrack;
+import so.mp3.type.Tracker;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -29,12 +29,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class ControllerFragment extends SherlockFragment implements OnClickListener, OnSeekBarChangeListener, PlayerListener {
+public class OnlineTrackControllerFragment extends SherlockFragment implements OnClickListener, OnSeekBarChangeListener, PlayerListener {
 
-	private static final String TAG = "ControllerFragment";
+	private static final String TAG = "OnlineTrackControllerFragment";
 	private Host host;
-	
-//	private MusicPlayer mp;
 	
 	private PlayTask playTask;
 	
@@ -46,29 +44,30 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 	private ImageButton previous;
 	private ImageButton next;
 	
-	private OnlineMp3 currentMp3;
-	
     private AudioManager am; 
     
-    private PlayerService playerService;
+    private OnlineTrackPlayer playerService;
     private ServiceConnection playerServiceConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName arg0, IBinder service) {
-            PlayerBinder playerBinder = (PlayerBinder)service;
+            OnlinePlayerBinder playerBinder = (OnlinePlayerBinder)service;
             playerService = playerBinder.getService();
-            playerService.setPlayerListener(ControllerFragment.this);
+            playerService.setPlayerListener(OnlineTrackControllerFragment.this);
+            if(playerService.isActive()) {
+            	restoreUI();
+            }
             Log.d(TAG, "service connected: " + arg0.toShortString() + "/" + playerService);
         }
 
-        @Override
+		@Override
         public void onServiceDisconnected(ComponentName arg0) {
         	Log.d(TAG, "service disconnected: " + arg0.toShortString());
         }
     };
     
-    public static ControllerFragment newInstance() {
-    	ControllerFragment f = new ControllerFragment();
+    public static OnlineTrackControllerFragment newInstance() {
+    	OnlineTrackControllerFragment f = new OnlineTrackControllerFragment();
         return f;
     }
     
@@ -86,7 +85,7 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	    am = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-	    Intent playerServiceIntent = new Intent(getSherlockActivity(), PlayerService.class);
+	    Intent playerServiceIntent = new Intent(getSherlockActivity(), OnlineTrackPlayer.class);
 	    getSherlockActivity().getApplicationContext().bindService(playerServiceIntent, playerServiceConnection, Context.BIND_AUTO_CREATE);
 	}
     
@@ -151,7 +150,7 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 		
 	}
 	 
-	public void handleNewMp3(OnlineMp3 music) {
+	public void handleNewMp3(OnlineTrack music) {
 //		if(mp.isPlaying()) {
 //			stop();
 //		}
@@ -260,7 +259,7 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 	}
 
 	@Override
-	public void onPlay(int position, LocalMp3 mp3) {
+	public void onPlay(int position, Tracker mp3) {
 		updatePlayPauseBtn(true);
 		updateDisplay(mp3);
 	}
@@ -268,7 +267,6 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 	@Override
 	public void onPause(int position) {
 		updatePlayPauseBtn(false);
-		
 	}
 
 	@Override
@@ -288,6 +286,14 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 		
 	}
 	
+	private void restoreUI() {
+		if(playerService != null) {
+			updatePlayPauseBtn(playerService.isPlaying());
+			updateDisplay(playerService.getCurrentTrack());
+			updateProgress(playerService.getCurrentTrackDuration(), playerService.getCurrentTrackProgress());
+		}
+	}
+	
 	private void updatePlayPauseBtn(boolean isPlaying) {
 		if(isPlaying) {
 			playOrPause.setImageResource(R.drawable.av_pause);
@@ -296,7 +302,7 @@ public class ControllerFragment extends SherlockFragment implements OnClickListe
 		}
 	}
 	
-	private void updateDisplay(LocalMp3 mp3) {
+	private void updateDisplay(Tracker mp3) {
 		if(mp3 != null) {
 			trackName.setText(mp3.getTitle());
 			artist.setText(mp3.getArtist());

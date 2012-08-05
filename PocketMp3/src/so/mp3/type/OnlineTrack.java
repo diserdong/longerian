@@ -1,31 +1,31 @@
 package so.mp3.type;
 
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class OnlineMp3 implements Parcelable {
+public class OnlineTrack implements Parcelable, Tracker {
 	
 	private String title;
-	private String singer;
+	private String artist;
 	private String album;
 	private String playerLink;
 	private String mp3Link;
 	private String size;
-	public OnlineMp3() {
-		super();
-	}
+	
+	@Override
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getSinger() {
-		return singer;
+	
+	public void setArtist(String artist) {
+		this.artist = artist;
 	}
-	public void setSinger(String singer) {
-		this.singer = singer;
-	}
+	
+	@Override
 	public String getAlbum() {
 		return album;
 	}
@@ -44,6 +44,8 @@ public class OnlineMp3 implements Parcelable {
 	public void setMp3Link(String mp3Link) {
 		this.mp3Link = mp3Link;
 	}
+	
+	@Override
 	public String getSize() {
 		return size;
 	}
@@ -53,12 +55,15 @@ public class OnlineMp3 implements Parcelable {
 	
 	@Override
 	public String toString() {
-		return "Mp3 [title=" + title + ", singer=" + singer + ", album="
+		return "Mp3 [title=" + title + ", singer=" + artist + ", album="
 				+ album + ", link=" + playerLink + ", size=" + size + "]";
 	}
 	
-	public OnlineMp3(Parcel in) {
+	public OnlineTrack(Parcel in) {
 		readFromParcel(in);
+	}
+	
+	public OnlineTrack() {
 	}
 	
 	@Override
@@ -69,7 +74,7 @@ public class OnlineMp3 implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(title);
-		dest.writeString(singer);
+		dest.writeString(artist);
 		dest.writeString(album);
 		dest.writeString(playerLink);
 		dest.writeString(mp3Link);
@@ -79,7 +84,7 @@ public class OnlineMp3 implements Parcelable {
 	@SuppressWarnings("unchecked")
 	private void readFromParcel(Parcel in) {
 		title = in.readString();
-		singer = in.readString();
+		artist = in.readString();
 		album = in.readString();
 		playerLink = in.readString();
 		mp3Link = in.readString();
@@ -90,14 +95,30 @@ public class OnlineMp3 implements Parcelable {
 	public static final Parcelable.Creator CREATOR = 
 		new Parcelable.Creator() {
 	
-            public OnlineMp3 createFromParcel(Parcel in) {
-                return new OnlineMp3(in);
+            public OnlineTrack createFromParcel(Parcel in) {
+                return new OnlineTrack(in);
             }
  
-            public OnlineMp3[] newArray(int size) {
-                return new OnlineMp3[size];
+            public OnlineTrack[] newArray(int size) {
+                return new OnlineTrack[size];
             }
             
         };
+	@Override
+	public Uri getUri() {
+		if(mp3Link != null) {
+			return Uri.parse(mp3Link);
+		}
+		return null;
+	}
+	@Override
+	public String getArtist() {
+		return artist;
+	}
+	@Override
+	public int getDuration() {
+		//not available
+		return -1;
+	}
         
 }

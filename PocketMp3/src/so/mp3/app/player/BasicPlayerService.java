@@ -6,57 +6,59 @@ import java.util.ArrayList;
 
 import so.mp3.app.IndexActivity;
 import so.mp3.player.R;
-import so.mp3.type.LocalMp3;
+import so.mp3.type.Tracker;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.net.Uri;
-import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-public class PlayerService extends Service {
+abstract public class BasicPlayerService extends Service {
 	
-	public static final String TAG = "PlayerService";
-	public static final String ACTION_VIEW_PLAYER = "so.mp3.app.IndexActivity.player";
+	public static final String TAG = "BasicPlayerService";
     public static final int STOPED = -1, PAUSED = 0, PLAYING = 1;
     private MediaPlayer mediaPlayer;
-    private ArrayList<LocalMp3> localMp3List;
+    protected ArrayList<? extends Tracker> trackList;
     private int status, currentTrackPosition;
     private boolean taken;
-    private IBinder playerBinder;
+    protected IBinder playerBinder;
+    private Handler mHandler = new Handler();
+    private PlayerListener playerListener;
+    private IndicatorListener indicatorListener;
     private Notification notification;
-    private int notificationId = 2001;
-    private PlayerListener listener;
+    
+    abstract protected int getNotificationId();
+    abstract protected String getNotificationAction();
+    abstract public void addTracks(ArrayList<? extends Tracker> tracks);
 
     public interface PlayerListener {
-    	public void onPlay(int position, LocalMp3 mp3);
+    	public void onPlay(int position, Tracker track);
     	public void onPause(int position);
     	public void onStop(int position);
     	public void onProgress(int max, int current);
     	public void onError();
     }
     
+    public interface IndicatorListener {
+    	public void onPlay(int position);
+    }
+    
     @Override
     public void onCreate() {
         super.onCreate();
         mediaPlayer = new MediaPlayer();
-        localMp3List = new ArrayList<LocalMp3>();
         currentTrackPosition = -1;
         setStatus(STOPED);
-        playerBinder = new PlayerBinder();
         mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
 
             @Override
             public void onCompletion(MediaPlayer arg0) {
-                if (currentTrackPosition == localMp3List.size()-1) {
+                if (currentTrackPosition == trackList.size()-1) {
                     stop();
                 } else {
                     nextTrack();
@@ -72,7 +74,7 @@ public class PlayerService extends Service {
 
     @Override
     public boolean onUnbind(Intent intent) {
-    	Log.d(TAG, "service destroyed");
+    	Log.d(TAG, "service unbind, intent is: " + intent.getAction() + "/" + intent.getComponent());
         return super.onUnbind(intent);
     }
     
@@ -80,17 +82,22 @@ public class PlayerService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		Log.d(TAG, "service destroyed");
+		release();
 	}
 
 	public void setPlayerListener(PlayerListener listener) {
-		this.listener = listener;
+		this.playerListener = listener;
+	}
+
+	public void setIndicatorListener(IndicatorListener indicatorListener) {
+		this.indicatorListener = indicatorListener;
 	}
 
 	public void take() {
         taken = true;
     }
 
-    private void untake() {
+    protected void untake() {
         synchronized (this) {
             taken = false;
             notifyAll();
@@ -109,29 +116,24 @@ public class PlayerService extends Service {
         return status;
     }
 
-    public ArrayList<LocalMp3> getTracklist() {
-        return localMp3List;
+    public ArrayList<? extends Tracker> getTracklist() {
+        return trackList;
     }
 
-    public LocalMp3 getTrack(int pos) {
-        return localMp3List.get(pos);
+    public Tracker getTrack(int pos) {
+        return trackList.get(pos);
     }
 
-    public LocalMp3 getCurrentTrack() {
+    public Tracker getCurrentTrack() {
         if (currentTrackPosition < 0) {
             return null;
         } else {
-            return localMp3List.get(currentTrackPosition);
+            return trackList.get(currentTrackPosition);
         }
     }
 
     public int getCurrentTrackPosition() {
         return currentTrackPosition;
-    }
-
-    public void addTrack(LocalMp3 track) {
-        localMp3List.add(track);
-        untake();
     }
 
     public void removeTrack(int pos) {
@@ -141,7 +143,7 @@ public class PlayerService extends Service {
         if (pos < currentTrackPosition) {
             currentTrackPosition--;
         }
-        localMp3List.remove(pos);
+        trackList.remove(pos);
         untake();
     }
 
@@ -149,12 +151,12 @@ public class PlayerService extends Service {
         if (status > STOPED) {
             stop();
         }
-        localMp3List.clear();
+        trackList.clear();
         untake();
     }
 
     public void playTrack(int pos) {
-    	if(localMp3List.isEmpty()) {
+    	if(trackList.isEmpty()) {
     		return;
     	}
         if (status > STOPED) {
@@ -163,26 +165,23 @@ public class PlayerService extends Service {
         boolean isSuccess = true;
         try {
             mediaPlayer.setDataSource(getApplicationContext(), 
-            		Uri.withAppendedPath(
-                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, 
-                        "/"+String.valueOf(localMp3List.get(pos).getId())
-                        ));
+            		trackList.get(pos).getUri());
             mediaPlayer.prepare();
         } catch (FileNotFoundException e) {
         	isSuccess = false;
-        	if(listener != null) listener.onError();
+        	if(playerListener != null) playerListener.onError();
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
         	isSuccess = false;
-        	if(listener != null) listener.onError();
+        	if(playerListener != null) playerListener.onError();
             e.printStackTrace();
         } catch (IllegalStateException e) {
         	isSuccess = false;
-        	if(listener != null) listener.onError();
+        	if(playerListener != null) playerListener.onError();
             e.printStackTrace();
         } catch (IOException e) {
         	isSuccess = false;
-        	if(listener != null) listener.onError();
+        	if(playerListener != null) playerListener.onError();
             e.printStackTrace();
         }
         if(isSuccess) {
@@ -194,7 +193,7 @@ public class PlayerService extends Service {
     			notification = new Notification();
     			notification.flags |= Notification.FLAG_ONGOING_EVENT;
     			notification.icon = android.R.drawable.ic_media_play;
-    			Intent notificationIntent = new Intent(ACTION_VIEW_PLAYER);
+    			Intent notificationIntent = new Intent(getNotificationAction());
     			notificationIntent.setClass(getApplicationContext(), IndexActivity.class);
     			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
@@ -202,12 +201,13 @@ public class PlayerService extends Service {
     		}
     		RemoteViews views = new RemoteViews(getPackageName(), R.layout.player_status_niotification);
             views.setImageViewResource(R.id.icon, android.R.drawable.ic_media_play);
-            views.setTextViewText(R.id.trackname, localMp3List.get(pos).getTitle());
-            views.setTextViewText(R.id.artist, localMp3List.get(pos).getArtist());
-    		notification.tickerText = "Player for " + localMp3List.get(pos).getTitle() + " - " + localMp3List.get(pos).getArtist();
+            views.setTextViewText(R.id.trackname, trackList.get(pos).getTitle());
+            views.setTextViewText(R.id.artist, trackList.get(pos).getArtist());
+    		notification.tickerText = "Player for " + trackList.get(pos).getTitle() + " - " + trackList.get(pos).getArtist();
     		notification.contentView = views;
-    		startForeground(notificationId, notification);
-    		if(listener != null) listener.onPlay(pos, localMp3List.get(pos));
+    		startForeground(getNotificationId(), notification);
+    		if(playerListener != null) playerListener.onPlay(pos, trackList.get(pos));
+    		if(indicatorListener != null) indicatorListener.onPlay(pos);
     		mHandler.post(mRunProgress);
         }
     }
@@ -215,7 +215,7 @@ public class PlayerService extends Service {
     public void play() {
         switch (status) {
         case STOPED:
-            if (!localMp3List.isEmpty()) {
+            if (!trackList.isEmpty()) {
                 playTrack(0);
             }
         break;
@@ -232,8 +232,8 @@ public class PlayerService extends Service {
     public void start() {
     	mediaPlayer.start();
         setStatus(PLAYING);
-        startForeground(notificationId, notification);
-		if(listener != null) listener.onPlay(currentTrackPosition, localMp3List.get(currentTrackPosition));
+        startForeground(getNotificationId(), notification);
+		if(playerListener != null) playerListener.onPlay(currentTrackPosition, trackList.get(currentTrackPosition));
 		mHandler.post(mRunProgress);
 		untake();
     }
@@ -242,7 +242,7 @@ public class PlayerService extends Service {
         mediaPlayer.pause();
         setStatus(PAUSED);
         stopForeground(true);
-        if(listener != null) listener.onPause(currentTrackPosition);
+        if(playerListener != null) playerListener.onPause(currentTrackPosition);
         mHandler.removeCallbacks(mRunProgress);
         untake();
     }
@@ -253,9 +253,18 @@ public class PlayerService extends Service {
         currentTrackPosition = -1;
         setStatus(STOPED);
         stopForeground(true);
-        if(listener != null) listener.onStop(currentTrackPosition);
+        if(playerListener != null) playerListener.onStop(currentTrackPosition);
         mHandler.removeCallbacks(mRunProgress);
         untake();
+    }
+    
+    public void release() {
+    	stop();
+    	mediaPlayer.release();
+    }
+    
+    public boolean isPlaying() {
+    	return mediaPlayer.isPlaying();
     }
     
     public boolean isActive() {
@@ -263,7 +272,7 @@ public class PlayerService extends Service {
     }
 
     public void nextTrack() {
-        if (currentTrackPosition < localMp3List.size()-1) {
+        if (currentTrackPosition < trackList.size()-1) {
             playTrack(currentTrackPosition+1);
         }
     }
@@ -284,7 +293,7 @@ public class PlayerService extends Service {
 
     public int getCurrentTrackDuration() {
         if (status > STOPED) {
-            return localMp3List.get(currentTrackPosition).getDuration();
+            return trackList.get(currentTrackPosition).getDuration();
         } else {
             return 0;
         }
@@ -296,32 +305,16 @@ public class PlayerService extends Service {
             untake();
         }
     }
-
-    public class PlayerBinder extends Binder {
-
-        public PlayerService getService() {
-            return PlayerService.this;
-        }
-    }
     
     private Runnable mRunProgress = new Runnable() {
 		
 		@Override
 		public void run() {
-			if(listener != null && mediaPlayer.isPlaying()) {
-				listener.onProgress(mediaPlayer.getDuration(), mediaPlayer.getCurrentPosition());
+			if(playerListener != null && mediaPlayer.isPlaying()) {
+				playerListener.onProgress(mediaPlayer.getDuration(), mediaPlayer.getCurrentPosition());
 			}
 			mHandler.postDelayed(mRunProgress, 1000);
 		}
 	};
     
-    private Handler mHandler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			
-		}
-    	
-    };
-
 }

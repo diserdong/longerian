@@ -3,7 +3,7 @@ package so.mp3.app.widget;
 import java.util.List;
 
 import so.mp3.player.R;
-import so.mp3.type.OnlineMp3;
+import so.mp3.type.OnlineTrack;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +13,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class OnlineMp3Adapter extends ArrayAdapter<OnlineMp3> {
+public class OnlineTrackAdapter extends ArrayAdapter<OnlineTrack> {
 
 	public interface OnOpenSongOptionListener {
 		public void onOpenOption(int position);
 	}
 	
 	private OnOpenSongOptionListener listener;
-	protected List<OnlineMp3> items;
+	protected List<OnlineTrack> items;
 	protected Context ctx;
 	protected int resource;
 	
-	public OnlineMp3Adapter(Context context, int resource,
-			int textViewResourceId, List<OnlineMp3> items, OnOpenSongOptionListener listener) {
+	public OnlineTrackAdapter(Context context, int resource,
+			int textViewResourceId, List<OnlineTrack> items, OnOpenSongOptionListener listener) {
 		super(context, resource, textViewResourceId, items);
 		this.ctx = context;
 		this.resource = resource;
@@ -33,7 +33,7 @@ public class OnlineMp3Adapter extends ArrayAdapter<OnlineMp3> {
 		this.listener = listener;
 	}
 	
-	public List<OnlineMp3> getItems() {
+	public List<OnlineTrack> getItems() {
 		return items;
 	}
 
@@ -53,10 +53,10 @@ public class OnlineMp3Adapter extends ArrayAdapter<OnlineMp3> {
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
-		OnlineMp3 m = items.get(position);
+		OnlineTrack m = items.get(position);
 		viewHolder.no.setText(position + 1 + "");
 		viewHolder.title.setText(m.getTitle());
-		viewHolder.singer.setText(m.getSinger());
+		viewHolder.singer.setText(m.getArtist());
 		viewHolder.size.setText(m.getSize());
 		viewHolder.album.setText(m.getAlbum());
 		viewHolder.more.setOnClickListener(new OnClickListener() {

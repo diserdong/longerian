@@ -1,22 +1,40 @@
 package so.mp3.type;
 
-public class LocalMp3 {
+import java.text.DecimalFormat;
+
+import android.net.Uri;
+import android.provider.MediaStore;
+
+public class LocalTrack implements Tracker {
 	
 	private String artist, album, title;
     private int id, duration, size;
 
+    @Override
     public String getArtist() {
         return artist;
     }
 
+    @Override
     public String getAlbum() {
         return album;
     }
 
-    public int getSize() {
-		return size;
+    @Override
+    public String getSize() {
+    	DecimalFormat decimalFormater = new DecimalFormat("0.00");
+    	String sizeInStr = null;
+    	if(size > 1024 * 1024) {
+    		sizeInStr = decimalFormater.format(((double) size / 1024 / 1024 )) + "MB" ;
+		} else if(size > 1024) {
+			sizeInStr = decimalFormater.format(((double) size / 1024 )) + "KB";
+		} else {
+			sizeInStr = size + "B";
+		}
+		return sizeInStr;
 	}
 
+    @Override
 	public String getTitle() {
         return title;
     }
@@ -25,6 +43,7 @@ public class LocalMp3 {
         return id;
     }
 
+    @Override
     public int getDuration() {
         return duration;
     }
@@ -51,6 +70,13 @@ public class LocalMp3 {
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	@Override
+	public Uri getUri() {
+		return Uri.withAppendedPath(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, 
+                "/"+String.valueOf(id));
 	}
 
 }
