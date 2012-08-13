@@ -23,6 +23,7 @@ public class OnlineTrackAdapter extends ArrayAdapter<OnlineTrack> {
 	protected List<OnlineTrack> items;
 	protected Context ctx;
 	protected int resource;
+	private int currentPosition = -1;
 	
 	public OnlineTrackAdapter(Context context, int resource,
 			int textViewResourceId, List<OnlineTrack> items, OnOpenSongOptionListener listener) {
@@ -49,6 +50,7 @@ public class OnlineTrackAdapter extends ArrayAdapter<OnlineTrack> {
 			viewHolder.size = (TextView) convertView.findViewById(R.id.size);
 			viewHolder.album = (TextView) convertView.findViewById(R.id.album);
 			viewHolder.more = (ImageView) convertView.findViewById(R.id.more);
+			viewHolder.indicator = (ImageView) convertView.findViewById(R.id.indicator);
 			convertView.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) convertView.getTag();
@@ -66,6 +68,7 @@ public class OnlineTrackAdapter extends ArrayAdapter<OnlineTrack> {
 				listener.onOpenOption(position);
 			}
 		});
+		viewHolder.indicator.setVisibility((position == currentPosition) ? View.VISIBLE : View.GONE);
 		return convertView;
 	}
 	
@@ -77,7 +80,13 @@ public class OnlineTrackAdapter extends ArrayAdapter<OnlineTrack> {
 		public TextView size;
 		public TextView album;
 		public ImageView more;
+		public ImageView indicator;
 		
+	}
+
+	public void updateIndicator(int position) {
+		currentPosition = position;
+		notifyDataSetChanged();
 	}
 	
 }

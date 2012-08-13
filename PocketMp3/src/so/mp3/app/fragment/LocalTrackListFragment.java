@@ -2,7 +2,6 @@ package so.mp3.app.fragment;
 
 import java.util.ArrayList;
 
-import so.mp3.app.player.BasicPlayerService;
 import so.mp3.app.player.BasicPlayerService.IndicatorListener;
 import so.mp3.app.player.LocalTrackPlayer;
 import so.mp3.app.player.LocalTrackPlayer.LocalPlayerBinder;

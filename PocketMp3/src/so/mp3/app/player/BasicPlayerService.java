@@ -22,19 +22,20 @@ abstract public class BasicPlayerService extends Service {
 	
 	public static final String TAG = "BasicPlayerService";
     public static final int STOPED = -1, PAUSED = 0, PLAYING = 1;
-    private MediaPlayer mediaPlayer;
+    protected MediaPlayer mediaPlayer;
     protected ArrayList<? extends Tracker> trackList;
-    private int status, currentTrackPosition;
-    private boolean taken;
+    protected int status, currentTrackPosition;
+    protected boolean taken;
     protected IBinder playerBinder;
-    private Handler mHandler = new Handler();
-    private PlayerListener playerListener;
-    private IndicatorListener indicatorListener;
-    private Notification notification;
+    protected Handler mHandler = new Handler();
+    protected PlayerListener playerListener;
+    protected IndicatorListener indicatorListener;
+    protected Notification notification;
     
     abstract protected int getNotificationId();
     abstract protected String getNotificationAction();
     abstract public void addTracks(ArrayList<? extends Tracker> tracks);
+    abstract public void playTrack(int position);
 
     public interface PlayerListener {
     	public void onPlay(int position, Tracker track);
@@ -108,7 +109,7 @@ abstract public class BasicPlayerService extends Service {
         return taken;
     }
 
-    private void setStatus(int s) {
+    protected void setStatus(int s) {
         status = s;
     }
 
@@ -153,63 +154,6 @@ abstract public class BasicPlayerService extends Service {
         }
         trackList.clear();
         untake();
-    }
-
-    public void playTrack(int pos) {
-    	if(trackList.isEmpty()) {
-    		return;
-    	}
-        if (status > STOPED) {
-            stop();
-        }
-        boolean isSuccess = true;
-        try {
-            mediaPlayer.setDataSource(getApplicationContext(), 
-            		trackList.get(pos).getUri());
-            mediaPlayer.prepare();
-        } catch (FileNotFoundException e) {
-        	isSuccess = false;
-        	if(playerListener != null) playerListener.onError();
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-        	isSuccess = false;
-        	if(playerListener != null) playerListener.onError();
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-        	isSuccess = false;
-        	if(playerListener != null) playerListener.onError();
-            e.printStackTrace();
-        } catch (IOException e) {
-        	isSuccess = false;
-        	if(playerListener != null) playerListener.onError();
-            e.printStackTrace();
-        }
-        if(isSuccess) {
-        	mediaPlayer.start();
-        	currentTrackPosition = pos;
-        	setStatus(PLAYING);
-        	untake();
-    		if(notification == null) {
-    			notification = new Notification();
-    			notification.flags |= Notification.FLAG_ONGOING_EVENT;
-    			notification.icon = android.R.drawable.ic_media_play;
-    			Intent notificationIntent = new Intent(getNotificationAction());
-    			notificationIntent.setClass(getApplicationContext(), IndexActivity.class);
-    			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-    			PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-    			notification.contentIntent = pendingIntent;
-    		}
-    		RemoteViews views = new RemoteViews(getPackageName(), R.layout.player_status_niotification);
-            views.setImageViewResource(R.id.icon, android.R.drawable.ic_media_play);
-            views.setTextViewText(R.id.trackname, trackList.get(pos).getTitle());
-            views.setTextViewText(R.id.artist, trackList.get(pos).getArtist());
-    		notification.tickerText = "Player for " + trackList.get(pos).getTitle() + " - " + trackList.get(pos).getArtist();
-    		notification.contentView = views;
-    		startForeground(getNotificationId(), notification);
-    		if(playerListener != null) playerListener.onPlay(pos, trackList.get(pos));
-    		if(indicatorListener != null) indicatorListener.onPlay(pos);
-    		mHandler.post(mRunProgress);
-        }
     }
 
     public void play() {
@@ -272,6 +216,7 @@ abstract public class BasicPlayerService extends Service {
     }
 
     public void nextTrack() {
+    	Log.d(TAG, "next: " + (currentTrackPosition + 1));
         if (currentTrackPosition < trackList.size()-1) {
             playTrack(currentTrackPosition+1);
         }
@@ -306,7 +251,7 @@ abstract public class BasicPlayerService extends Service {
         }
     }
     
-    private Runnable mRunProgress = new Runnable() {
+    protected Runnable mRunProgress = new Runnable() {
 		
 		@Override
 		public void run() {

@@ -8,6 +8,7 @@ import so.mp3.app.downloader.DownloadService;
 import so.mp3.app.fragment.TrackOptionDialogFragment.OnOptionSelectedListener;
 import so.mp3.app.player.BasicPlayerService.IndicatorListener;
 import so.mp3.app.player.OnlineTrackPlayer;
+import so.mp3.app.player.OnlineTrackPlayer.OnPreparePlayListener;
 import so.mp3.app.player.OnlineTrackPlayer.OnlinePlayerBinder;
 import so.mp3.app.widget.OnlineTrackAdapter;
 import so.mp3.app.widget.OnlineTrackAdapter.OnOpenSongOptionListener;
@@ -28,7 +29,6 @@ import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +44,8 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class OnlineTrackListFragment extends SherlockFragment implements OnOpenSongOptionListener, IndicatorListener, OnOptionSelectedListener {
+public class OnlineTrackListFragment extends SherlockFragment implements OnOpenSongOptionListener, 
+	IndicatorListener, OnOptionSelectedListener, OnPreparePlayListener {
 
 	private static final String TAG = "OnlineTrackListFragment";
 
@@ -72,6 +73,7 @@ public class OnlineTrackListFragment extends SherlockFragment implements OnOpenS
             OnlinePlayerBinder playerBinder = (OnlinePlayerBinder)service;
             playerService = playerBinder.getService();
             playerService.setIndicatorListener(OnlineTrackListFragment.this);
+            playerService.setPreparePlayListener(OnlineTrackListFragment.this);
             if(playerService.isActive()) {
             	restoreUI(playerService.getCurrentTrackPosition());
             }
@@ -127,13 +129,7 @@ public class OnlineTrackListFragment extends SherlockFragment implements OnOpenS
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-				OnlineTrack ot = (OnlineTrack) songList.getItemAtPosition(position);
-				if(TextUtils.isEmpty(ot.getMp3Link())) {
-					downloadLinkTask = new DownloadLinkTask(PostDownlaodLinkAction.PLAY, ot, position);
-					downloadLinkTask.execute(ot.getPlayerLink());
-				} else {
-					play(position);
-				}
+				play(position);
 			}
 		});
 		return view;
@@ -210,7 +206,7 @@ public class OnlineTrackListFragment extends SherlockFragment implements OnOpenS
 	
 	private void play(int position) {
 		if(playerService != null) {
-			playerService.playTrack(position);// TODO
+			playerService.playTrack(position);
 		}
 	}
 
@@ -252,17 +248,10 @@ public class OnlineTrackListFragment extends SherlockFragment implements OnOpenS
 
 		private PostDownlaodLinkAction action;
 		private OnlineTrack track;
-		private int position;
 		
 		public DownloadLinkTask(PostDownlaodLinkAction action, OnlineTrack orgTrack) {
 			this.action = action;
 			this.track = orgTrack;
-		}
-		
-		public DownloadLinkTask(PostDownlaodLinkAction action, OnlineTrack orgTrack, int pos) {
-			this.action = action;
-			this.track = orgTrack;
-			this.position = pos;
 		}
 		
 		@Override
@@ -296,9 +285,6 @@ public class OnlineTrackListFragment extends SherlockFragment implements OnOpenS
 					case DOWNLOAD:
 						download(track);
 						break;
-					case PLAY:
-						play(position);
-						break;
 					default:
 						break;
 					}
@@ -325,13 +311,21 @@ public class OnlineTrackListFragment extends SherlockFragment implements OnOpenS
 
 	@Override
 	public void onPlay(int position) {
-		// TODO Auto-generated method stub
-		
+		restoreUI(position);
 	}
 
 	private void restoreUI(int position) {
-		// TODO Auto-generated method stub
-//		mAdapter.updateIndicator(position);
+		mAdapter.updateIndicator(position);
+	}
+
+	@Override
+	public void onStartPreparePlay() {
+		host.showIndeterminateProgressBar();
+	}
+
+	@Override
+	public void onFinishPreparePlay() {
+		host.hideIndeterminateProgressBar();
 	}
 	
 }

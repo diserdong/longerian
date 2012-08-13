@@ -34,8 +34,6 @@ public class OnlineTrackControllerFragment extends SherlockFragment implements O
 	private static final String TAG = "OnlineTrackControllerFragment";
 	private Host host;
 	
-	private PlayTask playTask;
-	
 	private TextView trackName;
 	private TextView artist;
 	
@@ -109,9 +107,6 @@ public class OnlineTrackControllerFragment extends SherlockFragment implements O
     @Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if(playTask != null) {
-			playTask.cancel(true);
-		}
 	}
     
     @Override
@@ -120,83 +115,6 @@ public class OnlineTrackControllerFragment extends SherlockFragment implements O
 		getSherlockActivity().getApplicationContext().unbindService(playerServiceConnection);
 //		am.abandonAudioFocus(afChangeListener);
 	}
-	
-	private class PlayTask extends AsyncTask<String, Void, Void> {
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			host.showIndeterminateProgressBar();
-		}
-
-		@Override
-		protected Void doInBackground(String... params) {
-//			mp.play(params[0]);
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-//			if(mp.isPlaying()) {
-//				playOrPause.setImageResource(R.drawable.av_pause);
-//				playOrPause.setEnabled(true);
-//				progress.setEnabled(true);
-//			} else {
-//				Toast.makeText(getActivity(), R.string.can_not_play_the_song, Toast.LENGTH_LONG).show();
-//			}
-//			host.hideIndeterminateProgressBar();
-		}
-		
-	}
-	 
-	public void handleNewMp3(OnlineTrack music) {
-//		if(mp.isPlaying()) {
-//			stop();
-//		}
-//		int result = requestAudioFocus();
-//		if(result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-//			currentMp3 = music;
-//			title.setText(music.getTitle() + " - " + music.getSinger());
-//			prepareDownloadAndPlay(music.getMp3Link());
-//		}
-	}
-	
-	private void prepareDownloadAndPlay(String link) {
-//		currentMp3.setMp3Link(link);
-//		playOrPause.setImageResource(R.drawable.av_play);
-//		playOrPause.setEnabled(false);
-//		progress.setEnabled(false);
-//		play(link);
-	}
-	
-//	private void play(String link) {
-//		playTask = new PlayTask();
-//		playTask.execute(link);
-//	}
-//	
-//	private void start() {
-//		playOrPause.setImageResource(R.drawable.av_pause);
-//		mp.start();
-//	}
-//	
-//	private void pause() {
-//		playOrPause.setImageResource(R.drawable.av_play);
-//		mp.pause();
-//	}
-//	
-//	private void stop() {
-//		playOrPause.setImageResource(R.drawable.av_play);
-//		progress.setProgress(0);
-//		playOrPause.setEnabled(false);
-//		progress.setEnabled(false);
-//		mp.stop();
-//	}
-//	
-//	private void complete() {
-//		playOrPause.setImageResource(R.drawable.av_play);
-//		progress.setProgress(0);
-//	}
 	
 	private int requestAudioFocus() {
 //		int result = am.requestAudioFocus(afChangeListener,
