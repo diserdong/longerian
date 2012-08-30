@@ -21,7 +21,11 @@ public class ToolBoxPanel extends SherlockFragment {
 		return inflater.inflate(R.layout.fragment_toolbox, null);
 	}
 
-	
+	@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        setUserVisibleHint(true);
+    }
 	
 	
 }

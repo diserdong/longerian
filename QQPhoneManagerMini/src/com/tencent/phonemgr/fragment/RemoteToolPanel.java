@@ -21,7 +21,11 @@ public class RemoteToolPanel extends SherlockFragment {
 		return inflater.inflate(R.layout.fragment_remote_tool, null);
 	}
 
-	
+	@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        setUserVisibleHint(true);
+    }
 	
 	
 }

@@ -57,12 +57,18 @@ public class LocalToolPanel extends SherlockFragment {
 		return view;
 	}
 	
+	@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        setUserVisibleHint(true);
+    }
+	
 	private OnItemClickListener mOnEntryClickListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> adapterView, View parent, int position,
 				long id) {
-			mEntries.get(position).doAction(getActivity());
+			mEntries.get(position).doAction(getSherlockActivity());
 		}
 	};
 
