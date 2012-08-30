@@ -24,10 +24,6 @@ import com.tencent.phonemgr.tab.ToolboxTab;
 
 public class IndexActivity extends SherlockFragmentActivity implements TabListener, OnPageChangeListener {
 
-//	private LocalToolPanel mLocalToolPanel;
-//	private ToolBoxPanel mToolBoxPanel;
-//	private RemoteToolPanel mRemoteToolPanel;
-	
 	private ViewPager mViewPager;
 	private PagerAdapter mAdapter;
 	

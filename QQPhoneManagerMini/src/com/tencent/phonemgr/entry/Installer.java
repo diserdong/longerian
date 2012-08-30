@@ -1,11 +1,13 @@
 package com.tencent.phonemgr.entry;
 
+import android.content.Context;
+
 import com.tencent.phonemgr.R;
 
 public class Installer implements Entry {
 
 	@Override
-	public int getStringId() {
+	public int getLabelId() {
 		return R.string.entry_installation_and_uninstallation;
 	}
 
@@ -15,7 +17,7 @@ public class Installer implements Entry {
 	}
 
 	@Override
-	public void doAction() {
+	public void doAction(Context context) {
 		// TODO Auto-generated method stub
 
 	}

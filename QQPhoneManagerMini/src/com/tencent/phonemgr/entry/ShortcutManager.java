@@ -1,12 +1,14 @@
 package com.tencent.phonemgr.entry;
 
+import android.content.Context;
+
 import com.tencent.phonemgr.R;
 
-public class ShorcutManager implements Entry {
+public class ShortcutManager implements Entry {
 
 	@Override
-	public int getStringId() {
-		return R.string.entry_shorcut;
+	public int getLabelId() {
+		return R.string.entry_shortcut;
 	}
 
 	@Override
@@ -15,7 +17,7 @@ public class ShorcutManager implements Entry {
 	}
 
 	@Override
-	public void doAction() {
+	public void doAction(Context context) {
 		// TODO Auto-generated method stub
 
 	}

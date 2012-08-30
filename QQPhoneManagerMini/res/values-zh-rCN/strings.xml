@@ -13,7 +13,7 @@
     <string name="entry_app_manager">程序管理</string>
     <string name="entry_quick_setting">快速设置</string>
     <string name="entry_installation_and_uninstallation">安装卸载</string>
-    <string name="entry_shorcut">快捷方式</string>
+    <string name="entry_shortcut">快捷方式</string>
     <string name="entry_system_setting">系统开机</string>
     
 </resources>
