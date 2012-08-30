@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">QQ手机Mini管家</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="tab_local_tool">本地功能</string>
+    <string name="tab_toolbox">工具箱</string>
+    <string name="tab_remote_tool">网络工具</string>
+    
+    <string name="entry_file_manager">文件管理</string>
+    <string name="entry_app_manager">程序管理</string>
+    <string name="entry_quick_setting">快速设置</string>
+    <string name="entry_installation_and_uninstallation">安装卸载</string>
+    <string name="entry_shorcut">快捷方式</string>
+    <string name="entry_system_setting">系统开机</string>
+    
+    
+</resources>
