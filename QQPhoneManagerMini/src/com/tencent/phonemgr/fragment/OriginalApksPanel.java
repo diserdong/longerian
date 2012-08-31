@@ -83,7 +83,6 @@ public class OriginalApksPanel extends SherlockFragment {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if(intent.getAction().equals(Intent.ACTION_MEDIA_MOUNTED)) {
-				android.os.Environment.getExternalStorageDirectory();
 				hideUnavailableSDCardNote();
 				loaderTask = new ApkLoaderTask();
 				loaderTask.execute();
@@ -92,6 +91,9 @@ public class OriginalApksPanel extends SherlockFragment {
 					|| intent.getAction().equals(Intent.ACTION_MEDIA_UNMOUNTED)
 					|| intent.getAction().equals(Intent.ACTION_MEDIA_BAD_REMOVAL)) {
 				showUnavailableSDCardNote();
+				if(loaderTask != null) {
+					loaderTask.cancel(true);
+				}
 			}
 		}
 	};
