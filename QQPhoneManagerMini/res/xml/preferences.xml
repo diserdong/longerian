@@ -17,12 +17,11 @@
 		android:summaryOn="关闭蓝牙" 
 		android:title="@string/title_bluetooth">
 	</CheckBoxPreference>
-	<CheckBoxPreference 
+	<Preference 
 	    android:key="@string/key_mobile_network"
-		android:summaryOff="启用数据网络"
-		android:summaryOn="关闭数据网络" 
+		android:summary="数据网络"
 		android:title="@string/title_mobile_network">
-	</CheckBoxPreference>
+	</Preference>
 	<CheckBoxPreference
 	    android:key="@string/key_silent"
 		android:title="@string/title_silent">
