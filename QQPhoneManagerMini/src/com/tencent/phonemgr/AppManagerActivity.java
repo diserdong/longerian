@@ -5,11 +5,9 @@ import java.util.List;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
-public class ShortcutActivity extends SherlockActivity {
+public class AppManagerActivity extends SherlockActivity {
 
 	private GridView shortcuts;
 	private ProgressBar progress;
@@ -39,8 +36,6 @@ public class ShortcutActivity extends SherlockActivity {
 		loaderTask.execute();
 	}
 	
-	
-	
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -48,8 +43,6 @@ public class ShortcutActivity extends SherlockActivity {
 			loaderTask.cancel(true);
 		}
 	}
-
-
 
 	private class AppLoaderTask extends AsyncTask<Void, Void, List<ResolveInfo>> {
 
@@ -80,10 +73,8 @@ public class ShortcutActivity extends SherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View parent, int position,
 					long id) {
-					createShortcut(appPackages.get(position).activityInfo.packageName,
-							appPackages.get(position).activityInfo.name,
-							appPackages.get(position).activityInfo.applicationInfo.labelRes, 
-							appPackages.get(position).activityInfo.applicationInfo.icon);
+				lauchApplication(appPackages.get(position).activityInfo.packageName,
+						appPackages.get(position).activityInfo.name);
 			}
 
 		};
@@ -133,29 +124,11 @@ public class ShortcutActivity extends SherlockActivity {
 		}
     }
 	
-	public void createShortcut(String packageName, String clsName, int appNameId, int appLogoId){
-	    Context pkgContext = null;
-	    try {
-			pkgContext = getApplicationContext().createPackageContext(packageName, Context.CONTEXT_IGNORE_SECURITY  
-			        | Context.CONTEXT_INCLUDE_CODE);
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-			Toast.makeText(getApplicationContext(), "app not found", Toast.LENGTH_SHORT).show();
-			return ;
-		}
-	    
-	    Intent shortcutintent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-	    shortcutintent.putExtra("duplicate", false);
-	    shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_NAME, pkgContext.getString(appNameId));
-	    Parcelable icon = Intent.ShortcutIconResource.fromContext(pkgContext, appLogoId);
-	    shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
-	    
-	    ComponentName comp = new ComponentName(packageName, clsName);
-	    Intent appIntent = new Intent(new Intent(Intent.ACTION_MAIN).setComponent(comp));
-	    appIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-	    
-	    shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, appIntent);
-	    sendBroadcast(shortcutintent);
+	public void lauchApplication(String packageName, String clsName) {
+		ComponentName comp = new ComponentName(packageName, clsName);
+		Intent appIntent = new Intent();
+		appIntent.setComponent(comp);
+		startActivity(appIntent);
 	}
 	
 }

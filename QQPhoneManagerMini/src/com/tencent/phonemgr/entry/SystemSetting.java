@@ -1,8 +1,10 @@
 package com.tencent.phonemgr.entry;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.tencent.phonemgr.R;
+import com.tencent.phonemgr.ShortcutActivity;
 
 public class SystemSetting implements Entry {
 
@@ -18,8 +20,8 @@ public class SystemSetting implements Entry {
 
 	@Override
 	public void doAction(Context context) {
-		// TODO Auto-generated method stub
-
+		Intent intent = new Intent(context, ShortcutActivity.class);
+		context.startActivity(intent);
 	}
 
 }
