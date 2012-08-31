@@ -32,7 +32,7 @@ public class DownloadedAppsPanel extends SherlockFragment {
 		return f;
 	}
 	
-	private ListView downloadedApps;
+	private ListView appsList;
 	private ProgressBar progress;
 	private AppLoaderTask loaderTask;
 	
@@ -46,7 +46,7 @@ public class DownloadedAppsPanel extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_downloaded_apps, container, false);
-		downloadedApps = (ListView) view.findViewById(R.id.apps);
+		appsList = (ListView) view.findViewById(R.id.apps);
 		progress = (ProgressBar) view.findViewById(R.id.progress);
 		return view;
 	}
@@ -96,8 +96,8 @@ public class DownloadedAppsPanel extends SherlockFragment {
 		@Override
 		protected void onPostExecute(List<PackageInfo> result) {
 			progress.setVisibility(View.INVISIBLE);
-			downloadedApps.setAdapter(new AppAdapter(getActivity(), R.layout.app_item_in_list, result));
-			downloadedApps.setOnItemClickListener(onAppClickListener);
+			appsList.setAdapter(new AppAdapter(getActivity(), R.layout.app_item_in_list, result));
+			appsList.setOnItemClickListener(onAppClickListener);
 		}
 		
 		private OnItemClickListener onAppClickListener = new OnItemClickListener() {

@@ -2,24 +2,24 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 	<CheckBoxPreference 
 	    android:key="@string/key_airplane_mode"
-		android:summary="禁用所有无线连接" 
+		android:summary="@string/summary_airplane_mode" 
 		android:title="@string/title_airplane_mode">
 	</CheckBoxPreference>
 	<CheckBoxPreference 
 	    android:key="@string/key_wifi"
-		android:summaryOff="打开Wi-Fi"
-		android:summaryOn="关闭Wi-Fi"
+		android:summaryOff="@string/summary_wifi_off"
+		android:summaryOn="@string/summary_wifi_on"
 		android:title="@string/title_wifi">
 	</CheckBoxPreference>
 	<CheckBoxPreference 
 	    android:key="@string/key_bluetooth"
-		android:summaryOff="启用蓝牙"
-		android:summaryOn="关闭蓝牙" 
+		android:summaryOff="@string/summary_bluetooth_off"
+		android:summaryOn="@string/summary_bluetooth_on" 
 		android:title="@string/title_bluetooth">
 	</CheckBoxPreference>
 	<Preference 
 	    android:key="@string/key_mobile_network"
-		android:summary="数据网络"
+		android:summary="@string/summary_mobile_network"
 		android:title="@string/title_mobile_network">
 	</Preference>
 	<CheckBoxPreference

@@ -4,6 +4,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
+    
+    <string name="note_sdcard_unavailable">SDCard不可用</string>
 
     <string name="tab_local_tool">本地功能</string>
     <string name="tab_toolbox">工具箱</string>
@@ -31,5 +33,12 @@
     <string name="key_mobile_network">apply_mobile_network</string>
     <string name="key_silent">apply_silent</string>
     <string name="key_auto_rotate">apply_autorotate</string>
+    
+    <string name="summary_airplane_mode">禁用所有无线连接</string>
+    <string name="summary_wifi_off">打开Wi-Fi</string>
+    <string name="summary_wifi_on">关闭Wi-Fi</string>
+    <string name="summary_bluetooth_off">启用蓝牙</string>
+    <string name="summary_bluetooth_on">关闭蓝牙</string>
+    <string name="summary_mobile_network">数据网络</string>
     
 </resources>
