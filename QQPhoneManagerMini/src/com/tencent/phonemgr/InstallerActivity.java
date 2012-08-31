@@ -14,14 +14,12 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.tencent.phonemgr.fragment.LocalToolPanel;
-import com.tencent.phonemgr.fragment.RemoteToolPanel;
-import com.tencent.phonemgr.fragment.ToolBoxPanel;
-import com.tencent.phonemgr.tab.LocalToolTab;
-import com.tencent.phonemgr.tab.RemoteToolTab;
-import com.tencent.phonemgr.tab.ToolboxTab;
+import com.tencent.phonemgr.fragment.DownloadedAppsPanel;
+import com.tencent.phonemgr.fragment.OriginalApksPanel;
+import com.tencent.phonemgr.tab.DownloadedAppsTab;
+import com.tencent.phonemgr.tab.OriginalApksTab;
 
-public class IndexActivity extends SherlockFragmentActivity implements TabListener, OnPageChangeListener {
+public class InstallerActivity extends SherlockFragmentActivity implements TabListener, OnPageChangeListener {
 
 	private ViewPager mViewPager;
 	private PagerAdapter mAdapter;
@@ -29,15 +27,14 @@ public class IndexActivity extends SherlockFragmentActivity implements TabListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
+        setContentView(R.layout.activity_installer);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOnPageChangeListener(this);
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-    	getSupportActionBar().addTab(LocalToolTab.getInstance().createTab(getSupportActionBar(), this));
-    	getSupportActionBar().addTab(ToolboxTab.getInstance().createTab(getSupportActionBar(), this));
-    	getSupportActionBar().addTab(RemoteToolTab.getInstance().createTab(getSupportActionBar(), this));
+    	getSupportActionBar().addTab(DownloadedAppsTab.getInstance().createTab(getSupportActionBar(), this));
+    	getSupportActionBar().addTab(OriginalApksTab.getInstance().createTab(getSupportActionBar(), this));
     	getSupportActionBar().setSelectedNavigationItem(0);
     }
 
@@ -62,9 +59,8 @@ public class IndexActivity extends SherlockFragmentActivity implements TabListen
 		
 		public PagerAdapter(FragmentManager fm) {
 			super(fm);
-			mPages.add(LocalToolPanel.newInstance());
-			mPages.add(ToolBoxPanel.newInstance());
-			mPages.add(RemoteToolPanel.newInstance());
+			mPages.add(DownloadedAppsPanel.newInstance());
+			mPages.add(OriginalApksPanel.newInstance());
 		}
 
 		@Override

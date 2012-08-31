@@ -71,7 +71,7 @@ public class ShortcutActivity extends SherlockActivity {
 		@Override
 		protected void onPostExecute(List<ResolveInfo> result) {
 			progress.setVisibility(View.INVISIBLE);
-			shortcuts.setAdapter(new AppsAdapter(getApplicationContext(), R.layout.app_item, result));
+			shortcuts.setAdapter(new AppsAdapter(getApplicationContext(), R.layout.app_item_in_grid, result));
 			shortcuts.setOnItemClickListener(mOnIconClickListener);
 		}
 		
@@ -103,7 +103,7 @@ public class ShortcutActivity extends SherlockActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
         	ViewHolder viewHolder;
             if (convertView == null) {
-            	convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.app_item, null);
+            	convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.app_item_in_grid, null);
             	viewHolder = new ViewHolder(convertView);
 				convertView.setTag(viewHolder);
             }

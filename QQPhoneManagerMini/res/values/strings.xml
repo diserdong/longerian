@@ -8,6 +8,8 @@
     <string name="tab_local_tool">本地功能</string>
     <string name="tab_toolbox">工具箱</string>
     <string name="tab_remote_tool">网络工具</string>
+    <string name="tab_downloaded_apps">已安装应用</string>
+    <string name="tab_original_apks">未安装应用</string>
     
     <string name="entry_file_manager">文件管理</string>
     <string name="entry_app_manager">程序管理</string>

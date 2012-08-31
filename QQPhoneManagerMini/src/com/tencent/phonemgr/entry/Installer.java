@@ -1,7 +1,9 @@
 package com.tencent.phonemgr.entry;
 
 import android.content.Context;
+import android.content.Intent;
 
+import com.tencent.phonemgr.InstallerActivity;
 import com.tencent.phonemgr.R;
 
 public class Installer implements Entry {
@@ -18,8 +20,8 @@ public class Installer implements Entry {
 
 	@Override
 	public void doAction(Context context) {
-		// TODO Auto-generated method stub
-
+		Intent intent = new Intent(context, InstallerActivity.class);
+		context.startActivity(intent);
 	}
 
 }
