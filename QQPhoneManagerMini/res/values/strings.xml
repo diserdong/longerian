@@ -16,4 +16,18 @@
     <string name="entry_shortcut">快捷方式</string>
     <string name="entry_system_setting">系统开机</string>
     
+    <string name="title_airplane_mode">飞行模式</string>
+    <string name="title_wifi">WiFi连接</string>
+    <string name="title_bluetooth">蓝牙连接</string>
+    <string name="title_mobile_network">网络数据</string>
+    <string name="title_silent">静音</string>
+    <string name="title_auto_rotate">自动旋转</string>
+    
+    <string name="key_airplane_mode">apply_airplane_mode</string>
+    <string name="key_wifi">apply_wifi</string>
+    <string name="key_bluetooth">apply_bluetooth</string>
+    <string name="key_mobile_network">apply_mobile_network</string>
+    <string name="key_silent">apply_silent</string>
+    <string name="key_auto_rotate">apply_autorotate</string>
+    
 </resources>

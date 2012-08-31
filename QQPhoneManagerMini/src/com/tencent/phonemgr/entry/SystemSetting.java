@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.tencent.phonemgr.R;
 import com.tencent.phonemgr.ShortcutActivity;
+import com.tencent.phonemgr.SystemSettingActivity;
 
 public class SystemSetting implements Entry {
 
@@ -20,7 +21,7 @@ public class SystemSetting implements Entry {
 
 	@Override
 	public void doAction(Context context) {
-		Intent intent = new Intent(context, ShortcutActivity.class);
+		Intent intent = new Intent(context, SystemSettingActivity.class);
 		context.startActivity(intent);
 	}
 

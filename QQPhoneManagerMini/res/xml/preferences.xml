@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<CheckBoxPreference 
+	    android:key="@string/key_airplane_mode"
+		android:summary="禁用所有无线连接" 
+		android:title="@string/title_airplane_mode">
+	</CheckBoxPreference>
+	<CheckBoxPreference 
+	    android:key="@string/key_wifi"
+		android:summary="打开Wi-Fi" 
+		android:title="@string/title_wifi">
+	</CheckBoxPreference>
+	<CheckBoxPreference 
+	    android:key="@string/key_bluetooth"
+		android:summary="启用蓝牙" 
+		android:title="@string/title_bluetooth">
+	</CheckBoxPreference>
+	<CheckBoxPreference 
+	    android:key="@string/key_mobile_network"
+		android:summary="数据网络" 
+		android:title="@string/title_mobile_network">
+	</CheckBoxPreference>
+	<CheckBoxPreference
+	    android:key="@string/key_silent"
+		android:title="@string/title_silent">
+	</CheckBoxPreference>
+	<CheckBoxPreference
+	    android:key="@string/key_auto_rotate"
+		android:title="@string/title_auto_rotate">
+	</CheckBoxPreference>
+</PreferenceScreen>
