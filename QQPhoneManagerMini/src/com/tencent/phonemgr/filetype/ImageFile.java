@@ -32,6 +32,7 @@ public class ImageFile implements FileItem {
 
 	@Override
 	public Drawable getLogo(Context context) {
+		//TODO cache image
 		if(thumbnail == null) {
 			Options options = new Options();
 			options.outHeight = 40;
@@ -39,7 +40,6 @@ public class ImageFile implements FileItem {
 			Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 			Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(bitmap, 40, 40, true);
 			bitmap.recycle();
-			Log.d(file.getName(), thumbnailBitmap.getHeight() + "/" + thumbnailBitmap.getWidth());
 			thumbnail = new BitmapDrawable(context.getResources(), thumbnailBitmap);
 		}
 		return thumbnail;

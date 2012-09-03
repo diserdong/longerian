@@ -194,11 +194,11 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 	public void onFinishLoading(List<FileItem> fileItems) {
 		progress.setVisibility(View.INVISIBLE);
 		if(fileItems != null) {
-			int count = fileAdapter.getCount();
-			for(int i = 0; i < count; i++) {
-				//release resource such as bitmap
-				fileAdapter.getItem(i).close();
-			}
+//			int count = fileAdapter.getCount();
+//			for(int i = 0; i < count; i++) {
+//				//release resource such as bitmap
+//				fileAdapter.getItem(i).close();
+//			}
 			fileAdapter.clear();
 			for(FileItem f : fileItems) {
 				fileAdapter.add(f);
