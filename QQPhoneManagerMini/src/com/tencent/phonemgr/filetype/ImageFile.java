@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory.Options;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 
 public class ImageFile implements FileItem {
 
@@ -48,12 +49,14 @@ public class ImageFile implements FileItem {
 	
 	@Override
 	public Bitmap getBitmapLogo(Context context) {
+		//TODO  there's some problem here, it will cause oom
 		Options options = new Options();
 		options.outHeight = 40;
 		options.outWidth = 40;
 		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 		Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(bitmap, 40, 40, true);
 		bitmap.recycle();
+		Log.d(getName(), thumbnailBitmap.getWidth() + "/" + thumbnailBitmap.getHeight());
 		return thumbnailBitmap;
 	}
 
