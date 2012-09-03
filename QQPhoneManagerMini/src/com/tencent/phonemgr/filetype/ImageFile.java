@@ -5,10 +5,13 @@ import java.io.File;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-
-import com.tencent.phonemgr.R;
+import android.util.Log;
 
 public class ImageFile implements FileItem {
 
@@ -16,6 +19,7 @@ public class ImageFile implements FileItem {
 	public static final String PNG_FILE = ".png";
 	
 	private File file;
+	private BitmapDrawable thumbnail;
 	
 	public ImageFile(File file) {
 		this.file = file;
@@ -28,8 +32,17 @@ public class ImageFile implements FileItem {
 
 	@Override
 	public Drawable getLogo(Context context) {
-		// TODO Auto-generated method stub
-		return context.getResources().getDrawable(R.drawable.ic_launcher);
+		if(thumbnail == null) {
+			Options options = new Options();
+			options.outHeight = 40;
+			options.outWidth = 40;
+			Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+			Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(bitmap, 40, 40, true);
+			bitmap.recycle();
+			Log.d(file.getName(), thumbnailBitmap.getHeight() + "/" + thumbnailBitmap.getWidth());
+			thumbnail = new BitmapDrawable(context.getResources(), thumbnailBitmap);
+		}
+		return thumbnail;
 	}
 
 	@Override
@@ -41,7 +54,11 @@ public class ImageFile implements FileItem {
 
 	@Override
 	public void close() {
-		
+		if(thumbnail != null) {
+			if(thumbnail.getBitmap() != null) {
+				thumbnail.getBitmap().recycle();
+			}
+		}
 	}
 
 	@Override
