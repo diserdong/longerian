@@ -33,11 +33,10 @@ public class ImageFile implements FileItem {
 	}
 
 	@Override
-	public void open(Activity context) {
-	     Intent intent = new Intent();
-	     intent.setAction(android.content.Intent.ACTION_VIEW);
+	public void open(Activity activity) {
+	     Intent intent = new Intent(Intent.ACTION_VIEW);
 	     intent.setDataAndType(Uri.fromFile(file), "image/*");
-	     context.startActivity(intent);     
+	     activity.startActivity(intent);     
 	}
 
 	@Override

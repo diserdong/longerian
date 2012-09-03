@@ -47,6 +47,11 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 		progress = (ProgressBar) findViewById(R.id.progress);
 		unavailableSdcardNote = (TextView) findViewById(R.id.sdcard_unavailable);
 		switch2NewDirFile(new DirFile(Environment.getExternalStorageDirectory()));
+		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			openDir();
+		} else {
+			closeDir();
+		}
 	}
 	
 	private void switch2NewDirFile(DirFile dirFile) {
@@ -87,11 +92,6 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 		intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
 		intentFilter.addDataScheme("file");
 		registerReceiver(sdcardStateReceiver, intentFilter);
-		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-			openDir();
-		} else {
-			closeDir();
-		}
 	}
 	
 	private final BroadcastReceiver sdcardStateReceiver = new BroadcastReceiver() {
@@ -112,10 +112,15 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 	@Override
 	public void onStop() {
 		super.onStop();
-		currentFileItem.close();
 		unregisterReceiver(sdcardStateReceiver);
 	}
 	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		currentFileItem.close();
+	}
+
 	private OnItemClickListener mOnIconClickListener = new OnItemClickListener() {
 
 		@Override

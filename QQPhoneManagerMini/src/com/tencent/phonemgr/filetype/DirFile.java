@@ -57,17 +57,24 @@ public class DirFile implements FileItem {
 				for(File f : files) {
 					if(f.isDirectory()) {
 						fileItems.add(new DirFile(f));
-					} else if(f.getName().endsWith(".apk")) {
+					} else if(f.getName().toLowerCase().endsWith(ApkFile.APK_FILE)) {
 						fileItems.add(new ApkFile(f));
-					} else if(f.getName().endsWith(".jpg")) {
+					} else if(f.getName().toLowerCase().endsWith(ImageFile.JPG_FILE) ||
+							f.getName().toLowerCase().endsWith(ImageFile.PNG_FILE)) {
 						fileItems.add(new ImageFile(f));
-					} else if(f.getName().endsWith(".3gp")) {
+					} else if(f.getName().toLowerCase().endsWith(AudioFile.MP3_FILE) ||
+							f.getName().toLowerCase().endsWith(AudioFile.M4A_FILE)) {
 						fileItems.add(new AudioFile(f));
+					} else if(f.getName().toLowerCase().endsWith(VideoFile.MP4_FILE) ||
+							f.getName().toLowerCase().endsWith(VideoFile.FLV_FILE) ||
+							f.getName().toLowerCase().endsWith(VideoFile.THREEGP_FILE)) {
+						fileItems.add(new VideoFile(f));
 					} else {
 						fileItems.add(new GeneralFile(f));
 					}
 				}
 			}
+			//TODO sort by strings
 			return fileItems;
 		}
 

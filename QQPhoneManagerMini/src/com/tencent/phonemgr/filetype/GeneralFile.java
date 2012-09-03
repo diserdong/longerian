@@ -28,7 +28,6 @@ public class GeneralFile implements FileItem {
 
 	@Override
 	public void open(Activity context) {
-		// TODO Auto-generated method stub
 
 	}
 

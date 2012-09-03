@@ -2,26 +2,31 @@ package com.tencent.phonemgr.filetype;
 
 import java.io.File;
 
+import com.tencent.phonemgr.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-import com.tencent.phonemgr.R;
+public class VideoFile implements FileItem {
 
-public class AudioFile implements FileItem {
-
-	public static final String MP3_FILE = ".mp3";
-	public static final String M4A_FILE = ".m4a";
+	public static final String THREEGP_FILE = ".3gp";
+	public static final String MP4_FILE = ".mp4";
+	public static final String FLV_FILE = ".flv";
 	
 	private File file;
 	
-	public AudioFile(File file) {
+	public VideoFile(File file) {
 		this.file = file;
 	}
-
 	
+	@Override
+	public File getParentDir() {
+		return file.getParentFile();
+	}
+
 	@Override
 	public String getName() {
 		return file.getName();
@@ -29,31 +34,25 @@ public class AudioFile implements FileItem {
 
 	@Override
 	public Drawable getLogo(Context context) {
-		return context.getResources().getDrawable(R.drawable.ic_audio);
+		// TODO Auto-generated method stub
+		return context.getResources().getDrawable(R.drawable.ic_video);
 	}
 
 	@Override
 	public void open(Activity activity) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);  
-	    intent.setDataAndType(Uri.fromFile(file), "audio/*");
+	    intent.setDataAndType(Uri.fromFile(file), "video/*");
 	    activity.startActivity(intent);
 	}
 
-
 	@Override
 	public void close() {
-		
-	}
 
+	}
 
 	@Override
 	public void setOnLoadListener(OnLoadListener listener) {
-		
-	}
-	
-	@Override
-	public File getParentDir() {
-		return file.getParentFile();
+
 	}
 
 }

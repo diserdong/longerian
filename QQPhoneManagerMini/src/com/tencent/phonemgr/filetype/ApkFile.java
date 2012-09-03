@@ -4,7 +4,9 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 
 import com.tencent.phonemgr.R;
 
@@ -25,12 +27,15 @@ public class ApkFile implements FileItem {
 
 	@Override
 	public Drawable getLogo(Context context) {
+		// TODO Auto-generated method stub
 		return context.getResources().getDrawable(R.drawable.ic_launcher);
 	}
 
 	@Override
-	public void open(Activity context) {
-		// TODO Auto-generated method stub
+	public void open(Activity activity) {
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+		activity.startActivity(intent);
 	}
 
 	@Override
