@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.tencent.phonemgr.R;
-import com.tencent.phonemgr.utils.ApkUtils;
+import com.tencent.phonemgr.utils.apk.ApkUtils;
 
 public class OriginalApksPanel extends SherlockFragment {
 
@@ -212,7 +212,7 @@ public class OriginalApksPanel extends SherlockFragment {
 			}
 			viewHolder = (ViewHolder) convertView.getTag();
 			viewHolder.getLabel().setText(items.get(position).getName());
-			Drawable icon = ApkUtils.getApkIcon(getActivity(), items.get(position).getAbsolutePath());
+			Drawable icon = ApkUtils.getApkDrawableIcon(getActivity(), items.get(position).getAbsolutePath());
 			if(icon != null) {
 				viewHolder.getLogo().setImageDrawable(icon);
 			}

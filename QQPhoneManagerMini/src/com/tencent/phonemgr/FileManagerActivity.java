@@ -1,6 +1,5 @@
 package com.tencent.phonemgr;
 
-import java.io.File;
 import java.util.List;
 
 import android.content.BroadcastReceiver;
@@ -9,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore.Images;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +20,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.tencent.phonemgr.filetype.DirFile;
 import com.tencent.phonemgr.filetype.FileItem;
 import com.tencent.phonemgr.filetype.FileItem.OnLoadListener;
+import com.tencent.phonemgr.filetype.FileItemThumbWorker;
+import com.tencent.phonemgr.utils.bitmap.ImageCache;
+import com.tencent.phonemgr.utils.bitmap.ImageCache.ImageCacheParams;
+import com.tencent.phonemgr.utils.bitmap.ImageWorker.ImageWorkerAdapter;
+import com.tencent.phonemgr.utils.bitmap.Utils;
 
-public class FileManagerActivity extends SherlockActivity implements OnLoadListener {
+public class FileManagerActivity extends SherlockFragmentActivity implements OnLoadListener {
+	
+	private static final String IMAGE_CACHE_DIR = "thumbs";
 
 	private ListView fileList;
 	private FileAdapter fileAdapter;
@@ -33,10 +40,33 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 	private TextView unavailableSdcardNote;
 	private TextView fileListEmptyView;
 	private FileItem currentFileItem;
+	private FileItemThumbWorker thumbWorker;
+	private ImageWorkerAdapter imageThumbWorkerAdapter = new ImageWorkerAdapter() {
+        
+		@Override
+		public Object getItem(int num) {
+			return fileAdapter.getItem(num);
+		}
+
+		@Override
+		public int getSize() {
+			return fileAdapter.getCount();
+		}
+		
+    };
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ImageCacheParams cacheParams = new ImageCacheParams(IMAGE_CACHE_DIR);
+        cacheParams.memCacheSize = 1024 * 1024 * Utils.getMemoryClass(this) / 3;
+        thumbWorker = new FileItemThumbWorker(this, 40);
+        thumbWorker.setAdapter(imageThumbWorkerAdapter);
+//        thumbWorker.setLoadingImage(R.drawable.ic_file);
+        thumbWorker.setImageCache(ImageCache.findOrCreateCache(this, cacheParams));
+        
+        
 		setContentView(R.layout.activity_file_manager);
 		fileListEmptyView = (TextView) findViewById(R.id.empty);
 		fileList = (ListView) findViewById(R.id.files);
@@ -94,6 +124,18 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 		registerReceiver(sdcardStateReceiver, intentFilter);
 	}
 	
+	@Override
+    public void onResume() {
+        super.onResume();
+        thumbWorker.setExitTasksEarly(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        thumbWorker.setExitTasksEarly(true);
+    }
+	    
 	private final BroadcastReceiver sdcardStateReceiver = new BroadcastReceiver() {
 
 		@Override
@@ -151,8 +193,12 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 				convertView.setTag(viewHolder);
             }
             viewHolder = (ViewHolder) convertView.getTag();
-            //TODO get logo async
-            viewHolder.getLogo().setImageDrawable(getItem(position).getLogo(getApplicationContext()));
+
+            if(getItem(position).isDir()) {
+            	viewHolder.getLogo().setImageDrawable(getItem(position).getDrawableLogo(getApplicationContext()));
+            } else {
+            	thumbWorker.loadImage(getItem(position), viewHolder.getLogo());
+            }
             viewHolder.getName().setText(getItem(position).getName());
             return convertView;
         }
@@ -194,11 +240,6 @@ public class FileManagerActivity extends SherlockActivity implements OnLoadListe
 	public void onFinishLoading(List<FileItem> fileItems) {
 		progress.setVisibility(View.INVISIBLE);
 		if(fileItems != null) {
-//			int count = fileAdapter.getCount();
-//			for(int i = 0; i < count; i++) {
-//				//release resource such as bitmap
-//				fileAdapter.getItem(i).close();
-//			}
 			fileAdapter.clear();
 			for(FileItem f : fileItems) {
 				fileAdapter.add(f);

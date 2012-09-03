@@ -7,12 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.tencent.phonemgr.R;
+import com.tencent.phonemgr.utils.bitmap.ImageResizer;
+import com.tencent.phonemgr.utils.bitmap.ImageWorker;
 
 public class VideoFile implements FileItem {
 
@@ -40,7 +43,7 @@ public class VideoFile implements FileItem {
 	}
 
 	@Override
-	public Drawable getLogo(Context context) {
+	public Drawable getDrawableLogo(Context context) {
 		//TODO cache image 
 		if(android.os.Build.VERSION.SDK_INT >= 5) {
 			if(thumbnail == null) {
@@ -67,6 +70,34 @@ public class VideoFile implements FileItem {
 			thumbnail = (BitmapDrawable) context.getResources().getDrawable(R.drawable.ic_video);
 		}
 		return thumbnail;
+	}
+	
+	@Override
+	public Bitmap getBitmapLogo(Context context) {
+		Bitmap thumbnailBitmap = null;
+		if(android.os.Build.VERSION.SDK_INT >= 5) {
+				Cursor cursor = context.getContentResolver().query(
+						android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI, 
+						null, 
+						android.provider.MediaStore.Video.Media.DATA + " = '" + file.getAbsolutePath() + "'", 
+						null, 
+						null);
+				if(cursor != null && cursor.moveToFirst()) {
+					long id = cursor.getLong(cursor.getColumnIndex(android.provider.MediaStore.Video.Media._ID));
+					cursor.close();
+					Bitmap bitmap = MediaStore.Video.Thumbnails.getThumbnail(
+							context.getContentResolver(), 
+							id,
+							MediaStore.Images.Thumbnails.MICRO_KIND,
+							null);
+					thumbnailBitmap = bitmap;
+				} else {
+					thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_video);
+				}
+		} else {
+			thumbnailBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_video);
+		}
+		return thumbnailBitmap;
 	}
 
 	@Override
@@ -103,5 +134,5 @@ public class VideoFile implements FileItem {
 			return this.getName().compareTo(another.getName());
 		}
 	}
-
+	
 }

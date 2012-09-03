@@ -4,9 +4,10 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
-import com.tencent.phonemgr.utils.ApkUtils;
+import com.tencent.phonemgr.utils.apk.ApkUtils;
 
 public class ApkFile implements FileItem {
 
@@ -26,8 +27,13 @@ public class ApkFile implements FileItem {
 	}
 
 	@Override
-	public Drawable getLogo(Context context) {
-		return ApkUtils.getApkIcon(context, file.getAbsolutePath());
+	public Drawable getDrawableLogo(Context context) {
+		return ApkUtils.getApkDrawableIcon(context, file.getAbsolutePath());
+	}
+	
+	@Override
+	public Bitmap getBitmapLogo(Context context) {
+		return ApkUtils.getApkBitmapIcon(context, file.getAbsolutePath());
 	}
 
 	@Override

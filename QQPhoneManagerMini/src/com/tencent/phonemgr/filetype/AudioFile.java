@@ -5,6 +5,8 @@ import java.io.File;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
@@ -30,8 +32,13 @@ public class AudioFile implements FileItem {
 	}
 
 	@Override
-	public Drawable getLogo(Context context) {
+	public Drawable getDrawableLogo(Context context) {
 		return context.getResources().getDrawable(R.drawable.ic_audio);
+	}
+	
+	@Override
+	public Bitmap getBitmapLogo(Context context) {
+		return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_audio);
 	}
 
 	@Override

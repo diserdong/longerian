@@ -7,6 +7,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
@@ -30,10 +32,15 @@ public class DirFile implements FileItem {
 	}
 
 	@Override
-	public Drawable getLogo(Context context) {
+	public Drawable getDrawableLogo(Context context) {
 		return context.getResources().getDrawable(R.drawable.ic_directory);
 	}
 
+	@Override
+	public Bitmap getBitmapLogo(Context context) {
+		return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_directory);
+	}
+	
 	@Override
 	public void open(Activity context) {
 		if(file != null && file.isDirectory()) {

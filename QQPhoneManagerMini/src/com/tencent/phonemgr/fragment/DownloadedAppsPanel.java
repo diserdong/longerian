@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.tencent.phonemgr.R;
-import com.tencent.phonemgr.utils.ApkUtils;
+import com.tencent.phonemgr.utils.apk.ApkUtils;
 
 public class DownloadedAppsPanel extends SherlockFragment {
 
