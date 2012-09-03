@@ -8,6 +8,7 @@
 		android:layout_height="fill_parent"
 	    android:padding="10dip"
 	    android:cacheColorHint="@android:color/transparent"
+	    android:fastScrollEnabled="true"
 	    />
 	<ProgressBar 
         android:id="@+id/progress"

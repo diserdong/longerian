@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.tencent.phonemgr.R;
+import com.tencent.phonemgr.utils.ApkUtils;
 
 public class DownloadedAppsPanel extends SherlockFragment {
 
@@ -105,16 +106,10 @@ public class DownloadedAppsPanel extends SherlockFragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View parent, int position,
 					long id) {
-				uninstallApplication(appPackages.get(position).packageName);
+				ApkUtils.uninstallApk(getActivity(), appPackages.get(position).packageName);
 			}
 
 		};
-		
-		private void uninstallApplication(String packageName) {
-			Intent intent = new Intent(Intent.ACTION_DELETE);
-			intent.setData(Uri.parse("package:" + packageName));
-			startActivity(intent);
-		}
 		
 	}
 	

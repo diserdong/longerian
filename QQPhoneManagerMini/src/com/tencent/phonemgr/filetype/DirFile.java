@@ -54,6 +54,7 @@ public class DirFile implements FileItem {
 		protected List<FileItem> doInBackground(File... params) {
 			File[] files = params[0].listFiles();
 			if(files != null) {
+				//TODO need to simplify the code here
 				for(File f : files) {
 					if(f.isDirectory()) {
 						fileItems.add(new DirFile(f));

@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.tencent.phonemgr.R;
+import com.tencent.phonemgr.utils.ApkUtils;
 
 public class OriginalApksPanel extends SherlockFragment {
 
@@ -155,16 +156,12 @@ public class OriginalApksPanel extends SherlockFragment {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View parent, int position,
 					long id) {
-				installApplication(apkFileList.get(position));
+				ApkUtils.installApk(getActivity(), apkFileList.get(position));
 			}
 
 		};
 		
-		private void installApplication(File apkFile) {
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
-			startActivity(intent);
-		}
+		
 		
 	}
 	
@@ -193,25 +190,6 @@ public class OriginalApksPanel extends SherlockFragment {
 	    }
 	}
 	
-//	08-31 19:28:40.647: W/PackageParser(12913): Unable to read AndroidManifest.xml of /mnt/sdcard/.medieval_software/.BlueFTP_temp/blueftp_view_960036825.apk
-//	08-31 19:28:40.647: W/PackageParser(12913): java.io.FileNotFoundException: AndroidManifest.xml
-	private Drawable getApkIcon(Context context, String apkPath) {
-        PackageManager pm = context.getPackageManager();
-        PackageInfo info = pm.getPackageArchiveInfo(apkPath,
-                PackageManager.GET_ACTIVITIES);
-        if (info != null) {
-            ApplicationInfo appInfo = info.applicationInfo;
-            appInfo.sourceDir = apkPath;
-            appInfo.publicSourceDir = apkPath;
-            try {
-                return appInfo.loadIcon(pm);
-            } catch (OutOfMemoryError e) {
-                Log.e("ApkIconLoader", e.toString());
-            }
-        }
-        return null;
-    }
-	
 	private class ApkAdapter extends ArrayAdapter<File> {
 
 		private List<File> items;
@@ -234,7 +212,7 @@ public class OriginalApksPanel extends SherlockFragment {
 			}
 			viewHolder = (ViewHolder) convertView.getTag();
 			viewHolder.getLabel().setText(items.get(position).getName());
-			Drawable icon = getApkIcon(getActivity(), items.get(position).getAbsolutePath());
+			Drawable icon = ApkUtils.getApkIcon(getActivity(), items.get(position).getAbsolutePath());
 			if(icon != null) {
 				viewHolder.getLogo().setImageDrawable(icon);
 			}
