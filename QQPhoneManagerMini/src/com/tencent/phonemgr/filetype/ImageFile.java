@@ -11,18 +11,19 @@ import android.graphics.BitmapFactory.Options;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
 
 public class ImageFile implements FileItem {
 
 	public static final String JPG_FILE = ".jpg";
 	public static final String PNG_FILE = ".png";
 	
+	private boolean isDir;
 	private File file;
 	private BitmapDrawable thumbnail;
 	
 	public ImageFile(File file) {
 		this.file = file;
+		this.isDir = false;
 	}
 
 	@Override
@@ -69,6 +70,20 @@ public class ImageFile implements FileItem {
 	@Override
 	public File getParentDir() {
 		return file.getParentFile();
+	}
+	
+	@Override
+	public boolean isDir() {
+		return isDir;
+	}
+	
+	@Override
+	public int compareTo(FileItem another) {
+		if(another.isDir()) {
+			return -1;
+		} else {
+			return this.getName().compareTo(another.getName());
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package com.tencent.phonemgr.filetype;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,12 +14,14 @@ import com.tencent.phonemgr.R;
 
 public class DirFile implements FileItem {
 	
+	private boolean isDir;
 	private File file;
 	private OnLoadListener listener;
 	private FileLoaderTask loaderTask;
 	
 	public DirFile(File file) {
 		this.file = file;
+		this.isDir = true;
 	}
 	
 	@Override
@@ -54,7 +57,6 @@ public class DirFile implements FileItem {
 		protected List<FileItem> doInBackground(File... params) {
 			File[] files = params[0].listFiles();
 			if(files != null) {
-				//TODO need to simplify the code here
 				for(File f : files) {
 					if(f.isDirectory()) {
 						fileItems.add(new DirFile(f));
@@ -75,7 +77,7 @@ public class DirFile implements FileItem {
 					}
 				}
 			}
-			//TODO sort by strings
+			Collections.sort(fileItems);
 			return fileItems;
 		}
 
@@ -105,4 +107,18 @@ public class DirFile implements FileItem {
 		return file.getParentFile();
 	}
 	
+	@Override
+	public boolean isDir() {
+		return isDir;
+	}
+	
+	@Override
+	public int compareTo(FileItem another) {
+		if(another.isDir()) {
+			return this.getName().compareTo(another.getName());
+		} else {
+			return 1;
+		}
+	}
+
 }

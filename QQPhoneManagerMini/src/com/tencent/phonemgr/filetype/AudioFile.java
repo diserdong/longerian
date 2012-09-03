@@ -15,10 +15,12 @@ public class AudioFile implements FileItem {
 	public static final String MP3_FILE = ".mp3";
 	public static final String M4A_FILE = ".m4a";
 	
+	private boolean isDir;
 	private File file;
 	
 	public AudioFile(File file) {
 		this.file = file;
+		this.isDir = false;
 	}
 
 	
@@ -54,6 +56,20 @@ public class AudioFile implements FileItem {
 	@Override
 	public File getParentDir() {
 		return file.getParentFile();
+	}
+
+	@Override
+	public boolean isDir() {
+		return isDir;
+	}
+
+	@Override
+	public int compareTo(FileItem another) {
+		if(another.isDir()) {
+			return -1;
+		} else {
+			return this.getName().compareTo(another.getName());
+		}
 	}
 
 }

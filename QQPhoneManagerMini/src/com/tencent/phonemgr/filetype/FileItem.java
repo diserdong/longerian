@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-public interface FileItem {
+public interface FileItem extends Comparable<FileItem> {
 	
 	public interface OnLoadListener {
 		
@@ -16,6 +16,7 @@ public interface FileItem {
 		
 	}
 	
+	public boolean isDir();
 	public File getParentDir();
 	public String getName();
 	public Drawable getLogo(Context context);

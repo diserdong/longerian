@@ -11,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import com.tencent.phonemgr.R;
 
@@ -21,11 +20,13 @@ public class VideoFile implements FileItem {
 	public static final String MP4_FILE = ".mp4";
 	public static final String FLV_FILE = ".flv";
 	
+	private boolean isDir;
 	private File file;
 	private BitmapDrawable thumbnail;
 	
 	public VideoFile(File file) {
 		this.file = file;
+		this.isDir = false;
 	}
 	
 	@Override
@@ -87,6 +88,20 @@ public class VideoFile implements FileItem {
 	@Override
 	public void setOnLoadListener(OnLoadListener listener) {
 
+	}
+	
+	@Override
+	public boolean isDir() {
+		return isDir;
+	}
+	
+	@Override
+	public int compareTo(FileItem another) {
+		if(another.isDir()) {
+			return -1;
+		} else {
+			return this.getName().compareTo(another.getName());
+		}
 	}
 
 }

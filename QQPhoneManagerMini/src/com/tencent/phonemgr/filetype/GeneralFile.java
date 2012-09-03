@@ -10,10 +10,12 @@ import com.tencent.phonemgr.R;
 
 public class GeneralFile implements FileItem {
 
+	private boolean isDir;
 	private File file;
 	
 	public GeneralFile(File file) {
 		this.file = file;
+		this.isDir = false;
 	}
 	
 	@Override
@@ -44,6 +46,20 @@ public class GeneralFile implements FileItem {
 	@Override
 	public File getParentDir() {
 		return file.getParentFile();
+	}
+	
+	@Override
+	public boolean isDir() {
+		return isDir;
+	}
+	
+	@Override
+	public int compareTo(FileItem another) {
+		if(another.isDir()) {
+			return -1;
+		} else {
+			return this.getName().compareTo(another.getName());
+		}
 	}
 
 }
