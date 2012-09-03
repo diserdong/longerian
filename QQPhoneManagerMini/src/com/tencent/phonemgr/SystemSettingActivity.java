@@ -51,9 +51,14 @@ public class SystemSettingActivity extends SherlockPreferenceActivity {
 		WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		mWifiPreference.setChecked(wm.isWifiEnabled());
 		
-		//TODO listen the bluetooth state
-		mBluetoothPreference = (CheckBoxPreference) findPreference(keyBluetooth);
-		mBluetoothPreference.setChecked(BluetoothAdapter.getDefaultAdapter().isEnabled());
+		if(BluetoothAdapter.getDefaultAdapter() != null) {
+			//TODO listen the bluetooth state
+			mBluetoothPreference = (CheckBoxPreference) findPreference(keyBluetooth);
+			mBluetoothPreference.setChecked(BluetoothAdapter.getDefaultAdapter().isEnabled());
+		} else {
+			//TODO  npe on simulator
+			mBluetoothPreference.setEnabled(false);
+		}
 		
 		mMobileNetworkPreference = findPreference(keyMobileNetwork);
 		

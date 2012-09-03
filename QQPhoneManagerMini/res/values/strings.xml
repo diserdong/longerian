@@ -6,6 +6,7 @@
     <string name="title_activity_main">MainActivity</string>
     
     <string name="note_sdcard_unavailable">SDCard不可用</string>
+    <string name="note_dir_is_empty">该目录为空</string>
 
     <string name="tab_local_tool">本地功能</string>
     <string name="tab_toolbox">工具箱</string>

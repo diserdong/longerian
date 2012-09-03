@@ -1,14 +1,12 @@
 package com.tencent.phonemgr;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -23,69 +21,50 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.tencent.phonemgr.filetype.DirFile;
 import com.tencent.phonemgr.filetype.FileItem;
+import com.tencent.phonemgr.filetype.FileItem.OnLoadListener;
 
-public class FileManagerActivity extends SherlockActivity {
+public class FileManagerActivity extends SherlockActivity implements OnLoadListener {
 
 	private ListView fileList;
 	private FileAdapter fileAdapter;
 	private ProgressBar progress;
 	private TextView unavailableSdcardNote;
-	private FileLoaderTask loaderTask;
-	private File currentDir;
+	private TextView fileListEmptyView;
+	private FileItem currentFileItem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_shortcut_grid);
+		setContentView(R.layout.activity_file_manager);
+		fileListEmptyView = (TextView) findViewById(R.id.empty);
 		fileList = (ListView) findViewById(R.id.files);
+		fileAdapter = new FileAdapter(getApplicationContext(), R.layout.file_item_in_list);
+		fileList.setEmptyView(fileListEmptyView);
+		fileList.setAdapter(fileAdapter);
+		fileList.setOnItemClickListener(mOnIconClickListener);
 		progress = (ProgressBar) findViewById(R.id.progress);
 		unavailableSdcardNote = (TextView) findViewById(R.id.sdcard_unavailable);
-		currentDir = Environment.getExternalStorageDirectory();
-		loaderTask = new FileLoaderTask();
-		loaderTask.execute(currentDir);
+		switch2NewDirFile(new DirFile(Environment.getExternalStorageDirectory()));
 	}
 	
-	@Override
-	public void onStart() {
-		super.onStart();
-		IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_MOUNTED);
-		intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
-		intentFilter.addAction(Intent.ACTION_MEDIA_REMOVED);
-		intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
-		intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
-		intentFilter.addDataScheme("file");
-		registerReceiver(sdcardStateReceiver, intentFilter);
+	private void switch2NewDirFile(DirFile dirFile) {
+		if(currentFileItem != null) {
+			currentFileItem.setOnLoadListener(null);
+		}
+		currentFileItem = dirFile;
+		currentFileItem.setOnLoadListener(this);
 	}
 	
-	private final BroadcastReceiver sdcardStateReceiver = new BroadcastReceiver() {
-
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			if(intent.getAction().equals(Intent.ACTION_MEDIA_MOUNTED)) {
-				android.os.Environment.getExternalStorageDirectory();
-				hideUnavailableSDCardNote();
-				loaderTask = new FileLoaderTask();
-				loaderTask.execute();
-			}else if(intent.getAction().equals(Intent.ACTION_MEDIA_REMOVED)
-					|| intent.getAction().equals(Intent.ACTION_MEDIA_SHARED)
-					|| intent.getAction().equals(Intent.ACTION_MEDIA_UNMOUNTED)
-					|| intent.getAction().equals(Intent.ACTION_MEDIA_BAD_REMOVAL)) {
-				showUnavailableSDCardNote();
-				if(loaderTask != null) {
-					loaderTask.cancel(true);
-				}
-			}
-		}
-	};
+	private void openDir() {
+		hideUnavailableSDCardNote();
+		currentFileItem.open(this);
+	}
 	
-	@Override
-	public void onStop() {
-		super.onStop();
-		unregisterReceiver(sdcardStateReceiver);
-		if(loaderTask != null) {
-			loaderTask.cancel(true);
-		}
+	private void closeDir() {
+		showUnavailableSDCardNote();
+		currentFileItem.close();
 	}
 	
 	private void showUnavailableSDCardNote() {
@@ -98,63 +77,77 @@ public class FileManagerActivity extends SherlockActivity {
 		fileList.setVisibility(View.VISIBLE);
 	}
 	
-	private class FileLoaderTask extends AsyncTask<File, Void, List<FileItem>> {
-
-		private List<FileItem> fileItems = new ArrayList<FileItem>();
-		
-		@Override
-		protected void onPreExecute() {
-			progress.setVisibility(View.VISIBLE);
+	@Override
+	public void onStart() {
+		super.onStart();
+		IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_MOUNTED);
+		intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
+		intentFilter.addAction(Intent.ACTION_MEDIA_REMOVED);
+		intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
+		intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
+		intentFilter.addDataScheme("file");
+		registerReceiver(sdcardStateReceiver, intentFilter);
+		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			openDir();
+		} else {
+			closeDir();
 		}
-		
-		@Override
-		protected List<FileItem> doInBackground(File... params) {
-			
-			
-			return fileItems;
-		}
-
-		@Override
-		protected void onPostExecute(List<FileItem> result) {
-			progress.setVisibility(View.INVISIBLE);
-			fileList.setAdapter(new FileAdapter(getApplicationContext(), R.layout.app_item_in_grid, result));
-			fileList.setOnItemClickListener(mOnIconClickListener);
-		}
-		
-		private OnItemClickListener mOnIconClickListener = new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View parent, int position,
-					long id) {
-				fileItems.get(position).open(getApplicationContext());
-			}
-
-		};
-		
 	}
+	
+	private final BroadcastReceiver sdcardStateReceiver = new BroadcastReceiver() {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(intent.getAction().equals(Intent.ACTION_MEDIA_MOUNTED)) {
+				openDir();
+			}else if(intent.getAction().equals(Intent.ACTION_MEDIA_REMOVED)
+					|| intent.getAction().equals(Intent.ACTION_MEDIA_SHARED)
+					|| intent.getAction().equals(Intent.ACTION_MEDIA_UNMOUNTED)
+					|| intent.getAction().equals(Intent.ACTION_MEDIA_BAD_REMOVAL)) {
+				closeDir();
+			}
+		}
+	};
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		currentFileItem.close();
+		unregisterReceiver(sdcardStateReceiver);
+	}
+	
+	private OnItemClickListener mOnIconClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> adapterView, View parent, int position,
+				long id) {
+			if(adapterView.getItemAtPosition(position) instanceof DirFile) {
+				switch2NewDirFile((DirFile) adapterView.getItemAtPosition(position));
+			}
+			((FileItem) adapterView.getItemAtPosition(position)).open(FileManagerActivity.this); 
+		}
+
+	};
 	
 	private class FileAdapter extends ArrayAdapter<FileItem> {
 		
-		private List<FileItem> files;
 		private int resource;
 		
-        public FileAdapter(Context context, int resource,
-				List<FileItem> files) {
-        	super(context, resource, files);
+        public FileAdapter(Context context, int resource) {
+        	super(context, resource);
         	this.resource = resource;
-        	this.files = files;
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
         	ViewHolder viewHolder;
             if (convertView == null) {
-            	convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.app_item_in_grid, null);
+            	convertView = LayoutInflater.from(getApplicationContext()).inflate(resource, null);
             	viewHolder = new ViewHolder(convertView);
 				convertView.setTag(viewHolder);
             }
             viewHolder = (ViewHolder) convertView.getTag();
-//            ResolveInfo info = files.get(position);
-//            viewHolder.getLogo().setImageDrawable(info.activityInfo.loadIcon(getPackageManager()));
+            viewHolder.getLogo().setImageDrawable(getItem(position).getLogo(getApplicationContext()));
+            viewHolder.getName().setText(getItem(position).getName());
             return convertView;
         }
 
@@ -162,6 +155,7 @@ public class FileManagerActivity extends SherlockActivity {
 			
 			private View base;
 			private ImageView logo;
+			private TextView name;
 			
 			public ViewHolder(View base) {
 				super();
@@ -170,12 +164,45 @@ public class FileManagerActivity extends SherlockActivity {
 			
 			public ImageView getLogo() {
 				if(logo == null) {
-					logo = (ImageView) base.findViewById(R.id.app_logo);
+					logo = (ImageView) base.findViewById(R.id.file_logo);
 				}
 				return logo;
 			}
 			
+			public TextView getName() {
+				if(name == null) {
+					name = (TextView) base.findViewById(R.id.file_name);
+				}
+				return name;
+			}
+			
 		}
     }
+
+	@Override
+	public void onStartLoading() {
+		progress.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	public void onFinishLoading(List<FileItem> fileItems) {
+		progress.setVisibility(View.INVISIBLE);
+		if(fileItems != null) {
+			fileAdapter.clear();
+			for(FileItem f : fileItems) {
+				fileAdapter.add(f);
+			}
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if(currentFileItem.getName().equals(Environment.getExternalStorageDirectory().getName())) {
+			super.onBackPressed();
+		} else {
+			switch2NewDirFile(new DirFile(currentFileItem.getParentDir()));
+			openDir();
+		}
+	}
 	
 }
