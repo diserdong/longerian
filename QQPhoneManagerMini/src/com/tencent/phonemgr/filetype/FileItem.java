@@ -17,6 +17,7 @@ public interface FileItem extends Comparable<FileItem> {
 	}
 	
 	public boolean isDir();
+	public File getFile();
 	public File getParentDir();
 	public String getName();
 	public Bitmap getBitmapLogo(Context context);

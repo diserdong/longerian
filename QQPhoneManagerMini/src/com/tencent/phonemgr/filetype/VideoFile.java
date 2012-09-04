@@ -95,4 +95,9 @@ public class VideoFile implements FileItem {
 		}
 	}
 	
+	@Override
+	public File getFile() {
+		return file;
+	}
+	
 }

@@ -121,5 +121,10 @@ public class DirFile implements FileItem {
 			return 1;
 		}
 	}
+	
+	@Override
+	public File getFile() {
+		return file;
+	}
 
 }

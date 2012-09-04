@@ -64,4 +64,9 @@ public class ApkFile implements FileItem {
 		}
 	}
 
+	@Override
+	public File getFile() {
+		return file;
+	}
+
 }

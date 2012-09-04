@@ -92,4 +92,9 @@ public class ImageFile implements FileItem {
 		}
 	}
 
+	@Override
+	public File getFile() {
+		return file;
+	}
+	
 }

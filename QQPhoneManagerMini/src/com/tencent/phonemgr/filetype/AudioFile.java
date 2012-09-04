@@ -72,5 +72,10 @@ public class AudioFile implements FileItem {
 			return this.getName().compareTo(another.getName());
 		}
 	}
+	
+	@Override
+	public File getFile() {
+		return file;
+	}
 
 }

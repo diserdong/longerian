@@ -73,7 +73,13 @@ public class FileManagerActivity extends SherlockFragmentActivity implements OnL
 		fileList.setOnItemClickListener(mOnIconClickListener);
 		progress = (ProgressBar) findViewById(R.id.progress);
 		unavailableSdcardNote = (TextView) findViewById(R.id.sdcard_unavailable);
-		switch2NewDirFile(new DirFile(Environment.getExternalStorageDirectory()));
+		
+		FileItem savedFileItem = (FileItem) getLastCustomNonConfigurationInstance();
+		if(savedFileItem != null) {
+			switch2NewDirFile(new DirFile(savedFileItem.getFile()));
+		} else {
+			switch2NewDirFile(new DirFile(Environment.getExternalStorageDirectory()));
+		}
 		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			openDir();
 		} else {
@@ -158,6 +164,11 @@ public class FileManagerActivity extends SherlockFragmentActivity implements OnL
 	protected void onDestroy() {
 		super.onDestroy();
 		currentFileItem.close();
+	}
+
+	@Override
+	public Object onRetainCustomNonConfigurationInstance() {
+		return currentFileItem;
 	}
 
 	private OnItemClickListener mOnIconClickListener = new OnItemClickListener() {
