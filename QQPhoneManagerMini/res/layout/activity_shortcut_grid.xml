@@ -8,7 +8,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:numColumns="4"
-	    android:horizontalSpacing="10dip"
+	    android:verticalSpacing="20dip"
 	    />
     <ProgressBar 
         android:id="@+id/progress"

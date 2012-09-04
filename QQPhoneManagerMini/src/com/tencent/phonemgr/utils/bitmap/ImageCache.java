@@ -48,6 +48,8 @@ public class ImageCache {
     private static final boolean DEFAULT_DISK_CACHE_ENABLED = true;
     private static final boolean DEFAULT_CLEAR_DISK_CACHE_ON_START = false;
 
+    private static final String IMAGE_CACHE_DIR = "thumbs";
+    
     private DiskLruCache mDiskCache;
     private LruCache<String, Bitmap> mMemoryCache;
 
@@ -213,5 +215,10 @@ public class ImageCache {
         public ImageCacheParams(String uniqueName) {
             this.uniqueName = uniqueName;
         }
+        
+        public ImageCacheParams() {
+        	this.uniqueName = IMAGE_CACHE_DIR;
+        }
+        
     }
 }

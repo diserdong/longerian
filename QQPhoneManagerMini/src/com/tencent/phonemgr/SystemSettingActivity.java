@@ -57,7 +57,9 @@ public class SystemSettingActivity extends SherlockPreferenceActivity {
 			mBluetoothPreference.setChecked(BluetoothAdapter.getDefaultAdapter().isEnabled());
 		} else {
 			//TODO  npe on simulator
-			mBluetoothPreference.setEnabled(false);
+			if(mBluetoothPreference != null) {
+				mBluetoothPreference.setEnabled(false);
+			}
 		}
 		
 		mMobileNetworkPreference = findPreference(keyMobileNetwork);
@@ -138,16 +140,22 @@ public class SystemSettingActivity extends SherlockPreferenceActivity {
 		sendBroadcast(intent);
 	}
 	
+
+//TODO	09-04 03:15:03.950: E/AndroidRuntime(738): java.lang.SecurityException: Permission Denial: starting Intent { act=android.intent.action.MAIN cmp=com.android.phone/.Settings } from ProcessRecord{41198370 738:com.tencent.phonemgr/u0a44} (pid=738, uid=10044) not exported from uid 1001
+
 	private void toggleWifi() {
 		WifiManager wm = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		wm.setWifiEnabled(!wm.isWifiEnabled());
 	}
 	
 	private void toggleBluetooth() {
-		if(BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-			BluetoothAdapter.getDefaultAdapter().disable();
-		} else {
-			BluetoothAdapter.getDefaultAdapter().enable();
+		BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		if(bluetoothAdapter != null) {
+			if(bluetoothAdapter.isEnabled()) {
+				bluetoothAdapter.disable();
+			} else {
+				bluetoothAdapter.enable();
+			}
 		}
 	}
 	

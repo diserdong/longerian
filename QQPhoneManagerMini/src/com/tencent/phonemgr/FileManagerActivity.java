@@ -23,7 +23,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.tencent.phonemgr.filetype.DirFile;
 import com.tencent.phonemgr.filetype.FileItem;
 import com.tencent.phonemgr.filetype.FileItem.OnLoadListener;
-import com.tencent.phonemgr.filetype.FileItemThumbWorker;
+import com.tencent.phonemgr.utils.bitmap.FileItemThumbWorker;
 import com.tencent.phonemgr.utils.bitmap.ImageCache;
 import com.tencent.phonemgr.utils.bitmap.ImageCache.ImageCacheParams;
 import com.tencent.phonemgr.utils.bitmap.ImageWorker.ImageWorkerAdapter;
@@ -31,8 +31,6 @@ import com.tencent.phonemgr.utils.bitmap.Utils;
 
 public class FileManagerActivity extends SherlockFragmentActivity implements OnLoadListener {
 	
-	private static final String IMAGE_CACHE_DIR = "thumbs";
-
 	private ListView fileList;
 	private FileAdapter fileAdapter;
 	private ProgressBar progress;
@@ -58,7 +56,7 @@ public class FileManagerActivity extends SherlockFragmentActivity implements OnL
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ImageCacheParams cacheParams = new ImageCacheParams(IMAGE_CACHE_DIR);
+		ImageCacheParams cacheParams = new ImageCacheParams();
         cacheParams.memCacheSize = 1024 * 1024 * Utils.getMemoryClass(this) / 3;
         thumbWorker = new FileItemThumbWorker(this, 40);
         thumbWorker.setAdapter(imageThumbWorkerAdapter);

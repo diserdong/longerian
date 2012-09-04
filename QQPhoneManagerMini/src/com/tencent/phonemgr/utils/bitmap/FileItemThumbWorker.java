@@ -1,13 +1,11 @@
-package com.tencent.phonemgr.filetype;
-
-import java.io.File;
+package com.tencent.phonemgr.utils.bitmap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.tencent.phonemgr.BuildConfig;
-import com.tencent.phonemgr.utils.bitmap.ImageResizer;
+import com.tencent.phonemgr.filetype.FileItem;
 
 public class FileItemThumbWorker extends ImageResizer {
 

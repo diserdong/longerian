@@ -21,17 +21,42 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.tencent.phonemgr.utils.bitmap.AppIconWorker;
+import com.tencent.phonemgr.utils.bitmap.ImageCache;
+import com.tencent.phonemgr.utils.bitmap.ImageCache.ImageCacheParams;
+import com.tencent.phonemgr.utils.bitmap.ImageWorker.ImageWorkerAdapter;
+import com.tencent.phonemgr.utils.bitmap.Utils;
 
-public class ShortcutActivity extends SherlockActivity {
+public class ShortcutActivity extends SherlockFragmentActivity {
 
 	private GridView shortcuts;
 	private ProgressBar progress;
 	private AppLoaderTask loaderTask;
+	private AppIconWorker iconWorker;
+	private ImageWorkerAdapter iconWorkerAdapter = new ImageWorkerAdapter() {
+        
+		@Override
+		public Object getItem(int num) {
+			return shortcuts.getItemAtPosition(num);
+		}
+
+		@Override
+		public int getSize() {
+			return shortcuts.getCount();
+		}
+		
+    };
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ImageCacheParams cacheParams = new ImageCacheParams();
+        cacheParams.memCacheSize = 1024 * 1024 * Utils.getMemoryClass(this) / 3;
+        iconWorker = new AppIconWorker(getApplicationContext(), 40);
+        iconWorker.setAdapter(iconWorkerAdapter);
+        iconWorker.setImageCache(ImageCache.findOrCreateCache(this, cacheParams));
+		
 		setContentView(R.layout.activity_shortcut_grid);
 		shortcuts = (GridView) findViewById(R.id.shortcuts);
 		progress = (ProgressBar) findViewById(R.id.progress);
@@ -39,7 +64,17 @@ public class ShortcutActivity extends SherlockActivity {
 		loaderTask.execute();
 	}
 	
-	
+	@Override
+    public void onResume() {
+        super.onResume();
+        iconWorker.setExitTasksEarly(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        iconWorker.setExitTasksEarly(true);
+    }
 	
 	@Override
 	protected void onStop() {
@@ -109,7 +144,7 @@ public class ShortcutActivity extends SherlockActivity {
             }
             viewHolder = (ViewHolder) convertView.getTag();
             ResolveInfo info = nonSystemPackages.get(position);
-            viewHolder.getLogo().setImageDrawable(info.activityInfo.loadIcon(getPackageManager()));
+            iconWorker.loadImage(info, viewHolder.getLogo());
             return convertView;
         }
 

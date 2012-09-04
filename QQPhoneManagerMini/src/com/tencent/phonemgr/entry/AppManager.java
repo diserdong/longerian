@@ -15,7 +15,7 @@ public class AppManager implements Entry {
 
 	@Override
 	public int getLogoId() {
-		return R.drawable.ic_launcher;
+		return R.drawable.ic_app_manager;
 	}
 
 	@Override
