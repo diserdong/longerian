@@ -52,7 +52,7 @@ public class FileManagerActivity extends SherlockFragmentActivity implements OnL
 		
     };
 	
-	
+	//FIXME handle orientation change
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
