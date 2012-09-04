@@ -27,6 +27,15 @@
     <string name="title_mobile_network">网络数据</string>
     <string name="title_silent">静音</string>
     <string name="title_auto_rotate">自动旋转</string>
+    <string name="title_category_dev">调试设置</string>
+    <string name="title_debug_over_usb">USB调试设置</string>
+    <string name="title_unknown_source">应用程序安全保护</string>
+    <string name="title_install_applications">安装未知来源应用</string>
+    <string name="title_usb_setting">USB设置</string>
+    <string name="title_category_sys">系统设置</string>
+    <string name="title_date_and_time">时间设置</string>
+    <string name="title_display">显示设置</string>
+    <string name="title_sound">声音设置</string>
     
     <string name="key_airplane_mode">apply_airplane_mode</string>
     <string name="key_wifi">apply_wifi</string>
@@ -34,6 +43,14 @@
     <string name="key_mobile_network">apply_mobile_network</string>
     <string name="key_silent">apply_silent</string>
     <string name="key_auto_rotate">apply_autorotate</string>
+    <string name="key_category_dev">apply_development</string>
+    <string name="key_debug_over_usb">apply_use_setting</string>
+    <string name="key_unknown_source">apply_unknown_source</string>
+    <string name="key_usb_setting">apply_usb_setting</string>
+    <string name="key_category_sys">apply_system</string>
+    <string name="key_date_and_time">apply_data_and_time</string>
+    <string name="key_display">apply_display</string>
+    <string name="key_sound">apply_sound</string>
     
     <string name="summary_airplane_mode">禁用所有无线连接</string>
     <string name="summary_wifi_off">打开Wi-Fi</string>
@@ -41,5 +58,7 @@
     <string name="summary_bluetooth_off">启用蓝牙</string>
     <string name="summary_bluetooth_on">关闭蓝牙</string>
     <string name="summary_mobile_network">数据网络</string>
+    <string name="summary_install_unknown_applications">允许安装来自非市场应用</string>
+    <string name="summary_not_install_unknown_applications">不允许安装来自非市场应用</string>
     
 </resources>

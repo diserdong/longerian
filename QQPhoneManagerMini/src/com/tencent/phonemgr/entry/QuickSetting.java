@@ -1,7 +1,9 @@
 package com.tencent.phonemgr.entry;
 
 import android.content.Context;
+import android.content.Intent;
 
+import com.tencent.phonemgr.QuickSettingActivity;
 import com.tencent.phonemgr.R;
 
 public class QuickSetting implements Entry {
@@ -18,8 +20,8 @@ public class QuickSetting implements Entry {
 
 	@Override
 	public void doAction(Context context) {
-		// TODO Auto-generated method stub
-
+		Intent intent = new Intent(context, QuickSettingActivity.class);
+		context.startActivity(intent);
 	}
 
 }

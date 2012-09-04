@@ -35,7 +35,7 @@ public class SystemSettingActivity extends SherlockPreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.preferences);
+		addPreferencesFromResource(R.xml.system_setting_preferences);
 		
 		keyAirplaneMode = getString(R.string.key_airplane_mode);
 		keyWifi = getString(R.string.key_wifi);

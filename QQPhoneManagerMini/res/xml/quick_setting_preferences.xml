@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:key="@string/key_category_dev"
+        android:title="@string/title_category_dev"
+        >
+		<Preference 
+		    android:key="@string/key_debug_over_usb"
+			android:title="@string/title_debug_over_usb">
+		</Preference>
+<!-- 		<CheckBoxPreference -->
+<!--             android:key="@string/key_unknown_source" -->
+<!--             android:title="@string/title_install_applications" -->
+<!--             android:summaryOff="@string/summary_install_unknown_applications" -->
+<!--             android:summaryOn="@string/summary_not_install_unknown_applications" -->
+<!--             android:persistent="false" /> -->
+		<Preference 
+		    android:key="@string/key_unknown_source"
+			android:title="@string/title_unknown_source">
+		</Preference>
+		<Preference
+		    android:key="@string/key_usb_setting"
+			android:title="@string/title_usb_setting">
+		</Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/key_category_sys"
+        android:title="@string/title_category_sys"
+        >
+		<Preference 
+		    android:key="@string/key_date_and_time"
+			android:title="@string/title_date_and_time">
+		</Preference>
+		<Preference
+		    android:key="@string/key_display"
+			android:title="@string/title_display">
+		</Preference>
+		<Preference
+		    android:key="@string/key_sound"
+			android:title="@string/title_sound">
+		</Preference>
+    </PreferenceCategory>
+</PreferenceScreen>
