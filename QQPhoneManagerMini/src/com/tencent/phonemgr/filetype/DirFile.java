@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
 import com.tencent.phonemgr.R;
@@ -29,11 +28,6 @@ public class DirFile implements FileItem {
 	@Override
 	public String getName() {
 		return file.getName();
-	}
-
-	@Override
-	public Drawable getDrawableLogo(Context context) {
-		return context.getResources().getDrawable(R.drawable.ic_directory);
 	}
 
 	@Override

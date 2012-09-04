@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 import com.tencent.phonemgr.R;
@@ -31,11 +30,6 @@ public class AudioFile implements FileItem {
 		return file.getName();
 	}
 
-	@Override
-	public Drawable getDrawableLogo(Context context) {
-		return context.getResources().getDrawable(R.drawable.ic_audio);
-	}
-	
 	@Override
 	public Bitmap getBitmapLogo(Context context) {
 		return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_audio);

@@ -34,11 +34,7 @@ public class FileItemThumbWorker extends ImageResizer {
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "processBitmap - " + data.getName());
         }
-        if(data instanceof ImageFile) {
-        	return decodeSampledBitmapFromFile(data.getParentDir() + File.separator + data.getName(), mImageWidth, mImageHeight);
-        } else {
-        	return data.getBitmapLogo(context);
-        }
+    	return data.getBitmapLogo(context);
     }
 	
 	

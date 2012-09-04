@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.tencent.phonemgr.R;
-import com.tencent.phonemgr.ShortcutActivity;
 import com.tencent.phonemgr.SystemSettingActivity;
 
 public class SystemSetting implements Entry {

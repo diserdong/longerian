@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore.Images;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class FileManagerActivity extends SherlockFragmentActivity implements OnL
         cacheParams.memCacheSize = 1024 * 1024 * Utils.getMemoryClass(this) / 3;
         thumbWorker = new FileItemThumbWorker(this, 40);
         thumbWorker.setAdapter(imageThumbWorkerAdapter);
-//        thumbWorker.setLoadingImage(R.drawable.ic_file);
+//        thumbWorker.setLoadingImage(R.drawable.empty_photo);
         thumbWorker.setImageCache(ImageCache.findOrCreateCache(this, cacheParams));
         
         
@@ -195,7 +194,7 @@ public class FileManagerActivity extends SherlockFragmentActivity implements OnL
             viewHolder = (ViewHolder) convertView.getTag();
 
             if(getItem(position).isDir()) {
-            	viewHolder.getLogo().setImageDrawable(getItem(position).getDrawableLogo(getApplicationContext()));
+            	viewHolder.getLogo().setImageBitmap(getItem(position).getBitmapLogo(getApplicationContext()));
             } else {
             	thumbWorker.loadImage(getItem(position), viewHolder.getLogo());
             }

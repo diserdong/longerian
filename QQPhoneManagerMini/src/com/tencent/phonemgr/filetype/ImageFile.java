@@ -5,13 +5,12 @@ import java.io.File;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.Log;
+import android.provider.MediaStore;
+
+import com.tencent.phonemgr.utils.bitmap.ImageResizer;
 
 public class ImageFile implements FileItem {
 
@@ -20,7 +19,6 @@ public class ImageFile implements FileItem {
 	
 	private boolean isDir;
 	private File file;
-	private BitmapDrawable thumbnail;
 	
 	public ImageFile(File file) {
 		this.file = file;
@@ -33,30 +31,29 @@ public class ImageFile implements FileItem {
 	}
 
 	@Override
-	public Drawable getDrawableLogo(Context context) {
-		//TODO cache image
-		if(thumbnail == null) {
-			Options options = new Options();
-			options.outHeight = 40;
-			options.outWidth = 40;
-			Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-			Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(bitmap, 40, 40, true);
-			bitmap.recycle();
-			thumbnail = new BitmapDrawable(context.getResources(), thumbnailBitmap);
-		}
-		return thumbnail;
-	}
-	
-	@Override
 	public Bitmap getBitmapLogo(Context context) {
-		//TODO  there's some problem here, it will cause oom
-		Options options = new Options();
-		options.outHeight = 40;
-		options.outWidth = 40;
-		Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
-		Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(bitmap, 40, 40, true);
-		bitmap.recycle();
-		Log.d(getName(), thumbnailBitmap.getWidth() + "/" + thumbnailBitmap.getHeight());
+		Bitmap thumbnailBitmap = null;
+		if(android.os.Build.VERSION.SDK_INT >= 5) {
+				Cursor cursor = context.getContentResolver().query(
+						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, 
+						null, 
+						android.provider.MediaStore.Images.Media.DATA + " = '" + file.getAbsolutePath() + "'", 
+						null, 
+						null);
+				if(cursor != null && cursor.moveToFirst()) {
+					long id = cursor.getLong(cursor.getColumnIndex(android.provider.MediaStore.Images.Media._ID));
+					cursor.close();
+					Bitmap bitmap = MediaStore.Video.Thumbnails.getThumbnail(
+							context.getContentResolver(), 
+							id,
+							MediaStore.Images.Thumbnails.MICRO_KIND,
+							null);
+					thumbnailBitmap = bitmap;
+				}
+		}
+		if(thumbnailBitmap == null) {
+			thumbnailBitmap = ImageResizer.decodeSampledBitmapFromFile(file.getAbsolutePath(), 40, 40);
+		}
 		return thumbnailBitmap;
 	}
 
@@ -69,11 +66,6 @@ public class ImageFile implements FileItem {
 
 	@Override
 	public void close() {
-		if(thumbnail != null) {
-			if(thumbnail.getBitmap() != null) {
-				thumbnail.getBitmap().recycle();
-			}
-		}
 	}
 
 	@Override
