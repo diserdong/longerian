@@ -61,7 +61,7 @@ public class QuickSettingActivity extends SherlockPreferenceActivity {
 		} else if(key.equals(keyUnknownSource)) {
 			try {
 				if(Class.forName("com.android.settings.ApplicationSettings") != null) {
-					//FIXME crash on 4.1
+					//FIXME crash on 4.1, use sdk version to check it
 					openSystemSetting("com.android.settings", "com.android.settings.ApplicationSettings");
 				}
 			} catch (ClassNotFoundException e) {
@@ -72,7 +72,7 @@ public class QuickSettingActivity extends SherlockPreferenceActivity {
 		} else if(key.equals(keyDateAndTime)) {
 			try {
 				if(Class.forName("com.android.settings.DateTimeSettings") != null) {
-					//FIXME crash on 4.1
+					//FIXME crash on 4.1, use sdk version to check it
 					openSystemSetting("com.android.settings", "com.android.settings.DateTimeSettings");
 				}
 			} catch (ClassNotFoundException e) {
