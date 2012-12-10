@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SHA</title>
+<script type="text/javascript" src="../../javascript/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/sha1.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/sha256.js"></script>
+</head>
+<body>
+
+	<form id="login" method="post">
+		<input id="sendsha1" type="button" value="SEND SHA1" /> <br />
+		<input id="getsha1" type="button" value="GET SHA1" /> <br />
+		<input id="sendsha256" type="button" value="SEND SHA256" /> <br />
+		<input id="getsha256" type="button" value="GET SHA256" /> <br />
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var secretmsg = "Longerian";
+			$("#sendsha1").click(function() {
+				var encrypted = CryptoJS.SHA1(secretmsg);
+				$.ajax({
+				    url: '/sha1?get=false&send=' + encrypted.toString(),
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+				    }
+				});
+			});
+			$("#getsha1").click(function() {
+				$.ajax({
+				    url: '/sha1?get=true',
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("response " + data);
+				    }
+				});
+			});
+			$("#sendsha256").click(function() {
+				var encrypted = CryptoJS.SHA256(secretmsg);
+				$.ajax({
+				    url: '/sha256?get=false&send=' + encrypted.toString(),
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+				    }
+				});
+			});
+			$("#getsha256").click(function() {
+				$.ajax({
+				    url: '/sha256?get=true',
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("response " + data);
+				    }
+				});
+			});
+		}); 
+	</script>
+</body>
+</html>

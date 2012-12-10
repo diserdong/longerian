@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Crypto</title>
+<script type="text/javascript" src="../../javascript/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../../javascript/rsa/Barrett.js"></script>
+<script type="text/javascript" src="../../javascript/rsa/BigInt.js"></script>
+<script type="text/javascript" src="../../javascript/rsa/RSA.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/core-min.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/enc-base64-min.js"></script>
+</head>
+<body>
+	<form id="login" method="post">
+		<input id="send" type="button" value="SEND" /> <br />
+		<input id="get" type="button" value="GET" /> <br />
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var rsa_e = "10001";
+			var rsa_m = "9d4005c01a4af20ca825b5c02e5863dd8c963f2276704f3ef3348a4d10efd1b50d7a30977148a5dcd14f6e945b170bfb78eb3f1c8b4a1ae2402c6211e7deaa8964233eae0ffbd0d4954e9dbb0d8cd4e3484deed053acc56bf31c510f79d722708c3dbeb5a0ed52be3ae88da54fc1dd4ec7deb4a98738a51a006423e764634937";
+			$("#send").click(function() {  
+				setMaxDigits(131); //131 => n的十六进制位数/2+3  
+			    var key = new RSAKeyPair(rsa_e, '', rsa_m); //10001 => e的十六进制  
+				var encrypted = encryptedString(key, "longerian"); //不支持汉字  
+				console.log("send " + encrypted.toString());
+				$.ajax({
+				    url: '/rsa?get=false&send=' + encrypted.toString(),
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+				    }
+				});
+			});
+			$("#get").click(function() {
+				$.ajax({
+				    url: '/rsa?get=true',
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+				    }
+				});
+			});
+		}); 
+	</script>
+</body>
+</html>

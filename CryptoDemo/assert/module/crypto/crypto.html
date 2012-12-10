@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Crypto</title>
+<script type="text/javascript" src="../../javascript/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/md5.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/aes.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/rc4.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/tripledes.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/enc-utf16-min.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/enc-base64-min.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/mode-ecb.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/pad-zeropadding.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/pad-iso10126-min.js"></script>
+</head>
+<body>
+	<form id="login" method="post">
+		<input id="send" type="button" value="SEND" /> <br />
+		<input id="get" type="button" value="GET" /> <br />
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var JsonFormatter = {
+	        stringify: function (cipherParams) {
+	            // create json object with ciphertext
+	            var jsonObj = {
+	                ct: cipherParams.ciphertext.toString(CryptoJS.enc.Base64)
+	            };
+	
+	            // optionally add iv and salt
+	            if (cipherParams.iv) {
+	                jsonObj.iv = cipherParams.iv.toString();
+	            }
+	            if (cipherParams.salt) {
+	                jsonObj.s = cipherParams.salt.toString();
+	            }
+	
+	            // stringify json object
+	            return JSON.stringify(jsonObj);
+	        },
+	
+	        parse: function (jsonStr) {
+	            // parse json string
+	            var jsonObj = JSON.parse(jsonStr);
+	
+	            // extract ciphertext from json object, and create cipher params object
+	            var cipherParams = CryptoJS.lib.CipherParams.create({
+	                ciphertext: CryptoJS.enc.Base64.parse(jsonObj.ct)
+	            });
+	
+	            // optionally extract iv and salt
+	            if (jsonObj.iv) {
+	                cipherParams.iv = CryptoJS.enc.Hex.parse(jsonObj.iv)
+	            }
+	            if (jsonObj.s) {
+	                cipherParams.salt = CryptoJS.enc.Hex.parse(jsonObj.s)
+	            }
+	
+	            return cipherParams;
+	        }
+	    };
+	    //var encrypted = CryptoJS.AES.encrypt("it is a very secret text", "Secret Passphrase", { format: JsonFormatter });
+	    //console.log(encrypted.toString());
+	    //var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase", { format: JsonFormatter });
+	    //console.log(decrypted.toString(CryptoJS.enc.Utf8));
+	    
+			var key = "Secret Passphrase";
+			$("#send").click(function() {
+				var encrypted = CryptoJS.AES.encrypt("Message", key, { format: JsonFormatter });
+				console.log("send encrypted " + encrypted.toString());
+				$.ajax({
+				    url: '/crypto?get=false&send=' + encrypted.toString(),
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+				    	console.log("receive " + data);
+				    	var decrypted = CryptoJS.AES.decrypt(data, key, { format: JsonFormatter });
+						console.log("response " + decrypted.toString(CryptoJS.enc.Utf8));
+				    }
+				});
+			});
+			$("#get").click(function() {
+				$.ajax({
+				    url: '/crypto?get=true',
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+						var decrypted = CryptoJS.AES.decrypt(data, key, { mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Iso10126, format: JsonFormatter });
+						console.log("response " + decrypted.toString(CryptoJS.enc.Hex));
+				    }
+				});
+			});
+		}); 
+	</script>
+</body>
+</html>

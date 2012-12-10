@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Base64</title>
+<script type="text/javascript" src="../../javascript/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/core-min.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/enc-base64-min.js"></script>
+</head>
+<body>
+
+	<form id="login" method="post">
+		<input id="send" type="button" value="SEND" /> <br />
+		<input id="get" type="button" value="GET" /> <br />
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var secretmsg = "Longerian";
+			$("#send").click(function() {
+				var encoded = base64_encode(secretmsg);
+				$.ajax({
+				    url: '/base64?get=false&send=' + encoded,
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+				    }
+				});
+			});
+			$("#get").click(function() {
+				$.ajax({
+				    url: '/base64?get=true',
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+						console.log("response " + base64_decode(data));
+				    }
+				});
+			});
+		}); 
+		
+		function base64_encode(plainTxt){
+			var str = CryptoJS.enc.Utf8.parse(plainTxt);
+			var base64 = CryptoJS.enc.Base64.stringify(str);
+			return base64;
+		}
+		
+		function base64_decode(encodedTxt){
+			var words  = CryptoJS.enc.Base64.parse(encodedTxt);
+			return words.toString(CryptoJS.enc.Utf8);
+		}
+	</script>
+</body>
+</html>

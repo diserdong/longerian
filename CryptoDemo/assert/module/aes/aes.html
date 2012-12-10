@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AES</title>
+<script type="text/javascript" src="../../javascript/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../../javascript/gibberish_aes/gibberish-aes.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/rollups/aes.js"></script>
+<script type="text/javascript" src="../../javascript/cryptojs/components/pad-zeropadding.js"></script>
+</head>
+<body>
+	<form id="login" method="post">
+		<input id="send" type="button" value="SEND" /> <br />
+		<input id="get" type="button" value="GET" /> <br />
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var key  = CryptoJS.enc.Latin1.parse('1234567812345678');
+			var iv   = CryptoJS.enc.Latin1.parse('1234567812345678');
+			$("#send").click(function() {
+				var data = "{\"iv\":\"JalKnubD0NKLMJZWdhcPNA==\",\"mode\":\"OFB\",\"padding\":\"\",\"keySize\":\"128\",\"cipher\":\"aes\",\"salt\":\"NTVlOGZi\",\"ciphertext\":\"T8VRUxXu4DVG/zQBAcUBfvwFOTCElJE1kW7CdZW5tQv1OlWl+A==\",\"time\":0.41}";
+				//加密
+				var encrypted = CryptoJS.AES.encrypt(data, key, {iv:iv,mode:CryptoJS.mode.CBC,padding:CryptoJS.pad.ZeroPadding});
+				console.log("send " + encrypted.toString());
+				$.ajax({
+				    url: '/aes?get=false&send=' 
+				    		+ encrypted.toString(),
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+				    }
+				});
+			});
+			$("#get").click(function() {
+				$.ajax({
+				    url: '/aes?get=true',
+				    type: 'GET',
+				    timeout: 1000,
+				    error: function() {
+				        alert('Error loading data');
+				    },
+				    success: function(data) {
+						console.log("receive " + data);
+						var response = CryptoJS.AES.decrypt(data, key, {iv:iv,padding:CryptoJS.pad.ZeroPadding});
+						//console.log(decrypted.toString(CryptoJS.enc.Utf8));
+						console.log("response " + response.toString(CryptoJS.enc.Utf8));
+				    }
+				});
+			});
+		}); 
+	</script>
+</body>
+</html>
