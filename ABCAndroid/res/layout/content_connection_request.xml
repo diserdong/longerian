@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/always_allow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30.0dip"
+            android:layout_marginRight="30.0dip"
+            android:text="label_always_allow"
+            android:textColor="@android:color/white"
+            android:textSize="28px" />
+
+        <Button
+            android:id="@+id/allow_this_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30.0dip"
+            android:layout_marginRight="30.0dip"
+            android:layout_marginTop="17.3dip"
+            android:text="label_allow_this_time"
+            android:textColor="@android:color/white"
+            android:textSize="28px" />
+
+        <Button
+            android:id="@+id/deny_request"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30.0dip"
+            android:layout_marginRight="30.0dip"
+            android:layout_marginTop="70.0dip"
+            android:text="label_deny_request"
+            android:textColor="@android:color/white"
+            android:textSize="28px" />
+
+</LinearLayout>

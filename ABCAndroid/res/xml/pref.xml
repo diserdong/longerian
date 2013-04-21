@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xpk>
+<!--data游戏数据包的文件名 size游戏包的大小 -->
+<data name="com.zemaGamez.FingerNinjas" size="57534178">
+<!--游戏数据包是一个目录 -->
+<directory>true</directory>
+<!--游戏数据包拷贝到android手机上时的目标存放目录 -->
+<destination>/sdcard/Android/obb/com.zemaGamez.FingerNinjas</destination>
+</data>
+<!--游戏支持的手机cpu列表 -->
+<cpusupport>
+<item>Liehu2</item>
+<item>Qualcomm</item>
+<item>TI</item>
+<item>Tegra2</item>
+<item>SAMSUNG</item>
+</cpusupport>
+<!--size apk安装包的大小 -->
+<apkinfo size="51477383">
+<label><![CDATA[Finger Ninjas]]></label>
+<!--apk安装包里声明过的权限，同apk里的manifest.xml里的声明 -->
+<permissions>
+<item>android.permission.INTERNET</item>
+<item>android.permission.ACCESS_NETWORK_STATE</item>
+<item>android.permission.RECEIVE_BOOT_COMPLETED</item>
+<item>android.permission.READ_PHONE_STATE</item>
+<item>android.permission.VIBRATE</item>
+<item>android.permission.WRITE_EXTERNAL_STORAGE</item>
+<item>android.permission.BROADCAST_STICKY</item>
+<item>com.android.vending.BILLING</item>
+<item>com.android.vending.CHECK_LICENSE</item>
+<item>android.permission.WAKE_LOCK</item>
+<item>android.permission.ACCESS_WIFI_STATE</item>
+</permissions>
+<!--apk安装包的外部版本号 -->
+<versionName>1.4</versionName>
+<!--apk安装包支持的最低系统版本 -->
+<minSdkVersion>Android 2.3</minSdkVersion>
+<!--apk安装包的内部版本号 -->
+<versionCode>10</versionCode>
+<!--apk安装包的包名 -->
+<package>com.zemaGamez.FingerNinjas</package>
+</apkinfo>
+</xpk>

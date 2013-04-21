@@ -1,0 +1,13 @@
+<resources>
+
+        <string name="app_name">ABCAndroid</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_backupdb">BackupDBActivity</string>
+<!-- 	<string name="note_qqlogin1">在浏览器上打开&lt;font color=&apos;red&apos;&gt;ty.qq.com&lt;/font&gt;</string> -->
+	<string name="note_qqlogin1"><![CDATA[在浏览器上打开<font color="red">ty.qq.com</font>]]></string>
+	<string name="progress_relative">%1$d%%</string>
+     <string name="progress_absolute">%1$.2fMB/%2$.2fMB</string>
+     <string name="language">繁体中文</string>
+</resources>
