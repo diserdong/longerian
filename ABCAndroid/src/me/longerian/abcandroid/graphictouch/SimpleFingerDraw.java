@@ -53,6 +53,10 @@ public class SimpleFingerDraw extends Activity implements OnTouchListener,
 		paint.setStrokeWidth(2);
 		image.setImageBitmap(masterPiece);
 		image.setOnTouchListener(this);
+		
+//		Uri fileUri = Uri.parse("android.resource://me.longerian.abcandroid/" + R.drawable.tencent_q);
+//		Log.d("URIFILE", fileUri.toString());
+//		image.setImageURI(fileUri);
 	}
 
 	@Override

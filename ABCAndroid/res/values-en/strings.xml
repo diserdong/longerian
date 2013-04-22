@@ -10,4 +10,6 @@
 	<string name="progress_relative">%1$d%%</string>
      <string name="progress_absolute">%1$.2fMB/%2$.2fMB</string>
      <string name="language">英文</string>
+     <string name="tip_dim_code_scanning_1">请扫描腾讯手机管家PC版中的</string>
+	<string name="tip_dim_code_scanning_2">二维码完成连接</string>
 </resources>

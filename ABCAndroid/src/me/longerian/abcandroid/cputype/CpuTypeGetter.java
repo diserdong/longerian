@@ -14,10 +14,10 @@ public class CpuTypeGetter extends Activity {
 		TextView hello = (TextView) findViewById(R.id.hello);
 		StringBuilder sb = new StringBuilder();
 		sb.append(android.os.Build.CPU_ABI);
-		sb.append("\n");
-		sb.append(android.os.Build.CPU_ABI2);
-		sb.append("\n");
-		sb.append(android.os.Build.HARDWARE);
+//		sb.append("\n");
+//		sb.append(android.os.Build.CPU_ABI2);
+//		sb.append("\n");
+//		sb.append(android.os.Build.HARDWARE);
 		hello.setText(sb.toString());
 	}
 	
