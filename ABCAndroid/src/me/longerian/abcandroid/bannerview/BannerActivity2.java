@@ -21,33 +21,29 @@ public class BannerActivity2 extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_banner_2);
-		mListViews = new ArrayList<View>();  
+		mListViews = new ArrayList<View>();
 		ImageView iv1 = new ImageView(getApplicationContext());
 		iv1.setImageResource(R.drawable.system_file_manager);
 		ImageView iv2 = new ImageView(getApplicationContext());
 		iv2.setImageResource(R.drawable.system_installer);
 		ImageView iv3 = new ImageView(getApplicationContext());
 		iv3.setImageResource(R.drawable.tencent_q);
-		
-		mListViews.add(iv1);  
-		mListViews.add(iv2);  
-		mListViews.add(iv3);  
+
+		mListViews.add(iv1);
+		mListViews.add(iv2);
+		mListViews.add(iv3);
 		viewPager = (BannerView2) findViewById(R.id.banner);
 		viewPager.setAdapter(new BannerPagerAdapter(new MyAdapter()));
 		viewPager.setOnPageChangeListener(new MyListener());
-		
+
 		viewPager.startAutoScroll();
 	}
-	
-	
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		viewPager.stopAutoScroll();
 	}
-
-
 
 	class MyAdapter extends PagerAdapter {
 
@@ -67,17 +63,19 @@ public class BannerActivity2 extends Activity {
 		}
 
 		@Override
-		public void destroyItem(View arg0, int arg1, Object arg2) {
-			// ((ViewPager) arg0).removeView(list.get(arg1));
+		public void destroyItem(View viewPager, int position, Object content) {
+//			((ViewPager) viewPager).removeView((View) content);
+			//cost too many memory
 		}
 
 		@Override
-		public Object instantiateItem(View view, int position) {
-			try {
-				((ViewPager) view).addView(mListViews.get(position % mListViews.size()), 0);
-			} catch (Exception e) {
+		public Object instantiateItem(View viewPager, int position) {
+			View content = mListViews.get(position % mListViews.size());
+			if(content.getParent() != null) {
+				((ViewPager) viewPager).removeView((View) content);
 			}
-			return mListViews.get(position % mListViews.size());
+			((ViewPager) viewPager).addView(content, 0);
+			return content;
 		}
 	}
 
@@ -103,14 +101,14 @@ public class BannerActivity2 extends Activity {
 				arg0 = arg0 % mListViews.size();
 			}
 			c_id = arg0;
-//			for (int i = 0; i < imageViews.length; i++) {
-//				imageViews[arg0]
-//						.setBackgroundResource(R.drawable.guide_dot_white);
-//				if (arg0 != i) {
-//					imageViews[i]
-//							.setBackgroundResource(R.drawable.guide_dot_black);
-//				}
-//			}
+			// for (int i = 0; i < imageViews.length; i++) {
+			// imageViews[arg0]
+			// .setBackgroundResource(R.drawable.guide_dot_white);
+			// if (arg0 != i) {
+			// imageViews[i]
+			// .setBackgroundResource(R.drawable.guide_dot_black);
+			// }
+			// }
 
 			Log.d("-------------", "当前是第" + c_id + "页");
 		}

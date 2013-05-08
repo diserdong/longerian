@@ -74,8 +74,13 @@ public class BannerView2 extends ViewPager {
 		// offset the current item to ensure there is space to scroll
 		item = getOffsetAmount() + (item % getAdapter().getCount());
 		super.setCurrentItem(item);
-
 	}
+	
+//	@Override
+//	public void setCurrentItem(int item, boolean smoothScroll) {
+//		item = getOffsetAmount() + (item % getAdapter().getCount());
+//		super.setCurrentItem(item, smoothScroll);
+//	}
 
 	private int getOffsetAmount() {
 		if (getAdapter() instanceof BannerPagerAdapter) {
