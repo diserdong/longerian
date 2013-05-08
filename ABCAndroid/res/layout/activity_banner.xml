@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <me.longerian.abcandroid.bannerview.BannerView
+        android:layout_width="match_parent"
+    	android:layout_height="0.0dip"
+    	android:layout_weight="3"
+        >
+        <ImageView 
+            android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:src="@drawable/system_file_manager"
+            />
+        <ImageView 
+            android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:src="@drawable/system_installer"
+            />
+        <ImageView 
+            android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:src="@drawable/tencent_q"
+            />
+        <ImageView 
+            android:layout_width="match_parent"
+    		android:layout_height="match_parent"
+    		android:src="@drawable/music"
+            />
+    </me.longerian.abcandroid.bannerview.BannerView> 
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="0.0dip"
+    	android:layout_weight="7"
+        >
+        
+    </LinearLayout>
+</LinearLayout>
