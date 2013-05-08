@@ -64,12 +64,14 @@ public class BannerActivity2 extends Activity {
 
 		@Override
 		public void destroyItem(View viewPager, int position, Object content) {
+			Log.d("BannerActivity", "destroyItem " + position);
 //			((ViewPager) viewPager).removeView((View) content);
 			//cost too many memory
 		}
 
 		@Override
 		public Object instantiateItem(View viewPager, int position) {
+			Log.d("BannerActivity", "instantiateItem " + position);
 			View content = mListViews.get(position % mListViews.size());
 			if(content.getParent() != null) {
 				((ViewPager) viewPager).removeView((View) content);
