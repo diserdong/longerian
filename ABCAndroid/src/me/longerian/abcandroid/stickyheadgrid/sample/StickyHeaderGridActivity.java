@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.longerian.abcandroid.R;
+import me.longerian.abcandroid.bannerview.BannerPageIndicator;
 import me.longerian.abcandroid.bannerview.BannerPagerAdapter;
 import me.longerian.abcandroid.bannerview.BannerView2;
 import me.longerian.abcandroid.stickyheadgrid.lib.StickyGridHeadersGridView;
@@ -24,14 +25,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 public class StickyHeaderGridActivity extends Activity {
 
+	
 	ScrollView container;
+	FrameLayout bannerContainer;
 	BannerView2 viewPager;
+	BannerPageIndicator indicator;
 	ArrayList<View> mListViews;
 	private static int c_id = 0;
 	
@@ -44,6 +49,9 @@ public class StickyHeaderGridActivity extends Activity {
 		setContentView(R.layout.activity_sticky_header_grid);
 		
 		container = (ScrollView) findViewById(R.id.container);
+		bannerContainer = (FrameLayout) findViewById(R.id.banner_container);
+		indicator = (BannerPageIndicator) findViewById(R.id.indicator);
+		indicator.setPageSize(3);
 		
 		mListViews = new ArrayList<View>();
 		ImageView iv1 = new ImageView(getApplicationContext());
@@ -97,7 +105,7 @@ public class StickyHeaderGridActivity extends Activity {
 	    DisplayMetrics dm = new DisplayMetrics();
 	    display.getMetrics(dm);
 	    
-		viewPager.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (dm.heightPixels * 0.3f)));
+	    bannerContainer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) (dm.heightPixels * 0.3f)));
 		int headerHeight = (int) (gridAdapter.getHeaderCount() * 34f * dm.scaledDensity + 0.5f);
 		int bodyHeight = (int) (gridAdapter.getRow() * 148.3f * dm.scaledDensity + 0.5f);
 		Log.d("StickyHeaderGridActivity", headerHeight + "/" + bodyHeight);
@@ -180,15 +188,7 @@ public class StickyHeaderGridActivity extends Activity {
 				arg0 = arg0 % mListViews.size();
 			}
 			c_id = arg0;
-			// for (int i = 0; i < imageViews.length; i++) {
-			// imageViews[arg0]
-			// .setBackgroundResource(R.drawable.guide_dot_white);
-			// if (arg0 != i) {
-			// imageViews[i]
-			// .setBackgroundResource(R.drawable.guide_dot_black);
-			// }
-			// }
-
+			indicator.updatePageIndicator(c_id);
 			Log.d("StickyHeaderGridActivity", "select page " + c_id);
 		}
 

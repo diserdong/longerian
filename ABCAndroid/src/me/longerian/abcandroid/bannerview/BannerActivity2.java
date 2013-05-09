@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import me.longerian.abcandroid.R;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class BannerActivity2 extends Activity {
+	BannerPageIndicator indicator;
+	
 	BannerView2 viewPager;
 	ArrayList<View> mListViews;
 	private static int c_id = 0;
@@ -37,6 +40,9 @@ public class BannerActivity2 extends Activity {
 		viewPager.setOnPageChangeListener(new MyListener());
 
 		viewPager.startAutoScroll();
+		
+		indicator = (BannerPageIndicator) findViewById(R.id.indicator);
+		indicator.setPageSize(3);
 	}
 
 	@Override
@@ -111,7 +117,7 @@ public class BannerActivity2 extends Activity {
 			// .setBackgroundResource(R.drawable.guide_dot_black);
 			// }
 			// }
-
+			indicator.updatePageIndicator(c_id);
 			Log.d("-------------", "当前是第" + c_id + "页");
 		}
 

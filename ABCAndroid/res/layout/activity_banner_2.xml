@@ -14,6 +14,10 @@
     	android:layout_height="0.0dip"
     	android:layout_weight="7"
         >
-        
+        <me.longerian.abcandroid.bannerview.BannerPageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+            />
     </LinearLayout>
 </LinearLayout>
