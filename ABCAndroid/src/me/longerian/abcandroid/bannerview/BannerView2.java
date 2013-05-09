@@ -9,13 +9,14 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 public class BannerView2 extends ViewPager {
 
 	private static final int NEXT = 1;
 	private Handler handler;
 	private Timer timer;
-	
+
 	public BannerView2(Context context) {
 		super(context);
 		init();
@@ -25,8 +26,18 @@ public class BannerView2 extends ViewPager {
 		super(context, attrs);
 		init();
 	}
-	
+
 	private void init() {
+		handler = new Handler() {
+
+			@Override
+			public void handleMessage(Message msg) {
+				if (msg.what == NEXT) {
+					setCurrentItem(getCurrentItem() + 1, true);
+				}
+			}
+
+		};
 	}
 
 	@Override
@@ -35,19 +46,9 @@ public class BannerView2 extends ViewPager {
 		// offset first element so that we can scroll to the left
 		setCurrentItem(0);
 	}
-	
-	public void startAutoScroll() {
-		handler = new Handler() {
 
-			@Override
-			public void handleMessage(Message msg) {
-				if(msg.what == NEXT) {
-					setCurrentItem(getCurrentItem() + 1, true);
-				}
-			}
-			
-		};
-		if(timer != null) {
+	public void startAutoScroll() {
+		if (timer != null) {
 			timer.cancel();
 		}
 		timer = new Timer();
@@ -55,16 +56,16 @@ public class BannerView2 extends ViewPager {
 
 			@Override
 			public void run() {
-				if(handler != null) {
+				if (handler != null) {
 					handler.sendEmptyMessage(NEXT);
 				}
 			}
-			
+
 		}, 5000, 5000);
 	}
-	
+
 	public void stopAutoScroll() {
-		if(timer != null) {
+		if (timer != null) {
 			timer.cancel();
 		}
 	}
@@ -75,12 +76,12 @@ public class BannerView2 extends ViewPager {
 		item = getOffsetAmount() + (item % getAdapter().getCount());
 		super.setCurrentItem(item);
 	}
-	
-//	@Override
-//	public void setCurrentItem(int item, boolean smoothScroll) {
-//		item = getOffsetAmount() + (item % getAdapter().getCount());
-//		super.setCurrentItem(item, smoothScroll);
-//	}
+
+	// @Override
+	// public void setCurrentItem(int item, boolean smoothScroll) {
+	// item = getOffsetAmount() + (item % getAdapter().getCount());
+	// super.setCurrentItem(item, smoothScroll);
+	// }
 
 	private int getOffsetAmount() {
 		if (getAdapter() instanceof BannerPagerAdapter) {
@@ -93,6 +94,27 @@ public class BannerView2 extends ViewPager {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent me) {
+		if ((me.getAction() == MotionEvent.ACTION_MOVE)
+				|| (me.getAction() == MotionEvent.ACTION_DOWN))
+			getParent().requestDisallowInterceptTouchEvent(true);
+		return super.onInterceptTouchEvent(me);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent me) {
+		if ((me.getAction() == MotionEvent.ACTION_UP)
+				|| (me.getAction() == MotionEvent.ACTION_CANCEL)) {
+			getParent().requestDisallowInterceptTouchEvent(false);
+			startAutoScroll();
+		} else {
+			getParent().requestDisallowInterceptTouchEvent(true);
+			stopAutoScroll();
+		}
+		return super.onTouchEvent(me);
 	}
 
 }
