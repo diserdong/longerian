@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1D2225" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_block" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="腾讯手机助手"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_section_resource_bg"
+                android:padding="5dip"
+                android:text="资源下载 "
+                android:textColor="#FF394248"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_bg"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip" >
+
+                <ImageView
+                    android:id="@+id/ic_market"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_market" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ic_market"
+                    android:padding="5dip"
+                    android:text="应用市场 "
+                    android:textColor="#FFB6C6D0"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_section_resource_bg" >
+
+                <TextView
+                    android:id="@+id/manager_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/navigation_section_resource_bg"
+                    android:padding="5dip"
+                    android:text="手机管理"
+                    android:textColor="#FF394248"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/manager_label"
+                    android:orientation="horizontal" >
+
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:padding="10dip" >
+
+                        <ImageView
+                            android:id="@+id/ic_internal_storage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_internal_memory" />
+
+                        <TextView
+                            android:id="@+id/txt_internal_storage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/progress_internal_storage"
+                            android:layout_alignRight="@+id/progress_internal_storage"
+                            android:layout_toRightOf="@+id/ic_internal_storage"
+                            android:text="剩余1G"
+                            android:textColor="#FFB6C6D0"
+                            android:textSize="12sp" />
+
+                        <me.longerian.abcandroid.bannerview.StorageIndicator
+                            android:id="@+id/progress_internal_storage"
+                            style="@android:style/Widget.ProgressBar.Small"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_internal_storage"
+                            android:layout_toRightOf="@+id/ic_internal_storage"
+                            android:indeterminateOnly="false"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/storage_progressbar" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:padding="10dip" >
+
+                        <ImageView
+                            android:id="@+id/ic_external_storage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_external_memory" />
+
+                        <TextView
+                            android:id="@+id/txt_external_storage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignLeft="@+id/progress_external_storage"
+                            android:layout_alignRight="@+id/progress_external_storage"
+                            android:layout_toRightOf="@+id/ic_external_storage"
+                            android:text="剩余4G"
+                            android:textColor="#FFB6C6D0"
+                            android:textSize="12sp" />
+
+                        <me.longerian.abcandroid.bannerview.StorageIndicator
+                            android:id="@+id/progress_external_storage"
+                            style="@android:style/Widget.ProgressBar.Small"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/txt_external_storage"
+                            android:layout_toRightOf="@+id/ic_external_storage"
+                            android:indeterminateOnly="false"
+                            android:max="100"
+                            android:progress="50"
+                            android:progressDrawable="@drawable/storage_progressbar" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_bg"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip" >
+
+                <ImageView
+                    android:id="@+id/ic_application"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_application" />
+
+                <TextView
+                    android:id="@+id/txt_application"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ic_application"
+                    android:padding="5dip"
+                    android:text="应用 "
+                    android:textColor="#FFB6C6D0"
+                    android:textSize="18sp" />
+                
+                <TextView 
+                    android:id="@+id/update_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/txt_application"
+                    android:background="@drawable/ic_update_notification"
+                    android:gravity="center"
+                    android:text="18"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_bg"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip" >
+
+                <ImageView
+                    android:id="@+id/ic_audio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_audio" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ic_audio"
+                    android:padding="5dip"
+                    android:text="音乐 "
+                    android:textColor="#FFB6C6D0"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_bg"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip" >
+
+                <ImageView
+                    android:id="@+id/ic_video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_video" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ic_video"
+                    android:padding="5dip"
+                    android:text="视频 "
+                    android:textColor="#FFB6C6D0"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_bg"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip" >
+
+                <ImageView
+                    android:id="@+id/ic_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_photo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ic_photo"
+                    android:padding="5dip"
+                    android:text="图片 "
+                    android:textColor="#FFB6C6D0"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_item_bg"
+                android:paddingLeft="30dip"
+                android:paddingRight="20dip" >
+
+                <ImageView
+                    android:id="@+id/ic_ebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_ebook" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ic_ebook"
+                    android:padding="5dip"
+                    android:text="电子书 "
+                    android:textColor="#FFB6C6D0"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_navigation_arrow" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottom_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/navigation_bottom_bg"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/navigation_connection_logo" />
+
+        <Button
+            android:id="@+id/btn_connection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/btn_noshimehana_selector"
+            android:paddingLeft="35dip"
+            android:paddingRight="35dip"
+            android:text="连接电脑"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

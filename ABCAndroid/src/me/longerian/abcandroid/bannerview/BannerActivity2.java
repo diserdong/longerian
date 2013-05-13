@@ -15,6 +15,8 @@ import android.widget.ImageView;
 
 public class BannerActivity2 extends Activity {
 	BannerPageIndicator indicator;
+	RateBar rateBar;
+	StorageIndicator progress;
 	
 	BannerView2 viewPager;
 	ArrayList<View> mListViews;
@@ -43,6 +45,13 @@ public class BannerActivity2 extends Activity {
 		
 		indicator = (BannerPageIndicator) findViewById(R.id.indicator);
 		indicator.setPageSize(3);
+		
+		rateBar = (RateBar) findViewById(R.id.rate);
+		rateBar.setMaxRate(5);
+		rateBar.setRate(5);
+		
+		progress = (StorageIndicator) findViewById(R.id.progress_external_storage);
+		progress.setProgress(95);
 	}
 
 	@Override
@@ -105,6 +114,7 @@ public class BannerActivity2 extends Activity {
 		// 当新的页面被选中时调用
 		@Override
 		public void onPageSelected(int arg0) {
+			Log.d("-------------", "arg0 " + arg0);
 			if (arg0 > 2) {
 				arg0 = arg0 % mListViews.size();
 			}
@@ -118,6 +128,7 @@ public class BannerActivity2 extends Activity {
 			// }
 			// }
 			indicator.updatePageIndicator(c_id);
+//			rateBar.setRate(c_id);
 			Log.d("-------------", "当前是第" + c_id + "页");
 		}
 
