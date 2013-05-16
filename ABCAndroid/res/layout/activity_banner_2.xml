@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tencent="http://schemas.android.com/apk/res/me.longerian.abcandroid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -14,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.0dip"
         android:layout_weight="7"
+        android:background="#FF272D31"
         android:orientation="vertical" >
 
         <me.longerian.abcandroid.bannerview.BannerPageIndicator
@@ -31,12 +33,27 @@
             style="@android:style/Widget.ProgressBar.Small"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_external_storage"
-            android:layout_toRightOf="@+id/ic_external_storage"
             android:indeterminateOnly="false"
             android:max="100"
             android:progress="50"
             android:progressDrawable="@drawable/storage_progressbar" />
+
+        <ProgressBar
+            android:id="@+id/download_progress_drawable"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="fill_parent"
+            android:layout_height="36dip"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/download_progressbar" />
+        
+        <me.longerian.abcandroid.widget.TaskProgress
+            android:id="@+id/task_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="36dip"
+            tencent:textSize="30sp"
+            />
     </LinearLayout>
 
 </LinearLayout>

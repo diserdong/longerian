@@ -3,15 +3,19 @@ package me.longerian.abcandroid.bannerview;
 import java.util.ArrayList;
 
 import me.longerian.abcandroid.R;
+import me.longerian.abcandroid.widget.FavoriteButton;
+import me.longerian.abcandroid.widget.TaskButton;
+import me.longerian.abcandroid.widget.TaskProgress;
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 public class BannerActivity2 extends Activity {
 	BannerPageIndicator indicator;
@@ -52,6 +56,13 @@ public class BannerActivity2 extends Activity {
 		
 		progress = (StorageIndicator) findViewById(R.id.progress_external_storage);
 		progress.setProgress(95);
+		
+		ProgressBar bar = (ProgressBar) findViewById(R.id.download_progress_drawable);
+		bar.setProgress(40);
+		
+		TaskProgress tp = (TaskProgress) findViewById(R.id.task_progress);
+		tp.setProgress(60);
+		tp.stopProgress();
 	}
 
 	@Override
