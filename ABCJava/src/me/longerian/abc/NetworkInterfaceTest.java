@@ -25,7 +25,7 @@ public class NetworkInterfaceTest {
 			if(ni == null) {
 				System.out.println("No such interface: eth0");
 			} else {
-				System.out.println(ni.getDisplayName() + "\t" + ni.getName() + "\t" + ni.getIndex());
+				System.out.println(ni.getDisplayName() + "\t" + ni.getName());
 			}
 			
 			InetAddress local = InetAddress.getByName("127.0.0.1");
@@ -33,7 +33,7 @@ public class NetworkInterfaceTest {
 			if(ni1 == null) {
 				System.out.println("That's wired. No local loopback address.");
 			} else {
-				System.out.println(ni1.getDisplayName() + "\t" + ni1.getName() + "\t" + ni1.getIndex());
+				System.out.println(ni1.getDisplayName() + "\t" + ni1.getName());
 			}
 		} catch (SocketException e) {
 			e.printStackTrace();
