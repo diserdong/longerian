@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.MalformedInputException;
+import java.util.zip.GZIPInputStream;
 
 public class SourceViewer {
 
@@ -19,8 +20,9 @@ public class SourceViewer {
 			URL u = new URL("http://www.baidu.com/");
 			URLConnection uc = u.openConnection();
 			InputStream raw = uc.getInputStream();
+//			raw = new GZIPInputStream(raw);
 			InputStream buffer = new BufferedInputStream(raw);
-			Reader r = new InputStreamReader(buffer);
+			Reader r = new InputStreamReader(buffer, "UTF-8");
 			int c;
 			while((c = r.read()) != -1) {
 				System.out.print((char) c);

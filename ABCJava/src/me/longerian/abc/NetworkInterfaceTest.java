@@ -36,10 +36,8 @@ public class NetworkInterfaceTest {
 				System.out.println(ni1.getDisplayName() + "\t" + ni1.getName() + "\t" + ni1.getIndex());
 			}
 		} catch (SocketException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
