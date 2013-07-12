@@ -1,5 +1,7 @@
 package me.longerian.abcandroid;
 
+import me.longerian.abcandroid.resourceuri.ResourceUri;
+
 import org.w3c.dom.Text;
 
 import android.database.Cursor;
@@ -37,6 +39,8 @@ public class VideoViewTestActivity extends FragmentActivity implements LoaderCal
 //		videoListAdapter = new VideoListAdapter(getApplicationContext(), data);
 //		videoGridview.setAdapter(videoListAdapter);
 //		startManagingCursor(data);
+		
+		ResourceUri.resUri();
 	}
 
 	@Override
