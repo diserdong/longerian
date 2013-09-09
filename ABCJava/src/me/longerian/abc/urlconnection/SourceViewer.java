@@ -17,6 +17,7 @@ public class SourceViewer {
 	 */
 	public static void main(String[] args) {
 		try{
+//			URL u = new URL("http://nc.mir.wdjcdn.com/files/release2/WanDouJia_2.61.0.3538_homepage.exe");
 			URL u = new URL("http://www.baidu.com/");
 			URLConnection uc = u.openConnection();
 			InputStream raw = uc.getInputStream();
