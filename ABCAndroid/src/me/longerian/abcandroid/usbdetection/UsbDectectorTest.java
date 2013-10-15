@@ -1,6 +1,7 @@
 package me.longerian.abcandroid.usbdetection;
 
 import me.longerian.abcandroid.R;
+import me.longerian.abcandroid.cpu.CpuInfo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,8 @@ public class UsbDectectorTest extends Activity {
       		  Log.d("UsbDectector", ip + "");
       		  Log.d("UsbDectector", mac);
       	  }
+      	  
+      	  Log.d("Longer", CpuInfo.getSupportArchitecture());
       	  
 	}
 
