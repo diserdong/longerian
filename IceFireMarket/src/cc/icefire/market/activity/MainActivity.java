@@ -37,7 +37,7 @@ public class MainActivity extends TabActivity {
 		TabSpec index = tabHost.newTabSpec("Index");
 		index.setIndicator(view);
 		Intent indexIntent = new Intent(getApplicationContext(),
-				BaseActivity.class);
+				AppListActivity.class);
 		indexIntent.putExtra("label", "Index");
 		index.setContent(indexIntent);
 
@@ -47,7 +47,7 @@ public class MainActivity extends TabActivity {
 		TabSpec app = tabHost.newTabSpec("App");
 		app.setIndicator(view);
 		Intent appIntent = new Intent(getApplicationContext(),
-				BaseActivity.class);
+				AppDetailActivity.class);
 		appIntent.putExtra("label", "App");
 		app.setContent(appIntent);
 

@@ -38,6 +38,12 @@
         <activity
             android:name="cc.icefire.market.activity.BaseActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="cc.icefire.market.activity.AppDetailActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="cc.icefire.market.activity.AppListActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
