@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.Bitmap.CompressFormat;
 
 /**
  * Bitmap 操作相关类
