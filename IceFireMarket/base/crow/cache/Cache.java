@@ -91,15 +91,15 @@ public final class Cache {
 			URLConvertor convertor) {
 		this.urlConvertor = convertor;
 		if (cacheRelativePath == null) {
-			cacheRelativePath = "cache_"
-					+ context.getPackageName().replace(".", "_");
+			cacheRelativePath = "ucache";
 		}
 		if (Environment.MEDIA_MOUNTED.equals(Environment
 				.getExternalStorageState())) {
-			cacheDir = new File(Environment.getExternalStorageDirectory(),
+			
+			cacheDir = new File(context.getExternalCacheDir(),
 					cacheRelativePath);
 		} else {
-			cacheDir = context.getDir(cacheRelativePath, Context.MODE_PRIVATE);
+			cacheDir = context.getCacheDir();
 		}
 		if (!cacheDir.exists()) {
 			cacheDir.mkdirs();

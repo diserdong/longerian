@@ -57,7 +57,6 @@ implements BaseApiConstant, BaseApiContext {
 			imei = "";
 		}
 		// header
-		map.put(H_WEBLOGID, "");
 		map.put(H_PLATFORM_N, "android");
 		map.put(H_UDID, imei);
 		map.put(H_CLIENT_V, "1.0.0");
@@ -65,10 +64,9 @@ implements BaseApiConstant, BaseApiContext {
 		map.put(H_MODEL, android.os.Build.MODEL);
 		map.put(H_IMSI, imsi);
 		map.put(H_IMEI, imei);
-		map.put(H_SOURCE, "greenbox");
+		map.put(H_SOURCE, "icefire");
 		map.put(H_LANGUAGE, language == null ? "" : language);
 		map.put(H_CN_OPERATOR, Util.getCarrier(mContext));
-		map.put(H_SMS_CENTER_NUMBER, "13800100500");
 		map.put(H_CONTENET_TYPE, "application/x-www-form-urlencoded");
 		return map;
 	}
@@ -82,7 +80,6 @@ implements BaseApiConstant, BaseApiContext {
 	protected Header[] makeRequestHeaders(
 			BaseApiRequest<? extends BaseApiResponse> request) {
 		HttpPost httpPost = new HttpPost();
-		httpPost.setHeader(H_WEBLOGID, contextMap.get(H_WEBLOGID));
 		httpPost.setHeader(H_PLATFORM_N, contextMap.get(H_PLATFORM_N));
 		httpPost.setHeader(H_UDID, contextMap.get(H_UDID));
 		httpPost.setHeader(H_CLIENT_V, contextMap.get(H_CLIENT_V));
@@ -93,7 +90,6 @@ implements BaseApiConstant, BaseApiContext {
 		httpPost.setHeader(H_SOURCE, contextMap.get(H_SOURCE));
 		httpPost.setHeader(H_LANGUAGE, contextMap.get(H_LANGUAGE));
 		httpPost.setHeader(H_CN_OPERATOR, contextMap.get(H_CN_OPERATOR));
-		httpPost.setHeader(H_SMS_CENTER_NUMBER, contextMap.get(H_SMS_CENTER_NUMBER));
 		httpPost.setHeader(H_CONTENET_TYPE, contextMap.get(H_CONTENET_TYPE));
 		return httpPost.getAllHeaders();
 	}
@@ -129,7 +125,6 @@ implements BaseApiConstant, BaseApiContext {
 	 */
 	@Override
 	public String getParam(String key) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

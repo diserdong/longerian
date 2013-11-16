@@ -41,10 +41,5 @@ public class TestRequest extends BaseApiRequest<TestResponse> {
 		return Cache.EXPIRED;
 	}
 
-	@Override
-	public Class<?> getHttpRequestClass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

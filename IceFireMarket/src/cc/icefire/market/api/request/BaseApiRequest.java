@@ -2,6 +2,8 @@ package cc.icefire.market.api.request;
 
 import java.util.Date;
 
+import org.apache.http.client.methods.HttpPost;
+
 import cc.icefire.market.api.BaseApiConstant;
 import cc.icefire.market.api.BaseApiContext;
 import cc.icefire.market.api.response.BaseApiResponse;
@@ -11,7 +13,7 @@ import crow.util.Util;
 
 /**
  * <p>
- * 在GreenBoxApiClient 中会对如下参数进行设定。一般不需在Request 对象中设定，除非不默认规则不同才进行设定。<br/></p>
+ * 在CoreApiClient 中会对如下参数进行设定。一般不需在Request 对象中设定，除非不默认规则不同才进行设定。<br/></p>
  * method : 若{@link #getMethod()}不为空由 ApiClient 进行设定。<br/>
  * t ： 时间戳    <br/>
  * appkey :   <br/>
@@ -56,6 +58,11 @@ public abstract class BaseApiRequest<T extends BaseApiResponse>
 				strings[i] = "empty";
 		}
 		return FileUtil.joinPath(strings);		
+	}
+	
+	@Override
+	public Class<?> getHttpRequestClass() {
+		return HttpPost.class;
 	}
 
 }
