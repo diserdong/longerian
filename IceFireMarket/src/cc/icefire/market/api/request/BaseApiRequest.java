@@ -43,19 +43,12 @@ public abstract class BaseApiRequest<T extends BaseApiResponse>
 		return t;
 	}
 
-	/**
-	 * API 请求的方法名，如果该API 请求没有method，请返回null
-	 * 
-	 * @return null 没有相应 Method
-	 */
-	public abstract String getMethod();
-	
 	public static String makeCachePath(String ...strings){
 		// 去掉殊字符
 		int len = strings.length;
 		for(int i = 0; i < len; i ++) {
 			if(Util.isEmpty(strings[i]))
-				strings[i] = "empty";
+				strings[i] = "default";
 		}
 		return FileUtil.joinPath(strings);		
 	}
@@ -64,5 +57,5 @@ public abstract class BaseApiRequest<T extends BaseApiResponse>
 	public Class<?> getHttpRequestClass() {
 		return HttpPost.class;
 	}
-
+	
 }

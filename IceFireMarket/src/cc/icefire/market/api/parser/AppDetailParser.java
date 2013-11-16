@@ -1,16 +1,10 @@
 package cc.icefire.market.api.parser;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import cc.icefire.market.api.response.AppDetailResponse;
+import cc.icefire.market.model.BasicAppItem;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
-import cc.icefire.market.api.response.AppDetailResponse;
-import cc.icefire.market.model.BasicAppItem;
-import cc.icefire.market.model.Comment;
 
 public class AppDetailParser extends JsonParseHandler<AppDetailResponse> {
 

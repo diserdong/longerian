@@ -24,7 +24,6 @@ public interface BaseApiConstant {
 	// API 请求通用参数关键字
 	public static final String P_APPKEY = "appkey";
 	public static final String P_AUTHTYPE = "authtype";
-	public static final String P_METHOD = "method";
 	public static final String P_TIMESTAMP = "t";
 	public static final String P_SIGN = "sign";
 	public static final String P_USERNAME = "username";

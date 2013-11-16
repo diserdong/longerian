@@ -19,6 +19,12 @@ public class Category {
 
 	@SerializedName("icon_url")
     private String iconUrl;
+	
+	/**
+	 * 1.应用， 0.游戏
+	 */
+	@SerializedName("app_or_game")
+	private int appOrGame;
 
     /**
      * 分类描述信息
@@ -64,6 +70,14 @@ public class Category {
 
 	public void setDesp(String desp) {
 		this.desp = desp;
+	}
+
+	public int getAppOrGame() {
+		return appOrGame;
+	}
+
+	public void setAppOrGame(int appOrGame) {
+		this.appOrGame = appOrGame;
 	}
 
 }

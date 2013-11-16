@@ -1,7 +1,7 @@
 package cc.icefire.market.util;
 
-import cc.icefire.market.BuildConfig;
 import android.util.Log;
+import cc.icefire.market.BuildConfig;
 
 public class ILog {
 

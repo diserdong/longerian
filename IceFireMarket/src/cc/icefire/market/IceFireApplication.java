@@ -23,7 +23,7 @@ public class IceFireApplication extends Application {
 	/**
 	 * 封装应用的API请求
 	 */
-	private CoreClient mHttpAPI;
+	private CoreClient mHttpEngine;
 	/**
 	 * 缓存处理对象
 	 */
@@ -51,7 +51,15 @@ public class IceFireApplication extends Application {
 	private void init() {
 		mCacher = new Cache(getApplicationContext());
 		mThreadPoolExecutor = new ThreadPoolExecutor(1, 10, 10, TimeUnit.SECONDS, new ArrayBlockingQueue <Runnable>(100) );
-		mHttpAPI = new CoreClient(getApplicationContext(), new JsonParser(), mThreadPoolExecutor, mCacher);
+		mHttpEngine = new CoreClient(getApplicationContext(), new JsonParser(), mThreadPoolExecutor, mCacher);
 		mImgLoader = new BaseBitmapAsyncLoader(new AsyncLoaderEngine(getApplicationContext(), mThreadPoolExecutor, mCacher));
+	}
+	
+	public CoreClient getHttpEngine() {
+		return this.mHttpEngine;
+	}
+	
+	public BitmapAsyncLoader getImgLoader() {
+		return this.mImgLoader;
 	}
 }

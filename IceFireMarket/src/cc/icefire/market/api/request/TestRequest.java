@@ -1,6 +1,5 @@
 package cc.icefire.market.api.request;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import cc.icefire.market.api.BaseApiContext;
@@ -10,13 +9,8 @@ import crow.cache.Cache;
 public class TestRequest extends BaseApiRequest<TestResponse> {
 
 	@Override
-	public String getMethod() {
-		return "getproductinfo";
-	}
-
-	@Override
 	public String getRequestURL(BaseApiContext ctx) {
-		return ctx.getServer() + "getproductinfo.ashx";
+		return ctx.getServer();
 	}
 
 	@Override
@@ -26,14 +20,12 @@ public class TestRequest extends BaseApiRequest<TestResponse> {
 
 	@Override
 	public Map<String, String> getTextParams(BaseApiContext ctx) {
-		Map<String, String> map = new HashMap<String, String>();		
-		map.put("prodeuctcode", "JW10120110");
-		return map;
+		return null;
 	}
 
 	@Override
 	public String getCacheRelativePathOrURL() {
-		return "test";
+		return makeCachePath("api", "test");
 	}
 
 	@Override

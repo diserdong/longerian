@@ -1,7 +1,6 @@
 package cc.icefire.market.api.parser;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import cc.icefire.market.api.response.TrendResponse;

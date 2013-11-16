@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.http.Header;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicCookieStore;
 
@@ -98,17 +97,16 @@ implements BaseApiConstant, BaseApiContext {
 	protected Map<String, String> makeRequestParam(
 			BaseApiRequest<? extends BaseApiResponse> request) {
 		Map<String, String> param = new HashMap<String, String>();
-		String method = request.getMethod();
 		String timeStamp = request.getTimestamp();
+		String appKey = getApiContext().getAppKey();
 		param.put(P_AUTHTYPE, "md5");
-		if (method != null) {
-			param.put(P_METHOD, method); // 设定Method
-			param.put(P_SIGN, Util.md5(method + timeStamp)); // 签名
-		}
+		param.put(P_SIGN, Util.md5(appKey + timeStamp)); // 签名
 		param.put(P_TIMESTAMP, request.getTimestamp()); // 时间戳
-		param.put(P_APPKEY, getApiContext().getAppKey());
-		
-		param.putAll(request.getTextParams(getApiContext())); // 如有与公共参数相同的参数会进行覆盖
+		param.put(P_APPKEY, appKey);
+		Map<String, String> businessParam = request.getTextParams(getApiContext());
+		if(businessParam != null && !businessParam.isEmpty()) {
+			param.putAll(businessParam); // 如有与公共参数相同的参数会进行覆盖
+		}
 		return param;
 	}
 
