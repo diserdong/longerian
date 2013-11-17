@@ -42,24 +42,34 @@ public class MainActivity extends TabActivity {
 		index.setContent(indexIntent);
 
 		view = new TabView(getApplicationContext());
-		view.setIcon(R.drawable.home_menu_class_normal,
-				R.drawable.home_menu_class_selected);
+		view.setIcon(R.drawable.home_menu_category_normal,
+				R.drawable.home_menu_category_selected);
 		TabSpec app = tabHost.newTabSpec("App");
 		app.setIndicator(view);
 		Intent appIntent = new Intent(getApplicationContext(),
-				AppDetailActivity.class);
+				AppListActivity.class);
 		appIntent.putExtra("label", "App");
 		app.setContent(appIntent);
 
 		view = new TabView(getApplicationContext());
-		view.setIcon(R.drawable.home_menu_search_normal,
-				R.drawable.home_menu_search_selected);
+		view.setIcon(R.drawable.home_menu_category_normal,
+				R.drawable.home_menu_category_selected);
 		TabSpec game = tabHost.newTabSpec("Game");
 		game.setIndicator(view);
 		Intent gameIntent = new Intent(getApplicationContext(),
-				BaseActivity.class);
+				AppListActivity.class);
 		gameIntent.putExtra("label", "Game");
 		game.setContent(gameIntent);
+		
+		view = new TabView(getApplicationContext());
+		view.setIcon(R.drawable.home_menu_category_normal,
+				R.drawable.home_menu_category_selected);
+		TabSpec category = tabHost.newTabSpec("Category");
+		category.setIndicator(view);
+		Intent categoryIntent = new Intent(getApplicationContext(),
+				CategoryActivity.class);
+		categoryIntent.putExtra("label", "Category");
+		category.setContent(categoryIntent);
 
 		view = new TabView(getApplicationContext());
 		view.setIcon(R.drawable.home_menu_more_normal,
@@ -67,13 +77,14 @@ public class MainActivity extends TabActivity {
 		TabSpec setting = tabHost.newTabSpec("Setting");
 		setting.setIndicator(view);
 		Intent settingIntent = new Intent(getApplicationContext(),
-				BaseActivity.class);
+				SettingActivity.class);
 		settingIntent.putExtra("label", "Setting");
 		setting.setContent(settingIntent);
 
 		tabHost.addTab(index);
 		tabHost.addTab(app);
 		tabHost.addTab(game);
+		tabHost.addTab(category);
 		tabHost.addTab(setting);
 
 		tabHost.setCurrentTab(0);

@@ -12,18 +12,27 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 
 	private static final String path = "api/list";
 	
-	private AppListType type;
+	private final AppListType type;
 	private int pageIndex = 0;
 	private int pageSize = 10;
 	private AppOrGame appOrGame; //仅非搜索时使用，1 应用， 0 游戏
 	private String query; //仅搜索时使用
+	private String categoryId; //仅分类目录下应用时使用
+	
+	public AppListRequest(AppListType type) {
+		this.type = type;
+	}
 	
 	public AppListType getType() {
 		return type;
 	}
 
-	public void setType(AppListType type) {
-		this.type = type;
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public int getPageIndex() {
@@ -62,10 +71,17 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 	public Map<String, String> getTextParams(BaseApiContext context) {
 		HashMap<String, String> businessParams = new HashMap<String, String>();
 		businessParams.put("type", type.ordinal() + "");
-		if(type == AppListType.SEARCH) {
+		switch (type) {
+		case SEARCH:
 			businessParams.put("query", query);
-		} else {
+			break;
+		case CATEGORY:
+			businessParams.put("categoryId", categoryId);
 			businessParams.put("appOrGame", appOrGame + "");
+			break;
+		default:
+			businessParams.put("appOrGame", appOrGame + "");
+			break;
 		}
 		businessParams.put("pageIndex", pageIndex + "");
 		businessParams.put("pageSize", pageSize + "");
@@ -84,7 +100,14 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 
 	@Override
 	public String getCacheRelativePathOrURL() {
-		return makeCachePath("api", "applist", type.toString(), query, appOrGame == AppOrGame.APP ? "app" : "game", pageIndex + "", pageSize + "");
+		switch (type) {
+		case SEARCH:
+			return makeCachePath("api", "applist", type.toString(), query, pageIndex + "", pageSize + "");
+		case CATEGORY:
+			return makeCachePath("api", "applist", type.toString(), categoryId, appOrGame == AppOrGame.APP ? "app" : "game", pageIndex + "", pageSize + "");
+		default:
+			return makeCachePath("api", "applist", type.toString(), appOrGame == AppOrGame.APP ? "app" : "game", pageIndex + "", pageSize + "");
+		}
 	}
 
 	@Override
