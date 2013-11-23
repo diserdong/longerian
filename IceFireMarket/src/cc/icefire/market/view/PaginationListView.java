@@ -5,13 +5,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import cc.icefire.market.R;
-import cc.icefire.market.view.PaginationListAdapter.OnRecvNoDataListener;
+import cc.icefire.market.view.PaginationListAdapter.OnApiCallbackListener;
 
 import com.foound.widget.AmazingListView;
 
-public class PaginationListView extends AmazingListView implements OnRecvNoDataListener {
+public class PaginationListView extends AmazingListView {
 
-	private View emptyView;
 	private View loadingView;
 	private boolean hasLoadedData;
 	
@@ -33,9 +32,7 @@ public class PaginationListView extends AmazingListView implements OnRecvNoDataL
 	private void init(Context context) {
 		hasLoadedData = false;
 		loadingView = LayoutInflater.from(context).inflate(R.layout.widget_loading_more, null);
-		emptyView = LayoutInflater.from(context).inflate(R.layout.common_list_empty_view, null);
 		setLoadingView(loadingView);
-//		setEmptyView(emptyView);
 	}
 	
 	public boolean hasLoadedData() {
@@ -46,13 +43,8 @@ public class PaginationListView extends AmazingListView implements OnRecvNoDataL
 		hasLoadedData = true;
 	}
 	
-	private void clearHasLoadedData() {
+	public void clearHasLoadedData() {
 		hasLoadedData = false;
 	}
 
-	@Override
-	public void onRecvNoData() {
-		clearHasLoadedData();
-	}
-	
 }

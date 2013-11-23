@@ -7,4 +7,5 @@ public enum AppOrGame {
 
 	GAME, // == 0
 	APP, // == 1
+	ANY, // == 2
 }

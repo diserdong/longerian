@@ -94,6 +94,31 @@ public class BasicAppItem implements Parcelable {
 	@SerializedName("screenshots")
 	private String[] screenshots;
 
+	public BasicAppItem() {
+		super();
+	}
+
+	public BasicAppItem(String id, String apkName, String pkgName,
+			int versionCode, String versionName, String apkMd5, int categoryId,
+			String iconUrl, double score, int downloadCount,
+			String downloadUrl, String desp, int size, String[] screenshots) {
+		super();
+		this.id = id;
+		this.apkName = apkName;
+		this.pkgName = pkgName;
+		this.versionCode = versionCode;
+		this.versionName = versionName;
+		this.apkMd5 = apkMd5;
+		this.categoryId = categoryId;
+		this.iconUrl = iconUrl;
+		this.score = score;
+		this.downloadCount = downloadCount;
+		this.downloadUrl = downloadUrl;
+		this.desp = desp;
+		this.size = size;
+		this.screenshots = screenshots;
+	}
+
 	public String getId() {
 		return id;
 	}

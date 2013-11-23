@@ -1,8 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="@dimen/view_padding_magin"
+    >
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/view_app_icon_size"
+        android:layout_height="@dimen/view_app_icon_size"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_app"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/icon"
+        android:layout_marginLeft="@dimen/view_padding_magin"
+        android:layout_marginRight="@dimen/view_padding_magin"
+        android:layout_toRightOf="@+id/icon"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_title" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/icon"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/text_size_title" />
+
+    <TextView
+        android:id="@+id/size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_toRightOf="@+id/count"
+        android:layout_marginLeft="@dimen/view_padding_magin"
+        android:layout_marginRight="@dimen/view_padding_magin"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/text_size_title" />
+
+<!--     <com.tencent.market.widget.RateBar -->
+<!--         android:id="@+id/rate" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignBottom="@+id/icon" -->
+<!--         android:layout_alignLeft="@+id/name" -->
+<!--         android:layout_below="@+id/count" -->
+<!--         android:layout_toRightOf="@+id/icon" /> -->
+
+<!--     <com.tencent.market.widget.CircleWidget -->
+<!--         android:id="@+id/action" -->
+<!--         android:layout_width="64dip" -->
+<!--         android:layout_height="64dip" -->
+<!--         android:layout_alignParentRight="true" -->
+<!--         android:layout_alignParentTop="true" -->
+<!--         android:addStatesFromChildren="true" -->
+<!--         android:clickable="true" -->
+<!--         android:focusable="false" /> -->
+
+</RelativeLayout>

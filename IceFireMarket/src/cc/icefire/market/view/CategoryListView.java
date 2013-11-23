@@ -4,7 +4,7 @@ import cc.icefire.market.model.AppOrGame;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class CategoryListView extends PaginationListView {
+public class CategoryListView extends NetworkListView {
 
 	private CategoryListAdapter adapter;
 	
@@ -20,7 +20,7 @@ public class CategoryListView extends PaginationListView {
 		super(context, attrs, defStyle);
 	}
 	
-	public void startRequest(AppOrGame type) {
+	public void requestCategory(AppOrGame type) {
 		if(!hasLoadedData()) {
 			adapter = new CategoryListAdapter(getContext(), type);
 			setAdapter(adapter);

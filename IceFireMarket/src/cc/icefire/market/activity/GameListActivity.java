@@ -10,13 +10,13 @@ import cc.icefire.market.view.TabPageView;
 import cc.icefire.market.view.TabPageView.OnPageSelectedListener;
 import cc.icefire.market.view.TitleBar;
 
-public class AppListActivity extends BaseActivity {
+public class GameListActivity extends BaseActivity {
 
 	private TitleBar titleBar;
 	private TabPageView tabPageView;
-	private AppListView popularAppListView;
-	private AppListView topChartsAppListView;
-	private AppListView newReleaseAppListView;
+	private AppListView popularGameListView;
+	private AppListView topChartsGameListView;
+	private AppListView newReleaseGameListView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +29,17 @@ public class AppListActivity extends BaseActivity {
 	
 	private void initTitleBar() {
 		titleBar = (TitleBar) findViewById(R.id.title_bar);
-		titleBar.setTitle(R.string.title_app);
+		titleBar.setTitle(R.string.title_game);
 	}
 	
 	private void initTabPageView() {
 		tabPageView = (TabPageView) findViewById(R.id.page_view);
-		popularAppListView = new AppListView(getApplicationContext());
-		tabPageView.addPage(getString(R.string.app_list_popular), popularAppListView);
-		topChartsAppListView = new AppListView(getApplicationContext());
-		tabPageView.addPage(getString(R.string.app_list_top_charts), topChartsAppListView);
-		newReleaseAppListView = new AppListView(getApplicationContext());
-		tabPageView.addPage(getString(R.string.app_list_new_releases), newReleaseAppListView);
+		popularGameListView = new AppListView(getApplicationContext());
+		tabPageView.addPage(getString(R.string.app_list_popular), popularGameListView);
+		topChartsGameListView = new AppListView(getApplicationContext());
+		tabPageView.addPage(getString(R.string.app_list_top_charts), topChartsGameListView);
+		newReleaseGameListView = new AppListView(getApplicationContext());
+		tabPageView.addPage(getString(R.string.app_list_new_releases), newReleaseGameListView);
 		tabPageView.setOnPageSelectedListener(onPageSelected);
 	}
 	
@@ -54,11 +54,11 @@ public class AppListActivity extends BaseActivity {
 	
 	private void requestApp(int position) {
 		if(position == 0) {
-			popularAppListView.requestCommonApp(AppListType.POPULAR, AppOrGame.APP);
+			popularGameListView.requestCommonApp(AppListType.POPULAR, AppOrGame.GAME);
 		} else if(position == 1) {
-			topChartsAppListView.requestCommonApp(AppListType.TOP_CHARTS, AppOrGame.APP);
+			topChartsGameListView.requestCommonApp(AppListType.TOP_CHARTS, AppOrGame.GAME);
 		} else if(position == 2) {
-			newReleaseAppListView.requestCommonApp(AppListType.NEW_RELEASES, AppOrGame.APP);
+			newReleaseGameListView.requestCommonApp(AppListType.NEW_RELEASES, AppOrGame.GAME);
 		}
 	}
 	

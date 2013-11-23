@@ -23,6 +23,7 @@ public class CategoryActivity extends BaseActivity {
 		setContentView(R.layout.activity_category_list);
 		initTitleBar();
 		initTabPageView();
+		requestCategory(0);
 	}
 	
 	private void initTitleBar() {
@@ -32,10 +33,9 @@ public class CategoryActivity extends BaseActivity {
 	
 	private void initTabPageView() {
 		tabPageView = (TabPageView) findViewById(R.id.page_view);
-		LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-		appCategoryListView = (CategoryListView) inflater.inflate(R.layout.category_list, null);
+		appCategoryListView = new CategoryListView(getApplicationContext());
 		tabPageView.addPage(getString(R.string.title_app), appCategoryListView);
-		gameCategoryListView = (CategoryListView) inflater.inflate(R.layout.category_list, null);
+		gameCategoryListView = new CategoryListView(getApplicationContext());
 		tabPageView.addPage(getString(R.string.title_game), gameCategoryListView);
 		tabPageView.setOnPageSelectedListener(onPageSelected);
 	}
@@ -45,12 +45,16 @@ public class CategoryActivity extends BaseActivity {
 		@Override
 		public void onPageSelected(int position) {
 			ILog.d("Category", "select " + position);
-			if(position == 0) {
-				appCategoryListView.startRequest(AppOrGame.APP);
-			} else if(position == 1) {
-				gameCategoryListView.startRequest(AppOrGame.GAME);
-			}
+			requestCategory(position);
 		}
 	};
+	
+	private void requestCategory(int position) {
+		if(position == 0) {
+			appCategoryListView.requestCategory(AppOrGame.APP);
+		} else if(position == 1) {
+			gameCategoryListView.requestCategory(AppOrGame.GAME);
+		}
+	}
 	
 }

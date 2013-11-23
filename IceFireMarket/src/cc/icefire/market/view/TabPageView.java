@@ -106,7 +106,6 @@ public class TabPageView extends LinearLayout {
 
 		@Override
 		public void destroyItem(ViewGroup container, int position, Object object) {
-			super.destroyItem(container, position, object);
 			container.removeView(pages.get(position));
 		}
 

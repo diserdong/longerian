@@ -37,7 +37,7 @@ public class MainActivity extends TabActivity {
 		TabSpec index = tabHost.newTabSpec("Index");
 		index.setIndicator(view);
 		Intent indexIntent = new Intent(getApplicationContext(),
-				AppListActivity.class);
+				IndexActivity.class);
 		indexIntent.putExtra("label", "Index");
 		index.setContent(indexIntent);
 
@@ -57,7 +57,7 @@ public class MainActivity extends TabActivity {
 		TabSpec game = tabHost.newTabSpec("Game");
 		game.setIndicator(view);
 		Intent gameIntent = new Intent(getApplicationContext(),
-				AppListActivity.class);
+				GameListActivity.class);
 		gameIntent.putExtra("label", "Game");
 		game.setContent(gameIntent);
 		

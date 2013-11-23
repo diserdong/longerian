@@ -11,6 +11,6 @@ public enum AppListType {
 	SELECTED, //编辑精选
 	NEW_RELEASES, //最新上架
 	TOP_CHARTS, //下载排行榜
-	RECOMMENDEDED, //猜你喜欢
+	RECOMMENDEDED, //为你推荐
 	
 }

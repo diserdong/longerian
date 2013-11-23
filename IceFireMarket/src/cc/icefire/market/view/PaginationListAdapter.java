@@ -14,7 +14,7 @@ abstract public class PaginationListAdapter<T> extends AmazingAdapter {
 	private List<T> items;
 	protected Context context;
 	protected LayoutInflater inflater;
-	private OnRecvNoDataListener listener;
+	private OnApiCallbackListener listener;
 	
 	public PaginationListAdapter(Context context) {
 		this.context = context;
@@ -75,11 +75,23 @@ abstract public class PaginationListAdapter<T> extends AmazingAdapter {
 		}
 	}
 	
-	public void setOnRecvNoDataListener(OnRecvNoDataListener listener) {
+	public void setOnRecvNoDataListener(OnApiCallbackListener listener) {
 		this.listener = listener;
 	}
 
-	public void onRequestDataFail() {
+	public void onRequestFirstPage() {
+		if(listener != null) {
+			listener.onRequestFirstPage();
+		}
+	}
+	
+	public void onRecvDataSuccess() {
+		if(listener != null) {
+			listener.onRecvDataSuccess();
+		}
+	}
+	
+	public void onRecvDataFail() {
 		if(listener != null) {
 			if(getCount() == 0) {
 				listener.onRecvNoData();
@@ -87,9 +99,11 @@ abstract public class PaginationListAdapter<T> extends AmazingAdapter {
 		}
 	}
 	
-	public interface OnRecvNoDataListener {
+	public interface OnApiCallbackListener {
 		
+		public void onRequestFirstPage();
 		public void onRecvNoData();
+		public void onRecvDataSuccess();
 		
 	}
 

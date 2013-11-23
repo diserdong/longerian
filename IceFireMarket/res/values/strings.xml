@@ -9,6 +9,12 @@
     <string name="title_category">分类</string>
     <string name="title_setting">设置</string>
     <string name="title_search">搜索</string>
+    <string name="app_list_popular">最近流行</string>
+    <string name="app_list_new_releases">最新上架</string>
+    <string name="app_list_top_charts">下载排行榜</string>
+    <string name="app_list_selected">编辑精选</string>
+    <string name="app_list_recommended">为你推荐</string>
+    
 
     <string name="hint_network_error">网络异常，稍后再试</string>
     <string name="hint_loading_data_failed">获取失败</string>

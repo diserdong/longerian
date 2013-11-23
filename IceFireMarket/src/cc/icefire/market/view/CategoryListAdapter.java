@@ -61,6 +61,9 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 	}
 	
 	public void requestCategory(int page, AppOrGame type) {
+		if(page == 1) {
+			onRequestFirstPage();
+		}
 		CategoryRequest request = new CategoryRequest(type);
 		IceFireApplication.sharedInstance().getHttpEngine().request(request,
 				 new CategoryCallback());
@@ -70,6 +73,7 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 
 		@Override
 		public void onSuccess(CategoryResponse response) {
+			onRecvDataSuccess();
 			addItems(response.getCategories());
 			nextPage();
 			if(getCount() > 20) {
@@ -81,13 +85,13 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 
 		@Override
 		public void onFail(CategoryResponse response) {
-			onRequestDataFail();
+			onRecvDataFail();
 			Toast.makeText(context, R.string.hint_loading_data_failed, Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
 		public void onException(ApiException e) {
-			onRequestDataFail();
+			onRecvDataFail();
 			Toast.makeText(context, R.string.hint_network_error, Toast.LENGTH_SHORT).show();
 		}
 		

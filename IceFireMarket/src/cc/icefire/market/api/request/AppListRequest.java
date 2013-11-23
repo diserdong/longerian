@@ -15,9 +15,9 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 	private final AppListType type;
 	private int pageIndex = 0;
 	private int pageSize = 10;
-	private AppOrGame appOrGame; //仅非搜索时使用，1 应用， 0 游戏
+	private AppOrGame appOrGame; //0 游戏， 1 应用，2.任意 
 	private String query; //仅搜索时使用
-	private String categoryId; //仅分类目录下应用时使用
+	private int categoryId; //仅分类目录下应用时使用
 	
 	public AppListRequest(AppListType type) {
 		this.type = type;
@@ -27,11 +27,11 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 		return type;
 	}
 
-	public String getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -76,13 +76,12 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 			businessParams.put("query", query);
 			break;
 		case CATEGORY:
-			businessParams.put("categoryId", categoryId);
-			businessParams.put("appOrGame", appOrGame + "");
+			businessParams.put("categoryId", categoryId + "");
 			break;
 		default:
-			businessParams.put("appOrGame", appOrGame + "");
 			break;
 		}
+		businessParams.put("appOrGame", appOrGame + "");
 		businessParams.put("pageIndex", pageIndex + "");
 		businessParams.put("pageSize", pageSize + "");
 		return businessParams;
@@ -104,7 +103,7 @@ public class AppListRequest extends BaseApiRequest<AppListResponse> {
 		case SEARCH:
 			return makeCachePath("api", "applist", type.toString(), query, pageIndex + "", pageSize + "");
 		case CATEGORY:
-			return makeCachePath("api", "applist", type.toString(), categoryId, appOrGame == AppOrGame.APP ? "app" : "game", pageIndex + "", pageSize + "");
+			return makeCachePath("api", "applist", type.toString(), categoryId + "", appOrGame == AppOrGame.APP ? "app" : "game", pageIndex + "", pageSize + "");
 		default:
 			return makeCachePath("api", "applist", type.toString(), appOrGame == AppOrGame.APP ? "app" : "game", pageIndex + "", pageSize + "");
 		}
