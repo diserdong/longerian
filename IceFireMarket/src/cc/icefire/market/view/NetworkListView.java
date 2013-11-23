@@ -6,6 +6,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -44,7 +45,7 @@ public class NetworkListView extends RelativeLayout implements
 
 	public void setAdapter(ListAdapter adapter) {
 		if(list != null) {
-			list.setAdapter(adapter);			
+			list.setAdapter(adapter);
 		}
 	}
 
@@ -67,6 +68,12 @@ public class NetworkListView extends RelativeLayout implements
 	public void setEmptyViewText(String resStr) {
 		if(empty != null) {
 			empty.setText(resStr);
+		}
+	}
+	
+	public void setOnItemClickListener(OnItemClickListener listener) {
+		if(list != null) {
+			list.setOnItemClickListener(listener);
 		}
 	}
 	

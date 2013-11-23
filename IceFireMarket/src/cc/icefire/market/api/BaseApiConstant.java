@@ -18,7 +18,7 @@ public interface BaseApiConstant {
 	
 	
 
-	public static final String SERVER = "http://www.baidu.com/";
+	public static final String SERVER = "http://http://www.36kr.com//";
 	public static final String APPKEY = "1qaz2wsx";
 
 	// API 请求通用参数关键字
