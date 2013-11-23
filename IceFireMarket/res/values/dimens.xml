@@ -4,4 +4,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="view_padding_magin">8dip</dimen>
+    
+    <dimen name="view_app_icon_size">48dip</dimen>
+    
+    <dimen name="small_progress_width">20dp</dimen>
+    <dimen name="small_progress_height">20dp</dimen>
+    
+    <dimen name="text_size_title">18sp</dimen>
+    <dimen name="text_size_context">16sp</dimen>
 </resources>

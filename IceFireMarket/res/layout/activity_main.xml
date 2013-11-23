@@ -12,7 +12,7 @@
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" >
+            android:layout_above="@android:id/tabs" >
         </FrameLayout>
 
         <TabWidget
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/home_menu_bg"
-            android:layout_alignBottom="@android:id/tabcontent" />
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
 </TabHost>

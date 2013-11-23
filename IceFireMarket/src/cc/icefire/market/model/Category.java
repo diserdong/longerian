@@ -32,6 +32,22 @@ public class Category {
 	@SerializedName("desp")
     private String desp;
 
+	public Category(int id, int parentId, String name, String iconUrl,
+			int appOrGame, String desp) {
+		super();
+		this.id = id;
+		this.parentId = parentId;
+		this.name = name;
+		this.iconUrl = iconUrl;
+		this.appOrGame = appOrGame;
+		this.desp = desp;
+	}
+	
+
+	public Category() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}

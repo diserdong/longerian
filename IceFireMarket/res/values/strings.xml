@@ -10,4 +10,13 @@
     <string name="title_setting">设置</string>
     <string name="title_search">搜索</string>
 
+    <string name="hint_network_error">网络异常，稍后再试</string>
+    <string name="hint_loading_data_failed">获取失败</string>
+    
+    <string name="loading_more">正在加载...</string>
+    <string name="note_list_empty">这里没有东西诶</string>
+    
+    <string name="category_social_app">社交</string>
+    <string name="category_rpg_game">动作竞技</string>
+    
 </resources>
