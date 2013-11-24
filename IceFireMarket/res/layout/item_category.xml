@@ -11,7 +11,7 @@
         android:id="@+id/category_icon"
         android:layout_width="@dimen/view_app_icon_size"
         android:layout_height="@dimen/view_app_icon_size"
-        android:src="@drawable/ic_category" />
+        android:src="@drawable/ic_thinking_space" />
 
     <View
         android:layout_width="@dimen/view_padding_magin"

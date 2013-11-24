@@ -1,9 +1,11 @@
 package cc.icefire.market.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import cc.icefire.market.R;
@@ -25,6 +27,7 @@ public class SearchActivity extends BaseActivity {
 		setContentView(R.layout.activity_search_app_list);
 		initTitleBar();
 		initSearchUi();
+		showSoftInputWindow();
 	}
 	
 	private void initTitleBar() {
@@ -47,12 +50,30 @@ public class SearchActivity extends BaseActivity {
 			String query = searchBox.getEditableText().toString().trim();
 			if(!TextUtils.isEmpty(query)) {
 				requestSearch(query);
+				hideSoftInputWindow();
 			}
 		}
 	};
 	
 	private void requestSearch(String query) {
 		searchResult.requestSearchedApp(AppListType.SEARCH, AppOrGame.ANY, query);
+	}
+	
+	private void showSoftInputWindow() {
+		searchBox.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+				inputManager.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
+			}
+		}, 500);
+	}
+	
+	private void hideSoftInputWindow() {
+		InputMethodManager imm = (InputMethodManager) getSystemService(
+				Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
 	}
 	
 }

@@ -34,11 +34,11 @@ public class GameListActivity extends BaseActivity {
 	
 	private void initTabPageView() {
 		tabPageView = (TabPageView) findViewById(R.id.page_view);
-		popularGameListView = new AppListView(getApplicationContext());
+		popularGameListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_popular), popularGameListView);
-		topChartsGameListView = new AppListView(getApplicationContext());
+		topChartsGameListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_top_charts), topChartsGameListView);
-		newReleaseGameListView = new AppListView(getApplicationContext());
+		newReleaseGameListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_new_releases), newReleaseGameListView);
 		tabPageView.setOnPageSelectedListener(onPageSelected);
 	}

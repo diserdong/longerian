@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cc.icefire.market.BuildConfig;
 import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.R;
 import cc.icefire.market.api.request.AppListRequest;
@@ -29,15 +30,17 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		this.type = type;
 		this.appOrGame = appOrGame;
 	}
-	
-	public AppListAdapter(Context context, AppListType type, AppOrGame appOrGame, int categoryId) {
+
+	public AppListAdapter(Context context, AppListType type,
+			AppOrGame appOrGame, int categoryId) {
 		super(context);
 		this.type = type;
 		this.appOrGame = appOrGame;
 		this.categoryId = categoryId;
 	}
-	
-	public AppListAdapter(Context context, AppListType type, AppOrGame appOrGame, String query) {
+
+	public AppListAdapter(Context context, AppListType type,
+			AppOrGame appOrGame, String query) {
 		super(context);
 		this.type = type;
 		this.appOrGame = appOrGame;
@@ -74,10 +77,36 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		BasicAppItem item = (BasicAppItem) getItem(position);
-		Bitmap icon = IceFireApplication.sharedInstance().getImgLoader()
-				.load(item.getIconUrl(), holder.appIcon);
-		if (icon != null) {
-			holder.appIcon.setImageBitmap(icon);
+		if (BuildConfig.DEBUG) {
+			switch (type) {
+			case SEARCH:
+				holder.appIcon.setImageResource(R.drawable.ic_sky_map);
+				break;
+			case CATEGORY:
+				holder.appIcon.setImageResource(R.drawable.ic_foursquare);
+				break;
+			case POPULAR:
+				holder.appIcon.setImageResource(R.drawable.ic_android);
+				break;
+			case SELECTED:
+				holder.appIcon.setImageResource(R.drawable.ic_lovedsgn);
+				break;
+			case NEW_RELEASES:
+				holder.appIcon.setImageResource(R.drawable.ic_evernote);
+				break;
+			case TOP_CHARTS:
+				holder.appIcon.setImageResource(R.drawable.ic_score);
+				break;
+			case RECOMMENDEDED:
+				holder.appIcon.setImageResource(R.drawable.ic_bump);
+				break;
+			}
+		} else {
+			Bitmap icon = IceFireApplication.sharedInstance().getImgLoader()
+					.load(item.getIconUrl(), holder.appIcon);
+			if (icon != null) {
+				holder.appIcon.setImageBitmap(icon);
+			}
 		}
 		holder.appName.setText(item.getApkName());
 		holder.count.setText(item.getDownloadCount() + "time");
@@ -100,32 +129,34 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		request.setAppOrGame(appOrGame);
 		doRequest(page, request);
 	}
-	
-	public void requestSearchedApp(int page, AppListType type, AppOrGame appOrGame, String query) {
+
+	public void requestSearchedApp(int page, AppListType type,
+			AppOrGame appOrGame, String query) {
 		AppListRequest request = new AppListRequest(type);
 		request.setPageIndex(page);
-		if(appOrGame != AppOrGame.ANY) {
+		if (appOrGame != AppOrGame.ANY) {
 			appOrGame = AppOrGame.ANY;
 		}
 		request.setAppOrGame(appOrGame);
 		request.setQuery(query);
 		doRequest(page, request);
 	}
-	
-	public void requestCategoryApp(int page, AppListType type, AppOrGame appOrGame, int categoryId) {
+
+	public void requestCategoryApp(int page, AppListType type,
+			AppOrGame appOrGame, int categoryId) {
 		AppListRequest request = new AppListRequest(type);
 		request.setPageIndex(page);
 		request.setAppOrGame(appOrGame);
 		request.setCategoryId(categoryId);
 		doRequest(page, request);
 	}
-	
+
 	private void doRequest(int page, AppListRequest request) {
 		if (page == 1) {
 			onRequestFirstPage();
 		}
 		IceFireApplication.sharedInstance().getHttpEngine()
-		.request(request, new AppListCallback());
+				.request(request, new AppListCallback());
 	}
 
 	private class AppListCallback implements ApiCallback<AppListResponse> {

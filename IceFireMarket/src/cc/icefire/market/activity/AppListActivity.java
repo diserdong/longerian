@@ -34,11 +34,11 @@ public class AppListActivity extends BaseActivity {
 	
 	private void initTabPageView() {
 		tabPageView = (TabPageView) findViewById(R.id.page_view);
-		popularAppListView = new AppListView(getApplicationContext());
+		popularAppListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_popular), popularAppListView);
-		topChartsAppListView = new AppListView(getApplicationContext());
+		topChartsAppListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_top_charts), topChartsAppListView);
-		newReleaseAppListView = new AppListView(getApplicationContext());
+		newReleaseAppListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_new_releases), newReleaseAppListView);
 		tabPageView.setOnPageSelectedListener(onPageSelected);
 	}

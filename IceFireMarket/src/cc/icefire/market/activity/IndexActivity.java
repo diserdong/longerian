@@ -33,9 +33,9 @@ public class IndexActivity extends BaseActivity {
 	
 	private void initTabPageView() {
 		tabPageView = (TabPageView) findViewById(R.id.page_view);
-		selectedAppListView = new AppListView(getApplicationContext());
+		selectedAppListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_selected), selectedAppListView);
-		recommendedAppListView = new AppListView(getApplicationContext());
+		recommendedAppListView = new AppListView(this);
 		tabPageView.addPage(getString(R.string.app_list_recommended), recommendedAppListView);
 		tabPageView.setOnPageSelectedListener(onPageSelected);
 	}

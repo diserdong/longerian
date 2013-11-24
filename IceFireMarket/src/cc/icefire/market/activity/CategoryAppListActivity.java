@@ -33,7 +33,6 @@ public class CategoryAppListActivity extends BaseActivity {
 	
 	private void initTitleBar(String title) {
 		titleBar = (TitleBar) findViewById(R.id.title_bar);
-		titleBar.hideSearchBtn();
 		titleBar.setTitle(title);
 	}
 	

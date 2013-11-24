@@ -2,8 +2,15 @@ package cc.icefire.market.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
+import cc.icefire.market.model.BasicAppItem;
+import cc.icefire.market.model.Category;
+import cc.icefire.market.util.ActivityUtil;
+import cc.icefire.market.util.ILog;
 
 public class AppListView extends NetworkListView {
 
@@ -11,15 +18,33 @@ public class AppListView extends NetworkListView {
 	
 	public AppListView(Context context) {
 		super(context);
+		init(context);
 	}
 	
 	public AppListView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		init(context);
 	}
 	
 	public AppListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		init(context);
 	}
+	
+	private void init(Context context) {
+		setOnItemClickListener(onAppClicked);
+	}
+	
+	private OnItemClickListener onAppClicked = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			ILog.d(VIEW_LOG_TAG, "context " + parent.getContext());
+			BasicAppItem item = (BasicAppItem) parent.getItemAtPosition(position);
+			ActivityUtil.gotoAppDetailActivity(getContext(), item);
+		}
+	};
 	
 	public void requestCommonApp(AppListType type, AppOrGame appOrGame) {
 		if(!hasLoadedData()) {

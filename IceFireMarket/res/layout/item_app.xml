@@ -11,7 +11,7 @@
         android:layout_width="@dimen/view_app_icon_size"
         android:layout_height="@dimen/view_app_icon_size"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_app"
+        android:src="@drawable/ic_android"
         />
 
     <TextView
