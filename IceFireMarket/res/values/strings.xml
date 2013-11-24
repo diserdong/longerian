@@ -15,6 +15,8 @@
     <string name="app_list_selected">编辑精选</string>
     <string name="app_list_recommended">为你推荐</string>
     
+    <string name="app_detail">应用详情</string>
+    <string name="app_desp">应用描述</string>
 
     <string name="hint_network_error">网络异常，稍后再试</string>
     <string name="hint_loading_data_failed">获取失败</string>
@@ -24,5 +26,14 @@
     
     <string name="category_social_app">社交</string>
     <string name="category_rpg_game">动作竞技</string>
+    
+    <string name="download_count_many">%1$d万下载</string>
+    <string name="download_count_massive">超过%1$d亿下载</string>
+    <string name="download_count_few">%1$d次下载</string>
+    
+    <string name="app_size_kilo">%1$dK</string>
+    <string name="app_size_small_mega">%1$.1fM</string>
+    <string name="app_size_big_mega">%1$dM</string>
+    <string name="app_size_giga">%1$.1fG</string>
     
 </resources>

@@ -60,7 +60,7 @@ abstract public class PaginationListAdapter<T> extends AmazingAdapter {
 	public Object[] getSections() {
 		return null;
 	}
-	
+
 	public void addItem(T item) {
 		if(items != null) {
 			items.add(item);

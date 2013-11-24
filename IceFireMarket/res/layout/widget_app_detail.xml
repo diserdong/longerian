@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_padding_magin" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/view_app_icon_size"
+            android:layout_height="@dimen/view_app_icon_size"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_padding_magin"
+            android:layout_marginRight="@dimen/view_padding_magin"
+            android:layout_toLeftOf="@+id/rate"
+            android:layout_toRightOf="@+id/icon"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_title" />
+
+        <RatingBar
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/view_padding_magin"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/basic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginLeft="@dimen/view_padding_magin"
+            android:layout_marginRight="@dimen/view_padding_magin"
+            android:layout_toRightOf="@+id/icon"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/text_size_title" />
+
+            <View
+                android:layout_width="@dimen/view_padding_magin"
+                android:layout_height="@dimen/view_padding_magin" />
+
+            <TextView
+                android:id="@+id/size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/text_size_title" />
+
+            <View
+                android:layout_width="@dimen/view_padding_magin"
+                android:layout_height="@dimen/view_padding_magin" />
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/text_size_title" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@android:color/darker_gray" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdgeLength="0.0dip"
+        android:paddingBottom="@dimen/view_padding_magin"
+        android:paddingTop="@dimen/view_padding_magin" >
+
+        <LinearLayout
+            android:id="@+id/screenshots_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="240dip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/description_section"
+        android:layout_width="match_parent"
+        android:layout_height="32dip"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/view_padding_magin"
+        android:paddingRight="@dimen/view_padding_magin"
+        android:text="@string/app_desp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_title" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_padding_magin"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/text_size_content" />
+
+</merge>

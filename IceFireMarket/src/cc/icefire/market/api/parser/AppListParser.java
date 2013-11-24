@@ -15,7 +15,7 @@ import com.google.gson.reflect.TypeToken;
 public class AppListParser extends JsonParseHandler<AppListResponse> {
 
 	private AppListResponse appList = new AppListResponse();
-	
+
 	@Override
 	public AppListResponse getModel() {
 		return appList;
@@ -23,14 +23,35 @@ public class AppListParser extends JsonParseHandler<AppListResponse> {
 
 	@Override
 	public void parse(String inputSource) {
-		if(BuildConfig.DEBUG) {
+		if (BuildConfig.DEBUG) {
 			List<BasicAppItem> apps = new ArrayList<BasicAppItem>();
-			BasicAppItem b1 = new BasicAppItem("0", "ZenDay", "com.zenday-app", 0, "1.2", null, 0, "http://iconurl", 4, 50000, "http://downloadurl", "", (int) (4.7 * 1024 * 1024), null);
-			BasicAppItem b2 = new BasicAppItem("0", "ZenDay", "com.zenday-app", 0, "1.2", null, 0, "http://iconurl", 4, 50000, "http://downloadurl", "", (int) (4.7 * 1024 * 1024), null);
-			BasicAppItem b3 = new BasicAppItem("0", "ZenDay", "com.zenday-app", 0, "1.2", null, 0, "http://iconurl", 4, 50000, "http://downloadurl", "", (int) (4.7 * 1024 * 1024), null);
-			BasicAppItem b4 = new BasicAppItem("0", "ZenDay", "com.zenday-app", 0, "1.2", null, 0, "http://iconurl", 4, 50000, "http://downloadurl", "", (int) (4.7 * 1024 * 1024), null);
-			BasicAppItem b5 = new BasicAppItem("0", "ZenDay", "com.zenday-app", 0, "1.2", null, 0, "http://iconurl", 4, 50000, "http://downloadurl", "", (int) (4.7 * 1024 * 1024), null);
-			BasicAppItem b6 = new BasicAppItem("0", "ZenDay", "com.zenday-app", 0, "1.2", null, 0, "http://iconurl", 4, 50000, "http://downloadurl", "", (int) (4.7 * 1024 * 1024), null);
+			String desp = "With ZenDay, be better organized, maintain your work/life balance and fight procrastination."
+					+ "Our users say it best:"
+					+ "ZenDay is a functional and beautiful way to organize your schedule."
+					+ "It presents a unified view of Tasks and Appointments, by presenting them as a 3D Rolodex."
+					+ "The seamless integration of Tasks / Events / Google calendar makes it the perfect tool to manage your day."
+					+ "ZenDay is a task list that really works."
+					+ "This is time management as it *should* be."
+					+ "And it's already changing my life and work for the better.";
+			String iconUrl = "http://img.wdjimg.com/mms/icon/v1/3/bd/5295ac6a9c6d51e8285690bdbe1b1bd3_256_256.png";
+			BasicAppItem b1 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
+					0, "1.2", null, 0, iconUrl, 4, 50000,
+					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), null);
+			BasicAppItem b2 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
+					0, "1.2", null, 0, iconUrl, 4, 50000,
+					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), null);
+			BasicAppItem b3 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
+					0, "1.2", null, 0, iconUrl, 4, 50000,
+					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), null);
+			BasicAppItem b4 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
+					0, "1.2", null, 0, iconUrl, 4, 50000,
+					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), null);
+			BasicAppItem b5 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
+					0, "1.2", null, 0, iconUrl, 4, 50000,
+					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), null);
+			BasicAppItem b6 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
+					0, "1.2", null, 0, iconUrl, 4, 50000,
+					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), null);
 			apps.add(b1);
 			apps.add(b2);
 			apps.add(b3);
@@ -41,8 +62,10 @@ public class AppListParser extends JsonParseHandler<AppListResponse> {
 			appList.setSuccess(true);
 		} else {
 			try {
-				Type type = new TypeToken<List<BasicAppItem>>(){}.getType();
-				List<BasicAppItem> apps = JsonUtil.fromJsonArray(inputSource, type);
+				Type type = new TypeToken<List<BasicAppItem>>() {
+				}.getType();
+				List<BasicAppItem> apps = JsonUtil.fromJsonArray(inputSource,
+						type);
 				appList.setAppList(apps);
 				appList.setSuccess(true);
 			} catch (JsonSyntaxException e) {

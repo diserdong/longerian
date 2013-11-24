@@ -15,6 +15,7 @@ import cc.icefire.market.api.response.AppListResponse;
 import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.model.BasicAppItem;
+import cc.icefire.market.util.BusinessTextUtil;
 import crow.api.ApiCallback;
 import crow.api.ApiException;
 
@@ -109,8 +110,8 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			}
 		}
 		holder.appName.setText(item.getApkName());
-		holder.count.setText(item.getDownloadCount() + "time");
-		holder.size.setText(item.getSize() + "B");
+		holder.count.setText(BusinessTextUtil.getDownloadCountTxt(context, item.getDownloadCount()));
+		holder.size.setText(BusinessTextUtil.getSizeTxt(context, item.getSize()));
 		return convertView;
 	}
 

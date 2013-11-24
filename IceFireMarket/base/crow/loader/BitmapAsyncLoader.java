@@ -41,6 +41,7 @@ public class BitmapAsyncLoader extends AsyncLoader<String, Bitmap, ImageView> {
 		try {
 			cache.cacheURL(url);
 		} catch (IOException e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;

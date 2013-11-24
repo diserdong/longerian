@@ -12,5 +12,5 @@
     <dimen name="small_progress_height">20dp</dimen>
     
     <dimen name="text_size_title">18sp</dimen>
-    <dimen name="text_size_context">16sp</dimen>
+    <dimen name="text_size_content">16sp</dimen>
 </resources>
