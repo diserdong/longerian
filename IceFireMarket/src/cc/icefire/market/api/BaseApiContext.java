@@ -9,6 +9,12 @@ public interface BaseApiContext extends ApiContext {
 	public String getServer();
 	
 	/**
+	 *开发测试用 
+	 * @return
+	 */
+	public String getMockServer();
+	
+	/**
 	 * 返回 API请求的AppKey
 	 * @return
 	 */

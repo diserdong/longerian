@@ -91,6 +91,7 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 
 		@Override
 		public void onException(ApiException e) {
+			e.printStackTrace();
 			onRecvDataFail();
 			Toast.makeText(context, R.string.hint_network_error, Toast.LENGTH_SHORT).show();
 		}

@@ -28,13 +28,10 @@ public class SearchedAppListView extends NetworkListView {
 	}
 	
 	public void requestSearchedApp(AppListType type, AppOrGame appOrGame, String query) {
-		if(!hasLoadedData()) {
-			adapter = new AppListAdapter(getContext(), type, appOrGame, query);
-			setAdapter(adapter);
-			adapter.setOnRecvNoDataListener(this);
-			notifyHasLoadedData();
-			adapter.requestSearchedApp(1, type, appOrGame, query);
-		}
+		adapter = new AppListAdapter(getContext(), type, appOrGame, query);
+		setAdapter(adapter);
+		adapter.setOnRecvNoDataListener(this);
+		adapter.requestSearchedApp(1, type, appOrGame, query);
 	}
 	
 }

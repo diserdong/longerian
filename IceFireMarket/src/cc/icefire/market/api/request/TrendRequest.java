@@ -2,6 +2,7 @@ package cc.icefire.market.api.request;
 
 import java.util.Map;
 
+import cc.icefire.market.BuildConfig;
 import cc.icefire.market.api.BaseApiContext;
 import cc.icefire.market.api.response.TrendResponse;
 
@@ -16,7 +17,11 @@ public class TrendRequest extends BaseApiRequest<TrendResponse> {
 
 	@Override
 	public String getRequestURL(BaseApiContext context) {
-		return context.getServer() + path;
+		if(BuildConfig.DEBUG) {
+			return context.getMockServer();
+		} else {
+			return context.getServer() + path;
+		}
 	}
 
 	@Override

@@ -135,5 +135,10 @@ implements BaseApiConstant, BaseApiContext {
 	public String getAppKey() {
 		return APPKEY;
 	}
+
+	@Override
+	public String getMockServer() {
+		return MOCK_SERVER;
+	}
 	
 }
