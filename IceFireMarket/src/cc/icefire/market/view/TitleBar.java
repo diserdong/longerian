@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cc.icefire.market.R;
 import cc.icefire.market.util.ActivityUtil;
+import cc.icefire.market.util.ILog;
 
 public class TitleBar extends RelativeLayout {
 
@@ -21,6 +22,7 @@ public class TitleBar extends RelativeLayout {
 		
 		@Override
 		public void onClick(View v) {
+			ILog.d(VIEW_LOG_TAG, "context " + getContext());
 			ActivityUtil.gotoSearchActivity(getContext());
 		}
 	};

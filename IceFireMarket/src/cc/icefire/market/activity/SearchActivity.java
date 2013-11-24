@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import cc.icefire.market.R;
 import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
-import cc.icefire.market.view.SearchedAppListView;
+import cc.icefire.market.view.AppListView;
 import cc.icefire.market.view.TitleBar;
 
 public class SearchActivity extends BaseActivity {
@@ -17,7 +17,7 @@ public class SearchActivity extends BaseActivity {
 	private TitleBar titleBar;
 	private EditText searchBox;
 	private ImageView searchBtn;
-	private SearchedAppListView searchResult;
+	private AppListView searchResult;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class SearchActivity extends BaseActivity {
 	private void initSearchUi() {
 		searchBox = (EditText) findViewById(R.id.search_box);
 		searchBtn = (ImageView) findViewById(R.id.search_btn);
-		searchResult = (SearchedAppListView) findViewById(R.id.search_result);
+		searchResult = (AppListView) findViewById(R.id.search_result);
 		searchBtn.setOnClickListener(onSearchClicked);
 	}
 

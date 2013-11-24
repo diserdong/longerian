@@ -44,7 +44,7 @@ public class IndexActivity extends BaseActivity {
 		
 		@Override
 		public void onPageSelected(int position) {
-			ILog.d("App", "select " + position);
+			ILog.d("Index", "select " + position);
 			requestApp(position);
 		}
 	};

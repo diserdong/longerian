@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.apache.http.client.methods.HttpPost;
 
+import cc.icefire.market.BuildConfig;
 import cc.icefire.market.api.BaseApiConstant;
 import cc.icefire.market.api.BaseApiContext;
 import cc.icefire.market.api.response.BaseApiResponse;
@@ -56,6 +57,17 @@ public abstract class BaseApiRequest<T extends BaseApiResponse>
 	@Override
 	public Class<?> getHttpRequestClass() {
 		return HttpPost.class;
+	}
+	
+	abstract public String getPath();
+	
+	@Override
+	public String getRequestURL(BaseApiContext context) {
+		if(BuildConfig.DEBUG) {
+			return context.getMockServer();
+		} else {
+			return context.getServer() + getPath();
+		}
 	}
 	
 }

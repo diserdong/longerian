@@ -7,7 +7,7 @@ public class TestParser extends JsonParseHandler<TestResponse> {
 
 	@Override
 	public void parse(String inputSource) {
-		ILog.d("Longer", inputSource);
+		ILog.d("TestParser", inputSource);
 	}
 
 	@Override

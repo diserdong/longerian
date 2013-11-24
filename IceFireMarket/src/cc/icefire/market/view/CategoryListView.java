@@ -3,6 +3,7 @@ package cc.icefire.market.view;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.model.Category;
 import cc.icefire.market.util.ActivityUtil;
+import cc.icefire.market.util.ILog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -47,8 +48,9 @@ public class CategoryListView extends NetworkListView {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			ILog.d(VIEW_LOG_TAG, "context " + parent.getContext());
 			Category item = (Category) parent.getItemAtPosition(position);
-			ActivityUtil.gotoCategoryAppListActivity(getContext(), item.getId(), AppOrGame.fromInt(item.getAppOrGame()));
+			ActivityUtil.gotoCategoryAppListActivity(getContext(), item);
 		}
 	};
 	

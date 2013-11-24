@@ -1,12 +1,15 @@
 package cc.icefire.market.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * 分类信息
  *
  */
-public class Category {
+public class Category implements Parcelable {
 
 	@SerializedName("id")
 	private int id;
@@ -95,5 +98,46 @@ public class Category {
 	public void setAppOrGame(int appOrGame) {
 		this.appOrGame = appOrGame;
 	}
+
+
+	public Category(Parcel in) {
+		readFromParcel(in);
+    }  
+	
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int flags) {
+		parcel.writeInt(id);
+		parcel.writeInt(parentId);
+		parcel.writeString(name);
+		parcel.writeInt(appOrGame);
+		parcel.writeString(iconUrl);
+		parcel.writeString(desp);
+	}
+	
+	private void readFromParcel(Parcel in) {
+		id = in.readInt();
+		parentId = in.readInt();
+		name = in.readString();
+		appOrGame = in.readInt();
+		iconUrl = in.readString();
+		desp = in.readString();
+	}
+    
+	public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {  
+        @Override  
+        public Category createFromParcel(Parcel source) {  
+            return new Category(source);  
+        }  
+  
+        @Override  
+        public Category[] newArray(int size) {  
+            return new Category[size];  
+        }  
+    };
 
 }

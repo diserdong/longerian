@@ -36,12 +36,8 @@ public class AppDetailRequest extends BaseApiRequest<AppDetailResponse> {
 	}
 
 	@Override
-	public String getRequestURL(BaseApiContext context) {
-		if(BuildConfig.DEBUG) {
-			return context.getMockServer();
-		} else {
-			return context.getServer() + path;
-		}
+	public String getPath() {
+		return path;
 	}
 
 	@Override

@@ -33,9 +33,9 @@ public class CategoryActivity extends BaseActivity {
 	
 	private void initTabPageView() {
 		tabPageView = (TabPageView) findViewById(R.id.page_view);
-		appCategoryListView = new CategoryListView(getApplicationContext());
+		appCategoryListView = new CategoryListView(this);
 		tabPageView.addPage(getString(R.string.title_app), appCategoryListView);
-		gameCategoryListView = new CategoryListView(getApplicationContext());
+		gameCategoryListView = new CategoryListView(this);
 		tabPageView.addPage(getString(R.string.title_game), gameCategoryListView);
 		tabPageView.setOnPageSelectedListener(onPageSelected);
 	}

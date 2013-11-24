@@ -60,6 +60,9 @@
             android:label="@string/app_name"
             android:launchMode="singleTop" />
         <activity
+            android:name="cc.icefire.market.activity.CategoryAppListActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name="cc.icefire.market.activity.SettingActivity"
             android:label="@string/app_name" />
     </application>

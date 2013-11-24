@@ -9,8 +9,8 @@ import crow.cache.Cache;
 public class TestRequest extends BaseApiRequest<TestResponse> {
 
 	@Override
-	public String getRequestURL(BaseApiContext ctx) {
-		return ctx.getServer();
+	public String getPath() {
+		return "";
 	}
 
 	@Override

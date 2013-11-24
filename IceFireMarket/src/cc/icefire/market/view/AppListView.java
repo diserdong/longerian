@@ -30,5 +30,22 @@ public class AppListView extends NetworkListView {
 			adapter.requestCommonApp(1, type, appOrGame);
 		}
 	}
+	
+	public void requestSearchedApp(AppListType type, AppOrGame appOrGame, String query) {
+		adapter = new AppListAdapter(getContext(), type, appOrGame, query);
+		setAdapter(adapter);
+		adapter.setOnRecvNoDataListener(this);
+		adapter.requestSearchedApp(1, type, appOrGame, query);
+	}
+	
+	public void requestCategoryApp(AppListType type, AppOrGame appOrGame, int categoryId) {
+		if(!hasLoadedData()) {
+			adapter = new AppListAdapter(getContext(), type, appOrGame, categoryId);
+			setAdapter(adapter);
+			adapter.setOnRecvNoDataListener(this);
+			notifyHasLoadedData();
+			adapter.requestCategoryApp(1, type, appOrGame, categoryId);
+		}
+	}
 
 }

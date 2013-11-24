@@ -285,6 +285,6 @@ public class BasicAppItem implements Parcelable {
         public BasicAppItem[] newArray(int size) {  
             return new BasicAppItem[size];  
         }  
-    };  
+    };
     
 }
