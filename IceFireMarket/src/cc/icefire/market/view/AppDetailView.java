@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -84,6 +85,25 @@ public class AppDetailView extends LinearLayout {
 		}
 		if(desp != null) {
 			desp.setText(item.getDesp());
+		}
+		if(screenshotWrapper != null) {
+			for(int i = 0, size = item.getScreenshots().length; i < size; i++) {
+				ImageView image = (ImageView) LayoutInflater.from(getContext()).inflate(R.layout.item_screenshot, null, false);
+				if (BuildConfig.DEBUG) {
+					image.setImageResource(R.drawable.ic_dribbble);
+				} else {
+					Bitmap bitmap = IceFireApplication.sharedInstance().getImgLoader()
+							.load(item.getScreenshots()[i], image);
+					if (bitmap != null) {
+						image.setImageBitmap(bitmap);
+					}
+				}
+				screenshotWrapper.addView(image);
+				if(i < size - 1) {
+					View space = new View(getContext());
+					screenshotWrapper.addView(space, new LinearLayout.LayoutParams(12, 12));
+				}
+			}
 		}
 	}
 	
