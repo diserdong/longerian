@@ -4,7 +4,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.os.Build;
 import cc.icefire.market.BuildConfig;
 import cc.icefire.market.api.response.CategoryResponse;
 import cc.icefire.market.model.AppOrGame;

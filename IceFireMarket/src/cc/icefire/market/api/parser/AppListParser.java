@@ -34,24 +34,25 @@ public class AppListParser extends JsonParseHandler<AppListResponse> {
 					+ "This is time management as it *should* be."
 					+ "And it's already changing my life and work for the better.";
 			String iconUrl = "http://img.wdjimg.com/mms/icon/v1/3/bd/5295ac6a9c6d51e8285690bdbe1b1bd3_256_256.png";
+			String downloadUrl = "http://gdown.baidu.com/data/wisegame/f3591c4b8b7d4953/SolCalendar_58.apk";
 			String[] screendshots = new String[] {iconUrl, iconUrl, iconUrl, iconUrl, iconUrl, iconUrl};
 			BasicAppItem b1 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
-					0, "1.2", null, 0, iconUrl, 4, 50000,
+					0, "1.2", downloadUrl, 0, iconUrl, 4, 50000,
 					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), screendshots);
 			BasicAppItem b2 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
-					0, "1.2", null, 0, iconUrl, 4, 50000,
+					0, "1.2", downloadUrl, 0, iconUrl, 4, 50000,
 					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), screendshots);
 			BasicAppItem b3 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
-					0, "1.2", null, 0, iconUrl, 4, 50000,
+					0, "1.2", downloadUrl, 0, iconUrl, 4, 50000,
 					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), screendshots);
 			BasicAppItem b4 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
-					0, "1.2", null, 0, iconUrl, 4, 50000,
+					0, "1.2", downloadUrl, 0, iconUrl, 4, 50000,
 					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), screendshots);
 			BasicAppItem b5 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
-					0, "1.2", null, 0, iconUrl, 4, 50000,
+					0, "1.2", downloadUrl, 0, iconUrl, 4, 50000,
 					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), screendshots);
 			BasicAppItem b6 = new BasicAppItem("0", "ZenDay", "com.zenday-app",
-					0, "1.2", null, 0, iconUrl, 4, 50000,
+					0, "1.2", downloadUrl, 0, iconUrl, 4, 50000,
 					"http://downloadurl", desp, (int) (4.7 * 1024 * 1024), screendshots);
 			apps.add(b1);
 			apps.add(b2);

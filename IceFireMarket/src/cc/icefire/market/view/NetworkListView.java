@@ -1,7 +1,5 @@
 package cc.icefire.market.view;
 
-import cc.icefire.market.R;
-import cc.icefire.market.view.PaginationListAdapter.OnApiCallbackListener;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,6 +9,8 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cc.icefire.market.R;
+import cc.icefire.market.view.PaginationListAdapter.OnApiCallbackListener;
 
 public class NetworkListView extends RelativeLayout implements
 		OnApiCallbackListener {

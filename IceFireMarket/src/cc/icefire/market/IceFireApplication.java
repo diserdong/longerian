@@ -5,11 +5,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Application;
+import android.content.Intent;
 import cc.icefire.market.api.CoreClient;
 import cc.icefire.market.api.parser.JsonParser;
 import cc.icefire.market.bitmaploader.ApkBitmapAsyncLoader;
 import cc.icefire.market.bitmaploader.RemoteBitmapAsyncLoader;
 import cc.icefire.market.localapk.InstalledAppManager;
+import cc.icefire.providers.DownloadManager;
+import cc.icefire.providers.downloads.DownloadService;
 import crow.cache.Cache;
 import crow.loader.AsyncLoaderEngine;
 import crow.loader.BitmapAsyncLoader;
@@ -39,6 +42,8 @@ public class IceFireApplication extends Application {
 	
 	private InstalledAppManager mInstallAppManager;
 	
+	private DownloadManager mDownloadManager;
+	
 	public static IceFireApplication sharedInstance() {
 		return instance;
 	}
@@ -63,6 +68,14 @@ public class IceFireApplication extends Application {
 		mApkImgLoader = new ApkBitmapAsyncLoader(mAsyncLoader);
 		mInstallAppManager = new InstalledAppManager(getApplicationContext());
 		mInstallAppManager.loadAllInstalledApps();
+		mDownloadManager = new DownloadManager(getContentResolver(), getPackageName());
+		startDownloadService();
+	}
+	
+	private void startDownloadService() {
+		Intent intent = new Intent();
+		intent.setClass(this, DownloadService.class);
+		startService(intent);
 	}
 	
 	public CoreClient getHttpEngine() {
@@ -79,6 +92,10 @@ public class IceFireApplication extends Application {
 	
 	public InstalledAppManager getInstalledAppManager() {
 		return this.mInstallAppManager;
+	}
+	
+	public DownloadManager getDownloadManager() {
+		return this.mDownloadManager;
 	}
 	
 }

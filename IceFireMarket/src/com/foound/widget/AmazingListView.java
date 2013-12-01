@@ -1,10 +1,11 @@
 package com.foound.widget;
 
-import android.content.*;
-import android.graphics.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.foound.widget.AmazingAdapter.HasMorePagesListener;
 

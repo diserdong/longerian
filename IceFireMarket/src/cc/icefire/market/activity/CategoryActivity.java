@@ -1,7 +1,6 @@
 package cc.icefire.market.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import cc.icefire.market.R;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.util.ILog;

@@ -109,7 +109,6 @@ public class InstalledAppManager {
 		item.setVersionName(packageInfo.versionName);
 		item.setVersionCode(packageInfo.versionCode);
 		item.setSize(new File(packageInfo.applicationInfo.publicSourceDir).length());
-		// item.appIcon = packageInfo.applicationInfo.loadIcon(pm);
 		return item;
 	}
 

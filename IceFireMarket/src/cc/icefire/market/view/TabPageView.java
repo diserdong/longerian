@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import cc.icefire.market.R;
-import cc.icefire.market.util.ILog;
 
 import com.viewpagerindicator.TabPageIndicator;
 

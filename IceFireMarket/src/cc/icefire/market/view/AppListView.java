@@ -8,7 +8,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.model.BasicAppItem;
-import cc.icefire.market.model.Category;
 import cc.icefire.market.util.ActivityUtil;
 import cc.icefire.market.util.ILog;
 

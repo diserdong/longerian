@@ -1,9 +1,9 @@
 package cc.icefire.market.localapk;
 
-import cc.icefire.market.util.ILog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import cc.icefire.market.util.ILog;
 
 public class BootBroadcastReceiver extends BroadcastReceiver {
 

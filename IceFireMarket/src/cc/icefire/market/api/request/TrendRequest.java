@@ -2,7 +2,6 @@ package cc.icefire.market.api.request;
 
 import java.util.Map;
 
-import cc.icefire.market.BuildConfig;
 import cc.icefire.market.api.BaseApiContext;
 import cc.icefire.market.api.response.TrendResponse;
 

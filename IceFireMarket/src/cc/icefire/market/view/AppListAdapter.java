@@ -2,8 +2,12 @@ package cc.icefire.market.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +20,8 @@ import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.model.BasicAppItem;
 import cc.icefire.market.util.BusinessTextUtil;
+import cc.icefire.providers.DownloadManager;
+import cc.icefire.providers.DownloadManager.Request;
 import crow.api.ApiCallback;
 import crow.api.ApiException;
 
@@ -73,6 +79,8 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			holder.appName = (TextView) convertView.findViewById(R.id.name);
 			holder.count = (TextView) convertView.findViewById(R.id.count);
 			holder.size = (TextView) convertView.findViewById(R.id.size);
+			holder.action = (Button) convertView.findViewById(R.id.action);
+			holder.action.setOnClickListener(onActionClicked);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -112,15 +120,33 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		holder.appName.setText(item.getApkName());
 		holder.count.setText(BusinessTextUtil.getDownloadCountTxt(context, item.getDownloadCount()));
 		holder.size.setText(BusinessTextUtil.getSizeTxt(context, item.getSize()));
+		holder.action.setTag(item);
 		return convertView;
 	}
-
+	
+	private OnClickListener onActionClicked = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			BasicAppItem item = (BasicAppItem) v.getTag();
+			if(item != null && item.getDownloadUrl() != null) {
+				Uri srcUri = Uri.parse(item.getDownloadUrl());
+				DownloadManager.Request request = new Request(srcUri);
+				request.setDestinationInExternalPublicDir(
+						Environment.DIRECTORY_DOWNLOADS, "/");
+				request.setDescription(item.getApkName());
+				IceFireApplication.sharedInstance().getDownloadManager().enqueue(request);
+			}
+		}
+	};
+	
 	public class ViewHolder {
 
 		private ImageView appIcon;
 		private TextView appName;
 		private TextView count;
 		private TextView size;
+		private Button action;
 
 	}
 

@@ -1,11 +1,10 @@
 package cc.icefire.market.view;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.localapk.InstalledAppManager.OnAppInstallOrUninstallListener;
 import cc.icefire.market.model.BasicAppItem;
-import cc.icefire.market.util.ILog;
-import android.content.Context;
-import android.util.AttributeSet;
 
 /**
  * 加载本地用户安装的应用列表
@@ -34,13 +33,14 @@ public class UserAppListView extends LocalListView implements OnAppInstallOrUnin
 	
 	public void onCreate() {
 		IceFireApplication.sharedInstance().getInstalledAppManager().registerPkgEventListener(this);
+		loadApp();
 	}
 	
 	public void onDestroy() {
 		IceFireApplication.sharedInstance().getInstalledAppManager().unregisterPkgEventListener(this);
 	}
 	
-	public void loadApp() {
+	private void loadApp() {
 		if(adapter == null) {
 			adapter = new UserAppListAdapter(getContext());
 			adapter.addItems(IceFireApplication.sharedInstance().getInstalledAppManager().getUserAppList());

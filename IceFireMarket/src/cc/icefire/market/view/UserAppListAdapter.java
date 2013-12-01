@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cc.icefire.market.BuildConfig;
 import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.R;
 import cc.icefire.market.model.BasicAppItem;
 import cc.icefire.market.util.BusinessTextUtil;
-import cc.icefire.market.view.AppListAdapter.ViewHolder;
 
 public class UserAppListAdapter extends LocalAppListAdapter<BasicAppItem> {
 

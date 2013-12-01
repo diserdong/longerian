@@ -1,14 +1,14 @@
 package cc.icefire.market.view;
 
-import cc.icefire.market.model.AppOrGame;
-import cc.icefire.market.model.Category;
-import cc.icefire.market.util.ActivityUtil;
-import cc.icefire.market.util.ILog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import cc.icefire.market.model.AppOrGame;
+import cc.icefire.market.model.Category;
+import cc.icefire.market.util.ActivityUtil;
+import cc.icefire.market.util.ILog;
 
 public class CategoryListView extends NetworkListView {
 

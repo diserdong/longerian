@@ -13,7 +13,6 @@ import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.R;
 import cc.icefire.market.model.BasicAppItem;
 import cc.icefire.market.util.BusinessTextUtil;
-import cc.icefire.market.util.ILog;
 
 public class AppDetailView extends LinearLayout {
 

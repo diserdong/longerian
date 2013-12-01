@@ -1,8 +1,11 @@
 package com.foound.widget;
 
-import android.view.*;
-import android.widget.*;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.BaseAdapter;
+import android.widget.SectionIndexer;
 
 public abstract class AmazingAdapter extends BaseAdapter implements
 		SectionIndexer, OnScrollListener {

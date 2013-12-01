@@ -5,7 +5,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import cc.icefire.market.R;
-import cc.icefire.market.view.PaginationListAdapter.OnApiCallbackListener;
 
 import com.foound.widget.AmazingListView;
 
