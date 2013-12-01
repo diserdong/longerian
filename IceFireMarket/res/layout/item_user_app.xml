@@ -56,23 +56,5 @@
         android:layout_centerVertical="true"
         android:text="@string/uninstall"
         />
-<!--     <com.tencent.market.widget.RateBar -->
-<!--         android:id="@+id/rate" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_alignBottom="@+id/icon" -->
-<!--         android:layout_alignLeft="@+id/name" -->
-<!--         android:layout_below="@+id/count" -->
-<!--         android:layout_toRightOf="@+id/icon" /> -->
-
-<!--     <com.tencent.market.widget.CircleWidget -->
-<!--         android:id="@+id/action" -->
-<!--         android:layout_width="64dip" -->
-<!--         android:layout_height="64dip" -->
-<!--         android:layout_alignParentRight="true" -->
-<!--         android:layout_alignParentTop="true" -->
-<!--         android:addStatesFromChildren="true" -->
-<!--         android:clickable="true" -->
-<!--         android:focusable="false" /> -->
 
 </RelativeLayout>
