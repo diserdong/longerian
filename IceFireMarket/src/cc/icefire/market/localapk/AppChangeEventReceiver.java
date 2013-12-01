@@ -1,4 +1,4 @@
-package cc.icefire.market.localres;
+package cc.icefire.market.localapk;
 
 import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.util.ILog;

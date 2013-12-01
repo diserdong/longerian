@@ -1,7 +1,7 @@
 package cc.icefire.market.view;
 
 import cc.icefire.market.IceFireApplication;
-import cc.icefire.market.localres.InstalledAppManager.OnAppInstallOrUninstallListener;
+import cc.icefire.market.localapk.InstalledAppManager.OnAppInstallOrUninstallListener;
 import cc.icefire.market.model.BasicAppItem;
 import cc.icefire.market.util.ILog;
 import android.content.Context;

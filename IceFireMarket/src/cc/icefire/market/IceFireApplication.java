@@ -9,7 +9,7 @@ import cc.icefire.market.api.CoreClient;
 import cc.icefire.market.api.parser.JsonParser;
 import cc.icefire.market.bitmaploader.ApkBitmapAsyncLoader;
 import cc.icefire.market.bitmaploader.RemoteBitmapAsyncLoader;
-import cc.icefire.market.localres.InstalledAppManager;
+import cc.icefire.market.localapk.InstalledAppManager;
 import crow.cache.Cache;
 import crow.loader.AsyncLoaderEngine;
 import crow.loader.BitmapAsyncLoader;
