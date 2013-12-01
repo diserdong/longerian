@@ -8,9 +8,9 @@ import crow.cache.Cache;
 import crow.loader.AsyncLoaderEngine;
 import crow.loader.BitmapAsyncLoader;
 
-public class BaseBitmapAsyncLoader extends BitmapAsyncLoader {
+public class RemoteBitmapAsyncLoader extends BitmapAsyncLoader {
 
-	public BaseBitmapAsyncLoader(AsyncLoaderEngine engine) {
+	public RemoteBitmapAsyncLoader(AsyncLoaderEngine engine) {
 		super(engine);
 	}
 

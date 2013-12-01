@@ -45,7 +45,7 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		Category item = (Category) getItem(position);
-		Bitmap icon = IceFireApplication.sharedInstance().getImgLoader().load(item.getIconUrl(), holder.categoryIcon);
+		Bitmap icon = IceFireApplication.sharedInstance().getNetImgLoader().load(item.getIconUrl(), holder.categoryIcon);
 		if(icon != null) {
 			holder.categoryIcon.setImageBitmap(icon);
 		}

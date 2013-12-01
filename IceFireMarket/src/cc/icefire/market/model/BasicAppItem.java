@@ -86,7 +86,7 @@ public class BasicAppItem implements Parcelable {
 	 * 应用大小，单位byte
 	 */
 	@SerializedName("size")
-    private int size;
+    private long size;
 	
 	/**
 	 * 应用截图
@@ -96,6 +96,26 @@ public class BasicAppItem implements Parcelable {
 
 	public BasicAppItem() {
 		super();
+	}
+	
+	public BasicAppItem(BasicAppItem item) {
+		this.id = item.id;
+		this.apkName = item.apkName;
+		this.pkgName = item.pkgName;
+		this.versionCode = item.versionCode;
+		this.versionName = item.versionName;
+		this.apkMd5 = item.apkMd5;
+		this.categoryId = item.categoryId;
+		this.iconUrl = item.iconUrl;
+		this.score = item.score;
+		this.downloadCount = item.downloadCount;
+		this.downloadUrl = item.downloadUrl;
+		this.desp = item.desp;
+		this.size = item.size;
+		if(item.screenshots != null) {
+			this.screenshots = new String[item.screenshots.length];
+			System.arraycopy(item.screenshots, 0, this.screenshots, 0, item.screenshots.length);
+		}
 	}
 
 	public BasicAppItem(String id, String apkName, String pkgName,
@@ -207,11 +227,11 @@ public class BasicAppItem implements Parcelable {
 		this.desp = desp;
 	}
 
-	public int getSize() {
+	public long getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(long size) {
 		this.size = size;
 	}
 
@@ -254,7 +274,7 @@ public class BasicAppItem implements Parcelable {
 		parcel.writeInt(downloadCount);
 		parcel.writeString(downloadUrl);
 		parcel.writeString(desp);
-		parcel.writeInt(size);
+		parcel.writeLong(size);
 		parcel.writeStringArray(screenshots);
 	}
 	
@@ -271,7 +291,7 @@ public class BasicAppItem implements Parcelable {
 		downloadCount = in.readInt();
 		downloadUrl = in.readString();
 		desp = in.readString();
-		size = in.readInt();
+		size = in.readLong();
 		screenshots = in.createStringArray();
 	}
     
@@ -286,5 +306,37 @@ public class BasicAppItem implements Parcelable {
             return new BasicAppItem[size];  
         }  
     };
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((downloadUrl == null) ? 0 : downloadUrl.hashCode());
+		result = prime * result + ((pkgName == null) ? 0 : pkgName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BasicAppItem other = (BasicAppItem) obj;
+		if (downloadUrl == null) {
+			if (other.downloadUrl != null)
+				return false;
+		} else if (!downloadUrl.equals(other.downloadUrl))
+			return false;
+		if (pkgName == null) {
+			if (other.pkgName != null)
+				return false;
+		} else if (!pkgName.equals(other.pkgName))
+			return false;
+		return true;
+	}
     
 }

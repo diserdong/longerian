@@ -4,8 +4,10 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.R;
 import cc.icefire.market.view.TabView;
 
@@ -23,6 +25,19 @@ public class MainActivity extends TabActivity {
 		// Inflate the menu; getApplicationContext() adds items to the action
 		// bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_exit:
+			IceFireApplication.sharedInstance().exit();
+			break;
+
+		default:
+			break;
+		}
 		return true;
 	}
 
@@ -77,7 +92,7 @@ public class MainActivity extends TabActivity {
 		TabSpec setting = tabHost.newTabSpec("Setting");
 		setting.setIndicator(view);
 		Intent settingIntent = new Intent(getApplicationContext(),
-				SettingActivity.class);
+				ManagementActivity.class);
 		settingIntent.putExtra("label", "Setting");
 		setting.setContent(settingIntent);
 

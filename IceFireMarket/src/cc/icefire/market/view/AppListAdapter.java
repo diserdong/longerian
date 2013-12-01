@@ -103,7 +103,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 				break;
 			}
 		} else {
-			Bitmap icon = IceFireApplication.sharedInstance().getImgLoader()
+			Bitmap icon = IceFireApplication.sharedInstance().getNetImgLoader()
 					.load(item.getIconUrl(), holder.appIcon);
 			if (icon != null) {
 				holder.appIcon.setImageBitmap(icon);

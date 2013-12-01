@@ -20,13 +20,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     
     <application
+        android:name="cc.icefire.market.IceFireApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Light.NoTitleBar"
-        android:name="cc.icefire.market.IceFireApplication" >
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
             android:name="cc.icefire.market.activity.MainActivity"
             android:label="@string/app_name" >
@@ -63,8 +64,25 @@
             android:name="cc.icefire.market.activity.CategoryAppListActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="cc.icefire.market.activity.SettingActivity"
-            android:label="@string/app_name" />
+            android:name="cc.icefire.market.activity.ManagementActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
+
+        <receiver
+            android:name="cc.icefire.market.localres.AppChangeEventReceiver"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="cc.icefire.market.localres.BootBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

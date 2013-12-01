@@ -64,7 +64,7 @@ public class AppDetailView extends LinearLayout {
 			if (BuildConfig.DEBUG) {
 				icon.setImageResource(R.drawable.ic_lastfm);
 			} else {
-				Bitmap bitmap = IceFireApplication.sharedInstance().getImgLoader()
+				Bitmap bitmap = IceFireApplication.sharedInstance().getNetImgLoader()
 						.load(item.getIconUrl(), icon);
 				if (bitmap != null) {
 					icon.setImageBitmap(bitmap);
@@ -92,7 +92,7 @@ public class AppDetailView extends LinearLayout {
 				if (BuildConfig.DEBUG) {
 					image.setImageResource(R.drawable.ic_dribbble);
 				} else {
-					Bitmap bitmap = IceFireApplication.sharedInstance().getImgLoader()
+					Bitmap bitmap = IceFireApplication.sharedInstance().getNetImgLoader()
 							.load(item.getScreenshots()[i], image);
 					if (bitmap != null) {
 						image.setImageBitmap(bitmap);
