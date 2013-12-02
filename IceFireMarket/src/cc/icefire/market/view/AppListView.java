@@ -5,13 +5,15 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import cc.icefire.market.IceFireApplication;
+import cc.icefire.market.localapk.DownloadingAppManager.OnDownloadingEventListener;
 import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.model.BasicAppItem;
 import cc.icefire.market.util.ActivityUtil;
 import cc.icefire.market.util.ILog;
 
-public class AppListView extends NetworkListView {
+public class AppListView extends NetworkListView implements OnDownloadingEventListener {
 
 	private AppListAdapter adapter;
 	
@@ -45,6 +47,14 @@ public class AppListView extends NetworkListView {
 		}
 	};
 	
+	public void onCreate() {
+		IceFireApplication.sharedInstance().getDownloadingAppManager().registerDwnlEventListener(this);
+	}
+	
+	public void onDestroy() {
+		IceFireApplication.sharedInstance().getDownloadingAppManager().unregisterDwnlEventListener(this);
+	}
+	
 	public void requestCommonApp(AppListType type, AppOrGame appOrGame) {
 		if(!hasLoadedData()) {
 			adapter = new AppListAdapter(getContext(), type, appOrGame);
@@ -69,6 +79,13 @@ public class AppListView extends NetworkListView {
 			adapter.setOnRecvNoDataListener(this);
 			notifyHasLoadedData();
 			adapter.requestCategoryApp(1, type, appOrGame, categoryId);
+		}
+	}
+
+	@Override
+	public void onDownloadingChange(String url) {
+		if(adapter != null) {
+			adapter.notifyDataSetChanged();
 		}
 	}
 

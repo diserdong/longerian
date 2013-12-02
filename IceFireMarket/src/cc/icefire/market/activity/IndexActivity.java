@@ -24,8 +24,17 @@ public class IndexActivity extends BaseActivity {
 		initTitleBar();
 		initTabPageView();
 		requestApp(0);
+		selectedAppListView.onCreate();
+		recommendedAppListView.onCreate();
 	}
 	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		selectedAppListView.onDestroy();
+		recommendedAppListView.onDestroy();
+	}
+
 	private void initTitleBar() {
 		titleBar = (TitleBar) findViewById(R.id.title_bar);
 		titleBar.setTitle(R.string.title_index);

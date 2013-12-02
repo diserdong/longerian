@@ -123,6 +123,15 @@ public class InstalledAppManager {
 		}
 		return userAppList;
 	}
+	
+	public BasicAppItem ifInstalled(String pkgName) {
+		BasicAppItem item = userAppPool.get(pkgName);
+		if(item != null) {
+			return new BasicAppItem(item);
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * 在这里不直接更新userAppPool里的数据

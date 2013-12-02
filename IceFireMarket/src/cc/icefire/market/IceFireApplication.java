@@ -10,6 +10,7 @@ import cc.icefire.market.api.CoreClient;
 import cc.icefire.market.api.parser.JsonParser;
 import cc.icefire.market.bitmaploader.ApkBitmapAsyncLoader;
 import cc.icefire.market.bitmaploader.RemoteBitmapAsyncLoader;
+import cc.icefire.market.localapk.DownloadingAppManager;
 import cc.icefire.market.localapk.InstalledAppManager;
 import cc.icefire.providers.DownloadManager;
 import cc.icefire.providers.downloads.DownloadService;
@@ -43,6 +44,7 @@ public class IceFireApplication extends Application {
 	private InstalledAppManager mInstallAppManager;
 	
 	private DownloadManager mDownloadManager;
+	private DownloadingAppManager mDownloadingAppManager;
 	
 	public static IceFireApplication sharedInstance() {
 		return instance;
@@ -56,6 +58,7 @@ public class IceFireApplication extends Application {
 	}
 	
 	public void exit() {
+		mDownloadingAppManager.onAppExit();
 		System.exit(0);
 	}
 
@@ -70,6 +73,8 @@ public class IceFireApplication extends Application {
 		mInstallAppManager.loadAllInstalledApps();
 		mDownloadManager = new DownloadManager(getContentResolver(), getPackageName());
 		startDownloadService();
+		mDownloadingAppManager = new DownloadingAppManager(getApplicationContext());
+		mDownloadingAppManager.onAppStart();
 	}
 	
 	private void startDownloadService() {
@@ -96,6 +101,10 @@ public class IceFireApplication extends Application {
 	
 	public DownloadManager getDownloadManager() {
 		return this.mDownloadManager;
+	}
+	
+	public DownloadingAppManager getDownloadingAppManager() {
+		return this.mDownloadingAppManager;
 	}
 	
 }

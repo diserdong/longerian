@@ -40,7 +40,9 @@
     <string name="app_size_big_mega">%1$dM</string>
     <string name="app_size_giga">%1$.1fG</string>
     
+    <string name="install">安装</string>
     <string name="uninstall">卸载</string>
+    <string name="downloading">下载中</string>
     <string name="download">下载</string>
     <string name="upgrade">更新</string>
     <string name="launch">打开</string>

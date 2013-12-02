@@ -30,4 +30,12 @@ public class ActivityUtil {
 		context.startActivity(intent);
 	}
 	
+	public static void launchApplication(Context context, String pkg) {
+		Intent intent = context.getPackageManager().getLaunchIntentForPackage(pkg);
+		if(intent != null) {
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intent);
+		}
+	}
+	
 }
