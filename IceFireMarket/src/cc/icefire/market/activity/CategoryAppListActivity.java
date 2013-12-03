@@ -26,6 +26,23 @@ public class CategoryAppListActivity extends BaseActivity {
 		requestChildren(AppOrGame.fromInt(item.getAppOrGame()), item.getId());
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerListener();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterListener();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+	
 	private void parseCategoryItem() {
 		Intent launchIntent = getIntent();
 		item = launchIntent.getParcelableExtra(ActivityUtil.EXTRA_CATEGORY);
@@ -42,6 +59,14 @@ public class CategoryAppListActivity extends BaseActivity {
 
 	private void requestChildren(AppOrGame appOrGame, int categoryId) {
 		children.requestCategoryApp(AppListType.CATEGORY, appOrGame, categoryId);
+	}
+	
+	private void registerListener() {
+		children.onResume();
+	}
+	
+	private void unregisterListener() {
+		children.onPause();
 	}
 	
 }

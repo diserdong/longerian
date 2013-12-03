@@ -39,6 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import cc.icefire.market.R;
+import cc.icefire.market.util.ILog;
 import cc.icefire.market.view.DownloadItem.DownloadSelectListener;
 import cc.icefire.providers.DownloadManager;
 

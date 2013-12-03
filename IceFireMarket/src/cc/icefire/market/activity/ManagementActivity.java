@@ -31,7 +31,7 @@ public class ManagementActivity extends BaseActivity {
 		setContentView(R.layout.activity_app_list);
 		initTitleBar();
 		initTabPageView();
-		userAppListView.onCreate();
+		registerListener();
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class ManagementActivity extends BaseActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		userAppListView.onDestroy();
+		unregisterListener();
 	}
 
 	@Override
@@ -115,4 +115,12 @@ public class ManagementActivity extends BaseActivity {
 		}
 	};
 
+	private void registerListener() {
+		userAppListView.onCreate();
+	}
+	
+	private void unregisterListener() {
+		userAppListView.onDestroy();
+	}
+	
 }

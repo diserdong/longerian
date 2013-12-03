@@ -29,7 +29,7 @@ public class UserAppListAdapter extends LocalAppListAdapter<BasicAppItem> {
 			holder.appName = (TextView) convertView.findViewById(R.id.name);
 			holder.version = (TextView) convertView.findViewById(R.id.version);
 			holder.size = (TextView) convertView.findViewById(R.id.size);
-			holder.uninstall = (Button) convertView.findViewById(R.id.uninstall);
+			holder.uninstall = (TextView) convertView.findViewById(R.id.uninstall);
 			holder.uninstall.setOnClickListener(onUninstallClicked);
 			convertView.setTag(holder);
 		} else {
@@ -54,7 +54,7 @@ public class UserAppListAdapter extends LocalAppListAdapter<BasicAppItem> {
 		private TextView appName;
 		private TextView version;
 		private TextView size;
-		private Button uninstall;
+		private TextView uninstall;
 
 	}
 	

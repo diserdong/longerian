@@ -24,15 +24,23 @@ public class IndexActivity extends BaseActivity {
 		initTitleBar();
 		initTabPageView();
 		requestApp(0);
-		selectedAppListView.onCreate();
-		recommendedAppListView.onCreate();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerListener();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterListener();
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		selectedAppListView.onDestroy();
-		recommendedAppListView.onDestroy();
 	}
 
 	private void initTitleBar() {
@@ -64,6 +72,16 @@ public class IndexActivity extends BaseActivity {
 		} else if(position == 1) {
 			recommendedAppListView.requestCommonApp(AppListType.RECOMMENDEDED, AppOrGame.ANY);
 		}
+	}
+	
+	private void registerListener() {
+		selectedAppListView.onResume();
+		recommendedAppListView.onResume();
+	}
+	
+	private void unregisterListener() {
+		selectedAppListView.onPause();
+		recommendedAppListView.onPause();
 	}
 	
 }

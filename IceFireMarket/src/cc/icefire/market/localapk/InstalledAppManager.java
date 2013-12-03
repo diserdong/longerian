@@ -1,12 +1,15 @@
 package cc.icefire.market.localapk;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +17,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.util.Log;
+import android.widget.Toast;
+import cc.icefire.market.R;
 import cc.icefire.market.model.BasicAppItem;
 import cc.icefire.market.util.ILog;
 
@@ -139,11 +145,18 @@ public class InstalledAppManager {
 	 * @param path
 	 */
 	public void installApp(String path) {
-		Uri uri = Uri.fromFile(new File(path));
-		Intent installIntent = new Intent(Intent.ACTION_VIEW);
-		installIntent.setDataAndType(uri, "application/vnd.android.package-archive");
-		installIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.startActivity(installIntent);
+		Uri uri = Uri.parse(path);
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(uri, "application/vnd.android.package-archive");
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+				| Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		try {
+			context.startActivity(intent);
+		} catch (ActivityNotFoundException ex) {
+			Toast.makeText(context,
+					R.string.download_no_application_title, Toast.LENGTH_LONG)
+					.show();
+		}
 	}
 
 	/**

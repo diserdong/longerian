@@ -1,11 +1,17 @@
 package cc.icefire.market.view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,11 +27,13 @@ import cc.icefire.market.api.response.AppListResponse;
 import cc.icefire.market.model.AppListType;
 import cc.icefire.market.model.AppOrGame;
 import cc.icefire.market.model.BasicAppItem;
+import cc.icefire.market.model.BasicDownloadInfo;
 import cc.icefire.market.util.ActivityUtil;
 import cc.icefire.market.util.BusinessTextUtil;
 import cc.icefire.market.util.ILog;
 import cc.icefire.providers.DownloadManager;
 import cc.icefire.providers.DownloadManager.Request;
+import cc.icefire.providers.downloads.Downloads;
 import crow.api.ApiCallback;
 import crow.api.ApiException;
 
@@ -83,7 +91,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			holder.appName = (TextView) convertView.findViewById(R.id.name);
 			holder.count = (TextView) convertView.findViewById(R.id.count);
 			holder.size = (TextView) convertView.findViewById(R.id.size);
-			holder.action = (Button) convertView.findViewById(R.id.action);
+			holder.action = (TextView) convertView.findViewById(R.id.action);
 			holder.action.setOnClickListener(onActionClicked);
 			convertView.setTag(holder);
 		} else {
@@ -124,13 +132,25 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		holder.appName.setText(item.getApkName());
 		holder.count.setText(BusinessTextUtil.getDownloadCountTxt(context, item.getDownloadCount()));
 		holder.size.setText(BusinessTextUtil.getSizeTxt(context, item.getSize()));
-		boolean isDownloading =  IceFireApplication.sharedInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
-		holder.action.setClickable(!isDownloading);
-		if(isDownloading) {
-			holder.action.setText(R.string.downloading);
-			holder.action.setTag(null);
-			//TODO  determine status
+		BasicDownloadInfo isDownloading = IceFireApplication.sharedInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
+		if(isDownloading != null) {
+			switch (isDownloading.getStatus()) {
+			case DownloadManager.STATUS_PENDING:
+			case DownloadManager.STATUS_RUNNING:
+			case DownloadManager.STATUS_PAUSED:
+			case DownloadManager.STATUS_FAILED:
+				holder.action.setClickable(false);
+				holder.action.setText(R.string.downloading);
+				holder.action.setTag(null);
+				break;
+			case DownloadManager.STATUS_SUCCESSFUL:
+				holder.action.setClickable(true);
+				holder.action.setText(R.string.install);
+				holder.action.setTag(isDownloading);
+				break;
+			}
 		} else {
+			holder.action.setClickable(true);
 			BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
 			if(ifInstalled != null) {
 				if(item.getVersionCode() > ifInstalled.getVersionCode()) {
@@ -150,21 +170,29 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		
 		@Override
 		public void onClick(View v) {
-			BasicAppItem item = (BasicAppItem) v.getTag();
+			Object item = v.getTag();
 			if(item == null) {
 				return ;
 			}
-			BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
-			if(ifInstalled != null) {
-				if(item.getVersionCode() > ifInstalled.getVersionCode()) {
-					download(item);
+			if(item instanceof BasicAppItem) {
+				BasicAppItem appItem = (BasicAppItem) item;
+				BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(appItem.getPkgName());
+				if(ifInstalled != null) {
+					if(appItem.getVersionCode() > ifInstalled.getVersionCode()) {
+						download(appItem);
+					} else {
+						ActivityUtil.launchApplication(context, appItem.getPkgName());
+					}
 				} else {
-					ActivityUtil.launchApplication(context, item.getPkgName());
+					download(appItem);
 				}
-			} else {
-				download(item);
 			}
-			
+			if(item instanceof BasicDownloadInfo) {
+				BasicDownloadInfo downloadItem = (BasicDownloadInfo) item;
+				if(downloadItem.getStatus() == DownloadManager.STATUS_SUCCESSFUL) {
+					IceFireApplication.sharedInstance().getInstalledAppManager().installApp(downloadItem.getDestination());
+				}
+			}
 		}
 		
 		private void download(BasicAppItem item) {
@@ -188,7 +216,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		private TextView appName;
 		private TextView count;
 		private TextView size;
-		private Button action;
+		private TextView action;
 
 	}
 
@@ -235,10 +263,18 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			onRecvDataSuccess();
 			addItems(response.getAppList());
 			nextPage();
-			if (getCount() > 20) {
-				notifyNoMorePages();
+			if(BuildConfig.DEBUG) {
+				if (getCount() > 20) {
+					notifyNoMorePages();
+				} else {
+					notifyMayHaveMorePages();
+				}
 			} else {
-				notifyMayHaveMorePages();
+				if(response.getAppList().isEmpty()) {
+					notifyNoMorePages();
+				} else {
+					notifyMayHaveMorePages();
+				}
 			}
 		}
 

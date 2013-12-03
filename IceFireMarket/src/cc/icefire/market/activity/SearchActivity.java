@@ -30,6 +30,23 @@ public class SearchActivity extends BaseActivity {
 		showSoftInputWindow();
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerListener();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterListener();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+	
 	private void initTitleBar() {
 		titleBar = (TitleBar) findViewById(R.id.title_bar);
 		titleBar.hideSearchBtn();
@@ -74,6 +91,14 @@ public class SearchActivity extends BaseActivity {
 		InputMethodManager imm = (InputMethodManager) getSystemService(
 				Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+	}
+	
+	private void registerListener() {
+		searchResult.onResume();
+	}
+	
+	private void unregisterListener() {
+		searchResult.onPause();
 	}
 	
 }

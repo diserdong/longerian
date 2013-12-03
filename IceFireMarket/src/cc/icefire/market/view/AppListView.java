@@ -47,11 +47,14 @@ public class AppListView extends NetworkListView implements OnDownloadingEventLi
 		}
 	};
 	
-	public void onCreate() {
+	public void onResume() {
 		IceFireApplication.sharedInstance().getDownloadingAppManager().registerDwnlEventListener(this);
+		if(adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 	
-	public void onDestroy() {
+	public void onPause() {
 		IceFireApplication.sharedInstance().getDownloadingAppManager().unregisterDwnlEventListener(this);
 	}
 	

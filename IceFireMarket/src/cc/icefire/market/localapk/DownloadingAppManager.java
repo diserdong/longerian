@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Handler;
 import cc.icefire.market.IceFireApplication;
 import cc.icefire.market.model.BasicAppItem;
+import cc.icefire.market.model.BasicDownloadInfo;
 import cc.icefire.market.util.ILog;
 import cc.icefire.providers.DownloadManager;
 import cc.icefire.providers.downloads.Downloads;
@@ -20,13 +21,13 @@ import cc.icefire.providers.downloads.Downloads;
 public class DownloadingAppManager {
 
 	private Context context;
-	private ConcurrentHashMap<String, Boolean> downloadingAppPool;
+	private ConcurrentHashMap<String, BasicDownloadInfo> downloadingAppPool;
 	private List<OnDownloadingEventListener> listeners;
 	private Cursor mCursor;
 
 	public DownloadingAppManager(Context context) {
 		this.context = context;
-		this.downloadingAppPool = new ConcurrentHashMap<String, Boolean>();
+		this.downloadingAppPool = new ConcurrentHashMap<String, BasicDownloadInfo>();
 		this.listeners = new ArrayList<OnDownloadingEventListener>();
 	}
 	
@@ -48,8 +49,13 @@ public class DownloadingAppManager {
 		}
 	}
 	
-	public boolean isDownloading(String url) {
-		return downloadingAppPool.containsKey(url);
+	public BasicDownloadInfo isDownloading(String url) {
+		BasicDownloadInfo item = downloadingAppPool.get(url);
+		if(item != null) {
+			return new BasicDownloadInfo(item);
+		} else {
+			return null;
+		}
 	}
 	
 	public void registerDwnlEventListener(OnDownloadingEventListener l) {
@@ -71,7 +77,12 @@ public class DownloadingAppManager {
 			downloadingAppPool.clear();
 			mCursor.moveToFirst();
 			while(!mCursor.isAfterLast()) {
-				downloadingAppPool.put(mCursor.getString(mCursor.getColumnIndex(Downloads.COLUMN_URI)), Boolean.TRUE);
+				BasicDownloadInfo info = new BasicDownloadInfo();
+				info.setId(mCursor.getLong(mCursor.getColumnIndex(DownloadManager.COLUMN_ID)));
+				info.setUri(mCursor.getString(mCursor.getColumnIndex(DownloadManager.COLUMN_URI)));
+				info.setStatus(mCursor.getInt(mCursor.getColumnIndex(DownloadManager.COLUMN_STATUS)));
+				info.setDestination(mCursor.getString(mCursor.getColumnIndexOrThrow(DownloadManager.COLUMN_LOCAL_URI)));
+				downloadingAppPool.put(info.getUri(), info);
 				mCursor.moveToNext();
 			}
 		}

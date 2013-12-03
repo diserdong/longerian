@@ -27,6 +27,23 @@ public class AppListActivity extends BaseActivity {
 		requestApp(0);
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerListener();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterListener();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+	}
+	
 	private void initTitleBar() {
 		titleBar = (TitleBar) findViewById(R.id.title_bar);
 		titleBar.setTitle(R.string.title_app);
@@ -60,6 +77,18 @@ public class AppListActivity extends BaseActivity {
 		} else if(position == 2) {
 			newReleaseAppListView.requestCommonApp(AppListType.NEW_RELEASES, AppOrGame.APP);
 		}
+	}
+	
+	private void registerListener() {
+		popularAppListView.onResume();
+		topChartsAppListView.onResume();
+		newReleaseAppListView.onResume();
+	}
+	
+	private void unregisterListener() {
+		popularAppListView.onPause();
+		topChartsAppListView.onPause();
+		newReleaseAppListView.onPause();
 	}
 	
 }
