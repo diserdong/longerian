@@ -30,7 +30,7 @@
             android:id="@+id/rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/action"
             android:paddingTop="@dimen/view_padding_magin"
             android:visibility="gone" />
 
@@ -41,6 +41,7 @@
             android:layout_below="@+id/name"
             android:layout_marginLeft="@dimen/view_padding_magin"
             android:layout_marginRight="@dimen/view_padding_magin"
+            android:layout_toLeftOf="@+id/action"
             android:layout_toRightOf="@+id/icon"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
@@ -79,6 +80,17 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/text_size_title" />
         </LinearLayout>
+        
+        <TextView 
+	        android:id="@+id/action"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_centerVertical="true"
+	        android:gravity="center"
+	        android:text="@string/download"
+	        android:background="@android:drawable/btn_default"
+	        />
     </RelativeLayout>
 
     <View

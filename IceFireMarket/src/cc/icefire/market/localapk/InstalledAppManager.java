@@ -40,23 +40,27 @@ public class InstalledAppManager {
 	}
 
 	public void loadAllInstalledApps() {
-		long start = System.currentTimeMillis();
-		List<PackageInfo> packages = packageManager.getInstalledPackages(0);
-		for (int i = 0, size = packages.size(); i < size; i++) {
-			PackageInfo packageInfo = packages.get(i);
-			// Only display the non-system app info
-			BasicAppItem item = buildFromPackageInfo(packageManager,
-					packageInfo);
-			if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-				ILog.d("Apps", "user " + item.getPkgName());
-				userAppPool.put(item.getPkgName(), item);
-			} else {
-				ILog.d("Apps", "sys " + item.getPkgName());
-				sysAppPool.put(item.getPkgName(), item);
-			}
-		}
-		long end = System.currentTimeMillis();
-		ILog.d("Apps", "costs " + (end - start));
+		new Thread() {
+			public void run() {
+				long start = System.currentTimeMillis();
+				List<PackageInfo> packages = packageManager.getInstalledPackages(0);
+				for (int i = 0, size = packages.size(); i < size; i++) {
+					PackageInfo packageInfo = packages.get(i);
+					// Only display the non-system app info
+					BasicAppItem item = buildFromPackageInfo(packageManager,
+							packageInfo);
+					if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+						ILog.d("Apps", "user " + item.getPkgName());
+						userAppPool.put(item.getPkgName(), item);
+					} else {
+						ILog.d("Apps", "sys " + item.getPkgName());
+						sysAppPool.put(item.getPkgName(), item);
+					}
+				}
+				long end = System.currentTimeMillis();
+				ILog.d("Apps", "costs " + (end - start));
+			};
+		}.start();
 	}
 
 	public void onNewAppInstalled(String pkgName) {

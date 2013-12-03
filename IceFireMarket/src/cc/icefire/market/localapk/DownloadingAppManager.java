@@ -32,14 +32,18 @@ public class DownloadingAppManager {
 	}
 	
 	public void onAppStart() {
-		long start = System.currentTimeMillis();
-		DownloadManager.Query baseQuery = new DownloadManager.Query()
-		.setOnlyIncludeVisibleInDownloadsUi(true);
-		mCursor = IceFireApplication.sharedInstance().getDownloadManager().query(baseQuery);
-		mCursor.registerContentObserver(downloadingObserver);
-		fillDownloadingAppPool();
-		long end = System.currentTimeMillis();
-		ILog.d("Apps", "costs " + (end - start));
+		new Thread() {
+			public void run() {
+				long start = System.currentTimeMillis();
+				DownloadManager.Query baseQuery = new DownloadManager.Query()
+				.setOnlyIncludeVisibleInDownloadsUi(true);
+				mCursor = IceFireApplication.sharedInstance().getDownloadManager().query(baseQuery);
+				mCursor.registerContentObserver(downloadingObserver);
+				fillDownloadingAppPool();
+				long end = System.currentTimeMillis();
+				ILog.d("Apps", "costs " + (end - start));
+			};
+		}.start();
 	}
 	
 	public void onAppExit() {

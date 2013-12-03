@@ -22,6 +22,18 @@ public class AppDetailActivity extends BaseActivity {
 		initContentView();
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		registerListener();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterListener();
+	}
+
 	private void parseAppItem() {
 		item = getIntent().getParcelableExtra(ActivityUtil.EXTRA_APP);
 	}
@@ -35,4 +47,13 @@ public class AppDetailActivity extends BaseActivity {
 		content = (AppDetailView) findViewById(R.id.content);
 		content.bindBasicAppItem(item);
 	}
+	
+	private void registerListener() {
+		content.onResume();
+	}
+	
+	private void unregisterListener() {
+		content.onPause();
+	}
+	
 }

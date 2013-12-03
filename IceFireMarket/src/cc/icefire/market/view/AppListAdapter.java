@@ -133,7 +133,8 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		holder.count.setText(BusinessTextUtil.getDownloadCountTxt(context, item.getDownloadCount()));
 		holder.size.setText(BusinessTextUtil.getSizeTxt(context, item.getSize()));
 		BasicDownloadInfo isDownloading = IceFireApplication.sharedInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
-		if(isDownloading != null) {
+		BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
+		if(isDownloading != null && ifInstalled == null) {
 			switch (isDownloading.getStatus()) {
 			case DownloadManager.STATUS_PENDING:
 			case DownloadManager.STATUS_RUNNING:
@@ -151,7 +152,6 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			}
 		} else {
 			holder.action.setClickable(true);
-			BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
 			if(ifInstalled != null) {
 				if(item.getVersionCode() > ifInstalled.getVersionCode()) {
 					holder.action.setText(R.string.upgrade);
@@ -201,7 +201,6 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 				DownloadManager.Request request = new Request(srcUri);
 				Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), item.getPkgName() + "_" + System.currentTimeMillis() + ".apk"));
 				request.setDestinationUri(uri);
-				ILog.d(TAG, "uri " + uri.toString());
 				request.setTitle(item.getApkName());
 				request.setDescription(item.getPkgName());
 				IceFireApplication.sharedInstance().getDownloadManager().enqueue(request);
