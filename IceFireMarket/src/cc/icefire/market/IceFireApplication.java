@@ -46,7 +46,7 @@ public class IceFireApplication extends Application {
 	private DownloadManager mDownloadManager;
 	private DownloadingAppManager mDownloadingAppManager;
 	
-	public static IceFireApplication sharedInstance() {
+	public static IceFireApplication getInstance() {
 		return instance;
 	}
 	

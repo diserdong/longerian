@@ -4,6 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * 热门搜索关键词
+ * 对应的JSON对象表示（JSON的key为Java字段上方的注解）：
+ * {
+    "id": 10001,
+    "word": "weibo",
+    "count": 20000
+	}
  */
 public class Trend {
 

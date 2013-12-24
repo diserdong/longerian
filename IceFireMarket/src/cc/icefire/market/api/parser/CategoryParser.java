@@ -13,6 +13,43 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * 解析分类列表接口响应，获得一个Category对象的列表。服务器返回的数据格式应当为：
+ * [
+    {
+        "id": 10,
+        "parent_id": 1,
+        "name": "RPG",
+        "icon_url": "www.xxx.com",
+        "app_or_game": 0,
+        "desp": "RPG is waiting for you here, come on!"
+    },
+    {
+        "id": 10,
+        "parent_id": 1,
+        "name": "RPG",
+        "icon_url": "www.xxx.com",
+        "app_or_game": 0,
+        "desp": "RPG is waiting for you here, come on!"
+    },
+    {
+        "id": 10,
+        "parent_id": 1,
+        "name": "RPG",
+        "icon_url": "www.xxx.com",
+        "app_or_game": 0,
+        "desp": "RPG is waiting for you here, come on!"
+    },
+    {
+        "id": 10,
+        "parent_id": 1,
+        "name": "RPG",
+        "icon_url": "www.xxx.com",
+        "app_or_game": 0,
+        "desp": "RPG is waiting for you here, come on!"
+    }
+]
+ */
 public class CategoryParser extends JsonParseHandler<CategoryResponse> {
 
 	private CategoryResponse category = new CategoryResponse();

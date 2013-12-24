@@ -32,7 +32,7 @@ public class MainActivity extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_exit:
-			IceFireApplication.sharedInstance().exit();
+			IceFireApplication.getInstance().exit();
 			break;
 
 		default:

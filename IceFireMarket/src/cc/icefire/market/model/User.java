@@ -4,6 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * 用户信息，暂时未用到
+ * 对应的JSON对象表示（JSON的key为Java字段上方的注解）：
+ * {
+    "uid": "qwertyuiop",
+    "name": "hello",
+    "avatar_url": "http://www.xxx.com"
+	}
  *
  */
 public class User {

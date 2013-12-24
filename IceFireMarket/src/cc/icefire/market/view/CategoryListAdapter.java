@@ -45,7 +45,7 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		Category item = (Category) getItem(position);
-		Bitmap icon = IceFireApplication.sharedInstance().getNetImgLoader().load(item.getIconUrl(), holder.categoryIcon);
+		Bitmap icon = IceFireApplication.getInstance().getNetImgLoader().load(item.getIconUrl(), holder.categoryIcon);
 		if(icon != null) {
 			holder.categoryIcon.setImageBitmap(icon);
 		}
@@ -65,7 +65,7 @@ public class CategoryListAdapter extends PaginationListAdapter<Category> {
 			onRequestFirstPage();
 		}
 		CategoryRequest request = new CategoryRequest(type);
-		IceFireApplication.sharedInstance().getHttpEngine().request(request,
+		IceFireApplication.getInstance().getHttpEngine().request(request,
 				 new CategoryCallback());
 	}
 

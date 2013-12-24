@@ -31,7 +31,7 @@ public class ApkBitmapAsyncLoader extends AsyncLoader<String, Bitmap, ImageView>
 	 */
 	@Override
 	protected Bitmap loadFromCache(Cache cache, String pkg) {
-		PackageManager pm = IceFireApplication.sharedInstance().getPackageManager();
+		PackageManager pm = IceFireApplication.getInstance().getPackageManager();
 		PackageInfo packageInfo;
 		try {
 			packageInfo = pm.getPackageInfo(pkg, 0);

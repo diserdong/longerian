@@ -63,15 +63,19 @@ abstract public class PaginationListAdapter<T> extends AmazingAdapter {
 
 	public void addItem(T item) {
 		if(items != null) {
-			items.add(item);
-			notifyDataSetChanged();
+			synchronized (items) {
+				items.add(item);
+				notifyDataSetChanged();
+			}
 		}
 	}
 	
 	public void addItems(List<T> newItems) {
 		if(items != null) {
-			items.addAll(newItems);
-			notifyDataSetChanged();
+			synchronized (items) {
+				items.addAll(newItems);
+				notifyDataSetChanged();
+			}
 		}
 	}
 	

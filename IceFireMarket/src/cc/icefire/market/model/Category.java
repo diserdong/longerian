@@ -7,7 +7,15 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * 分类信息
- *
+ * 对应的JSON对象表示（JSON的key为Java字段上方的注解）：
+ * {
+    "id": 10,
+    "parent_id": 1,
+    "name": "RPG",
+    "icon_url": "www.xxx.com",
+    "app_or_game": 0,
+    "desp": "RPG is waiting for you here, come on!"
+}
  */
 public class Category implements Parcelable {
 

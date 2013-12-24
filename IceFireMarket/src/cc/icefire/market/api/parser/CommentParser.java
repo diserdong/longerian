@@ -10,6 +10,41 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * 解析评论列表接口响应，获得一个Comment对象的列表。服务器返回的数据格式应当为：
+ * [
+    {
+        "time": "2011-11-11 12:12:12",
+        "content": "nice",
+        "score": 5,
+        "user": {
+            "uid": "qwertyuiop",
+            "name": "hello",
+            "avatar_url": "http://www.xxx.com"
+        }
+    },
+    {
+        "time": "2011-11-11 12:12:12",
+        "content": "nice",
+        "score": 5,
+        "user": {
+            "uid": "qwertyuiop",
+            "name": "hello",
+            "avatar_url": "http://www.xxx.com"
+        }
+    },
+    {
+        "time": "2011-11-11 12:12:12",
+        "content": "nice",
+        "score": 5,
+        "user": {
+            "uid": "qwertyuiop",
+            "name": "hello",
+            "avatar_url": "http://www.xxx.com"
+        }
+    }
+]
+ */
 public class CommentParser extends JsonParseHandler<CommentResponse> {
 
 	private CommentResponse comment = new CommentResponse();

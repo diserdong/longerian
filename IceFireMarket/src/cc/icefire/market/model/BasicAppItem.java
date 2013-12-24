@@ -7,6 +7,28 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * APP简要信息
+ * 对应的JSON对象表示（JSON的key为Java字段上方的注解）：
+ * {
+    "id": "1000001",
+    "apk_name": "weibo",
+    "pkg_name": "com.weibo.android",
+    "version_code": 201,
+    "version_name": "V2.0.0.1",
+    "apk_md5": "1247FACBED5523732434275FEDA",
+    "category_id": 2,
+    "icon_url": "www.xxx.com",
+    "score": 4.5,
+    "download_count": 100000000,
+    "download_url": "www.downloadxxx.com",
+    "desp": "the twitter in China",
+    "size": 11023847,
+    "screenshots": [
+        "www.downloadxxx.com",
+        "www.downloadxxx.com",
+        "www.downloadxxx.com",
+        "www.downloadxxx.com"
+    ]
+}
  */
 public class BasicAppItem implements Parcelable {
 

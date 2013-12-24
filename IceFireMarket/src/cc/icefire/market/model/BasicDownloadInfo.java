@@ -1,5 +1,8 @@
 package cc.icefire.market.model;
 
+/**
+ * 基本下载信息对象，不用于接口
+ */
 public class BasicDownloadInfo {
 
 	private long mId;

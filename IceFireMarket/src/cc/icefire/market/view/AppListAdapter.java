@@ -123,7 +123,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 				break;
 			}
 		} else {
-			Bitmap icon = IceFireApplication.sharedInstance().getNetImgLoader()
+			Bitmap icon = IceFireApplication.getInstance().getNetImgLoader()
 					.load(item.getIconUrl(), holder.appIcon);
 			if (icon != null) {
 				holder.appIcon.setImageBitmap(icon);
@@ -132,8 +132,8 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		holder.appName.setText(item.getApkName());
 		holder.count.setText(BusinessTextUtil.getDownloadCountTxt(context, item.getDownloadCount()));
 		holder.size.setText(BusinessTextUtil.getSizeTxt(context, item.getSize()));
-		BasicDownloadInfo isDownloading = IceFireApplication.sharedInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
-		BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
+		BasicDownloadInfo isDownloading = IceFireApplication.getInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
+		BasicAppItem ifInstalled = IceFireApplication.getInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
 		if(isDownloading != null && ifInstalled == null) {
 			switch (isDownloading.getStatus()) {
 			case DownloadManager.STATUS_PENDING:
@@ -176,7 +176,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			}
 			if(item instanceof BasicAppItem) {
 				BasicAppItem appItem = (BasicAppItem) item;
-				BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(appItem.getPkgName());
+				BasicAppItem ifInstalled = IceFireApplication.getInstance().getInstalledAppManager().ifInstalled(appItem.getPkgName());
 				if(ifInstalled != null) {
 					if(appItem.getVersionCode() > ifInstalled.getVersionCode()) {
 						download(appItem);
@@ -190,7 +190,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 			if(item instanceof BasicDownloadInfo) {
 				BasicDownloadInfo downloadItem = (BasicDownloadInfo) item;
 				if(downloadItem.getStatus() == DownloadManager.STATUS_SUCCESSFUL) {
-					IceFireApplication.sharedInstance().getInstalledAppManager().installApp(downloadItem.getDestination());
+					IceFireApplication.getInstance().getInstalledAppManager().installApp(downloadItem.getDestination());
 				}
 			}
 		}
@@ -203,7 +203,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 				request.setDestinationUri(uri);
 				request.setTitle(item.getApkName());
 				request.setDescription(item.getPkgName());
-				IceFireApplication.sharedInstance().getDownloadManager().enqueue(request);
+				IceFireApplication.getInstance().getDownloadManager().enqueue(request);
 			}
 		}
 		
@@ -251,7 +251,7 @@ public class AppListAdapter extends PaginationListAdapter<BasicAppItem> {
 		if (page == 1) {
 			onRequestFirstPage();
 		}
-		IceFireApplication.sharedInstance().getHttpEngine()
+		IceFireApplication.getInstance().getHttpEngine()
 				.request(request, new AppListCallback());
 	}
 

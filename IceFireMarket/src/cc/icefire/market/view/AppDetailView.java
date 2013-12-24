@@ -72,12 +72,12 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 	}
 	
 	public void onResume() {
-		IceFireApplication.sharedInstance().getDownloadingAppManager().registerDwnlEventListener(this);
+		IceFireApplication.getInstance().getDownloadingAppManager().registerDwnlEventListener(this);
 		bindAction();
 	}
 	
 	public void onPause() {
-		IceFireApplication.sharedInstance().getDownloadingAppManager().unregisterDwnlEventListener(this);
+		IceFireApplication.getInstance().getDownloadingAppManager().unregisterDwnlEventListener(this);
 	}
 	
 	public void bindBasicAppItem(BasicAppItem item) {
@@ -86,7 +86,7 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 			if (BuildConfig.DEBUG) {
 				icon.setImageResource(R.drawable.ic_lastfm);
 			} else {
-				Bitmap bitmap = IceFireApplication.sharedInstance().getNetImgLoader()
+				Bitmap bitmap = IceFireApplication.getInstance().getNetImgLoader()
 						.load(item.getIconUrl(), icon);
 				if (bitmap != null) {
 					icon.setImageBitmap(bitmap);
@@ -114,7 +114,7 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 				if (BuildConfig.DEBUG) {
 					image.setImageResource(R.drawable.ic_dribbble);
 				} else {
-					Bitmap bitmap = IceFireApplication.sharedInstance().getNetImgLoader()
+					Bitmap bitmap = IceFireApplication.getInstance().getNetImgLoader()
 							.load(item.getScreenshots()[i], image);
 					if (bitmap != null) {
 						image.setImageBitmap(bitmap);
@@ -132,8 +132,8 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 	
 	private void bindAction() {
 		if(action != null) {
-			BasicDownloadInfo isDownloading = IceFireApplication.sharedInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
-			BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
+			BasicDownloadInfo isDownloading = IceFireApplication.getInstance().getDownloadingAppManager().isDownloading(item.getDownloadUrl());
+			BasicAppItem ifInstalled = IceFireApplication.getInstance().getInstalledAppManager().ifInstalled(item.getPkgName());
 			if(isDownloading != null && ifInstalled == null) {
 				switch (isDownloading.getStatus()) {
 				case DownloadManager.STATUS_PENDING:
@@ -176,7 +176,7 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 			}
 			if(item instanceof BasicAppItem) {
 				BasicAppItem appItem = (BasicAppItem) item;
-				BasicAppItem ifInstalled = IceFireApplication.sharedInstance().getInstalledAppManager().ifInstalled(appItem.getPkgName());
+				BasicAppItem ifInstalled = IceFireApplication.getInstance().getInstalledAppManager().ifInstalled(appItem.getPkgName());
 				if(ifInstalled != null) {
 					if(appItem.getVersionCode() > ifInstalled.getVersionCode()) {
 						download(appItem);
@@ -190,7 +190,7 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 			if(item instanceof BasicDownloadInfo) {
 				BasicDownloadInfo downloadItem = (BasicDownloadInfo) item;
 				if(downloadItem.getStatus() == DownloadManager.STATUS_SUCCESSFUL) {
-					IceFireApplication.sharedInstance().getInstalledAppManager().installApp(downloadItem.getDestination());
+					IceFireApplication.getInstance().getInstalledAppManager().installApp(downloadItem.getDestination());
 				}
 			}
 		}
@@ -203,7 +203,7 @@ public class AppDetailView extends LinearLayout implements OnDownloadingEventLis
 				request.setDestinationUri(uri);
 				request.setTitle(item.getApkName());
 				request.setDescription(item.getPkgName());
-				IceFireApplication.sharedInstance().getDownloadManager().enqueue(request);
+				IceFireApplication.getInstance().getDownloadManager().enqueue(request);
 			}
 		}
 		

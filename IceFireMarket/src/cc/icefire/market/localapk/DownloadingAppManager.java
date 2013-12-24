@@ -37,7 +37,7 @@ public class DownloadingAppManager {
 				long start = System.currentTimeMillis();
 				DownloadManager.Query baseQuery = new DownloadManager.Query()
 				.setOnlyIncludeVisibleInDownloadsUi(true);
-				mCursor = IceFireApplication.sharedInstance().getDownloadManager().query(baseQuery);
+				mCursor = IceFireApplication.getInstance().getDownloadManager().query(baseQuery);
 				mCursor.registerContentObserver(downloadingObserver);
 				fillDownloadingAppPool();
 				long end = System.currentTimeMillis();

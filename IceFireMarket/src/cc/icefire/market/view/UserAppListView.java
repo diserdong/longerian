@@ -32,18 +32,18 @@ public class UserAppListView extends LocalListView implements OnAppInstallOrUnin
 	}
 	
 	public void onCreate() {
-		IceFireApplication.sharedInstance().getInstalledAppManager().registerPkgEventListener(this);
+		IceFireApplication.getInstance().getInstalledAppManager().registerPkgEventListener(this);
 		loadApp();
 	}
 	
 	public void onDestroy() {
-		IceFireApplication.sharedInstance().getInstalledAppManager().unregisterPkgEventListener(this);
+		IceFireApplication.getInstance().getInstalledAppManager().unregisterPkgEventListener(this);
 	}
 	
 	private void loadApp() {
 		if(adapter == null) {
 			adapter = new UserAppListAdapter(getContext());
-			adapter.addItems(IceFireApplication.sharedInstance().getInstalledAppManager().getUserAppList());
+			adapter.addItems(IceFireApplication.getInstance().getInstalledAppManager().getUserAppList());
 			setAdapter(adapter);
 		}
 	}

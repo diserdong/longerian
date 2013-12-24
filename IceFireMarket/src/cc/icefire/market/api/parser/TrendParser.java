@@ -10,6 +10,31 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * 解析搜索关键词接口响应，获得一个Trend对象的列表。服务器返回的数据格式应当为：
+ * [
+    {
+        "id": 10001,
+        "word": "weibo",
+        "count": 20000
+    },
+    {
+        "id": 10001,
+        "word": "weibo",
+        "count": 20000
+    },
+    {
+        "id": 10001,
+        "word": "weibo",
+        "count": 20000
+    },
+    {
+        "id": 10001,
+        "word": "weibo",
+        "count": 20000
+    }
+]
+ */
 public class TrendParser extends JsonParseHandler<TrendResponse> {
 
 	private TrendResponse trend = new TrendResponse();

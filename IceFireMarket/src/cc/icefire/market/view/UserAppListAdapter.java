@@ -36,7 +36,7 @@ public class UserAppListAdapter extends LocalAppListAdapter<BasicAppItem> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		BasicAppItem item = (BasicAppItem) getItem(position);
-		Bitmap icon = IceFireApplication.sharedInstance().getApkImgLoader()
+		Bitmap icon = IceFireApplication.getInstance().getApkImgLoader()
 				.load(item.getPkgName(), holder.appIcon);
 		if (icon != null) {
 			holder.appIcon.setImageBitmap(icon);
@@ -64,7 +64,7 @@ public class UserAppListAdapter extends LocalAppListAdapter<BasicAppItem> {
 		public void onClick(View v) {
 			BasicAppItem item = (BasicAppItem) v.getTag();
 			if(item != null) {
-				IceFireApplication.sharedInstance().getInstalledAppManager().uninstallApp(item.getPkgName());
+				IceFireApplication.getInstance().getInstalledAppManager().uninstallApp(item.getPkgName());
 			}
 		}
 	};

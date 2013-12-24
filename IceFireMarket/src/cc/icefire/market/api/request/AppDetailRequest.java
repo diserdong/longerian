@@ -6,6 +6,12 @@ import java.util.Map;
 import cc.icefire.market.api.BaseApiContext;
 import cc.icefire.market.api.response.AppDetailResponse;
 
+/**
+ * 应用详情请求接口，
+ * 方法：POST 
+ * 路径：/api/detail
+ * 参数： appId=xxx&pkgName=xxxx
+ */
 public class AppDetailRequest extends BaseApiRequest<AppDetailResponse> {
 
 	private static final String path = "api/detail";

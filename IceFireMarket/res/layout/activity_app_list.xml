@@ -8,7 +8,33 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+  <RelativeLayout
+      android:id="@+id/gallery_layout"
+        android:layout_width="fill_parent"
+        android:padding="10dp"
+        android:layout_height="180dp"
+        android:background="@drawable/index_bg"
+        android:visibility="gone"
+         >
 
+        <cc.icefire.market.view.SmoothGallery
+            android:id="@+id/myGallery"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdge="none"
+            android:scrollbars="none"
+            android:spacing="0dp"
+            android:unselectedAlpha="1.2" />
+
+        <ImageView
+            android:id="@+id/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dip"
+            />
+    </RelativeLayout>
     <cc.icefire.market.view.TabPageView
         android:id="@+id/page_view"
         android:layout_width="match_parent"

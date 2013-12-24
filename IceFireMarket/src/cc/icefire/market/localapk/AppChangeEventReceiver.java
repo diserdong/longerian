@@ -13,11 +13,11 @@ public class AppChangeEventReceiver extends BroadcastReceiver {
 		if (Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())) {
             String packageName = intent.getDataString();
             ILog.d("AppChange", "install " + packageName);
-            IceFireApplication.sharedInstance().getInstalledAppManager().onNewAppInstalled(packageName);
+            IceFireApplication.getInstance().getInstalledAppManager().onNewAppInstalled(packageName);
         } else if (Intent.ACTION_PACKAGE_REMOVED.equals(intent.getAction())) {
         	String packageName = intent.getDataString();
         	ILog.d("AppChange", "uninstall " + packageName);
-        	IceFireApplication.sharedInstance().getInstalledAppManager().onAppUninstalled(packageName);
+        	IceFireApplication.getInstance().getInstalledAppManager().onAppUninstalled(packageName);
         }  
 	}
 }
