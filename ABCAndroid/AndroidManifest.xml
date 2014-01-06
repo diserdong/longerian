@@ -413,11 +413,11 @@
         <activity
             android:name=".usbdetection.UsbDectectorTest"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--             <intent-filter> -->
+<!--                 <action android:name="android.intent.action.MAIN" /> -->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                 <category android:name="android.intent.category.LAUNCHER" /> -->
+<!--             </intent-filter> -->
         </activity>
         <activity
             android:name=".processtextview.ProgressTextViewActivity"
@@ -427,6 +427,15 @@
 
 <!--                 <category android:name="android.intent.category.LAUNCHER" /> -->
 <!--             </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".apkparser.ParserActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
