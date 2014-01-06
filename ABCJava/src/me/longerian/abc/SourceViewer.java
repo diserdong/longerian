@@ -23,8 +23,8 @@ public class SourceViewer {
 //		System.setProperty("http.proxyPort", "8888");
 		
 		//proxy usage two: use Proxy
-		SocketAddress proxyAddress = new InetSocketAddress("127.0.0.1", 8888);
-		Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyAddress);
+//		SocketAddress proxyAddress = new InetSocketAddress("127.0.0.1", 8888);
+//		Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyAddress);
 		
 		try {
 //			URL u = new URL("http://www.google.com/");
@@ -36,8 +36,8 @@ public class SourceViewer {
 //			
 //			System.out.println("");
 			
-			URL u = new URL("http://www.baidu.com/");
-			URLConnection uc = u.openConnection(proxy);
+			URL u = new URL("http://112.90.140.215:10001/version");
+			URLConnection uc = u.openConnection();
 			InputStream in = uc.getInputStream();
 			in = new BufferedInputStream(in);
 			Reader r = new InputStreamReader(in);
