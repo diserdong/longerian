@@ -6,20 +6,24 @@ import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+
 public class Compressor {
 
-	public static byte[] compress(byte[] content) {
+	public static byte[] compress(byte[] content) 
+	{
+		byte[] bytes =  null;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         GZIPOutputStream gzipOutputStream = null;
 		try {
 			gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
 			gzipOutputStream.write(content);
-			gzipOutputStream.finish();
 			gzipOutputStream.flush();
+			gzipOutputStream.finish();
+			
+			bytes =  byteArrayOutputStream.toByteArray();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			//Nexus 4， 4.4 在flush()方法上抛出java.util.zip.DataFormatException: stream error错误
 			e.printStackTrace();
 		} finally {
 			try {
@@ -30,10 +34,12 @@ public class Compressor {
 			} catch (IOException e) {
 			}
 		}
-        return byteArrayOutputStream.toByteArray();
+        return bytes;
     }
 
-    public static byte[] decompress(byte[] contentBytes) {
+    public static byte[] decompress(byte[] contentBytes) 
+    {
+    	byte[] bytes =  null;
     	ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(contentBytes);
     	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     	byte[] buffer = new byte[1024];
@@ -45,6 +51,7 @@ public class Compressor {
 				byteArrayOutputStream.write(buffer, 0, n);
 			}
 			byteArrayOutputStream.flush();
+			bytes =  byteArrayOutputStream.toByteArray();; 
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -57,7 +64,7 @@ public class Compressor {
 			} catch (IOException e) {
 			}
 		}
-        return byteArrayOutputStream.toByteArray();
+        return bytes;
     }
     
 }
