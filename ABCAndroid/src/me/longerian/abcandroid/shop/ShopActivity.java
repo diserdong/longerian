@@ -1,7 +1,8 @@
 package me.longerian.abcandroid.shop;
 
 import me.longerian.abcandroid.R;
-import me.longerian.abcandroid.shop.ShopSpace.OnPinChangeListener;
+import me.longerian.abcandroid.shop.widget.ShopSpace;
+import me.longerian.abcandroid.shop.widget.ShopSpace.OnPinChangeListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

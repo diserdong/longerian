@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <me.longerian.abcandroid.shop.ShopSpace
+    <me.longerian.abcandroid.shop.widget.ShopSpace
         android:id="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,8 +26,9 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/pin" />
-    </me.longerian.abcandroid.shop.ShopSpace>
+            android:layout_below="@+id/pin"
+            android:layout_alignParentBottom="true" />
+    </me.longerian.abcandroid.shop.widget.ShopSpace>
 
     <ImageView
         android:id="@+id/hidden_pin"

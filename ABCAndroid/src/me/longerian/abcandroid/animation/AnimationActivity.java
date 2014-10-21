@@ -11,6 +11,7 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class AnimationActivity extends Activity {
 
@@ -18,11 +19,12 @@ public class AnimationActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         final ImageView circle = (ImageView) findViewById(R.id.circle);
         Button switcher = (Button) findViewById(R.id.switcher);
 //        Animation rotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_progress_anim);
 //        circle.startAnimation(rotation);
-        
+        layout.addView(switcher);
         switcher.setOnClickListener(new OnClickListener() {
 			
 			@Override

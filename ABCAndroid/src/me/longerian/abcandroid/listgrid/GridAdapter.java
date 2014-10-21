@@ -1,4 +1,4 @@
-﻿package me.longerian.abcandroid.listgrid;
+package me.longerian.abcandroid.listgrid;
 
 import me.longerian.abcandroid.R;
 import android.content.Context;
@@ -85,11 +85,7 @@ public class GridAdapter<T extends BaseAdapter> extends BaseAdapter implements O
             // real position
             int index = mColumns * pos + i;
             
-            // 不足一行时，直接返回现有状态
             if (index == count) {
-                // fix bug : root是有可能是系统缓存的root，这里直接返回root将导致如果此行数量
-                // 不够columns，就会使用缓存的root里的child，为了避免这个问题，必须
-                // 将缓存的child移除。
                 // by Chaos at 2012-12-17
                 removeCacheChild(root, index);
                 break;
@@ -102,12 +98,9 @@ public class GridAdapter<T extends BaseAdapter> extends BaseAdapter implements O
             setOnItemClickListenerIfNeed(child, pos, index);
             
             if (childCount == mColumns) {
-                // root已经包含了Item，就没有必要继续添加了。
                 continue;
             } else {
                 if (i == 0 && childCount != 0) {
-                    // 如果root已经包含item，但是并不全，这里就移除重新添加
-                    // FIXME 也许还有更好的方案
                     root.removeAllViews();
                 }
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(

@@ -4,4 +4,13 @@
     <item name="pos" type="id"></item>
     <item name="realPos" type="id"></item>
 
+    <declare-styleable name="CascadeLayout">
+        <attr name="horizontal_spacing" format="dimension" />
+        <attr name="vertical_spacing" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CascadeLayout_LayoutParams">
+        <attr name="layout_vertical_spacing" format="dimension" />
+    </declare-styleable>
+
 </resources>

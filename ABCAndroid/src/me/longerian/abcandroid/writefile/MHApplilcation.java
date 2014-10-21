@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.longerian.abcandroid.BuildConfig;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -20,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.util.Log;
 
 public class MHApplilcation extends Application {
@@ -29,7 +31,25 @@ public class MHApplilcation extends Application {
 
 	public void onCreate() {
 		super.onCreate();
+		enableStrictMode();
 		Thread.setDefaultUncaughtExceptionHandler(new MUncaughtExphandler());
+	}
+	
+	private void enableStrictMode() {
+		if (BuildConfig.DEBUG) {
+			StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder();
+			threadPolicyBuilder.detectCustomSlowCalls();
+			threadPolicyBuilder.detectNetwork();
+			threadPolicyBuilder.penaltyLog();
+			threadPolicyBuilder.penaltyFlashScreen();
+			
+			StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder();
+			vmPolicyBuilder.detectAll();
+			vmPolicyBuilder.penaltyLog();
+
+			StrictMode.setThreadPolicy(threadPolicyBuilder.build());
+			StrictMode.setVmPolicy(vmPolicyBuilder.build());
+		}
 	}
 
 	private class MUncaughtExphandler implements UncaughtExceptionHandler {

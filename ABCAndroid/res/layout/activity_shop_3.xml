@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.longerian.abcandroid.shop.widget.OutterScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/outter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+		
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="100dip"
+            android:src="#FFAA66CC" />
+
+        <ImageView
+            android:id="@+id/pin"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:src="#FFA3551D" />
+        
+<!--         <TextView  -->
+<!--             android:id="@+id/text" -->
+<!--             android:layout_width="match_parent" -->
+<!--         	android:layout_height="match_parent" -->
+<!--         	android:textSize="32dip" -->
+<!--         	android:textColor="@android:color/black" -->
+<!--             /> -->
+		
+<!-- 		<me.longerian.abcandroid.shop.widget.InnerListView -->
+<!-- 		    android:id="@+id/list" -->
+<!-- 	        android:layout_width="match_parent" -->
+<!-- 	        android:layout_height="match_parent" -->
+<!-- 	        android:scrollbars="none" -->
+<!-- 		    /> -->
+			
+			<include 
+			    android:id="@+id/inner"
+			    layout="@layout/page_shop_detail"
+			    android:layout_width="match_parent"
+        		android:layout_height="match_parent"
+			    />
+    </LinearLayout>
+
+</me.longerian.abcandroid.shop.widget.OutterScrollView>

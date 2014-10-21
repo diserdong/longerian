@@ -79,12 +79,12 @@ public class ShowcaseView extends RelativeLayout implements OnClickListener, OnT
 	}
 	
 	private void fadeOutShowcase() {
-	    AnimationUtils.createFadeOutAnimation(this, new AnimationEndListener() {
-	        @Override
-	        public void onAnimationEnd() {
-	            setVisibility(View.GONE);
-	        }
-	    }).start();
+//	    AnimationUtils.createFadeOutAnimation(this, new AnimationEndListener() {
+//	        @Override
+//	        public void onAnimationEnd() {
+//	            setVisibility(View.GONE);
+//	        }
+//	    }).start();
 	}
 	
 	public void show() {
@@ -99,12 +99,12 @@ public class ShowcaseView extends RelativeLayout implements OnClickListener, OnT
 	}
 
 	private void fadeInShowcase() {
-	    AnimationUtils.createFadeInAnimation(this, new AnimationStartListener() {
-	        @Override
-	        public void onAnimationStart() {
-	            setVisibility(View.VISIBLE);
-	        }
-	    }).start();
+//	    AnimationUtils.createFadeInAnimation(this, new AnimationStartListener() {
+//	        @Override
+//	        public void onAnimationStart() {
+//	            setVisibility(View.VISIBLE);
+//	        }
+//	    }).start();
 	}
 	    
 	@Override
