@@ -78,6 +78,18 @@ public class TMDynativePath implements ITMDynativePath {
                 state = ParseState.PARSE_STATE_BEGIN;
 			} else if((ParseState.PARSE_STATE_END == state)
 				||(ParseState.PARSE_STATE_ARRAY_END == state)) {
+
+                if(ParseState.PARSE_STATE_ARRAY_END == state) {
+                    //数组索引支持变量，增加变量值解析
+                    String index = pathName.toString();
+                    if(index.startsWith("$")) {
+                        int indexLength = pathName.length();
+
+                        pathName.delete(0, indexLength);
+                        pathName.append(100);
+                    }
+                }
+
 				//添加path
 				addOnePath(pathName);
                 
@@ -85,14 +97,14 @@ public class TMDynativePath implements ITMDynativePath {
                 state = ParseState.PARSE_STATE_BEGIN;
                 i--;
 			} else if(ParseState.PARSE_STATE_ARRAY_BEGIN == state){
-				if(c >= 33 && c <= 126 && c != '.' && c != '[' && c != ']' && c != '$' && c != '\\'){
+				if(c >= 33 && c <= 126 && c != '[' && c != ']'){
                 	pathName.append(c);
                 }  else if(c == ']'){
                 	state = ParseState.PARSE_STATE_ARRAY_END;
-                } else if (c == '\\'){
-                	state = ParseState.PARSE_STATE_CONVERT;
-                } else {
-                	state = ParseState.PARSE_STATE_ERR;
+                    if(i == len - 1) {
+                        //遍历到最后一个元素，需要回退一格，以便处理数组索引引用
+                        i--;
+                    }
                 }
 			} else if(ParseState.PARSE_STATE_ERR == state){
                 System.out.println("parse path err!");
@@ -140,18 +152,27 @@ public class TMDynativePath implements ITMDynativePath {
 		String path = "$this.box.backgroud.color";
 		TMDynativePath tmPath = new TMDynativePath(path);
 		System.out.println(tmPath.toString());
-		
+
 		path = "$this.box[0].backgroud.color";
 		tmPath = new TMDynativePath(path);
 		System.out.println(tmPath.toString());
-		
+
 		path = "$variable.\\$\\\\abc";
 		tmPath = new TMDynativePath(path);
 		System.out.println(tmPath.toString());
-		
+
 		path = "$variable.box[0].pencl[\\$long]";
 		tmPath = new TMDynativePath(path);
 		System.out.println(tmPath.toString());
+
+        path = "$layout.floor.items[0]";
+        tmPath = new TMDynativePath(path);
+        System.out.println(tmPath.toString());
+
+        path = "$layout.floor.items[$args.index]";
+        tmPath = new TMDynativePath(path);
+        System.out.println(tmPath.toString());
+
 		
 	}
 	
