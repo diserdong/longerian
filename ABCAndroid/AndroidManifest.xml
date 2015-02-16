@@ -4,7 +4,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="4"
+        android:minSdkVersion="13"
         android:targetSdkVersion="20" />
 	
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -465,6 +465,21 @@
              <!--</intent-filter>-->
         </activity>
         <activity android:name="me.longerian.androidhacks.CascadeLayoutActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".dynamicwebview.DynamicWebViewActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".viewdrawhelper.DragLayoutActivity"
+                android:theme="@style/TmallDialogStyle">
+        </activity>
+        <activity android:name=".viewdrawhelper.DragDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
