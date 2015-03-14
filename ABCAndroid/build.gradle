@@ -62,14 +62,26 @@ android {
     sourceSets {
         main.manifest.srcFile 'src/main/AndroidManifest.xml'
         main.java.srcDirs = ['src/main/java']
-        main.resources.srcDirs = ['src/resources']
+        main.resources.srcDirs = ['src/main/resources']
         main.aidl.srcDirs = ['src/main/java']
         main.renderscript.srcDirs = ['src/main/java']
         main.res.srcDirs = ['src/main/resources/res']
         main.assets.srcDirs = ['src/main/resources/asset']
 
         debug.manifest.srcFile 'src/debug/AndroidManifest.xml'
+        debug.java.srcDirs = ['src/debug/java']
+        debug.resources.srcDirs = ['src/debug/resources']
+        debug.aidl.srcDirs = ['src/debug/java']
+        debug.renderscript.srcDirs = ['src/debug/java']
+        debug.res.srcDirs = ['src/debug/resources/res']
+        debug.assets.srcDirs = ['src/debug/resources/asset']
 
         release.manifest.srcFile 'src/release/AndroidManifest.xml'
+        release.java.srcDirs = ['src/release/java']
+        release.resources.srcDirs = ['src/release/resources']
+        release.aidl.srcDirs = ['src/release/java']
+        release.renderscript.srcDirs = ['src/release/java']
+        release.res.srcDirs = ['src/release/resources/res']
+        release.assets.srcDirs = ['src/release/resources/asset']
     }
 }
