@@ -6,7 +6,7 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="bd6479f5dd592790607e0504e66e0f31c2b4d308">
-        <dex dex="D:\android-workspace\github\longerian\ABCAndroid\build\intermediates\pre-dexed\debug\android-support-v4-7061a960d7c5a3314d6be6194b7f0bf973401702.jar" />
+        <dex dex="D:\android-workspace\github\longerian\ABCAndroid\build\intermediates\pre-dexed\demo\debug\android-support-v4-7061a960d7c5a3314d6be6194b7f0bf973401702.jar" />
     </item>
 
 </items>

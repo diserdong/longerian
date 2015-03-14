@@ -1,6 +1,7 @@
 package me.longerian.abcandroid.viewdrawhelper;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,12 @@ public class DragLayoutActivity extends Activity {
                 Toast.makeText(getApplication(), "click option", Toast.LENGTH_SHORT).show();
             }
         });
+        Log.d("Longer", "package name " + getPackageName());
+        try {
+            Log.d("Longer", "package name " + getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

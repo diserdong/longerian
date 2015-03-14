@@ -16,15 +16,46 @@ android {
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
+    lintOptions {
+        abortOnError false
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("sample.keystore.jks")
+            storePassword "123456"
+            keyAlias "sample"
+            keyPassword "123456"
+        }
+        release {
+            storeFile file("sample.keystore.jks")
+            storePassword "123456"
+            keyAlias "sample"
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         debug {
             debuggable true
-//            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), file('proguard-project.txt')
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
+        }
+    }
+
+    productFlavors {
+        demo {
+            applicationId "me.longerian.abcandroid.demo"
+            versionName "1.0-demo"
+        }
+
+        full {
+            applicationId "me.longerian.abcandroid.full"
+            versionName "1.0-full"
         }
     }
 
@@ -36,5 +67,9 @@ android {
         main.renderscript.srcDirs = ['src/main/java']
         main.res.srcDirs = ['src/main/resources/res']
         main.assets.srcDirs = ['src/main/resources/asset']
+
+        debug.manifest.srcFile 'src/debug/AndroidManifest.xml'
+
+        release.manifest.srcFile 'src/release/AndroidManifest.xml'
     }
 }
