@@ -38,7 +38,7 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_linearlayout_weight.xml">
+      <layout url="file://$PROJECT_DIR$/src/main/res/res/layout/activity_linearlayout_weight.xml">
         <config>
           <theme>@android:style/Theme.DeviceDefault</theme>
         </config>
@@ -50,10 +50,165 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4c4fb32-b41a-456b-a0a1-baae5d12c678" name="Default" comment="">
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\.idea\libraries\android_support_v4.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\libs\android-support-v4.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\anim\push_progress_anim.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\anim\slide_in_from_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\anim\slide_out_to_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_add_to_favorite_normal.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_add_to_favorite_selected.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_download_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_download_normal.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_download_progress.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_download_selected.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_noshimehana_normal.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\btn_noshimehana_selected.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\circle.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\cling.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\confirm_dialog_load.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\dark_bg.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\download_divider.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\foursquare.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\grid_view_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_action_search.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_application.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_arrow_down.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_arrow_up.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_audio.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_download.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_ebook.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_external_memory.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_favorite.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_internal_memory.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_market.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_navigation_arrow.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_photo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_play_audio_normal.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_play_audio_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_playing_audio.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_stop_audio_normal.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_stop_audio_selected.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_update_notification.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\ic_video.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\line_divider.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\movies.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\music.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\nagivation_section_manager_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\navigation_bottom_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\navigation_connection_logo.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\navigation_item_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\navigation_section_resource_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\preferences_system.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\progress_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\progress_secondary_bg.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\section_bar.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\storage_progress_bg.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\storage_progress_full_bg.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\storage_progress_secondary_bg.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\system_file_manager.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\system_installer.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-hdpi\tencent_q.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-ldpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-mdpi\cling.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-mdpi\ic_action_search.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-mdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-xhdpi\cling.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-xhdpi\ic_action_search.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable-xhdpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\btn_add_to_favorite_selector.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\btn_download_selector.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\btn_noshimehana_selector.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\custom_loading.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\download_progressbar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\ic_play_audio_selector.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\ic_stop_audio_selector.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\mm_trans.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\progressbar_mini.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\storage_progressbar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\drawable\voice_rcd_hint_bg.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_animation.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_audio_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_banner.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_banner_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_cascade_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_cp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_dialog_main.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_dialog_style.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_dj.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_drag_layout_demo.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_dropdown.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_dynamic_webview.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_graphics_and_touch.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_image.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_image_compositing.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_image_scale.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_linearlayout_weight.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_list_grid.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_main.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_matrix.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_play_indicator.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_progress_bar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_progresstext.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_pullableview.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_scroll.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_shop.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_shop_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_shop_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_showcase.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_sidebar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_sticky_header_grid.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_string_format.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_text_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_tiled_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_video_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_view_finder.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\activity_viewdraghelper.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\complete_header.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\content_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\content_connection_request.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\content_title.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\fragment_app_detail.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\fragment_resource_navigation.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\item_company.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\item_grid_app.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\item_grid_header.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\item_header_category.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\item_video.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\list_section.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\main1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\market_app_detail_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\market_app_detail_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\market_search_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\mm_progress_dialog.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\page_shop_detail.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\pinned_header.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\qqaccount_dropdown_list.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\layout\section_list_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\raw\ab_cave_ambient.mp3" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\raw\beep.ogg" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values-en\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values-zh-rCN\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values-zh-rTW\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values\attrs.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values\attrs_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values\color.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values\dimens.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values\strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\values\styles.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\res\res\xml\pref.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ABCAndroid.iml" afterPath="$PROJECT_DIR$/ABCAndroid.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\android-workspace\github\longerian\ABCAndroid\src\main\resources\assets\beep.ogg" afterPath="$PROJECT_DIR$/src/main/assets/beep.ogg" />
     </list>
     <ignored path="ABCAndroid.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,21 +236,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26915887" vertical-offset="0" max-vertical-offset="1692">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="358" max-vertical-offset="1890">
+              <caret line="43" column="3" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="BuildType.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/debug/java/me/longerian/build/BuildType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
-              <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.225" vertical-offset="0" max-vertical-offset="560">
+              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -178,6 +333,34 @@
               <option name="externalSystemIdString" value="GRADLE" />
               <option name="taskNames">
                 <list>
+                  <option value="build" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
+                  <option value="uninstallDemoRelease" />
+                </list>
+              </option>
+            </ExternalSystemSettings>
+          </option>
+        </ExternalTaskExecutionInfo>
+        <ExternalTaskExecutionInfo>
+          <option name="executorId" value="Run" />
+          <option name="settings">
+            <ExternalSystemSettings>
+              <option name="externalProjectPath" value="$PROJECT_DIR$" />
+              <option name="externalSystemIdString" value="GRADLE" />
+              <option name="taskNames">
+                <list>
                   <option value="installDemoRelease" />
                 </list>
               </option>
@@ -193,20 +376,6 @@
               <option name="taskNames">
                 <list>
                   <option value="uninstallFullDebug" />
-                </list>
-              </option>
-            </ExternalSystemSettings>
-          </option>
-        </ExternalTaskExecutionInfo>
-        <ExternalTaskExecutionInfo>
-          <option name="executorId" value="Run" />
-          <option name="settings">
-            <ExternalSystemSettings>
-              <option name="externalProjectPath" value="$PROJECT_DIR$" />
-              <option name="externalSystemIdString" value="GRADLE" />
-              <option name="taskNames">
-                <list>
-                  <option value="build" />
                 </list>
               </option>
             </ExternalSystemSettings>
@@ -249,20 +418,6 @@
               <option name="taskNames">
                 <list>
                   <option value="installDemoDebug" />
-                </list>
-              </option>
-            </ExternalSystemSettings>
-          </option>
-        </ExternalTaskExecutionInfo>
-        <ExternalTaskExecutionInfo>
-          <option name="executorId" value="Run" />
-          <option name="settings">
-            <ExternalSystemSettings>
-              <option name="externalProjectPath" value="$PROJECT_DIR$" />
-              <option name="externalSystemIdString" value="GRADLE" />
-              <option name="taskNames">
-                <list>
-                  <option value="clean" />
                 </list>
               </option>
             </ExternalSystemSettings>
@@ -1055,7 +1210,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="1426312980641" />
+        <entry key="$PROJECT_DIR$" value="1426314252829" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1179,8 +1334,11 @@
         <option value="$PROJECT_DIR$/src/debug/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/release/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/debug/java/me/longerian/build/BuildType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/longerian/build/BuildType.java" />
+        <option value="$PROJECT_DIR$/src/demo/java/me/longerian/build/BuildType.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -1397,7 +1555,11 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="me.longerian.build" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\android-workspace\github\longerian\ABCAndroid\src\main" />
       <recent name="D:\android-workspace\github\longerian\ABCAndroid\src\release" />
       <recent name="D:\android-workspace\longerian\trunk\ABCAndroid\res\anim" />
       <recent name="D:\android-workspace\longerian\trunk\ABCAndroid\res\layout" />
@@ -1409,26 +1571,7 @@
       <recent name="D:\android-workspace\longerian\trunk\ABCAndroid\res\layout" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ABCAndroid [installDemoRelease]">
-    <configuration default="false" name="ABCAndroid [installDemoDebug]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="installDemoDebug" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <RunnerSettings RunnerId="ExternalSystemTaskRunner" />
-      <ConfigurationWrapper RunnerId="ExternalSystemTaskRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Gradle.ABCAndroid [uninstallDemoRelease]">
     <configuration default="false" name="ABCAndroid [installFullDebug]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -1497,6 +1640,25 @@
         <option name="taskNames">
           <list>
             <option value="installDemoRelease" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <RunnerSettings RunnerId="ExternalSystemTaskRunner" />
+      <ConfigurationWrapper RunnerId="ExternalSystemTaskRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ABCAndroid [uninstallDemoRelease]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="uninstallDemoRelease" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -1673,19 +1835,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android Application.ABCAndroid" />
-      <item index="1" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installDemoDebug]" />
-      <item index="2" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installFullDebug]" />
-      <item index="3" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallDemoDebug]" />
-      <item index="4" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallFullDebug]" />
-      <item index="5" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installDemoRelease]" />
+      <item index="1" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installFullDebug]" />
+      <item index="2" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallDemoDebug]" />
+      <item index="3" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallFullDebug]" />
+      <item index="4" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installDemoRelease]" />
+      <item index="5" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallDemoRelease]" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installDemoRelease]" />
-        <item index="1" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallFullDebug]" />
-        <item index="2" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallDemoDebug]" />
-        <item index="3" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installFullDebug]" />
-        <item index="4" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installDemoDebug]" />
+        <item index="0" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallDemoRelease]" />
+        <item index="1" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installDemoRelease]" />
+        <item index="2" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallFullDebug]" />
+        <item index="3" class="java.lang.String" itemvalue="Gradle.ABCAndroid [uninstallDemoDebug]" />
+        <item index="4" class="java.lang.String" itemvalue="Gradle.ABCAndroid [installFullDebug]" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
@@ -1734,7 +1896,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962063" sideWeight="0.500846" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5989848" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6463621" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1743,7 +1905,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32928678" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962063" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24962063" sideWeight="0.49915397" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282572" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1778,73 +1940,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="990">
-          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="8442" max-vertical-offset="8640">
-          <caret line="469" column="76" selection-start-line="469" selection-start-column="76" selection-end-line="469" selection-end-column="76" />
-          <folding>
-            <element signature="e#927#945#0" expanded="true" />
-            <element signature="e#1073#1102#0" expanded="true" />
-            <element signature="e#1454#1487#0" expanded="true" />
-            <element signature="e#1839#1857#0" expanded="true" />
-            <element signature="e#2224#2242#0" expanded="true" />
-            <element signature="e#2609#2627#0" expanded="true" />
-            <element signature="e#2985#3003#0" expanded="true" />
-            <element signature="e#3360#3378#0" expanded="true" />
-            <element signature="e#3749#3767#0" expanded="true" />
-            <element signature="e#4130#4148#0" expanded="true" />
-            <element signature="e#4514#4532#0" expanded="true" />
-            <element signature="e#4891#4909#0" expanded="true" />
-            <element signature="e#5274#5292#0" expanded="true" />
-            <element signature="e#6024#6042#0" expanded="true" />
-            <element signature="e#6419#6437#0" expanded="true" />
-            <element signature="e#6798#6816#0" expanded="true" />
-            <element signature="e#7178#7196#0" expanded="true" />
-            <element signature="e#7369#7387#0" expanded="true" />
-            <element signature="e#7756#7774#0" expanded="true" />
-            <element signature="e#8123#8141#0" expanded="true" />
-            <element signature="e#8504#8522#0" expanded="true" />
-            <element signature="e#8887#8905#0" expanded="true" />
-            <element signature="e#9266#9284#0" expanded="true" />
-            <element signature="e#9645#9663#0" expanded="true" />
-            <element signature="e#10028#10046#0" expanded="true" />
-            <element signature="e#10402#10420#0" expanded="true" />
-            <element signature="e#10785#10803#0" expanded="true" />
-            <element signature="e#11168#11186#0" expanded="true" />
-            <element signature="e#11543#11561#0" expanded="true" />
-            <element signature="e#11930#11948#0" expanded="true" />
-            <element signature="e#12301#12319#0" expanded="true" />
-            <element signature="e#12694#12712#0" expanded="true" />
-            <element signature="e#13076#13094#0" expanded="true" />
-            <element signature="e#13459#13477#0" expanded="true" />
-            <element signature="e#13836#13854#0" expanded="true" />
-            <element signature="e#14208#14226#0" expanded="true" />
-            <element signature="e#14577#14595#0" expanded="true" />
-            <element signature="e#14952#14970#0" expanded="true" />
-            <element signature="e#15335#15353#0" expanded="true" />
-            <element signature="e#15715#15733#0" expanded="true" />
-            <element signature="e#16115#16133#0" expanded="true" />
-            <element signature="e#16494#16512#0" expanded="true" />
-            <element signature="e#16879#16897#0" expanded="true" />
-            <element signature="e#17258#17276#0" expanded="true" />
-            <element signature="e#17656#17674#0" expanded="true" />
-            <element signature="e#18039#18057#0" expanded="true" />
-            <element signature="e#18433#18451#0" expanded="true" />
-            <element signature="e#18811#18829#0" expanded="true" />
-            <element signature="e#19183#19201#0" expanded="true" />
-            <element signature="e#19558#19576#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/adt-bundle-windows-x86_64-20140321/sdk/platforms/android-17/android.jar!/android/widget/NumberPicker.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1078" max-vertical-offset="1746">
@@ -1856,17 +1951,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.03065134" vertical-offset="430" max-vertical-offset="1872">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_linearlayout_weight.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2727273" vertical-offset="0" max-vertical-offset="378">
-          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1919,32 +2003,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_banner_2.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06792453" vertical-offset="0" max-vertical-offset="1152">
-          <caret line="2" column="58" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/longerian/abcandroid/listgrid/GridAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4212">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_cascade_layout.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10" max-vertical-offset="666">
-          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1969,40 +2031,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_animation.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8727274" vertical-offset="0" max-vertical-offset="486">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/values/attrs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40373832" vertical-offset="0" max-vertical-offset="535">
-          <caret line="12" column="62" selection-start-line="12" selection-start-column="62" selection-end-line="12" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/longerian/abcandroid/HtmlTestActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12857144" vertical-offset="0" max-vertical-offset="560">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_audio_list.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30566037" vertical-offset="0" max-vertical-offset="530">
-          <caret line="9" column="44" selection-start-line="8" selection-start-column="8" selection-end-line="9" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2013,53 +2045,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/android-support-v4.jar!/android/support/v4/widget/ViewDragHelper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1878" max-vertical-offset="3222">
-          <caret line="115" column="19" selection-start-line="115" selection-start-column="19" selection-end-line="115" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_dynamic_webview.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33962265" vertical-offset="0" max-vertical-offset="530">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/adt-bundle-windows-x86_64-20140321/sdk/extras/android/support/v4/src/java/android/support/v4/view/ViewCompat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33272395" vertical-offset="4030" max-vertical-offset="36162">
           <caret line="267" column="20" selection-start-line="267" selection-start-column="20" selection-end-line="267" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_drag_layout_demo.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27169812" vertical-offset="0" max-vertical-offset="530">
-          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/anim/slide_in_from_bottom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/anim/slide_out_to_bottom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2098,14 +2087,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="666">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/adt-bundle-windows-x86_64-20140321/sdk/sources/android-20/android/view/ViewGroup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33272395" vertical-offset="89098" max-vertical-offset="119736">
@@ -2138,29 +2119,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/layout/activity_viewdraghelper.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="378">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/longerian/abcandroid/viewdrawhelper/DragDemoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="630">
           <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12857144" vertical-offset="0" max-vertical-offset="560">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -2269,18 +2231,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/ABCAndroid.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
-          <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+        <state vertical-scroll-proportion="-2.0274222" vertical-offset="1109" max-vertical-offset="1980">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/assets/beep.ogg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/intermediates/manifests/full/demo/debug/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11214953" vertical-offset="3126" max-vertical-offset="10854">
+          <caret line="177" column="27" selection-start-line="177" selection-start-column="27" selection-end-line="177" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26915887" vertical-offset="0" max-vertical-offset="1692">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="358" max-vertical-offset="1890">
+          <caret line="43" column="3" selection-start-line="43" selection-start-column="3" selection-end-line="43" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.6392857" vertical-offset="0" max-vertical-offset="1026">
+          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/debug/java/me/longerian/build/BuildType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.225" vertical-offset="0" max-vertical-offset="560">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>

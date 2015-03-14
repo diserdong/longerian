@@ -16,9 +16,9 @@
         <option name="TEST_SOURCE_GEN_TASK_NAME" value="generateDemoDebugTestSources" />
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
-        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/resources/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/resources/res" />
-        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/resources/asset" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
@@ -48,10 +48,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/demo/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/demo/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/demo/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/aidl" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/demo/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/demo/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/demo/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/assets" type="java-test-resource" />
@@ -59,14 +57,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestDemo/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/debug/resources/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/debug/resources/asset" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/jni" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources/asset" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/assets" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
@@ -100,7 +97,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="android-support-v4" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-18.0.0" level="project" />
   </component>
 </module>
 

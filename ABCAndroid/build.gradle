@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'com.android.application'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
+    compile 'com.android.support:support-v4:18.0.0'
 }
 
 android {
@@ -63,26 +63,37 @@ android {
     sourceSets {
         main.manifest.srcFile 'src/main/AndroidManifest.xml'
         main.java.srcDirs = ['src/main/java']
-        main.resources.srcDirs = ['src/main/resources']
         main.aidl.srcDirs = ['src/main/java']
         main.renderscript.srcDirs = ['src/main/java']
-        main.res.srcDirs = ['src/main/resources/res']
-        main.assets.srcDirs = ['src/main/resources/asset']
+        main.res.srcDirs = ['src/main/res']
+        main.assets.srcDirs = ['src/main/assets']
 
         debug.manifest.srcFile 'src/debug/AndroidManifest.xml'
         debug.java.srcDirs = ['src/debug/java']
-        debug.resources.srcDirs = ['src/debug/resources']
         debug.aidl.srcDirs = ['src/debug/java']
         debug.renderscript.srcDirs = ['src/debug/java']
-        debug.res.srcDirs = ['src/debug/resources/res']
-        debug.assets.srcDirs = ['src/debug/resources/asset']
+        debug.res.srcDirs = ['src/debug/res']
+        debug.assets.srcDirs = ['src/debug/assets']
 
         release.manifest.srcFile 'src/release/AndroidManifest.xml'
         release.java.srcDirs = ['src/release/java']
-        release.resources.srcDirs = ['src/release/resources']
         release.aidl.srcDirs = ['src/release/java']
         release.renderscript.srcDirs = ['src/release/java']
-        release.res.srcDirs = ['src/release/resources/res']
-        release.assets.srcDirs = ['src/release/resources/asset']
+        release.res.srcDirs = ['src/release/res']
+        release.assets.srcDirs = ['src/release/assets']
+
+        demo.manifest.srcFile 'src/demo/AndroidManifest.xml'
+        demo.java.srcDirs = ['src/demo/java']
+        demo.aidl.srcDirs = ['src/demo/java']
+        demo.renderscript.srcDirs = ['src/demo/java']
+        demo.res.srcDirs = ['src/demo/res']
+        demo.assets.srcDirs = ['src/demo/assets']
+
+        full.manifest.srcFile 'src/full/AndroidManifest.xml'
+        full.java.srcDirs = ['src/full/java']
+        full.aidl.srcDirs = ['src/full/java']
+        full.renderscript.srcDirs = ['src/full/java']
+        full.res.srcDirs = ['src/full/res']
+        full.assets.srcDirs = ['src/full/assets']
     }
 }
