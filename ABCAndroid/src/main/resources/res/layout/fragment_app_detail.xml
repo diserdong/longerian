@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FF272D31" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/foot_divider" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+        android:id="@+id/desp_1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:background="@drawable/ic_launcher"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginTop="2dip"
+            android:layout_toLeftOf="@+id/rate"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_centerVertical="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="手机管家"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <me.longerian.abcandroid.bannerview.RateBar
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="2dip"
+            android:layout_marginTop="2dip"
+            android:layout_alignParentRight="true"
+            android:background="#FF44BD01" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:id="@+id/desp_2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/desp_1"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip"
+        >
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:textColor="#FF56636B"
+            android:textSize="16sp"
+            android:text="V2.0" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/version"
+            android:textColor="#FF56636B"
+            android:textSize="16sp"
+            android:text="60万次下载" />
+        
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="#FF56636B"
+            android:textSize="16sp"
+            android:text="2013-4-22" />
+        
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/head_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/desp_2"
+        android:background="#FFD1DAE1" />
+    
+            <FrameLayout
+                android:id="@+id/screenshots_wrapper"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFDBE2E7"
+                android:gravity="center"
+                android:padding="8.0dip" >
+
+                <ImageView
+                    android:id="@+id/default_screenshot"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/tencent_q"
+                    android:scaleType="fitXY" />
+
+                <Gallery
+                    android:id="@+id/screenshots"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fadingEdge="none"
+                    android:gravity="left"
+                    android:spacing="10.0dip"
+                    android:unselectedAlpha="1.0" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/description_section"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:textColor="#FF56636B"
+                android:textSize="18sp" />
+            
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:textColor="#FF858E96"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/foot_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_above="@+id/foot"
+        android:background="#FFD1DAE1" />
+
+    <LinearLayout
+        android:id="@+id/foot"
+        android:layout_width="fill_parent"
+        android:layout_height="40dip"
+        android:layout_alignParentBottom="true" >
+
+    </LinearLayout>
+
+</RelativeLayout>

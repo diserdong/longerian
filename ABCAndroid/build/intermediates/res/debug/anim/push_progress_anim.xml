@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+	android:toDegrees="360"
+	android:pivotX="50%"
+	android:pivotY="50%"
+	android:startOffset="0"
+	android:duration="1000"
+	android:repeatMode="restart"
+	android:repeatCount="infinite">
+</rotate><!-- From: file:/D:/android-workspace/github/longerian/ABCAndroid/src/main/resources/res/anim/push_progress_anim.xml -->

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/android-workspace/github/longerian/ABCAndroid/src/main/resources/res/values-zh-rTW/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">ABCAndroid</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="language">繁体中文</string>
+    <string name="menu_settings">Settings</string>
+    <string name="note_qqlogin1"><![CDATA[在浏览器上打开<font color="red">ty.qq.com</font>]]></string>
+    <string name="progress_absolute">%1$.2fMB/%2$.2fMB</string>
+    <string name="progress_relative">%1$d%%</string>
+    <string name="tip_dim_code_scanning_1">请扫描腾讯手机管家PC版中的</string>
+    <string name="tip_dim_code_scanning_2">二维码完成连接</string>
+    <string name="title_activity_backupdb">BackupDBActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+</resources>

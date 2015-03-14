@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.longerian.abcandroid.viewdrawhelper.DragLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip">
+
+    <TextView android:id="@+id/block1" android:layout_width="match_parent"
+              android:layout_height="300dip"
+              android:background="#568734"/>
+
+</me.longerian.abcandroid.viewdrawhelper.DragLayout>

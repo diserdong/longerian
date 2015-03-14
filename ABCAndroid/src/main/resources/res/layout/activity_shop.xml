@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <me.longerian.abcandroid.shop.widget.ShopSpace
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button_wrapper" >
+
+        <ImageView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="100dip"
+            android:src="#FFAA66CC" />
+
+        <ImageView
+            android:id="@+id/pin"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_below="@+id/banner"
+            android:src="#FFA3551D" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/pin"
+            android:layout_alignParentBottom="true" />
+    </me.longerian.abcandroid.shop.widget.ShopSpace>
+
+    <ImageView
+        android:id="@+id/hidden_pin"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:src="#FF05D5A8"
+        android:visibility="gone" />
+    
+    <LinearLayout 
+        android:id="@+id/button_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+	    <Button
+	        android:id="@+id/button_up"
+	        android:layout_width="0dip"
+	        android:layout_height="48dip"
+	        android:layout_weight="1"
+	        android:text="Scrolling Up" />
+	    <Button
+	        android:id="@+id/button_down"
+	        android:layout_width="0dip"
+	        android:layout_height="48dip"
+	        android:layout_weight="1"
+	        android:text="Scrolling Down" />
+        
+    </LinearLayout>
+
+</RelativeLayout>
