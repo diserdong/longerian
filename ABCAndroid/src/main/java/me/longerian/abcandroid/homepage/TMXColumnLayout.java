@@ -82,12 +82,10 @@ public class TMXColumnLayout extends ViewGroup {
                     LayoutParams lp = (LayoutParams) getChildAt(inlineIndex).getLayoutParams();
                     totalLineMargin += (lp.leftMargin + lp.rightMargin);
                 }
-                Log.d("Longer", "total margin " + totalLineMargin);
                 for (int i = 0; i < mColumnCount; i++) {
                     childIndex = l * mColumnCount + i;
                     if (childIndex < childCount) {
                         int width = (parentWidth - totalLineMargin) / mColumnCount;
-                        Log.d("Longer", "width " + width);
                         View child = getChildAt(childIndex);
                         LayoutParams lp = (LayoutParams) child.getLayoutParams();
                         measureChild(child,
