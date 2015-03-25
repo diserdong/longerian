@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="D:\adt-bundle-windows-x86_64-20140321\sdk\extras\android\m2repository\com\android\support\support-v4\18.0.0\support-v4-18.0.0.jar"
+        jar="/Users/longerian/Documents/devtools/android-sdk-macosx/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
         jumboMode="false"
-        revision="20.0.0"
+        revision="22.0.1"
         sha1="44ec51e9d395a47aab135e5e1b556c0007442156">
-        <dex dex="D:\android-workspace\github\longerian\ABCAndroid\build\intermediates\pre-dexed\demo\debug\support-v4-18.0.0-cb797f8c0021af8637f825e40f402adc1dd00d50.jar" />
+        <dex dex="/Users/longerian/Documents/android-workspace/longerian/ABCAndroid/build/intermediates/pre-dexed/full/debug/support-v4-18.0.0-a2af9b4892309aee54c0c9d24ce40516196a643b.jar" />
     </item>
 
 </items>
