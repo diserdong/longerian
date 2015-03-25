@@ -14,8 +14,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    compileSdkVersion Integer.parseInt(System.properties['compileSdkVersion'])
+    buildToolsVersion System.properties['buildToolsVersion']
 
     lintOptions {
         abortOnError false
