@@ -490,9 +490,9 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-                android:name="me.longerian.abcandroid.build.SecondActivity" >
+                android:name="me.longerian.abcandroid.gradletime.SecondActivity" >
         </activity>
-        <activity android:name=".build.BuildTestActivity">
+        <activity android:name=".gradletime.BuildTestActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->

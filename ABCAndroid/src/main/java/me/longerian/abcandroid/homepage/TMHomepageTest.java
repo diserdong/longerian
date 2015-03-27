@@ -9,8 +9,8 @@ import android.widget.TextView;
 import me.longerian.abcandroid.R;
 //import me.longerian.abcandroid.build.BuildTestActivity;
 //import me.longerian.abcandroid.build.SecondActivity;
-import me.longerian.abcandroid.build.BuildTestActivity;
-import me.longerian.abcandroid.build.SecondActivity;
+import me.longerian.abcandroid.gradletime.BuildTestActivity;
+import me.longerian.abcandroid.gradletime.SecondActivity;
 import me.longerian.abcandroid.viewdrawhelper.DragDemoActivity;
 
 /**
