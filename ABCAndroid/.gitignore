@@ -31,8 +31,6 @@ proguard/
 # OS X
 .DS_Store
 
-*.class
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -43,7 +41,6 @@ proguard/
 
 # IDEA Files
 .idea/
-.settings/
 out/
 
 # MAVEN COMPILE Files

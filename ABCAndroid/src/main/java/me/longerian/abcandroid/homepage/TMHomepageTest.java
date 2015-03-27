@@ -9,6 +9,8 @@ import android.widget.TextView;
 import me.longerian.abcandroid.R;
 //import me.longerian.abcandroid.build.BuildTestActivity;
 //import me.longerian.abcandroid.build.SecondActivity;
+import me.longerian.abcandroid.build.BuildTestActivity;
+import me.longerian.abcandroid.build.SecondActivity;
 import me.longerian.abcandroid.viewdrawhelper.DragDemoActivity;
 
 /**
@@ -25,14 +27,14 @@ public class TMHomepageTest extends Activity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent[] intents = new Intent[3];
-//                Intent intent1 = new Intent(getApplicationContext(), SecondActivity.class);
-//                Intent intent2 = new Intent(getApplicationContext(), DragDemoActivity.class);
-//                Intent intent3 = new Intent(getApplicationContext(), BuildTestActivity.class);
-//                intents[0] = intent1;
-//                intents[1] = intent2;
-//                intents[2] = intent3;
-//                startActivities(intents);
+                Intent[] intents = new Intent[3];
+                Intent intent1 = new Intent(getApplicationContext(), SecondActivity.class);
+                Intent intent2 = new Intent(getApplicationContext(), DragDemoActivity.class);
+                Intent intent3 = new Intent(getApplicationContext(), BuildTestActivity.class);
+                intents[0] = intent1;
+                intents[1] = intent2;
+                intents[2] = intent3;
+                startActivities(intents);
             }
         });
 
