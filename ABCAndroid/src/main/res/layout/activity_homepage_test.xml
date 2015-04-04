@@ -4,7 +4,57 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <me.longerian.abcandroid.homepage.TMOnePlusTwoLayout android:layout_width="match_parent"
+    <me.longerian.abcandroid.layoutdemo.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent" android:layout_height="100dip"
+            android:background="@android:color/holo_red_dark"
+            android:layout_margin="8dip"
+            android:gravity="center"
+            android:text="BLOCK 1"
+            />
+
+        <TextView android:layout_width="match_parent" android:layout_height="50dip"
+            android:background="@android:color/holo_green_light"
+            android:layout_margin="8dip"
+            android:gravity="center"
+            android:text="BLOCK 2"
+            />
+
+        <TextView android:layout_width="match_parent" android:layout_height="50dip"
+            android:background="@android:color/holo_orange_light"
+            android:layout_margin="8dip"
+            android:gravity="center"
+            android:text="BLOCK 3"
+            />
+
+        <TextView
+            android:layout_width="match_parent" android:layout_height="100dip"
+            android:background="@android:color/holo_red_dark"
+            android:layout_margin="8dip"
+            android:gravity="center"
+            android:text="BLOCK 1"
+            />
+
+        <TextView android:layout_width="match_parent" android:layout_height="50dip"
+            android:background="@android:color/holo_green_light"
+            android:layout_margin="8dip"
+            android:gravity="center"
+            android:text="BLOCK 2"
+            />
+
+        <TextView android:layout_width="match_parent" android:layout_height="50dip"
+            android:background="@android:color/holo_orange_light"
+            android:layout_margin="8dip"
+            android:gravity="center"
+            android:text="BLOCK 3"
+            />
+    </me.longerian.abcandroid.layoutdemo.GridLayout>
+
+
+    <me.longerian.abcandroid.layoutdemo.OneAndTwoLayout
+        android:layout_width="match_parent"
                                                          android:layout_height="wrap_content">
 
         <TextView android:id="@+id/block1"
@@ -29,9 +79,10 @@
                   android:text="BLOCK 3"
                 />
 
-    </me.longerian.abcandroid.homepage.TMOnePlusTwoLayout>
+    </me.longerian.abcandroid.layoutdemo.OneAndTwoLayout>
 
-    <me.longerian.abcandroid.homepage.TMTwoPlusOneLayout android:layout_width="match_parent"
+    <me.longerian.abcandroid.layoutdemo.TwoAndOneLayout
+        android:layout_width="match_parent"
                                                          android:layout_height="wrap_content">
         <TextView android:layout_width="match_parent" android:layout_height="100dip"
                   android:background="@android:color/holo_red_dark"
@@ -53,9 +104,10 @@
                   android:gravity="center"
                   android:text="BLOCK 3"
                 />
-    </me.longerian.abcandroid.homepage.TMTwoPlusOneLayout>
+    </me.longerian.abcandroid.layoutdemo.TwoAndOneLayout>
 
-    <me.longerian.abcandroid.homepage.TMXColumnLayout android:layout_width="match_parent"
+    <me.longerian.abcandroid.layoutdemo.ColumnLayout
+        android:layout_width="match_parent"
                                                       android:layout_height="wrap_content">
         <TextView android:layout_width="match_parent" android:layout_height="100dip"
                   android:background="@android:color/holo_red_dark"
@@ -98,5 +150,5 @@
                   android:gravity="center"
                   android:text="BLOCK 4"
                 />
-    </me.longerian.abcandroid.homepage.TMXColumnLayout>
+    </me.longerian.abcandroid.layoutdemo.ColumnLayout>
 </LinearLayout>

@@ -1,15 +1,14 @@
-package me.longerian.abcandroid.homepage;
+package me.longerian.abcandroid.layoutdemo;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * Created by huifeng.hxl on 2015/3/17.
  */
-public class TMXColumnLayout extends ViewGroup {
+public class ColumnLayout extends ViewGroup {
 
     /**
      * 当子元素个数小于mColumnCount时，是否自动均分容器宽度
@@ -17,15 +16,15 @@ public class TMXColumnLayout extends ViewGroup {
     private boolean mIsAutoExpand;
     private int mColumnCount = 4;
 
-    public TMXColumnLayout(Context context) {
+    public ColumnLayout(Context context) {
         super(context);
     }
 
-    public TMXColumnLayout(Context context, AttributeSet attrs) {
+    public ColumnLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TMXColumnLayout(Context context, AttributeSet attrs, int defStyle) {
+    public ColumnLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

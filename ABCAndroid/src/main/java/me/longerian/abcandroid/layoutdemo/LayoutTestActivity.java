@@ -1,4 +1,4 @@
-package me.longerian.abcandroid.homepage;
+package me.longerian.abcandroid.layoutdemo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import me.longerian.abcandroid.viewdrawhelper.DragDemoActivity;
 /**
  * Created by huifeng.hxl on 2015/3/16.
  */
-public class TMHomepageTest extends Activity {
+public class LayoutTestActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package me.longerian.abcandroid.homepage;
+package me.longerian.abcandroid.layoutdemo;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 /**
  * Created by huifeng.hxl on 2015/3/16.
  */
-public class TMOnePlusTwoLayout extends ViewGroup {
+public class OneAndTwoLayout extends ViewGroup {
 
-    public TMOnePlusTwoLayout(Context context) {
+    public OneAndTwoLayout(Context context) {
         super(context);
     }
 
-    public TMOnePlusTwoLayout(Context context, AttributeSet attrs) {
+    public OneAndTwoLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public TMOnePlusTwoLayout(Context context, AttributeSet attrs, int defStyle) {
+    public OneAndTwoLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
