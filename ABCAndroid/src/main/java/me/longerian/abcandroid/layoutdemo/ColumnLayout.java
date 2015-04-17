@@ -94,9 +94,9 @@ public class ColumnLayout extends ViewGroup {
                         if (totalInlineChildHeight > inlineHeight) {
                             inlineHeight = totalInlineChildHeight;
                         }
-                        totalHeight += inlineHeight;
                     }
                 }
+                totalHeight += inlineHeight;
             }
         }
         setMeasuredDimension(getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec), totalHeight);
