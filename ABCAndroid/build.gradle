@@ -28,6 +28,10 @@ android {
         abortOnError false
     }
 
+    defaultConfig {
+        applicationId 'me.longerian.abcandroid'
+    }
+
     signingConfigs {
         debug {
             storeFile file("sample.keystore.jks")
