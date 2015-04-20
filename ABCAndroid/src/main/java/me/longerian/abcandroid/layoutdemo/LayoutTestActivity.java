@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import org.lucasr.probe.Probe;
+import org.lucasr.probe.interceptors.OvermeasureInterceptor;
+
 import me.longerian.abcandroid.R;
 //import me.longerian.abcandroid.build.BuildTestActivity;
 //import me.longerian.abcandroid.build.SecondActivity;
@@ -21,7 +24,8 @@ public class LayoutTestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage_test);
+        Probe.deploy(this, new OvermeasureInterceptor(R.id.layout));
+        setContentView(R.layout.activity_homepage_probe_test);
 
         TextView textView = (TextView) findViewById(R.id.block1);
         textView.setOnClickListener(new View.OnClickListener() {
